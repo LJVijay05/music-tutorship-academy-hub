@@ -21,7 +21,6 @@ const Enrollment = () => {
 
   const plans = {
     monthly: { label: "Monthly", discount: 0 },
-    quarterly: { label: "3 Months", discount: 0 },
     halfYearly: { label: "6 Months", discount: 0 },
     annually: { label: "12 Months", discount: 0 }
   };
@@ -31,6 +30,8 @@ const Enrollment = () => {
       title: "Music Production Batch Mentorship",
       subtitle: "From Beginner to Advanced Level",
       monthlyPrice: 9599,
+      sixMonthDiscount: 5, // 5% discount for 6 months
+      annualDiscount: 15, // 15% discount for annual
       duration: "12 Months Duration",
       batchSize: "15 Students Per Batch",
       popular: true,
@@ -56,7 +57,8 @@ const Enrollment = () => {
       title: "One-on-One Music Production Mentorship",
       subtitle: "Premium Individual Coaching",
       monthlyPrice: 16000,
-      annualDiscountedPrice: 12800,
+      sixMonthDiscount: 10, // 10% discount for 6 months
+      annualDiscount: 20, // 20% discount for annual
       duration: "Personalized Learning Journey",
       batchSize: "Exclusive 1-on-1 Sessions",
       popular: false,
@@ -87,23 +89,33 @@ const Enrollment = () => {
     window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
   };
 
-  const calculatePrice = () => {
-    const course = courses[selectedCourse as keyof typeof courses];
-    let basePrice = course.monthlyPrice;
+  const calculateDiscountedPrice = (basePrice: number, plan: string, courseKey: string) => {
+    const course = courses[courseKey as keyof typeof courses];
     
-    if (selectedCourse === "oneOnOne" && selectedPlan === "annually") {
-      basePrice = course.annualDiscountedPrice!;
-    }
-    
-    switch (selectedPlan) {
-      case "quarterly":
-        return basePrice * 3;
+    switch (plan) {
       case "halfYearly":
-        return basePrice * 6;
+        const sixMonthDiscount = course.sixMonthDiscount;
+        return Math.round(basePrice * (1 - sixMonthDiscount / 100));
       case "annually":
-        return basePrice * 12;
+        const annualDiscount = course.annualDiscount;
+        return Math.round(basePrice * (1 - annualDiscount / 100));
       default:
         return basePrice;
+    }
+  };
+
+  const calculatePrice = () => {
+    const course = courses[selectedCourse as keyof typeof courses];
+    const basePrice = course.monthlyPrice;
+    const discountedMonthlyPrice = calculateDiscountedPrice(basePrice, selectedPlan, selectedCourse);
+    
+    switch (selectedPlan) {
+      case "halfYearly":
+        return discountedMonthlyPrice * 6;
+      case "annually":
+        return discountedMonthlyPrice * 12;
+      default:
+        return discountedMonthlyPrice;
     }
   };
 
@@ -112,8 +124,6 @@ const Enrollment = () => {
     const monthlyPrice = course.monthlyPrice;
     
     switch (selectedPlan) {
-      case "quarterly":
-        return monthlyPrice * 3;
       case "halfYearly":
         return monthlyPrice * 6;
       case "annually":
@@ -124,12 +134,21 @@ const Enrollment = () => {
   };
 
   const getDiscount = () => {
-    if (selectedCourse === "oneOnOne" && selectedPlan === "annually") {
-      const original = getOriginalPrice();
-      const discounted = calculatePrice();
-      return original - discounted;
+    const original = getOriginalPrice();
+    const discounted = calculatePrice();
+    return original - discounted;
+  };
+
+  const getDiscountPercentage = () => {
+    const course = courses[selectedCourse as keyof typeof courses];
+    switch (selectedPlan) {
+      case "halfYearly":
+        return course.sixMonthDiscount;
+      case "annually":
+        return course.annualDiscount;
+      default:
+        return 0;
     }
-    return 0;
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -276,15 +295,15 @@ const Enrollment = () => {
                           className={`cursor-pointer border-2 transition-all duration-300 hover:shadow-xl relative overflow-hidden ${
                             selectedCourse === key 
                               ? course.premium 
-                                ? "border-purple-500 bg-gradient-to-r from-purple-50 via-pink-50 to-purple-50 shadow-xl" 
+                                ? "border-amber-400 bg-gradient-to-r from-amber-50 via-yellow-50 to-amber-50 shadow-xl ring-2 ring-amber-200" 
                                 : "border-red-500 bg-gradient-to-r from-red-50 to-orange-50 shadow-lg"
                               : "border-gray-200 hover:border-red-300"
                           }`}
                           onClick={() => setSelectedCourse(key)}
                         >
                           {course.premium && (
-                            <div className="absolute top-0 right-0 bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 py-1 text-xs font-bold rounded-bl-lg">
-                              PREMIUM
+                            <div className="absolute top-0 right-0 bg-gradient-to-r from-amber-500 to-yellow-500 text-black px-4 py-1 text-xs font-bold rounded-bl-lg shadow-lg">
+                              ✨ PREMIUM GOLD
                             </div>
                           )}
                           <CardContent className="p-6">
@@ -292,7 +311,7 @@ const Enrollment = () => {
                               <div className={`w-6 h-6 rounded-full border-2 mt-1 flex-shrink-0 ${
                                 selectedCourse === key 
                                   ? course.premium 
-                                    ? "bg-purple-500 border-purple-500" 
+                                    ? "bg-amber-500 border-amber-500" 
                                     : "bg-red-500 border-red-500"
                                   : "border-gray-300"
                               }`}>
@@ -315,19 +334,22 @@ const Enrollment = () => {
                                   </span>
                                 </div>
                                 <div className="flex items-center gap-2">
-                                  {course.premium && selectedPlan === "annually" && course.annualDiscountedPrice ? (
-                                    <div className="flex items-center gap-2">
-                                      <span className="text-lg font-semibold text-gray-400 line-through">₹{course.monthlyPrice.toLocaleString()}</span>
-                                      <span className="text-2xl font-bold text-purple-600">₹{course.annualDiscountedPrice.toLocaleString()}</span>
-                                      <span className="text-gray-500">/month</span>
-                                      <span className="bg-green-500 text-white text-xs px-2 py-1 rounded-full">SAVE ₹{(course.monthlyPrice - course.annualDiscountedPrice).toLocaleString()}</span>
-                                    </div>
-                                  ) : (
-                                    <div className="flex items-center gap-2">
-                                      <span className={`text-2xl font-bold ${course.premium ? 'text-purple-600' : 'text-red-600'}`}>₹{course.monthlyPrice.toLocaleString()}</span>
-                                      <span className="text-gray-500">/month</span>
-                                    </div>
-                                  )}
+                                  <div className="flex items-center gap-2">
+                                    {(selectedPlan === "halfYearly" || selectedPlan === "annually") && (
+                                      <span className="text-lg font-semibold text-gray-400 line-through">
+                                        ₹{course.monthlyPrice.toLocaleString()}
+                                      </span>
+                                    )}
+                                    <span className={`text-2xl font-bold ${course.premium ? 'text-amber-600' : 'text-red-600'}`}>
+                                      ₹{calculateDiscountedPrice(course.monthlyPrice, selectedPlan, key).toLocaleString()}
+                                    </span>
+                                    <span className="text-gray-500">/month</span>
+                                    {(selectedPlan === "halfYearly" || selectedPlan === "annually") && (
+                                      <span className="bg-green-500 text-white text-xs px-2 py-1 rounded-full">
+                                        SAVE {getDiscountPercentage()}%
+                                      </span>
+                                    )}
+                                  </div>
                                 </div>
                               </div>
                             </div>
@@ -340,21 +362,29 @@ const Enrollment = () => {
                   {/* Plan Selection */}
                   <div>
                     <h3 className="text-2xl font-semibold mb-6 text-gray-900">Payment Plan</h3>
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
                       {Object.entries(plans).map(([key, plan]) => (
                         <Button
                           key={key}
                           variant={selectedPlan === key ? "default" : "outline"}
-                          className={`h-14 text-sm font-semibold ${
+                          className={`h-16 text-sm font-semibold relative ${
                             selectedPlan === key 
                               ? selectedCourse === "oneOnOne"
-                                ? "bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
+                                ? "bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-black"
                                 : "bg-gradient-to-r from-red-600 to-red-500 hover:from-red-700 hover:to-red-600"
                               : "border-2 hover:border-red-300"
                           }`}
                           onClick={() => setSelectedPlan(key)}
                         >
-                          {plan.label}
+                          <div className="text-center">
+                            <div className="font-bold">{plan.label}</div>
+                            {key === "halfYearly" && (
+                              <div className="text-xs opacity-80">Save {courses[selectedCourse as keyof typeof courses].sixMonthDiscount}%</div>
+                            )}
+                            {key === "annually" && (
+                              <div className="text-xs opacity-80">Save {courses[selectedCourse as keyof typeof courses].annualDiscount}%</div>
+                            )}
+                          </div>
                         </Button>
                       ))}
                     </div>
@@ -362,10 +392,10 @@ const Enrollment = () => {
                       <div className="flex items-center gap-3">
                         <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0" />
                         <span className="text-green-800 font-medium">
-                          {selectedPlan === "annually" && selectedCourse === "oneOnOne" && "Save ₹38,400 with annual payment! Perfect for serious students."}
-                          {selectedPlan === "annually" && selectedCourse === "batch" && "Annual upfront payment ensures your spot in our exclusive batch."}
-                          {selectedPlan === "quarterly" && "3-month commitment for focused learning."}
-                          {selectedPlan === "halfYearly" && "6-month program for comprehensive skill development."}
+                          {selectedPlan === "annually" && selectedCourse === "oneOnOne" && `Save ₹${getDiscount().toLocaleString()} with annual payment! Exclusive 20% discount for serious students.`}
+                          {selectedPlan === "annually" && selectedCourse === "batch" && `Save ₹${getDiscount().toLocaleString()} with annual payment! 15% discount for committed learners.`}
+                          {selectedPlan === "halfYearly" && selectedCourse === "oneOnOne" && `Save ₹${getDiscount().toLocaleString()} with 6-month payment! 10% discount included.`}
+                          {selectedPlan === "halfYearly" && selectedCourse === "batch" && `Save ₹${getDiscount().toLocaleString()} with 6-month payment! 5% discount included.`}
                           {selectedPlan === "monthly" && "Flexible monthly payments with premium support included."}
                         </span>
                       </div>
@@ -465,15 +495,15 @@ const Enrollment = () => {
                 <div>
                   <Card className={`sticky top-8 shadow-2xl border-0 ${
                     selectedCourse === "oneOnOne" 
-                      ? "bg-gradient-to-br from-purple-50 via-white to-pink-50" 
+                      ? "bg-gradient-to-br from-amber-50 via-yellow-50 to-amber-50 ring-2 ring-amber-200" 
                       : "bg-gradient-to-br from-white to-gray-50"
                   }`}>
                     <CardContent className="p-8">
                       <div className="flex items-center gap-2 mb-6">
                         <h3 className="text-2xl font-bold text-gray-900">Investment Summary</h3>
                         {selectedCourse === "oneOnOne" && (
-                          <div className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-3 py-1 text-xs font-bold rounded-full">
-                            PREMIUM
+                          <div className="bg-gradient-to-r from-amber-500 to-yellow-500 text-black px-3 py-1 text-xs font-bold rounded-full shadow-lg">
+                            ✨ PREMIUM GOLD
                           </div>
                         )}
                       </div>
@@ -481,12 +511,12 @@ const Enrollment = () => {
                       <div className="space-y-6 mb-8">
                         <div className={`p-6 rounded-xl border ${
                           selectedCourse === "oneOnOne" 
-                            ? "bg-gradient-to-r from-purple-50 to-pink-50 border-purple-200" 
+                            ? "bg-gradient-to-r from-amber-50 to-yellow-50 border-amber-200" 
                             : "bg-gradient-to-r from-red-50 to-orange-50 border-red-100"
                         }`}>
                           <h4 className="text-xl font-bold text-gray-900 mb-2">{courses[selectedCourse as keyof typeof courses].title}</h4>
                           <p className="text-gray-600 mb-3">{courses[selectedCourse as keyof typeof courses].subtitle}</p>
-                          <p className={`font-semibold ${selectedCourse === "oneOnOne" ? "text-purple-600" : "text-red-600"}`}>
+                          <p className={`font-semibold ${selectedCourse === "oneOnOne" ? "text-amber-600" : "text-red-600"}`}>
                             {courses[selectedCourse as keyof typeof courses].duration}
                           </p>
                         </div>
@@ -525,19 +555,19 @@ const Enrollment = () => {
                         </div>
                         {getDiscount() > 0 && (
                           <div className="flex justify-between items-center text-green-600">
-                            <span>Annual Discount Savings</span>
+                            <span>Discount Savings ({getDiscountPercentage()}% off)</span>
                             <span className="font-semibold">-₹{getDiscount().toLocaleString()}</span>
                           </div>
                         )}
                         <div className="flex justify-between items-center font-bold text-xl border-t-2 border-gray-200 pt-4">
                           <span className="text-gray-900">Total Investment:</span>
-                          <span className={selectedCourse === "oneOnOne" ? "text-purple-600" : "text-red-600"}>
+                          <span className={selectedCourse === "oneOnOne" ? "text-amber-600" : "text-red-600"}>
                             ₹{calculatePrice().toLocaleString()}
                           </span>
                         </div>
                         {selectedPlan !== "monthly" && (
                           <p className="text-sm text-gray-600 text-center">
-                            Equivalent to ₹{Math.round(calculatePrice() / (selectedPlan === "quarterly" ? 3 : selectedPlan === "halfYearly" ? 6 : 12)).toLocaleString()}/month
+                            Equivalent to ₹{Math.round(calculatePrice() / (selectedPlan === "halfYearly" ? 6 : 12)).toLocaleString()}/month
                           </p>
                         )}
                       </div>
@@ -545,7 +575,7 @@ const Enrollment = () => {
                       <Button 
                         className={`w-full h-14 text-lg font-semibold mt-8 shadow-lg ${
                           selectedCourse === "oneOnOne" 
-                            ? "bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700" 
+                            ? "bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-black" 
                             : "bg-gradient-to-r from-red-600 to-red-500 hover:from-red-700 hover:to-red-600"
                         }`} 
                         size="lg"
