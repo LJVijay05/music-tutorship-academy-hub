@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { useState } from "react";
-import { CheckCircle, CreditCard, Shield, Star, Clock, Users, Award } from "lucide-react";
+import { CheckCircle, CreditCard, Shield, Star, Clock, Users, Award, MessageCircle } from "lucide-react";
 
 const Enrollment = () => {
   const [selectedPlan, setSelectedPlan] = useState("monthly");
@@ -21,7 +21,9 @@ const Enrollment = () => {
 
   const plans = {
     monthly: { label: "Monthly", discount: 0 },
-    annually: { label: "Annually", discount: 0 }
+    quarterly: { label: "3 Months", discount: 0 },
+    halfYearly: { label: "6 Months", discount: 0 },
+    annually: { label: "12 Months", discount: 0 }
   };
 
   const courses = {
@@ -29,10 +31,10 @@ const Enrollment = () => {
       title: "Music Production Batch Mentorship",
       subtitle: "From Beginner to Advanced Level",
       monthlyPrice: 9599,
-      annualPrice: 9599 * 12, // ₹1,15,188 paid upfront
       duration: "12 Months Duration",
       batchSize: "15 Students Per Batch",
       popular: true,
+      premium: false,
       features: [
         "15 premium students per batch",
         "Weekly live interactive sessions",
@@ -54,9 +56,9 @@ const Enrollment = () => {
       title: "One-on-One Music Production Mentorship",
       subtitle: "Premium Individual Coaching",
       monthlyPrice: 16000,
-      annualPrice: 12800 * 12, // ₹1,53,600 vs ₹1,92,000 (Save ₹38,400)
       duration: "Personalized Learning Journey",
       batchSize: "Exclusive 1-on-1 Sessions",
+      popular: false,
       premium: true,
       features: [
         "Completely personalized curriculum",
@@ -79,22 +81,42 @@ const Enrollment = () => {
 
   const calculatePrice = () => {
     const course = courses[selectedCourse as keyof typeof courses];
-    if (selectedPlan === "annually") {
-      return course.annualPrice;
+    let basePrice = course.monthlyPrice;
+    
+    if (selectedCourse === "oneOnOne" && selectedPlan === "annually") {
+      basePrice = 12800; // Special annual rate for 1-on-1
     }
-    return course.monthlyPrice;
+    
+    switch (selectedPlan) {
+      case "quarterly":
+        return basePrice * 3;
+      case "halfYearly":
+        return basePrice * 6;
+      case "annually":
+        return basePrice * 12;
+      default:
+        return basePrice;
+    }
   };
 
   const getOriginalPrice = () => {
     const course = courses[selectedCourse as keyof typeof courses];
-    if (selectedPlan === "annually" && selectedCourse === "oneOnOne") {
-      return course.monthlyPrice * 12; // Show original monthly price × 12
+    const monthlyPrice = course.monthlyPrice;
+    
+    switch (selectedPlan) {
+      case "quarterly":
+        return monthlyPrice * 3;
+      case "halfYearly":
+        return monthlyPrice * 6;
+      case "annually":
+        return monthlyPrice * 12;
+      default:
+        return monthlyPrice;
     }
-    return course.monthlyPrice;
   };
 
   const getDiscount = () => {
-    if (selectedPlan === "annually" && selectedCourse === "oneOnOne") {
+    if (selectedCourse === "oneOnOne" && selectedPlan === "annually") {
       const original = getOriginalPrice();
       const discounted = calculatePrice();
       return original - discounted;
@@ -110,7 +132,7 @@ const Enrollment = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-red-50">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-red-50 font-inter">
       <Navigation />
       
       <div className="pt-20">
@@ -119,7 +141,7 @@ const Enrollment = () => {
           <div className="absolute inset-0 bg-black opacity-10"></div>
           <div className="container mx-auto px-6 text-center relative z-10">
             <div className="max-w-4xl mx-auto">
-              <h1 className="text-5xl md:text-7xl font-bold mb-8 leading-tight">
+              <h1 className="text-5xl md:text-7xl font-bold mb-8 leading-tight tracking-tight">
                 Elevate Your <span className="text-yellow-300">Music Production</span> Journey
               </h1>
               <p className="text-xl md:text-2xl text-red-100 max-w-3xl mx-auto mb-8 leading-relaxed">
@@ -138,6 +160,66 @@ const Enrollment = () => {
                   <Award className="w-5 h-5 text-yellow-300" />
                   <span>Industry Recognition</span>
                 </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* AI Chatbot Section */}
+        <section className="py-16 bg-gradient-to-r from-pink-500 to-red-500 text-white">
+          <div className="container mx-auto px-6">
+            <div className="max-w-4xl mx-auto text-center">
+              <div className="flex justify-center mb-6">
+                <div className="bg-white bg-opacity-20 p-4 rounded-full">
+                  <MessageCircle className="w-12 h-12 text-white" />
+                </div>
+              </div>
+              <h2 className="text-4xl md:text-5xl font-bold mb-6">Have Questions?</h2>
+              <p className="text-xl text-pink-100 mb-8">
+                Our AI-powered assistant is here to help you choose the perfect music production program
+              </p>
+              <Button className="bg-white text-pink-600 hover:bg-pink-50 px-8 py-4 text-lg font-semibold rounded-full">
+                <MessageCircle className="w-5 h-5 mr-2" />
+                Chat with AI Assistant
+              </Button>
+            </div>
+          </div>
+        </section>
+
+        {/* Why Choose Us Section */}
+        <section className="py-20 bg-gradient-to-r from-red-600 via-red-500 to-pink-500 text-white">
+          <div className="container mx-auto px-6">
+            <div className="text-center mb-16">
+              <h2 className="text-5xl font-bold mb-4">Why Choose Us</h2>
+              <p className="text-xl text-red-100">Premium Music Production Course Features</p>
+            </div>
+            <div className="grid md:grid-cols-3 gap-12 max-w-6xl mx-auto">
+              <div className="text-center">
+                <div className="bg-white bg-opacity-20 p-6 rounded-full w-24 h-24 mx-auto mb-6 flex items-center justify-center">
+                  <Users className="w-12 h-12 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold mb-4">Expert Mentorship</h3>
+                <p className="text-red-100 leading-relaxed">
+                  Learn from industry professionals with years of experience in music production and sound engineering.
+                </p>
+              </div>
+              <div className="text-center">
+                <div className="bg-white bg-opacity-20 p-6 rounded-full w-24 h-24 mx-auto mb-6 flex items-center justify-center">
+                  <Award className="w-12 h-12 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold mb-4">Industry Recognition</h3>
+                <p className="text-red-100 leading-relaxed">
+                  Get certified credentials that are recognized by top music studios and production houses worldwide.
+                </p>
+              </div>
+              <div className="text-center">
+                <div className="bg-white bg-opacity-20 p-6 rounded-full w-24 h-24 mx-auto mb-6 flex items-center justify-center">
+                  <Clock className="w-12 h-12 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold mb-4">Global Accessibility</h3>
+                <p className="text-red-100 leading-relaxed">
+                  Flexible scheduling across multiple time zones to accommodate students from around the world.
+                </p>
               </div>
             </div>
           </div>
@@ -197,9 +279,6 @@ const Enrollment = () => {
                                 <div className="flex items-center gap-2">
                                   <span className="text-2xl font-bold text-red-600">₹{course.monthlyPrice.toLocaleString()}</span>
                                   <span className="text-gray-500">/month</span>
-                                  {selectedPlan === "annually" && course.annualPrice < course.monthlyPrice * 12 && (
-                                    <span className="ml-2 px-2 py-1 bg-green-100 text-green-700 text-xs font-semibold rounded">SAVE ₹{((course.monthlyPrice * 12) - course.annualPrice).toLocaleString()}</span>
-                                  )}
                                 </div>
                               </div>
                             </div>
@@ -212,12 +291,12 @@ const Enrollment = () => {
                   {/* Plan Selection */}
                   <div>
                     <h3 className="text-2xl font-semibold mb-6 text-gray-900">Payment Plan</h3>
-                    <div className="flex gap-4 mb-6">
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
                       {Object.entries(plans).map(([key, plan]) => (
                         <Button
                           key={key}
                           variant={selectedPlan === key ? "default" : "outline"}
-                          className={`flex-1 h-14 text-lg font-semibold ${
+                          className={`h-14 text-sm font-semibold ${
                             selectedPlan === key 
                               ? "bg-gradient-to-r from-red-600 to-red-500 hover:from-red-700 hover:to-red-600" 
                               : "border-2 hover:border-red-300"
@@ -232,8 +311,10 @@ const Enrollment = () => {
                       <div className="flex items-center gap-3">
                         <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0" />
                         <span className="text-green-800 font-medium">
-                          {selectedPlan === "annually" && selectedCourse === "oneOnOne" && "Save ₹38,400 with annual payment! Perfect for serious NRI students."}
+                          {selectedPlan === "annually" && selectedCourse === "oneOnOne" && "Save ₹38,400 with annual payment! Perfect for serious students."}
                           {selectedPlan === "annually" && selectedCourse === "batch" && "Annual upfront payment ensures your spot in our exclusive batch."}
+                          {selectedPlan === "quarterly" && "3-month commitment for focused learning."}
+                          {selectedPlan === "halfYearly" && "6-month program for comprehensive skill development."}
                           {selectedPlan === "monthly" && "Flexible monthly payments with premium support included."}
                         </span>
                       </div>
@@ -364,7 +445,7 @@ const Enrollment = () => {
                       
                       <div className="border-t-2 border-gray-200 pt-6 space-y-4">
                         <div className="flex justify-between items-center">
-                          <span className="text-gray-700">Course Fee ({selectedPlan})</span>
+                          <span className="text-gray-700">Course Fee ({plans[selectedPlan as keyof typeof plans].label})</span>
                           <span className="font-semibold">₹{getOriginalPrice().toLocaleString()}</span>
                         </div>
                         {getDiscount() > 0 && (
@@ -377,9 +458,9 @@ const Enrollment = () => {
                           <span className="text-gray-900">Total Investment:</span>
                           <span className="text-red-600">₹{calculatePrice().toLocaleString()}</span>
                         </div>
-                        {selectedPlan === "annually" && (
+                        {selectedPlan !== "monthly" && (
                           <p className="text-sm text-gray-600 text-center">
-                            Equivalent to ₹{Math.round(calculatePrice() / 12).toLocaleString()}/month
+                            Equivalent to ₹{Math.round(calculatePrice() / (selectedPlan === "quarterly" ? 3 : selectedPlan === "halfYearly" ? 6 : 12)).toLocaleString()}/month
                           </p>
                         )}
                       </div>
