@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { useState } from "react";
-import { CheckCircle, CreditCard, Shield, Star, Clock, Users, Award, MessageCircle } from "lucide-react";
+import { CheckCircle, CreditCard, Shield, Star, Clock, Users, Award, MessageCircle, Phone } from "lucide-react";
 
 const Enrollment = () => {
   const [selectedPlan, setSelectedPlan] = useState("monthly");
@@ -56,6 +56,7 @@ const Enrollment = () => {
       title: "One-on-One Music Production Mentorship",
       subtitle: "Premium Individual Coaching",
       monthlyPrice: 16000,
+      annualDiscountedPrice: 12800,
       duration: "Personalized Learning Journey",
       batchSize: "Exclusive 1-on-1 Sessions",
       popular: false,
@@ -79,12 +80,19 @@ const Enrollment = () => {
     }
   };
 
+  // WhatsApp Integration
+  const openWhatsApp = () => {
+    const phoneNumber = "+919876543210"; // Replace with actual WhatsApp number
+    const message = encodeURIComponent("Hi! I'm interested in your music production courses. Can you help me with more information?");
+    window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+  };
+
   const calculatePrice = () => {
     const course = courses[selectedCourse as keyof typeof courses];
     let basePrice = course.monthlyPrice;
     
     if (selectedCourse === "oneOnOne" && selectedPlan === "annually") {
-      basePrice = 12800; // Special annual rate for 1-on-1
+      basePrice = course.annualDiscountedPrice!;
     }
     
     switch (selectedPlan) {
@@ -135,6 +143,17 @@ const Enrollment = () => {
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-red-50 font-inter">
       <Navigation />
       
+      {/* WhatsApp Floating Button */}
+      <div className="fixed bottom-6 right-6 z-50">
+        <Button
+          onClick={openWhatsApp}
+          className="bg-green-500 hover:bg-green-600 text-white rounded-full w-16 h-16 shadow-lg transition-all duration-300 hover:scale-110"
+          size="lg"
+        >
+          <Phone className="w-8 h-8" />
+        </Button>
+      </div>
+
       <div className="pt-20">
         {/* Hero Section */}
         <section className="py-20 bg-gradient-to-r from-red-600 via-red-500 to-orange-500 text-white relative overflow-hidden">
@@ -178,10 +197,19 @@ const Enrollment = () => {
               <p className="text-xl text-pink-100 mb-8">
                 Our AI-powered assistant is here to help you choose the perfect music production program
               </p>
-              <Button className="bg-white text-pink-600 hover:bg-pink-50 px-8 py-4 text-lg font-semibold rounded-full">
-                <MessageCircle className="w-5 h-5 mr-2" />
-                Chat with AI Assistant
-              </Button>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Button className="bg-white text-pink-600 hover:bg-pink-50 px-8 py-4 text-lg font-semibold rounded-full">
+                  <MessageCircle className="w-5 h-5 mr-2" />
+                  Chat with AI Assistant
+                </Button>
+                <Button 
+                  onClick={openWhatsApp}
+                  className="bg-green-500 hover:bg-green-600 text-white px-8 py-4 text-lg font-semibold rounded-full"
+                >
+                  <Phone className="w-5 h-5 mr-2" />
+                  WhatsApp Support
+                </Button>
+              </div>
             </div>
           </div>
         </section>
@@ -245,17 +273,28 @@ const Enrollment = () => {
                       {Object.entries(courses).map(([key, course]) => (
                         <Card 
                           key={key}
-                          className={`cursor-pointer border-2 transition-all duration-300 hover:shadow-xl ${
+                          className={`cursor-pointer border-2 transition-all duration-300 hover:shadow-xl relative overflow-hidden ${
                             selectedCourse === key 
-                              ? "border-red-500 bg-gradient-to-r from-red-50 to-orange-50 shadow-lg" 
+                              ? course.premium 
+                                ? "border-purple-500 bg-gradient-to-r from-purple-50 via-pink-50 to-purple-50 shadow-xl" 
+                                : "border-red-500 bg-gradient-to-r from-red-50 to-orange-50 shadow-lg"
                               : "border-gray-200 hover:border-red-300"
                           }`}
                           onClick={() => setSelectedCourse(key)}
                         >
+                          {course.premium && (
+                            <div className="absolute top-0 right-0 bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 py-1 text-xs font-bold rounded-bl-lg">
+                              PREMIUM
+                            </div>
+                          )}
                           <CardContent className="p-6">
                             <div className="flex items-start gap-4">
                               <div className={`w-6 h-6 rounded-full border-2 mt-1 flex-shrink-0 ${
-                                selectedCourse === key ? "bg-red-500 border-red-500" : "border-gray-300"
+                                selectedCourse === key 
+                                  ? course.premium 
+                                    ? "bg-purple-500 border-purple-500" 
+                                    : "bg-red-500 border-red-500"
+                                  : "border-gray-300"
                               }`}>
                                 {selectedCourse === key && <CheckCircle className="w-6 h-6 text-white -m-0.5" />}
                               </div>
@@ -263,7 +302,6 @@ const Enrollment = () => {
                                 <div className="flex items-center gap-3 mb-2">
                                   <h4 className="text-xl font-bold text-gray-900">{course.title}</h4>
                                   {course.popular && <span className="px-3 py-1 bg-green-500 text-white text-xs font-semibold rounded-full">POPULAR</span>}
-                                  {course.premium && <span className="px-3 py-1 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-xs font-semibold rounded-full">PREMIUM</span>}
                                 </div>
                                 <p className="text-gray-600 mb-3">{course.subtitle}</p>
                                 <div className="flex flex-wrap gap-4 mb-4 text-sm">
@@ -277,8 +315,19 @@ const Enrollment = () => {
                                   </span>
                                 </div>
                                 <div className="flex items-center gap-2">
-                                  <span className="text-2xl font-bold text-red-600">₹{course.monthlyPrice.toLocaleString()}</span>
-                                  <span className="text-gray-500">/month</span>
+                                  {course.premium && selectedPlan === "annually" && course.annualDiscountedPrice ? (
+                                    <div className="flex items-center gap-2">
+                                      <span className="text-lg font-semibold text-gray-400 line-through">₹{course.monthlyPrice.toLocaleString()}</span>
+                                      <span className="text-2xl font-bold text-purple-600">₹{course.annualDiscountedPrice.toLocaleString()}</span>
+                                      <span className="text-gray-500">/month</span>
+                                      <span className="bg-green-500 text-white text-xs px-2 py-1 rounded-full">SAVE ₹{(course.monthlyPrice - course.annualDiscountedPrice).toLocaleString()}</span>
+                                    </div>
+                                  ) : (
+                                    <div className="flex items-center gap-2">
+                                      <span className={`text-2xl font-bold ${course.premium ? 'text-purple-600' : 'text-red-600'}`}>₹{course.monthlyPrice.toLocaleString()}</span>
+                                      <span className="text-gray-500">/month</span>
+                                    </div>
+                                  )}
                                 </div>
                               </div>
                             </div>
@@ -298,7 +347,9 @@ const Enrollment = () => {
                           variant={selectedPlan === key ? "default" : "outline"}
                           className={`h-14 text-sm font-semibold ${
                             selectedPlan === key 
-                              ? "bg-gradient-to-r from-red-600 to-red-500 hover:from-red-700 hover:to-red-600" 
+                              ? selectedCourse === "oneOnOne"
+                                ? "bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
+                                : "bg-gradient-to-r from-red-600 to-red-500 hover:from-red-700 hover:to-red-600"
                               : "border-2 hover:border-red-300"
                           }`}
                           onClick={() => setSelectedPlan(key)}
@@ -412,15 +463,32 @@ const Enrollment = () => {
 
                 {/* Order Summary */}
                 <div>
-                  <Card className="sticky top-8 shadow-2xl border-0 bg-gradient-to-br from-white to-gray-50">
+                  <Card className={`sticky top-8 shadow-2xl border-0 ${
+                    selectedCourse === "oneOnOne" 
+                      ? "bg-gradient-to-br from-purple-50 via-white to-pink-50" 
+                      : "bg-gradient-to-br from-white to-gray-50"
+                  }`}>
                     <CardContent className="p-8">
-                      <h3 className="text-2xl font-bold mb-8 text-gray-900">Investment Summary</h3>
+                      <div className="flex items-center gap-2 mb-6">
+                        <h3 className="text-2xl font-bold text-gray-900">Investment Summary</h3>
+                        {selectedCourse === "oneOnOne" && (
+                          <div className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-3 py-1 text-xs font-bold rounded-full">
+                            PREMIUM
+                          </div>
+                        )}
+                      </div>
                       
                       <div className="space-y-6 mb-8">
-                        <div className="p-6 bg-gradient-to-r from-red-50 to-orange-50 rounded-xl border border-red-100">
+                        <div className={`p-6 rounded-xl border ${
+                          selectedCourse === "oneOnOne" 
+                            ? "bg-gradient-to-r from-purple-50 to-pink-50 border-purple-200" 
+                            : "bg-gradient-to-r from-red-50 to-orange-50 border-red-100"
+                        }`}>
                           <h4 className="text-xl font-bold text-gray-900 mb-2">{courses[selectedCourse as keyof typeof courses].title}</h4>
                           <p className="text-gray-600 mb-3">{courses[selectedCourse as keyof typeof courses].subtitle}</p>
-                          <p className="text-red-600 font-semibold">{courses[selectedCourse as keyof typeof courses].duration}</p>
+                          <p className={`font-semibold ${selectedCourse === "oneOnOne" ? "text-purple-600" : "text-red-600"}`}>
+                            {courses[selectedCourse as keyof typeof courses].duration}
+                          </p>
                         </div>
                         
                         <div className="space-y-3">
@@ -446,17 +514,26 @@ const Enrollment = () => {
                       <div className="border-t-2 border-gray-200 pt-6 space-y-4">
                         <div className="flex justify-between items-center">
                           <span className="text-gray-700">Course Fee ({plans[selectedPlan as keyof typeof plans].label})</span>
-                          <span className="font-semibold">₹{getOriginalPrice().toLocaleString()}</span>
+                          {getDiscount() > 0 ? (
+                            <div className="text-right">
+                              <div className="text-lg font-semibold text-gray-400 line-through">₹{getOriginalPrice().toLocaleString()}</div>
+                              <div className="font-semibold text-green-600">₹{calculatePrice().toLocaleString()}</div>
+                            </div>
+                          ) : (
+                            <span className="font-semibold">₹{calculatePrice().toLocaleString()}</span>
+                          )}
                         </div>
                         {getDiscount() > 0 && (
                           <div className="flex justify-between items-center text-green-600">
-                            <span>Annual Discount</span>
+                            <span>Annual Discount Savings</span>
                             <span className="font-semibold">-₹{getDiscount().toLocaleString()}</span>
                           </div>
                         )}
                         <div className="flex justify-between items-center font-bold text-xl border-t-2 border-gray-200 pt-4">
                           <span className="text-gray-900">Total Investment:</span>
-                          <span className="text-red-600">₹{calculatePrice().toLocaleString()}</span>
+                          <span className={selectedCourse === "oneOnOne" ? "text-purple-600" : "text-red-600"}>
+                            ₹{calculatePrice().toLocaleString()}
+                          </span>
                         </div>
                         {selectedPlan !== "monthly" && (
                           <p className="text-sm text-gray-600 text-center">
@@ -465,7 +542,14 @@ const Enrollment = () => {
                         )}
                       </div>
                       
-                      <Button className="w-full h-14 bg-gradient-to-r from-red-600 to-red-500 hover:from-red-700 hover:to-red-600 text-lg font-semibold mt-8 shadow-lg" size="lg">
+                      <Button 
+                        className={`w-full h-14 text-lg font-semibold mt-8 shadow-lg ${
+                          selectedCourse === "oneOnOne" 
+                            ? "bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700" 
+                            : "bg-gradient-to-r from-red-600 to-red-500 hover:from-red-700 hover:to-red-600"
+                        }`} 
+                        size="lg"
+                      >
                         <CreditCard className="w-6 h-6 mr-3" />
                         Secure Your Spot Now
                       </Button>
@@ -483,6 +567,17 @@ const Enrollment = () => {
                         <p className="text-blue-800 text-sm">
                           24/7 support for international students • Multiple payment options • Installment plans available
                         </p>
+                      </div>
+
+                      <div className="mt-4">
+                        <Button 
+                          onClick={openWhatsApp}
+                          variant="outline" 
+                          className="w-full bg-green-50 border-green-200 text-green-700 hover:bg-green-100"
+                        >
+                          <Phone className="w-4 h-4 mr-2" />
+                          Get Help on WhatsApp
+                        </Button>
                       </div>
                     </CardContent>
                   </Card>
