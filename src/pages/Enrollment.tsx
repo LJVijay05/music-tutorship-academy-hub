@@ -55,12 +55,12 @@ const Enrollment = () => {
   };
 
   const calculatePrice = () => {
-    const basePrice = courses[selectedCourse].price;
-    const discount = plans[selectedPlan].discount;
+    const basePrice = courses[selectedCourse as keyof typeof courses].price;
+    const discount = plans[selectedPlan as keyof typeof plans].discount;
     return Math.round(basePrice * (1 - discount / 100));
   };
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
@@ -208,7 +208,7 @@ const Enrollment = () => {
                       >
                         <option value="">Select your experience level</option>
                         <option value="beginner">Complete Beginner</option>
-                        <option value="some">Some Experience (< 1 year)</option>
+                        <option value="some">Some Experience (&lt; 1 year)</option>
                         <option value="intermediate">Intermediate (1-3 years)</option>
                         <option value="advanced">Advanced (3+ years)</option>
                       </select>
@@ -241,13 +241,13 @@ const Enrollment = () => {
                       
                       <div className="space-y-4 mb-6">
                         <div>
-                          <h4 className="font-semibold">{courses[selectedCourse].title}</h4>
-                          <p className="text-sm text-gray-600">{courses[selectedCourse].subtitle}</p>
-                          <p className="text-sm text-red-600">{courses[selectedCourse].duration}</p>
+                          <h4 className="font-semibold">{courses[selectedCourse as keyof typeof courses].title}</h4>
+                          <p className="text-sm text-gray-600">{courses[selectedCourse as keyof typeof courses].subtitle}</p>
+                          <p className="text-sm text-red-600">{courses[selectedCourse as keyof typeof courses].duration}</p>
                         </div>
                         
                         <div className="space-y-2">
-                          {courses[selectedCourse].features.map((feature, index) => (
+                          {courses[selectedCourse as keyof typeof courses].features.map((feature, index) => (
                             <div key={index} className="flex items-center gap-2 text-sm">
                               <CheckCircle className="w-4 h-4 text-green-600" />
                               <span className="text-gray-700">{feature}</span>
@@ -259,12 +259,12 @@ const Enrollment = () => {
                       <div className="border-t pt-4 space-y-2">
                         <div className="flex justify-between">
                           <span>Course Fee</span>
-                          <span>₹{courses[selectedCourse].price.toLocaleString()}</span>
+                          <span>₹{courses[selectedCourse as keyof typeof courses].price.toLocaleString()}</span>
                         </div>
-                        {plans[selectedPlan].discount > 0 && (
+                        {plans[selectedPlan as keyof typeof plans].discount > 0 && (
                           <div className="flex justify-between text-green-600">
-                            <span>{plans[selectedPlan].label} Discount ({plans[selectedPlan].discount}%)</span>
-                            <span>-₹{(courses[selectedCourse].price * plans[selectedPlan].discount / 100).toLocaleString()}</span>
+                            <span>{plans[selectedPlan as keyof typeof plans].label} Discount ({plans[selectedPlan as keyof typeof plans].discount}%)</span>
+                            <span>-₹{(courses[selectedCourse as keyof typeof courses].price * plans[selectedPlan as keyof typeof plans].discount / 100).toLocaleString()}</span>
                           </div>
                         )}
                         <div className="flex justify-between font-bold text-lg border-t pt-2">
