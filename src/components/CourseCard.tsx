@@ -102,7 +102,7 @@ const CourseCard = ({
             <ul className="space-y-4 mb-8">
               {features.map((feature, index) => (
                 <li key={index} className="flex items-center gap-3 group/item">
-                  <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 group-hover/item:scale-110 transition-transform" />
+                  <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 group-hover/item:scale-110 transition-transform duration-300" />
                   <span className="text-gray-700 font-medium">{feature}</span>
                 </li>
               ))}
@@ -121,14 +121,14 @@ const CourseCard = ({
           <div className="flex flex-col sm:flex-row gap-4 mt-6">
             <Button 
               variant="outline" 
-              className={`flex-1 border-2 ${borderColor.replace('border-', 'border-').replace('-100', '-500')} ${textColor.replace('-700', '-600')} hover:${bgColor} group/btn transition-all duration-300 h-12 rounded-xl font-semibold`}
+              className={`flex-1 border-2 ${borderColor.replace('border-', 'border-').replace('-100', '-500')} ${textColor.replace('-700', '-600')} hover:${bgColor} group/btn transition-all duration-300 h-12 rounded-xl font-semibold hover:scale-[1.02] hover:shadow-md`}
               onClick={handleDetailsClick}
             >
-              <Info className="w-5 h-5 mr-2 group-hover/btn:scale-110 transition-transform" />
+              <Info className="w-5 h-5 mr-2 group-hover/btn:scale-110 transition-transform duration-300" />
               View Details
             </Button>
             <Button 
-              className={`flex-1 bg-gradient-to-r ${buttonGradientFrom} ${buttonGradientTo} hover:${buttonHoverFrom} hover:${buttonHoverTo} shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 h-12 rounded-xl font-semibold text-white ${isPremium ? 'text-black' : ''}`}
+              className={`flex-1 bg-gradient-to-r ${buttonGradientFrom} ${buttonGradientTo} hover:${buttonHoverFrom} hover:${buttonHoverTo} shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02] h-12 rounded-xl font-semibold text-white ${isPremium ? 'text-black' : ''}`}
               asChild
             >
               <Link to="/enrollment">
