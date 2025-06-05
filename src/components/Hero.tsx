@@ -1,8 +1,47 @@
 
 import { Button } from "@/components/ui/button";
 import { Play, Star, Users, Music } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import DemoPopup from "./DemoPopup";
+
+// Counter Animation Component
+const AnimatedCounter = ({ target, suffix = "", duration = 2000 }: { target: number; suffix?: string; duration?: number }) => {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    const startTime = Date.now();
+    const endTime = startTime + duration;
+
+    const updateCount = () => {
+      const now = Date.now();
+      const progress = Math.min((now - startTime) / duration, 1);
+      
+      // Easing function for smooth animation
+      const easeOutQuad = 1 - (1 - progress) * (1 - progress);
+      const currentCount = Math.floor(easeOutQuad * target);
+      
+      setCount(currentCount);
+
+      if (now < endTime) {
+        requestAnimationFrame(updateCount);
+      } else {
+        setCount(target);
+      }
+    };
+
+    const timer = setTimeout(() => {
+      updateCount();
+    }, 500); // Small delay to ensure component is visible
+
+    return () => clearTimeout(timer);
+  }, [target, duration]);
+
+  return (
+    <span className="text-3xl font-bold text-gray-900 group-hover:text-red-600 transition-colors duration-300">
+      {count}{suffix}
+    </span>
+  );
+};
 
 const Hero = () => {
   const [isDemoPopupOpen, setIsDemoPopupOpen] = useState(false);
@@ -64,21 +103,21 @@ const Hero = () => {
             <div className="text-center group hover:scale-110 transition-all duration-500 p-6 rounded-2xl bg-gradient-to-br from-white/50 to-red-50/50 backdrop-blur-sm hover:shadow-xl hover:bg-gradient-to-br hover:from-red-50 hover:to-white border border-red-100/50">
               <div className="flex items-center justify-center mb-3">
                 <Users className="h-8 w-8 text-red-600 mr-2 group-hover:animate-bounce" />
-                <span className="text-3xl font-bold text-gray-900 group-hover:text-red-600 transition-colors duration-300">500+</span>
+                <AnimatedCounter target={320} suffix="+" duration={2000} />
               </div>
               <p className="text-gray-600 font-medium group-hover:text-gray-800 transition-colors duration-300">Students Mentored</p>
             </div>
             <div className="text-center group hover:scale-110 transition-all duration-500 p-6 rounded-2xl bg-gradient-to-br from-white/50 to-red-50/50 backdrop-blur-sm hover:shadow-xl hover:bg-gradient-to-br hover:from-red-50 hover:to-white border border-red-100/50" style={{ animationDelay: '1.3s' }}>
               <div className="flex items-center justify-center mb-3">
                 <Star className="h-8 w-8 text-red-600 mr-2 group-hover:animate-bounce" />
-                <span className="text-3xl font-bold text-gray-900 group-hover:text-red-600 transition-colors duration-300">10+</span>
+                <AnimatedCounter target={10} suffix="+" duration={2200} />
               </div>
               <p className="text-gray-600 font-medium group-hover:text-gray-800 transition-colors duration-300">Years Experience</p>
             </div>
             <div className="text-center group hover:scale-110 transition-all duration-500 p-6 rounded-2xl bg-gradient-to-br from-white/50 to-red-50/50 backdrop-blur-sm hover:shadow-xl hover:bg-gradient-to-br hover:from-red-50 hover:to-white border border-red-100/50" style={{ animationDelay: '1.4s' }}>
               <div className="flex items-center justify-center mb-3">
                 <Music className="h-8 w-8 text-red-600 mr-2 group-hover:animate-bounce" />
-                <span className="text-3xl font-bold text-gray-900 group-hover:text-red-600 transition-colors duration-300">200+</span>
+                <AnimatedCounter target={200} suffix="+" duration={2400} />
               </div>
               <p className="text-gray-600 font-medium group-hover:text-gray-800 transition-colors duration-300">Tracks Produced</p>
             </div>
