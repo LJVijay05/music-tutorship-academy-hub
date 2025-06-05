@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -137,7 +138,7 @@ export default {
 				},
 				'slide-left': {
 					'0%': {
-						transform: 'translateX(30px)',
+						transform: 'translateX(50px)',
 						opacity: '0'
 					},
 					'100%': {
@@ -147,7 +148,7 @@ export default {
 				},
 				'slide-right': {
 					'0%': {
-						transform: 'translateX(-30px)',
+						transform: 'translateX(-50px)',
 						opacity: '0'
 					},
 					'100%': {
@@ -206,6 +207,85 @@ export default {
 						opacity: '1',
 						transform: 'translateY(0) rotateX(0deg)'
 					}
+				},
+				'premium-glow': {
+					'0%, 100%': {
+						boxShadow: '0 0 20px rgba(239, 68, 68, 0.3)',
+						transform: 'scale(1)'
+					},
+					'50%': {
+						boxShadow: '0 0 40px rgba(239, 68, 68, 0.6), 0 0 60px rgba(239, 68, 68, 0.3)',
+						transform: 'scale(1.02)'
+					}
+				},
+				'golden-glow': {
+					'0%, 100%': {
+						boxShadow: '0 0 20px rgba(245, 158, 11, 0.3)',
+						transform: 'scale(1)'
+					},
+					'50%': {
+						boxShadow: '0 0 40px rgba(245, 158, 11, 0.6), 0 0 60px rgba(245, 158, 11, 0.3)',
+						transform: 'scale(1.02)'
+					}
+				},
+				'gradient-shift': {
+					'0%': {
+						backgroundPosition: '0% 50%'
+					},
+					'50%': {
+						backgroundPosition: '100% 50%'
+					},
+					'100%': {
+						backgroundPosition: '0% 50%'
+					}
+				},
+				'sparkle': {
+					'0%, 100%': {
+						opacity: '0',
+						transform: 'scale(0) rotate(0deg)'
+					},
+					'50%': {
+						opacity: '1',
+						transform: 'scale(1) rotate(180deg)'
+					}
+				},
+				'zoom-in-up': {
+					'0%': {
+						opacity: '0',
+						transform: 'scale(0.8) translateY(30px)'
+					},
+					'100%': {
+						opacity: '1',
+						transform: 'scale(1) translateY(0)'
+					}
+				},
+				'slide-in-bottom': {
+					'0%': {
+						opacity: '0',
+						transform: 'translateY(100px)'
+					},
+					'100%': {
+						opacity: '1',
+						transform: 'translateY(0)'
+					}
+				},
+				'stagger-fade': {
+					'0%': {
+						opacity: '0',
+						transform: 'translateY(20px) scale(0.95)'
+					},
+					'100%': {
+						opacity: '1',
+						transform: 'translateY(0) scale(1)'
+					}
+				},
+				'text-shimmer': {
+					'0%': {
+						backgroundPosition: '-200% center'
+					},
+					'100%': {
+						backgroundPosition: '200% center'
+					}
 				}
 			},
 			animation: {
@@ -222,7 +302,15 @@ export default {
 				'float': 'float 6s ease-in-out infinite',
 				'float-delayed': 'float-delayed 8s ease-in-out infinite',
 				'title-reveal': 'title-reveal 1s ease-out forwards',
-				'word-slide-up': 'word-slide-up 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards'
+				'word-slide-up': 'word-slide-up 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards',
+				'premium-glow': 'premium-glow 3s ease-in-out infinite',
+				'golden-glow': 'golden-glow 3s ease-in-out infinite',
+				'gradient-shift': 'gradient-shift 3s ease-in-out infinite',
+				'sparkle': 'sparkle 2s ease-in-out infinite',
+				'zoom-in-up': 'zoom-in-up 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards',
+				'slide-in-bottom': 'slide-in-bottom 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards',
+				'stagger-fade': 'stagger-fade 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards',
+				'text-shimmer': 'text-shimmer 2s linear infinite'
 			}
 		}
 	},

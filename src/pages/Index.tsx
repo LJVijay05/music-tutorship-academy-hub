@@ -9,26 +9,26 @@ import Footer from "@/components/Footer";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white overflow-x-hidden">
       <Navigation />
       <main>
         <div className="animate-fade-in">
           <Hero />
         </div>
-        <div className="animate-fade-in" style={{ animationDelay: '0.2s' }}>
+        <div className="animate-slide-up" style={{ animationDelay: '0.2s' }}>
           <AboutSection />
         </div>
-        <div className="animate-fade-in" style={{ animationDelay: '0.3s' }}>
+        <div className="animate-slide-up" style={{ animationDelay: '0.4s' }}>
           <WhyChooseSection />
         </div>
-        <div className="animate-fade-in" style={{ animationDelay: '0.4s' }}>
+        <div className="animate-slide-up" style={{ animationDelay: '0.6s' }}>
           <CoursesSection />
         </div>
-        <div className="animate-fade-in" style={{ animationDelay: '0.6s' }}>
+        <div className="animate-slide-up" style={{ animationDelay: '0.8s' }}>
           <FAQSection />
         </div>
       </main>
-      <div className="animate-fade-in" style={{ animationDelay: '0.8s' }}>
+      <div className="animate-slide-in-bottom" style={{ animationDelay: '1s' }}>
         <Footer />
       </div>
     </div>
