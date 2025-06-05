@@ -10,13 +10,13 @@ interface DemoPopupProps {
 }
 
 const DemoPopup = ({ isOpen, onClose }: DemoPopupProps) => {
-  const [formData, setFormData] = useState({
+  const formData = {
     fullName: '',
     mobile: '',
     email: '',
     dateOfBirth: '',
     interests: []
-  });
+  };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -60,16 +60,16 @@ const DemoPopup = ({ isOpen, onClose }: DemoPopupProps) => {
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-lg mx-auto bg-white rounded-3xl p-0 border-0 shadow-2xl">
-        <div className="relative p-8">
+        <div className="relative p-8 pt-12">
           <button
             onClick={onClose}
-            className="absolute top-6 right-6 text-gray-400 hover:text-gray-600 transition-colors z-10"
+            className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors z-20 bg-white rounded-full p-2 shadow-sm hover:shadow-md"
           >
-            <X className="w-6 h-6" />
+            <X className="w-5 h-5" />
           </button>
           
           {/* Header */}
-          <div className="text-center mb-8">
+          <div className="text-center mb-8 pr-8">
             <h2 className="text-2xl font-bold text-gray-900 mb-2">Book Your Free Demo</h2>
             <p className="text-gray-600">Get personalized guidance and start your musical journey</p>
           </div>
@@ -127,7 +127,7 @@ const DemoPopup = ({ isOpen, onClose }: DemoPopupProps) => {
                   placeholder="dd/mm/yyyy"
                   value={formData.dateOfBirth}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent text-gray-900 placeholder-gray-400"
+                  className="w-full px-4 py-3 pr-12 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent text-gray-900 placeholder-gray-400"
                   required
                 />
                 <Calendar className="absolute right-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none" />
