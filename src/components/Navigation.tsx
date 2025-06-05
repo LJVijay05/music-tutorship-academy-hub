@@ -2,11 +2,20 @@
 import { Button } from "@/components/ui/button";
 import { Music, Menu, X } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const isActive = (path: string) => location.pathname === path;
 
@@ -19,72 +28,94 @@ const Navigation = () => {
   ];
 
   return (
-    <nav className="fixed top-0 left-0 right-0 bg-white shadow-sm z-50">
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      isScrolled 
+        ? 'bg-white/95 backdrop-blur-md shadow-xl border-b border-gray-100' 
+        : 'bg-white/80 backdrop-blur-sm shadow-sm'
+    }`}>
+      <div className="container mx-auto px-6">
+        <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 font-bold text-xl">
-            <div className="w-8 h-8 bg-red-600 rounded-lg flex items-center justify-center">
-              <Music className="w-5 h-5 text-white" />
+          <Link to="/" className="flex items-center gap-3 font-bold text-2xl group transition-all duration-300 hover:scale-105">
+            <div className="w-12 h-12 bg-gradient-to-r from-red-600 to-pink-600 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-red-200 transition-all duration-300 group-hover:rotate-6">
+              <Music className="w-6 h-6 text-white" />
             </div>
-            <span className="text-gray-900">Music <span className="text-red-600">Tutorship</span></span>
+            <span className="text-gray-900 tracking-tight">
+              Music <span className="text-transparent bg-gradient-to-r from-red-600 to-pink-600 bg-clip-text">Tutorship</span>
+            </span>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navItems.map((item) => (
+          <div className="hidden md:flex items-center space-x-2">
+            {navItems.map((item, index) => (
               <Link
                 key={item.path}
                 to={item.path}
-                className={`font-medium transition-colors hover:text-red-600 ${
-                  isActive(item.path) ? "text-red-600" : "text-gray-700"
+                className={`relative px-6 py-3 font-semibold text-lg transition-all duration-300 rounded-xl hover:bg-gray-50 group ${
+                  isActive(item.path) ? "text-red-600" : "text-gray-700 hover:text-red-600"
                 }`}
+                style={{ animationDelay: `${index * 0.1}s` }}
               >
                 {item.label}
+                <span className={`absolute bottom-1 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-red-600 to-pink-600 transition-all duration-300 ${
+                  isActive(item.path) ? 'w-8' : 'group-hover:w-8'
+                }`}></span>
               </Link>
             ))}
           </div>
 
           {/* Register Button */}
           <div className="hidden md:block">
-            <Button asChild className="bg-red-600 hover:bg-red-700">
-              <Link to="/enrollment">Register</Link>
+            <Button 
+              asChild 
+              className="bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700 text-white px-8 py-6 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 rounded-xl"
+            >
+              <Link to="/enrollment">Register Now</Link>
             </Button>
           </div>
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden"
+            className="md:hidden p-2 rounded-xl bg-gray-50 hover:bg-gray-100 transition-all duration-300"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
-            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            <div className="relative w-6 h-6">
+              <Menu className={`w-6 h-6 transition-all duration-300 ${isMenuOpen ? 'opacity-0 rotate-180' : 'opacity-100'}`} />
+              <X className={`w-6 h-6 absolute top-0 left-0 transition-all duration-300 ${isMenuOpen ? 'opacity-100' : 'opacity-0 rotate-180'}`} />
+            </div>
           </button>
         </div>
 
         {/* Mobile Navigation */}
-        {isMenuOpen && (
-          <div className="md:hidden border-t">
-            <div className="py-4 space-y-4">
-              {navItems.map((item) => (
-                <Link
-                  key={item.path}
-                  to={item.path}
-                  className={`block font-medium transition-colors hover:text-red-600 ${
-                    isActive(item.path) ? "text-red-600" : "text-gray-700"
-                  }`}
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {item.label}
-                </Link>
-              ))}
-              <Button asChild className="w-full bg-red-600 hover:bg-red-700">
+        <div className={`md:hidden overflow-hidden transition-all duration-500 ${
+          isMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+        }`}>
+          <div className="py-6 space-y-2 border-t border-gray-100">
+            {navItems.map((item, index) => (
+              <Link
+                key={item.path}
+                to={item.path}
+                className={`block px-6 py-4 font-semibold text-lg transition-all duration-300 rounded-xl hover:bg-red-50 hover:text-red-600 ${
+                  isActive(item.path) ? "text-red-600 bg-red-50" : "text-gray-700"
+                }`}
+                onClick={() => setIsMenuOpen(false)}
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                {item.label}
+              </Link>
+            ))}
+            <div className="px-6 pt-4">
+              <Button 
+                asChild 
+                className="w-full bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700 text-lg py-6 rounded-xl shadow-lg"
+              >
                 <Link to="/enrollment" onClick={() => setIsMenuOpen(false)}>
-                  Register
+                  Register Now
                 </Link>
               </Button>
             </div>
           </div>
-        )}
+        </div>
       </div>
     </nav>
   );

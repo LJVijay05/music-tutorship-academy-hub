@@ -10,11 +10,21 @@ const Index = () => {
   return (
     <div className="min-h-screen">
       <Navigation />
-      <Hero />
-      <AboutSection />
-      <CoursesSection />
-      <FAQSection />
-      <Footer />
+      <div className="animate-fade-in">
+        <Hero />
+      </div>
+      <div className="animate-fade-in" style={{ animationDelay: '0.2s' }}>
+        <AboutSection />
+      </div>
+      <div className="animate-fade-in" style={{ animationDelay: '0.4s' }}>
+        <CoursesSection />
+      </div>
+      <div className="animate-fade-in" style={{ animationDelay: '0.6s' }}>
+        <FAQSection />
+      </div>
+      <div className="animate-fade-in" style={{ animationDelay: '0.8s' }}>
+        <Footer />
+      </div>
     </div>
   );
 };
