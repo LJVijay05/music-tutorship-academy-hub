@@ -5,6 +5,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { Plus } from "lucide-react";
 
 const FAQSection = () => {
   const faqs = [
@@ -43,32 +44,36 @@ const FAQSection = () => {
   ];
 
   return (
-    <section className="py-16 bg-gradient-to-br from-white via-gray-50 to-red-50">
+    <section className="py-16 bg-gray-50">
       <div className="container mx-auto px-4 lg:px-6">
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-4xl mx-auto">
           {/* Section Header */}
-          <div className="text-center mb-12 animate-fade-in">
-            <h2 className="text-3xl lg:text-4xl font-bold mb-4">
-              Frequently Asked <span className="bg-gradient-to-r from-red-600 to-red-500 bg-clip-text text-transparent">Questions</span>
+          <div className="text-center mb-12">
+            <h2 className="text-3xl lg:text-4xl font-bold mb-4 text-gray-900">
+              Common Inquiries About <span className="text-red-600">My Mentorship</span>
             </h2>
-            <p className="text-base text-gray-600 max-w-2xl mx-auto leading-relaxed">
-              Get answers to the most common questions about our music mentorship program
+            <p className="text-gray-600 max-w-2xl mx-auto leading-relaxed">
+              Explore answers to the most common questions about our music mentorship program, designed to help you excel in your musical journey.
             </p>
           </div>
 
           {/* FAQ Accordion */}
-          <div className="animate-slide-up" style={{ animationDelay: '200ms' }}>
-            <Accordion type="single" collapsible className="space-y-3">
+          <div className="space-y-0">
+            <Accordion type="single" collapsible className="space-y-0">
               {faqs.map((faq, index) => (
                 <AccordionItem 
                   key={index} 
                   value={`item-${index}`}
-                  className="border border-gray-200 rounded-xl px-4 bg-white shadow-sm hover:shadow-md transition-all duration-300"
+                  className="border-0 border-b border-gray-200 last:border-b-0"
                 >
-                  <AccordionTrigger className="text-left hover:no-underline py-4 text-sm font-medium text-gray-900">
-                    {faq.question}
+                  <AccordionTrigger className="text-left hover:no-underline py-6 px-0 text-red-600 font-medium text-lg group relative [&>svg]:hidden">
+                    <div className="flex items-center gap-4 w-full">
+                      <div className="w-1 h-8 bg-red-600 flex-shrink-0"></div>
+                      <span className="flex-1">{faq.question}</span>
+                      <Plus className="w-6 h-6 text-gray-400 group-data-[state=open]:rotate-45 transition-transform duration-200 flex-shrink-0" />
+                    </div>
                   </AccordionTrigger>
-                  <AccordionContent className="text-gray-700 leading-relaxed pb-4 text-sm">
+                  <AccordionContent className="text-gray-700 leading-relaxed pb-6 pl-8">
                     {faq.answer}
                   </AccordionContent>
                 </AccordionItem>
@@ -77,20 +82,20 @@ const FAQSection = () => {
           </div>
 
           {/* CTA at bottom */}
-          <div className="text-center mt-8 animate-fade-in" style={{ animationDelay: '400ms' }}>
-            <p className="text-base text-gray-600 mb-4">Still have questions? We're here to help!</p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+          <div className="text-center mt-12">
+            <p className="text-gray-600 mb-6">Still have questions? We're here to help!</p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a 
                 href="https://wa.me/919514499932" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="bg-gradient-to-r from-red-600 to-red-500 hover:from-red-700 hover:to-red-600 text-white px-6 py-3 rounded-lg font-medium shadow-md hover:shadow-lg transition-all duration-300 inline-block text-sm"
+                className="bg-red-600 hover:bg-red-700 text-white px-8 py-3 rounded-lg font-medium transition-all duration-300 inline-block"
               >
                 Chat with Us
               </a>
               <a 
                 href="mailto:contact@musictutorship.com"
-                className="border-2 border-red-500 text-red-600 hover:bg-red-50 px-6 py-3 rounded-lg font-medium transition-all duration-300 inline-block text-sm"
+                className="border-2 border-red-600 text-red-600 hover:bg-red-50 px-8 py-3 rounded-lg font-medium transition-all duration-300 inline-block"
               >
                 Email Us
               </a>
