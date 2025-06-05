@@ -17,7 +17,6 @@ const CoursesSection = () => {
     {
       id: "mentorship-90",
       title: "One-on-One Music Production Mentorship",
-      subtitle: "Personalized 90MIN Sessions",
       level: "Master the complete journey of music production",
       image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&h=400&fit=crop",
       icon: User,
@@ -76,16 +75,10 @@ const CoursesSection = () => {
                   alt={course.title}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
-                <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center group-hover:bg-opacity-30 transition-all duration-300">
-                  <course.icon className="w-12 h-12 text-white group-hover:scale-110 transition-transform duration-300" />
-                </div>
               </div>
               
               <CardContent className="p-6">
                 <h3 className="text-xl font-bold mb-2 text-gray-900">{course.title}</h3>
-                {course.subtitle && (
-                  <p className="text-gray-600 mb-1 font-medium text-sm">{course.subtitle}</p>
-                )}
                 <p className="text-xs text-red-600 mb-6 font-medium">({course.level})</p>
                 
                 <Button variant="outline" className="w-full border-2 hover:bg-gray-50 text-sm h-10" size="lg">
