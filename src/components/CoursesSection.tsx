@@ -2,9 +2,32 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Users, User, Star, Crown } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthContext";
+import { toast } from "sonner";
 
 const CoursesSection = () => {
+  const { isAuthenticated } = useAuth();
+  const navigate = useNavigate();
+
+  const handleEnquireNow = () => {
+    if (!isAuthenticated) {
+      toast.error("Please login to view course details and pricing");
+      navigate("/login");
+      return;
+    }
+    navigate("/enrollment");
+  };
+
+  const handleViewDetails = () => {
+    if (!isAuthenticated) {
+      toast.error("Please login to view course details and pricing");
+      navigate("/login");
+      return;
+    }
+    navigate("/courses");
+  };
+
   const courses = [
     {
       id: "production-course",
@@ -95,19 +118,10 @@ const CoursesSection = () => {
                   <p className="text-sm text-red-600 mb-8 font-semibold">({course.level})</p>
                   
                   <Button 
-                    className={`w-full h-12 text-base font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-500 hover:scale-105 ${
-                      course.premium 
-                        ? 'bg-gradient-to-r from-amber-500 to-yellow-600 hover:from-amber-600 hover:to-yellow-700 text-amber-900 animate-golden-glow' 
-                        : 'bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white animate-premium-glow'
-                    }`}
-                    asChild
+                    className="w-full h-12 text-base font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 ease-out transform hover:scale-[1.02] hover:-translate-y-1 active:scale-95 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white"
+                    onClick={handleEnquireNow}
                   >
-                    <Link 
-                      to="/enrollment" 
-                      aria-label={`Enquire now about ${course.title}`}
-                    >
-                      Enquire Now
-                    </Link>
+                    {isAuthenticated ? "Enroll Now" : "Login to View Pricing"}
                   </Button>
                 </CardContent>
               </Card>
@@ -117,10 +131,12 @@ const CoursesSection = () => {
 
         {/* Enhanced CTA Section */}
         <div className="text-center animate-slide-in-bottom" style={{ animationDelay: '800ms' }}>
-          <Button asChild size="lg" className="bg-gradient-to-r from-red-600 via-pink-600 to-red-700 hover:from-red-700 hover:via-pink-700 hover:to-red-800 px-10 py-4 text-lg font-semibold shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-1 hover:scale-105 rounded-2xl animate-premium-glow border-2 border-red-500/20">
-            <Link to="/courses" aria-label="View detailed course information">
-              View Course Details
-            </Link>
+          <Button 
+            size="lg" 
+            className="bg-gradient-to-r from-red-600 via-pink-600 to-red-700 hover:from-red-700 hover:via-pink-700 hover:to-red-800 px-10 py-4 text-lg font-semibold shadow-xl hover:shadow-2xl transition-all duration-300 ease-out transform hover:scale-[1.02] hover:-translate-y-1 active:scale-95 rounded-2xl border-2 border-red-500/20"
+            onClick={handleViewDetails}
+          >
+            View Course Details
           </Button>
         </div>
       </div>

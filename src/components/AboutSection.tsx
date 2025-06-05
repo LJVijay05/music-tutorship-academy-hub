@@ -38,7 +38,7 @@ const AboutSection = () => {
               
               <div className="pt-6">
                 <Button 
-                  className="bg-red-600 hover:bg-red-700 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 ease-out shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-opacity-50"
+                  className="bg-red-600 hover:bg-red-700 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 ease-out shadow-lg hover:shadow-xl transform hover:scale-[1.02] hover:-translate-y-0.5 active:scale-95 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-opacity-50"
                   asChild
                 >
                   <Link to="/about">Know More</Link>

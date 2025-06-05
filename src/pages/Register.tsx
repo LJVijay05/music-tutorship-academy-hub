@@ -3,30 +3,38 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Music, Eye, EyeOff, UserPlus } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useAuth } from "@/contexts/AuthContext";
+import { toast } from "sonner";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
-    confirmPassword: ""
-  });
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [name, setName] = useState("");
+  const { login } = useAuth();
+  const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Registration attempt:", formData);
-    // This will be connected to Supabase authentication
-  };
-
-  const handleInputChange = (field: string, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+    console.log("Registration attempt:", { name, email, password });
+    
+    if (password !== confirmPassword) {
+      toast.error("Passwords don't match!");
+      return;
+    }
+    
+    if (name && email && password) {
+      login(email, password);
+      toast.success("Registration successful!");
+      navigate("/courses");
+    } else {
+      toast.error("Please fill in all fields");
+    }
   };
 
   return (
@@ -40,45 +48,29 @@ const Register = () => {
               <div className="w-16 h-16 bg-gradient-to-r from-red-600 to-pink-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-xl">
                 <Music className="w-8 h-8 text-white" />
               </div>
-              <h1 className="text-3xl font-bold text-gray-900 mb-2">Join Us Today</h1>
-              <p className="text-gray-600">Start your musical journey with expert guidance</p>
+              <h1 className="text-3xl font-bold text-gray-900 mb-2">Join Us</h1>
+              <p className="text-gray-600">Create your account to start your musical journey</p>
             </div>
 
             <Card className="shadow-xl border-0 rounded-2xl">
               <CardHeader className="pb-4">
-                <CardTitle className="text-2xl text-center text-gray-900">Create Account</CardTitle>
+                <CardTitle className="text-2xl text-center text-gray-900">Register</CardTitle>
               </CardHeader>
               <CardContent>
                 <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <label htmlFor="firstName" className="text-sm font-medium text-gray-700">
-                        First Name
-                      </label>
-                      <Input
-                        id="firstName"
-                        type="text"
-                        placeholder="First name"
-                        value={formData.firstName}
-                        onChange={(e) => handleInputChange("firstName", e.target.value)}
-                        className="h-12 rounded-lg border-2 border-gray-200 focus:border-red-500 transition-all duration-300"
-                        required
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <label htmlFor="lastName" className="text-sm font-medium text-gray-700">
-                        Last Name
-                      </label>
-                      <Input
-                        id="lastName"
-                        type="text"
-                        placeholder="Last name"
-                        value={formData.lastName}
-                        onChange={(e) => handleInputChange("lastName", e.target.value)}
-                        className="h-12 rounded-lg border-2 border-gray-200 focus:border-red-500 transition-all duration-300"
-                        required
-                      />
-                    </div>
+                  <div className="space-y-2">
+                    <label htmlFor="name" className="text-sm font-medium text-gray-700">
+                      Full Name
+                    </label>
+                    <Input
+                      id="name"
+                      type="text"
+                      placeholder="Enter your full name"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      className="h-12 rounded-lg border-2 border-gray-200 focus:border-red-500 transition-all duration-300"
+                      required
+                    />
                   </div>
 
                   <div className="space-y-2">
@@ -89,8 +81,8 @@ const Register = () => {
                       id="email"
                       type="email"
                       placeholder="Enter your email"
-                      value={formData.email}
-                      onChange={(e) => handleInputChange("email", e.target.value)}
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
                       className="h-12 rounded-lg border-2 border-gray-200 focus:border-red-500 transition-all duration-300"
                       required
                     />
@@ -104,9 +96,9 @@ const Register = () => {
                       <Input
                         id="password"
                         type={showPassword ? "text" : "password"}
-                        placeholder="Create a password"
-                        value={formData.password}
-                        onChange={(e) => handleInputChange("password", e.target.value)}
+                        placeholder="Enter your password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                         className="h-12 rounded-lg border-2 border-gray-200 focus:border-red-500 transition-all duration-300 pr-12"
                         required
                       />
@@ -124,24 +116,15 @@ const Register = () => {
                     <label htmlFor="confirmPassword" className="text-sm font-medium text-gray-700">
                       Confirm Password
                     </label>
-                    <div className="relative">
-                      <Input
-                        id="confirmPassword"
-                        type={showConfirmPassword ? "text" : "password"}
-                        placeholder="Confirm your password"
-                        value={formData.confirmPassword}
-                        onChange={(e) => handleInputChange("confirmPassword", e.target.value)}
-                        className="h-12 rounded-lg border-2 border-gray-200 focus:border-red-500 transition-all duration-300 pr-12"
-                        required
-                      />
-                      <button
-                        type="button"
-                        onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 transition-colors duration-200"
-                      >
-                        {showConfirmPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
-                      </button>
-                    </div>
+                    <Input
+                      id="confirmPassword"
+                      type="password"
+                      placeholder="Confirm your password"
+                      value={confirmPassword}
+                      onChange={(e) => setConfirmPassword(e.target.value)}
+                      className="h-12 rounded-lg border-2 border-gray-200 focus:border-red-500 transition-all duration-300"
+                      required
+                    />
                   </div>
 
                   <Button

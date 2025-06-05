@@ -2,7 +2,9 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { CheckCircle, Users, User, Clock, Star, Info } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthContext";
+import { toast } from "sonner";
 
 interface CourseCardProps {
   courseId: string;
@@ -50,9 +52,21 @@ const CourseCard = ({
   onDetailsClick
 }: CourseCardProps) => {
   
+  const { isAuthenticated } = useAuth();
+  const navigate = useNavigate();
+
   const handleDetailsClick = () => {
     console.log('Details button clicked for course:', courseId);
     onDetailsClick(courseId);
+  };
+
+  const handleEnrollClick = () => {
+    if (!isAuthenticated) {
+      toast.error("Please login to enroll in courses");
+      navigate("/login");
+      return;
+    }
+    navigate("/enrollment");
   };
 
   return (
@@ -108,32 +122,32 @@ const CourseCard = ({
               ))}
             </ul>
             
-            <div className={`flex items-center gap-3 mb-8 p-4 ${bgColor} rounded-2xl border ${borderColor}`}>
-              <Clock className={`w-6 h-6 ${textColor.replace('text-', 'text-').replace('-700', '-600')}`} />
-              <div>
-                <p className={`font-semibold ${textColor}`}>{offerText}</p>
-                <p className={`text-sm ${textColor.replace('text-', 'text-').replace('-700', '-600')}`}>{offerSubtext}</p>
+            {isAuthenticated && (
+              <div className={`flex items-center gap-3 mb-8 p-4 ${bgColor} rounded-2xl border ${borderColor}`}>
+                <Clock className={`w-6 h-6 ${textColor.replace('text-', 'text-').replace('-700', '-600')}`} />
+                <div>
+                  <p className={`font-semibold ${textColor}`}>{offerText}</p>
+                  <p className={`text-sm ${textColor.replace('text-', 'text-').replace('-700', '-600')}`}>{offerSubtext}</p>
+                </div>
               </div>
-            </div>
+            )}
           </div>
           
-          {/* Action Buttons with Smooth Animations */}
+          {/* Action Buttons with Simple Animations */}
           <div className="flex flex-col sm:flex-row gap-4 mt-6">
             <Button 
               variant="outline" 
-              className="flex-1 border-2 border-gray-300 text-gray-700 bg-white hover:bg-gray-50 hover:border-gray-400 hover:text-gray-900 transition-all duration-300 ease-out h-12 rounded-xl font-semibold transform hover:scale-105 hover:shadow-md active:scale-95 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50"
+              className="flex-1 border-2 border-gray-300 text-gray-700 bg-white hover:bg-gray-50 hover:border-gray-400 hover:text-gray-900 transition-all duration-300 ease-out h-12 rounded-xl font-semibold transform hover:scale-[1.02] hover:-translate-y-0.5 active:scale-95 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50"
               onClick={handleDetailsClick}
             >
               <Info className="w-5 h-5 mr-2 transition-transform duration-200" />
               View Details
             </Button>
             <Button 
-              className="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 ease-out h-12 rounded-xl font-semibold transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50"
-              asChild
+              className="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 ease-out h-12 rounded-xl font-semibold transform hover:scale-[1.02] hover:-translate-y-0.5 active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50"
+              onClick={handleEnrollClick}
             >
-              <Link to="/enrollment" className="flex items-center justify-center">
-                Enroll Now
-              </Link>
+              {isAuthenticated ? "Enroll Now" : "Login to Enroll"}
             </Button>
           </div>
         </CardContent>
