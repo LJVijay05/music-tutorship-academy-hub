@@ -132,7 +132,7 @@ const Courses = () => {
                       </div>
                     </div>
                     
-                    <div className="flex gap-4">
+                    <div className="flex gap-4 mt-auto">
                       <Button 
                         variant="outline" 
                         className="flex-1 border-2 border-red-600 text-red-600 hover:bg-red-50 group/btn transition-all duration-300 h-12 rounded-xl font-semibold" 
@@ -204,7 +204,7 @@ const Courses = () => {
                       </div>
                     </div>
                     
-                    <div className="flex gap-4">
+                    <div className="flex gap-4 mt-auto">
                       <Button 
                         variant="outline" 
                         className="flex-1 border-2 border-amber-500 text-amber-600 hover:bg-amber-50 group/btn transition-all duration-300 h-12 rounded-xl font-semibold" 
