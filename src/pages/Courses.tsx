@@ -1,12 +1,17 @@
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { CheckCircle, Users, User, Clock, Star } from "lucide-react";
+import { CheckCircle, Users, User, Clock, Star, Info } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import CourseDetailsModal from "@/components/CourseDetailsModal";
 
 const Courses = () => {
+  const [selectedCourse, setSelectedCourse] = useState<string | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const batchFeatures = [
     "15 students per batch",
     "12 weeks intensive program",
@@ -24,6 +29,17 @@ const Courses = () => {
     "Industry networking opportunities",
     "Lifetime support access"
   ];
+
+  const handleDetailsClick = (courseId: string) => {
+    setSelectedCourse(courseId);
+    setIsModalOpen(true);
+  };
+
+  const getCourseTitle = (courseId: string) => {
+    return courseId === "production-course" 
+      ? "Complete Music Production Course"
+      : "One-on-One Music Production Mentorship";
+  };
 
   return (
     <div className="min-h-screen bg-white">
@@ -77,11 +93,24 @@ const Courses = () => {
                       <span className="text-sm text-gray-600">Enroll for 1 Year & Get 15% Off!</span>
                     </div>
                     
-                    <Button className="w-full bg-red-600 hover:bg-red-700" size="lg" asChild>
-                      <Link to="/enrollment">
-                        Enquire Now
-                      </Link>
-                    </Button>
+                    <div className="flex gap-3 mt-auto">
+                      <Button 
+                        variant="outline" 
+                        className="flex-1 border-red-600 text-red-600 hover:bg-red-50 group transition-all duration-300" 
+                        onClick={() => handleDetailsClick("production-course")}
+                      >
+                        <Info className="w-4 h-4 mr-2 group-hover:scale-110 transition-transform" />
+                        Details
+                      </Button>
+                      <Button 
+                        className="flex-1 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5" 
+                        asChild
+                      >
+                        <Link to="/enrollment">
+                          Enroll Now
+                        </Link>
+                      </Button>
+                    </div>
                   </CardContent>
                 </Card>
               </article>
@@ -119,11 +148,24 @@ const Courses = () => {
                       <span className="text-sm text-gray-600">Enroll for 1 Year & Get 20% Off!</span>
                     </div>
                     
-                    <Button className="w-full bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-black" size="lg" asChild>
-                      <Link to="/enrollment">
-                        Enquire Now
-                      </Link>
-                    </Button>
+                    <div className="flex gap-3 mt-auto">
+                      <Button 
+                        variant="outline" 
+                        className="flex-1 border-amber-500 text-amber-600 hover:bg-amber-50 group transition-all duration-300" 
+                        onClick={() => handleDetailsClick("mentorship-90")}
+                      >
+                        <Info className="w-4 h-4 mr-2 group-hover:scale-110 transition-transform" />
+                        Details
+                      </Button>
+                      <Button 
+                        className="flex-1 bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-black shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5" 
+                        asChild
+                      >
+                        <Link to="/enrollment">
+                          Enroll Now
+                        </Link>
+                      </Button>
+                    </div>
                   </CardContent>
                 </Card>
               </article>
@@ -133,6 +175,16 @@ const Courses = () => {
       </main>
       
       <Footer />
+      
+      {/* Course Details Modal */}
+      {selectedCourse && (
+        <CourseDetailsModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          courseId={selectedCourse}
+          courseTitle={getCourseTitle(selectedCourse)}
+        />
+      )}
     </div>
   );
 };
