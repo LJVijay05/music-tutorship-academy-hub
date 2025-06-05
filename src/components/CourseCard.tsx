@@ -2,9 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { CheckCircle, Users, User, Clock, Star, Info } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "@/contexts/AuthContext";
-import { toast } from "sonner";
+import { Link } from "react-router-dom";
 
 interface CourseCardProps {
   courseId: string;
@@ -52,21 +50,9 @@ const CourseCard = ({
   onDetailsClick
 }: CourseCardProps) => {
   
-  const { isAuthenticated } = useAuth();
-  const navigate = useNavigate();
-
   const handleDetailsClick = () => {
     console.log('Details button clicked for course:', courseId);
     onDetailsClick(courseId);
-  };
-
-  const handleEnrollClick = () => {
-    if (!isAuthenticated) {
-      toast.error("Please login to enroll in courses");
-      navigate("/login");
-      return;
-    }
-    navigate("/enrollment");
   };
 
   return (
@@ -115,39 +101,39 @@ const CourseCard = ({
           <div className="flex-grow">
             <ul className="space-y-4 mb-8">
               {features.map((feature, index) => (
-                <li key={index} className="flex items-center gap-3">
-                  <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0" />
+                <li key={index} className="flex items-center gap-3 group/item">
+                  <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 group-hover/item:scale-110 transition-transform duration-300" />
                   <span className="text-gray-700 font-medium">{feature}</span>
                 </li>
               ))}
             </ul>
             
-            {isAuthenticated && (
-              <div className={`flex items-center gap-3 mb-8 p-4 ${bgColor} rounded-2xl border ${borderColor}`}>
-                <Clock className={`w-6 h-6 ${textColor.replace('text-', 'text-').replace('-700', '-600')}`} />
-                <div>
-                  <p className={`font-semibold ${textColor}`}>{offerText}</p>
-                  <p className={`text-sm ${textColor.replace('text-', 'text-').replace('-700', '-600')}`}>{offerSubtext}</p>
-                </div>
+            <div className={`flex items-center gap-3 mb-8 p-4 ${bgColor} rounded-2xl border ${borderColor}`}>
+              <Clock className={`w-6 h-6 ${textColor.replace('text-', 'text-').replace('-700', '-600')}`} />
+              <div>
+                <p className={`font-semibold ${textColor}`}>{offerText}</p>
+                <p className={`text-sm ${textColor.replace('text-', 'text-').replace('-700', '-600')}`}>{offerSubtext}</p>
               </div>
-            )}
+            </div>
           </div>
           
-          {/* Action Buttons with Simple Animations */}
+          {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 mt-6">
             <Button 
               variant="outline" 
-              className="flex-1 border-2 border-gray-300 text-gray-700 bg-white hover:bg-gray-50 hover:border-gray-400 hover:text-gray-900 transition-all duration-300 ease-out h-12 rounded-xl font-semibold transform hover:scale-[1.02] hover:-translate-y-0.5 active:scale-95 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50"
+              className={`flex-1 border-2 ${borderColor.replace('border-', 'border-').replace('-100', '-500')} ${textColor.replace('-700', '-600')} hover:${bgColor} group/btn transition-all duration-300 h-12 rounded-xl font-semibold hover:scale-[1.02] hover:shadow-md`}
               onClick={handleDetailsClick}
             >
-              <Info className="w-5 h-5 mr-2 transition-transform duration-200" />
+              <Info className="w-5 h-5 mr-2 group-hover/btn:scale-110 transition-transform duration-300" />
               View Details
             </Button>
             <Button 
-              className="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 ease-out h-12 rounded-xl font-semibold transform hover:scale-[1.02] hover:-translate-y-0.5 active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50"
-              onClick={handleEnrollClick}
+              className={`flex-1 bg-gradient-to-r ${buttonGradientFrom} ${buttonGradientTo} hover:${buttonHoverFrom} hover:${buttonHoverTo} shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02] h-12 rounded-xl font-semibold text-white ${isPremium ? 'text-black' : ''}`}
+              asChild
             >
-              {isAuthenticated ? "Enroll Now" : "Login to Enroll"}
+              <Link to="/enrollment">
+                Enroll Now
+              </Link>
             </Button>
           </div>
         </CardContent>

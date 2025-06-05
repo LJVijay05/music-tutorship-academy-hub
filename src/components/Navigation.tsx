@@ -1,16 +1,13 @@
 
 import { Button } from "@/components/ui/button";
-import { Music, Menu, X, LogIn, UserPlus, LogOut, User } from "lucide-react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Music, Menu, X } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { useAuth } from "@/contexts/AuthContext";
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
-  const navigate = useNavigate();
-  const { isAuthenticated, user, logout } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,11 +18,6 @@ const Navigation = () => {
   }, []);
 
   const isActive = (path: string) => location.pathname === path;
-
-  const handleLogout = () => {
-    logout();
-    navigate("/");
-  };
 
   const navItems = [
     { path: "/", label: "Home" },
@@ -72,51 +64,19 @@ const Navigation = () => {
             ))}
           </div>
 
-          {/* Auth Buttons */}
-          <div className="hidden md:flex items-center gap-3">
-            {isAuthenticated ? (
-              <div className="flex items-center gap-3">
-                <div className="flex items-center gap-2 text-sm text-gray-600">
-                  <User className="w-4 h-4" />
-                  <span>{user?.email}</span>
-                </div>
-                <Button 
-                  variant="outline"
-                  className="border-2 border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400 hover:text-gray-900 transition-all duration-300 ease-out px-4 py-2 text-sm font-medium rounded-lg transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50"
-                  onClick={handleLogout}
-                >
-                  <LogOut className="w-4 h-4 mr-2" />
-                  Logout
-                </Button>
-              </div>
-            ) : (
-              <>
-                <Button 
-                  variant="outline"
-                  className="border-2 border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400 hover:text-gray-900 transition-all duration-300 ease-out px-4 py-2 text-sm font-medium rounded-lg transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50"
-                  asChild
-                >
-                  <Link to="/login" className="flex items-center gap-2">
-                    <LogIn className="w-4 h-4" />
-                    Login
-                  </Link>
-                </Button>
-                <Button 
-                  className="bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700 text-white px-6 py-2 text-sm font-medium shadow-md hover:shadow-lg transition-all duration-300 ease-out rounded-lg transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-opacity-50"
-                  asChild
-                >
-                  <Link to="/register" className="flex items-center gap-2">
-                    <UserPlus className="w-4 h-4" />
-                    Register
-                  </Link>
-                </Button>
-              </>
-            )}
+          {/* Register Button */}
+          <div className="hidden md:block">
+            <Button 
+              asChild 
+              className="bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700 text-white px-6 py-2 text-sm font-medium shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 rounded-lg"
+            >
+              <Link to="/enrollment">Register Now</Link>
+            </Button>
           </div>
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden p-2 rounded-lg bg-gray-50 hover:bg-gray-100 transition-all duration-300 hover:scale-105 active:scale-95"
+            className="md:hidden p-2 rounded-lg bg-gray-50 hover:bg-gray-100 transition-all duration-300"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             <div className="relative w-5 h-5">
@@ -144,42 +104,15 @@ const Navigation = () => {
                 {item.label}
               </Link>
             ))}
-            <div className="flex flex-col gap-3 px-4 pt-4">
-              {isAuthenticated ? (
-                <Button 
-                  variant="outline"
-                  className="w-full border-2 border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400 transition-all duration-300 ease-out py-3 rounded-lg transform hover:scale-105 active:scale-95"
-                  onClick={() => {
-                    handleLogout();
-                    setIsMenuOpen(false);
-                  }}
-                >
-                  <LogOut className="w-4 h-4 mr-2" />
-                  Logout
-                </Button>
-              ) : (
-                <>
-                  <Button 
-                    variant="outline"
-                    className="w-full border-2 border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400 transition-all duration-300 ease-out py-3 rounded-lg transform hover:scale-105 active:scale-95"
-                    asChild
-                  >
-                    <Link to="/login" onClick={() => setIsMenuOpen(false)} className="flex items-center justify-center gap-2">
-                      <LogIn className="w-4 h-4" />
-                      Login
-                    </Link>
-                  </Button>
-                  <Button 
-                    className="w-full bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700 text-sm py-3 rounded-lg shadow-md transition-all duration-300 ease-out transform hover:scale-105 active:scale-95"
-                    asChild
-                  >
-                    <Link to="/register" onClick={() => setIsMenuOpen(false)} className="flex items-center justify-center gap-2">
-                      <UserPlus className="w-4 h-4" />
-                      Register
-                    </Link>
-                  </Button>
-                </>
-              )}
+            <div className="px-4 pt-3">
+              <Button 
+                asChild 
+                className="w-full bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700 text-sm py-3 rounded-lg shadow-md"
+              >
+                <Link to="/enrollment" onClick={() => setIsMenuOpen(false)}>
+                  Register Now
+                </Link>
+              </Button>
             </div>
           </div>
         </div>
