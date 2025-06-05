@@ -37,10 +37,7 @@ const AboutSection = () => {
               </div>
               
               <div className="pt-6">
-                <Button 
-                  className="bg-red-600 hover:bg-red-700 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 ease-out shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-opacity-50"
-                  asChild
-                >
+                <Button asChild className="bg-red-600 hover:bg-red-700 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl">
                   <Link to="/about">Know More</Link>
                 </Button>
               </div>
@@ -55,6 +52,18 @@ const AboutSection = () => {
                   </div>
                   <h3 className="text-2xl font-bold text-gray-800 mb-3">Professional Mentor</h3>
                   <p className="text-lg text-gray-600 mb-8">Music Producer & Educator</p>
+                  
+                  {/* Achievement Badges */}
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="bg-white rounded-xl p-4 shadow-md border border-gray-100">
+                      <div className="text-2xl font-bold text-red-600">320+</div>
+                      <div className="text-sm text-gray-600">Students</div>
+                    </div>
+                    <div className="bg-white rounded-xl p-4 shadow-md border border-gray-100">
+                      <div className="text-2xl font-bold text-red-600">10+</div>
+                      <div className="text-sm text-gray-600">Years Exp</div>
+                    </div>
+                  </div>
                 </div>
               </div>
               
