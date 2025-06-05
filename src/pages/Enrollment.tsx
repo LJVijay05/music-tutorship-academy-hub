@@ -1,13 +1,14 @@
+
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { useState } from "react";
-import { CheckCircle, CreditCard, Shield, Star, Clock, Users, Award, MessageCircle, Phone } from "lucide-react";
+import { CheckCircle, CreditCard, Shield, Star, Clock, Users, Award, MessageCircle, Phone, Sparkles, Trophy, Target } from "lucide-react";
 
 const Enrollment = () => {
-  const [selectedPlan, setSelectedPlan] = useState("monthly");
+  const [selectedPlan, setSelectedPlan] = useState("annually"); // Changed default to annually (12 months)
   const [selectedCourse, setSelectedCourse] = useState("batch");
   const [formData, setFormData] = useState({
     firstName: "",
@@ -490,47 +491,72 @@ const Enrollment = () => {
                   </div>
                 </div>
 
-                {/* Order Summary */}
+                {/* Enhanced Course Summary */}
                 <div>
-                  <Card className={`sticky top-8 shadow-2xl border-0 ${
+                  <Card className={`sticky top-8 shadow-2xl border-0 overflow-hidden ${
                     selectedCourse === "oneOnOne" 
-                      ? "bg-gradient-to-br from-amber-50 via-yellow-50 to-amber-50 ring-2 ring-amber-200" 
-                      : "bg-gradient-to-br from-white to-gray-50"
+                      ? "bg-gradient-to-br from-amber-50 via-yellow-50 to-white ring-2 ring-amber-200" 
+                      : "bg-gradient-to-br from-white via-red-50 to-white ring-1 ring-red-100"
                   }`}>
-                    <CardContent className="p-8">
-                      <div className="flex items-center gap-2 mb-6">
-                        <h3 className="text-2xl font-bold text-gray-900">Investment Summary</h3>
-                        {selectedCourse === "oneOnOne" && (
-                          <div className="bg-gradient-to-r from-amber-500 to-yellow-500 text-black px-3 py-1 text-xs font-bold rounded-full shadow-lg">
-                            ✨ PREMIUM GOLD
+                    <CardContent className="p-0">
+                      {/* Header Section */}
+                      <div className={`p-8 ${
+                        selectedCourse === "oneOnOne" 
+                          ? "bg-gradient-to-r from-amber-500 to-yellow-500" 
+                          : "bg-gradient-to-r from-red-600 to-red-500"
+                      } text-white relative overflow-hidden`}>
+                        <div className="absolute top-0 right-0 opacity-20">
+                          <Sparkles className="w-24 h-24" />
+                        </div>
+                        <div className="relative z-10">
+                          <div className="flex items-center gap-3 mb-4">
+                            <Trophy className="w-8 h-8" />
+                            <span className="text-lg font-bold">Transform Your Dreams</span>
                           </div>
-                        )}
+                          <h3 className="text-2xl font-bold mb-2">{courses[selectedCourse as keyof typeof courses].title}</h3>
+                          <p className="text-lg opacity-90">{courses[selectedCourse as keyof typeof courses].subtitle}</p>
+                        </div>
                       </div>
-                      
-                      <div className="space-y-6 mb-8">
-                        <div className={`p-6 rounded-xl border ${
-                          selectedCourse === "oneOnOne" 
-                            ? "bg-gradient-to-r from-amber-50 to-yellow-50 border-amber-200" 
-                            : "bg-gradient-to-r from-red-50 to-orange-50 border-red-100"
-                        }`}>
-                          <h4 className="text-xl font-bold text-gray-900 mb-2">{courses[selectedCourse as keyof typeof courses].title}</h4>
-                          <p className="text-gray-600 mb-3">{courses[selectedCourse as keyof typeof courses].subtitle}</p>
-                          <p className={`font-semibold ${selectedCourse === "oneOnOne" ? "text-amber-600" : "text-red-600"}`}>
-                            {courses[selectedCourse as keyof typeof courses].duration}
-                          </p>
+
+                      <div className="p-8">
+                        {/* Course Details */}
+                        <div className="mb-8">
+                          <div className="flex items-center gap-2 mb-4">
+                            <Target className="w-5 h-5 text-blue-600" />
+                            <span className="font-semibold text-gray-900">Your Learning Journey</span>
+                          </div>
+                          <div className={`p-4 rounded-xl border-2 ${
+                            selectedCourse === "oneOnOne" 
+                              ? "bg-gradient-to-r from-amber-50 to-yellow-50 border-amber-200" 
+                              : "bg-gradient-to-r from-red-50 to-orange-50 border-red-200"
+                          }`}>
+                            <p className={`font-semibold text-lg ${selectedCourse === "oneOnOne" ? "text-amber-700" : "text-red-700"}`}>
+                              {courses[selectedCourse as keyof typeof courses].duration}
+                            </p>
+                            <p className="text-gray-600 text-sm mt-1">
+                              {courses[selectedCourse as keyof typeof courses].batchSize}
+                            </p>
+                          </div>
                         </div>
                         
-                        <div className="space-y-3">
-                          <h5 className="font-semibold text-gray-900 mb-4">🌟 What's Included:</h5>
-                          {courses[selectedCourse as keyof typeof courses].features.map((feature, index) => (
-                            <div key={index} className="flex items-start gap-3">
-                              <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
-                              <span className="text-gray-700 leading-relaxed">{feature}</span>
-                            </div>
-                          ))}
+                        {/* What's Included */}
+                        <div className="space-y-4 mb-8">
+                          <h5 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
+                            <Star className="w-5 h-5 text-yellow-500" />
+                            What You'll Master:
+                          </h5>
+                          <div className="space-y-3 max-h-64 overflow-y-auto pr-2">
+                            {courses[selectedCourse as keyof typeof courses].features.map((feature, index) => (
+                              <div key={index} className="flex items-start gap-3">
+                                <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                                <span className="text-gray-700 leading-relaxed text-sm">{feature}</span>
+                              </div>
+                            ))}
+                          </div>
                         </div>
 
-                        <div className="grid gap-4 mt-6">
+                        {/* Highlights */}
+                        <div className="grid gap-3 mb-8">
                           {courses[selectedCourse as keyof typeof courses].highlights.map((highlight, index) => (
                             <div key={index} className="flex items-center gap-3 p-3 bg-yellow-50 rounded-lg border border-yellow-200">
                               <highlight.icon className="w-5 h-5 text-yellow-600" />
@@ -538,84 +564,88 @@ const Enrollment = () => {
                             </div>
                           ))}
                         </div>
-                      </div>
-                      
-                      <div className="border-t-2 border-gray-200 pt-6 space-y-4">
-                        <div className="text-center mb-4">
-                          <p className="text-lg font-semibold text-gray-800 mb-2">
-                            🚀 Your Musical Journey Starts Here
-                          </p>
-                          <p className="text-sm text-gray-600">
-                            Join thousands of successful students worldwide
-                          </p>
-                        </div>
                         
-                        <div className="flex justify-between items-center">
-                          <span className="text-gray-700">Program Investment ({plans[selectedPlan as keyof typeof plans].label})</span>
-                          {getDiscount() > 0 ? (
-                            <div className="text-right">
-                              <div className="text-lg font-semibold text-gray-400 line-through">₹{getOriginalPrice().toLocaleString()}</div>
-                              <div className="font-semibold text-green-600">₹{calculatePrice().toLocaleString()}</div>
+                        {/* Pricing Section */}
+                        <div className="border-t-2 border-gray-200 pt-6 space-y-4">
+                          <div className="text-center mb-4">
+                            <div className="flex items-center justify-center gap-2 mb-2">
+                              <Sparkles className="w-6 h-6 text-purple-600" />
+                              <p className="text-xl font-bold text-gray-800">
+                                Ready to Begin Your Journey?
+                              </p>
                             </div>
-                          ) : (
-                            <span className="font-semibold">₹{calculatePrice().toLocaleString()}</span>
+                            <p className="text-sm text-gray-600">
+                              Join thousands of successful students worldwide
+                            </p>
+                          </div>
+                          
+                          <div className="flex justify-between items-center">
+                            <span className="text-gray-700 font-medium">Program Investment ({plans[selectedPlan as keyof typeof plans].label})</span>
+                            {getDiscount() > 0 ? (
+                              <div className="text-right">
+                                <div className="text-lg font-semibold text-gray-400 line-through">₹{getOriginalPrice().toLocaleString()}</div>
+                                <div className="font-bold text-green-600 text-lg">₹{calculatePrice().toLocaleString()}</div>
+                              </div>
+                            ) : (
+                              <span className="font-bold text-lg">₹{calculatePrice().toLocaleString()}</span>
+                            )}
+                          </div>
+                          {getDiscount() > 0 && (
+                            <div className="flex justify-between items-center text-green-600 bg-green-50 p-3 rounded-lg">
+                              <span className="font-medium">Smart Saver Bonus ({getDiscountPercentage()}% off)</span>
+                              <span className="font-bold">-₹{getDiscount().toLocaleString()}</span>
+                            </div>
+                          )}
+                          <div className={`flex justify-between items-center font-bold text-2xl border-t-2 border-gray-200 pt-4 ${
+                            selectedCourse === "oneOnOne" ? "text-amber-600" : "text-red-600"
+                          }`}>
+                            <span className="text-gray-900">Total Investment:</span>
+                            <span>₹{calculatePrice().toLocaleString()}</span>
+                          </div>
+                          {selectedPlan !== "monthly" && (
+                            <p className="text-sm text-gray-600 text-center bg-blue-50 p-2 rounded">
+                              Only ₹{Math.round(calculatePrice() / (selectedPlan === "halfYearly" ? 6 : 12)).toLocaleString()}/month
+                            </p>
                           )}
                         </div>
-                        {getDiscount() > 0 && (
-                          <div className="flex justify-between items-center text-green-600">
-                            <span>Smart Saver Bonus ({getDiscountPercentage()}% off)</span>
-                            <span className="font-semibold">-₹{getDiscount().toLocaleString()}</span>
-                          </div>
-                        )}
-                        <div className="flex justify-between items-center font-bold text-xl border-t-2 border-gray-200 pt-4">
-                          <span className="text-gray-900">Total Excellence Package:</span>
-                          <span className={selectedCourse === "oneOnOne" ? "text-amber-600" : "text-red-600"}>
-                            ₹{calculatePrice().toLocaleString()}
-                          </span>
-                        </div>
-                        {selectedPlan !== "monthly" && (
-                          <p className="text-sm text-gray-600 text-center">
-                            Only ₹{Math.round(calculatePrice() / (selectedPlan === "halfYearly" ? 6 : 12)).toLocaleString()}/month
-                          </p>
-                        )}
-                      </div>
-                      
-                      <Button 
-                        className={`w-full h-14 text-lg font-semibold mt-8 shadow-lg ${
-                          selectedCourse === "oneOnOne" 
-                            ? "bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-black" 
-                            : "bg-gradient-to-r from-red-600 to-red-500 hover:from-red-700 hover:to-red-600"
-                        }`} 
-                        size="lg"
-                      >
-                        <CreditCard className="w-6 h-6 mr-3" />
-                        🎯 Secure Your Spot Now
-                      </Button>
-                      
-                      <div className="flex items-center justify-center gap-3 mt-6 text-sm text-gray-500">
-                        <Shield className="w-5 h-5" />
-                        <span>Secure payment • SSL encrypted • Money-back guarantee</span>
-                      </div>
-
-                      <div className="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
-                        <div className="flex items-center gap-2 mb-2">
-                          <Star className="w-5 h-5 text-blue-600" />
-                          <span className="font-semibold text-blue-900">Premium Support</span>
-                        </div>
-                        <p className="text-blue-800 text-sm">
-                          24/7 support for international students • Multiple payment options • Installment plans available
-                        </p>
-                      </div>
-
-                      <div className="mt-4">
+                        
                         <Button 
-                          onClick={openWhatsApp}
-                          variant="outline" 
-                          className="w-full bg-green-50 border-green-200 text-green-700 hover:bg-green-100"
+                          className={`w-full h-14 text-lg font-bold mt-8 shadow-lg transition-all duration-300 hover:scale-105 ${
+                            selectedCourse === "oneOnOne" 
+                              ? "bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-black" 
+                              : "bg-gradient-to-r from-red-600 to-red-500 hover:from-red-700 hover:to-red-600"
+                          }`} 
+                          size="lg"
                         >
-                          <Phone className="w-4 h-4 mr-2" />
-                          Get Help on WhatsApp
+                          <CreditCard className="w-6 h-6 mr-3" />
+                          🚀 Secure Your Musical Future
                         </Button>
+                        
+                        <div className="flex items-center justify-center gap-3 mt-6 text-sm text-gray-500">
+                          <Shield className="w-5 h-5" />
+                          <span>Secure payment • SSL encrypted • Money-back guarantee</span>
+                        </div>
+
+                        <div className="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
+                          <div className="flex items-center gap-2 mb-2">
+                            <Star className="w-5 h-5 text-blue-600" />
+                            <span className="font-semibold text-blue-900">Premium Support Included</span>
+                          </div>
+                          <p className="text-blue-800 text-sm">
+                            24/7 support for international students • Multiple payment options • Installment plans available
+                          </p>
+                        </div>
+
+                        <div className="mt-4">
+                          <Button 
+                            onClick={openWhatsApp}
+                            variant="outline" 
+                            className="w-full bg-green-50 border-green-200 text-green-700 hover:bg-green-100"
+                          >
+                            <Phone className="w-4 h-4 mr-2" />
+                            Get Help on WhatsApp
+                          </Button>
+                        </div>
                       </div>
                     </CardContent>
                   </Card>
