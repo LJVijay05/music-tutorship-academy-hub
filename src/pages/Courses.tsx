@@ -12,6 +12,10 @@ const Courses = () => {
   const [selectedCourse, setSelectedCourse] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  console.log('Courses component rendered');
+  console.log('Selected course:', selectedCourse);
+  console.log('Modal open:', isModalOpen);
+
   const batchFeatures = [
     "15 students per batch",
     "12 weeks intensive program",
@@ -31,8 +35,15 @@ const Courses = () => {
   ];
 
   const handleDetailsClick = (courseId: string) => {
+    console.log('handleDetailsClick called with courseId:', courseId);
     setSelectedCourse(courseId);
     setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    console.log('Closing modal');
+    setIsModalOpen(false);
+    setSelectedCourse(null);
   };
 
   const getCourseTitle = (courseId: string) => {
@@ -105,31 +116,34 @@ const Courses = () => {
             </div>
 
             <div className="grid lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
-              {courses.map((course) => (
-                <CourseCard
-                  key={course.courseId}
-                  courseId={course.courseId}
-                  title={course.title}
-                  description={course.description}
-                  level={course.level}
-                  icon={course.icon}
-                  features={course.features}
-                  isPopular={course.isPopular}
-                  isPremium={course.isPremium}
-                  gradientFrom={course.gradientFrom}
-                  gradientTo={course.gradientTo}
-                  borderColor={course.borderColor}
-                  textColor={course.textColor}
-                  bgColor={course.bgColor}
-                  buttonGradientFrom={course.buttonGradientFrom}
-                  buttonGradientTo={course.buttonGradientTo}
-                  buttonHoverFrom={course.buttonHoverFrom}
-                  buttonHoverTo={course.buttonHoverTo}
-                  offerText={course.offerText}
-                  offerSubtext={course.offerSubtext}
-                  onDetailsClick={handleDetailsClick}
-                />
-              ))}
+              {courses.map((course) => {
+                console.log('Rendering course:', course.courseId);
+                return (
+                  <CourseCard
+                    key={course.courseId}
+                    courseId={course.courseId}
+                    title={course.title}
+                    description={course.description}
+                    level={course.level}
+                    icon={course.icon}
+                    features={course.features}
+                    isPopular={course.isPopular}
+                    isPremium={course.isPremium}
+                    gradientFrom={course.gradientFrom}
+                    gradientTo={course.gradientTo}
+                    borderColor={course.borderColor}
+                    textColor={course.textColor}
+                    bgColor={course.bgColor}
+                    buttonGradientFrom={course.buttonGradientFrom}
+                    buttonGradientTo={course.buttonGradientTo}
+                    buttonHoverFrom={course.buttonHoverFrom}
+                    buttonHoverTo={course.buttonHoverTo}
+                    offerText={course.offerText}
+                    offerSubtext={course.offerSubtext}
+                    onDetailsClick={handleDetailsClick}
+                  />
+                );
+              })}
             </div>
 
             <TrustIndicators />
@@ -142,7 +156,7 @@ const Courses = () => {
       {selectedCourse && (
         <CourseDetailsModal
           isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
+          onClose={handleCloseModal}
           courseId={selectedCourse}
           courseTitle={getCourseTitle(selectedCourse)}
         />

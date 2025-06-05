@@ -49,6 +49,12 @@ const CourseCard = ({
   offerSubtext,
   onDetailsClick
 }: CourseCardProps) => {
+  
+  const handleDetailsClick = () => {
+    console.log('Details button clicked for course:', courseId);
+    onDetailsClick(courseId);
+  };
+
   return (
     <article className="group">
       <Card className={`overflow-hidden border-0 shadow-xl hover:shadow-2xl transition-all duration-500 rounded-3xl h-full bg-white hover:-translate-y-2 relative ${isPremium ? 'ring-2 ring-amber-200' : ''}`}>
@@ -83,7 +89,7 @@ const CourseCard = ({
           <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
         </header>
 
-        <CardContent className="p-8 flex flex-col h-full">
+        <CardContent className="p-8 flex flex-col">
           <div className="mb-6">
             <h3 className="text-2xl font-bold mb-3 text-gray-900">{title}</h3>
             <p className="text-gray-600 mb-2">{description}</p>
@@ -111,17 +117,18 @@ const CourseCard = ({
             </div>
           </div>
           
-          <div className="flex gap-4 mt-auto">
+          {/* Action Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 mt-6">
             <Button 
               variant="outline" 
               className={`flex-1 border-2 ${borderColor.replace('border-', 'border-').replace('-100', '-500')} ${textColor.replace('-700', '-600')} hover:${bgColor} group/btn transition-all duration-300 h-12 rounded-xl font-semibold`}
-              onClick={() => onDetailsClick(courseId)}
+              onClick={handleDetailsClick}
             >
               <Info className="w-5 h-5 mr-2 group-hover/btn:scale-110 transition-transform" />
               View Details
             </Button>
             <Button 
-              className={`flex-1 bg-gradient-to-r ${buttonGradientFrom} ${buttonGradientTo} hover:${buttonHoverFrom} hover:${buttonHoverTo} shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 h-12 rounded-xl font-semibold ${isPremium ? 'text-black' : ''}`}
+              className={`flex-1 bg-gradient-to-r ${buttonGradientFrom} ${buttonGradientTo} hover:${buttonHoverFrom} hover:${buttonHoverTo} shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 h-12 rounded-xl font-semibold text-white ${isPremium ? 'text-black' : ''}`}
               asChild
             >
               <Link to="/enrollment">
