@@ -117,21 +117,21 @@ const CourseCard = ({
             </div>
           </div>
           
-          {/* Action Buttons */}
+          {/* Action Buttons with Smooth Animations */}
           <div className="flex flex-col sm:flex-row gap-4 mt-6">
             <Button 
               variant="outline" 
-              className="flex-1 border-2 border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400 transition-all duration-200 ease-in-out hover:scale-[1.02] h-12 rounded-xl font-semibold"
+              className="flex-1 border-2 border-gray-300 text-gray-700 bg-white hover:bg-gray-50 hover:border-gray-400 hover:text-gray-900 transition-all duration-300 ease-out h-12 rounded-xl font-semibold transform hover:scale-105 hover:shadow-md active:scale-95 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50"
               onClick={handleDetailsClick}
             >
-              <Info className="w-5 h-5 mr-2" />
+              <Info className="w-5 h-5 mr-2 transition-transform duration-200" />
               View Details
             </Button>
             <Button 
-              className="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-lg hover:shadow-xl transition-all duration-200 ease-in-out hover:scale-[1.02] h-12 rounded-xl font-semibold text-white"
+              className="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 ease-out h-12 rounded-xl font-semibold transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50"
               asChild
             >
-              <Link to="/enrollment">
+              <Link to="/enrollment" className="flex items-center justify-center">
                 Enroll Now
               </Link>
             </Button>
