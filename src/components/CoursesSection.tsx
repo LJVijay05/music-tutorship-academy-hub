@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Users, User, Star, Crown } from "lucide-react";
@@ -8,7 +7,7 @@ const CoursesSection = () => {
   const courses = [
     {
       id: "production-course",
-      title: "Music Production Batch Mentorship",
+      title: "Complete Music Production Course",
       subtitle: "Complete Music Production Live Course",
       level: "From Beginner to Advanced Level",
       image: "bg-gradient-to-br from-gray-900 to-gray-700",

@@ -18,25 +18,29 @@ const Hero = () => {
       
       <div className="relative z-10 container mx-auto px-4 lg:px-6 pt-32 pb-20">
         <div className="max-w-6xl mx-auto text-center">
-          {/* Original Hero Title */}
-          <div className="mb-12 animate-fade-in">
+          {/* Apple-style animated title on same line */}
+          <div className="mb-12 animate-title-reveal">
             <h1 className="text-6xl lg:text-8xl font-bold leading-tight">
-              <span className="text-gray-900">Learn Music</span>
-              <br />
-              <span className="text-transparent bg-gradient-to-r from-red-600 via-pink-600 to-purple-600 bg-clip-text">
+              <span className="inline-block animate-word-slide-up text-gray-900" style={{ animationDelay: '0.1s' }}>
+                Learn
+              </span>
+              <span className="inline-block animate-word-slide-up text-gray-900 ml-6" style={{ animationDelay: '0.3s' }}>
+                Music
+              </span>
+              <span className="inline-block animate-word-slide-up text-transparent bg-gradient-to-r from-red-600 via-pink-600 to-purple-600 bg-clip-text ml-6" style={{ animationDelay: '0.5s' }}>
                 Production
               </span>
             </h1>
           </div>
           
-          <div className="mb-12 animate-fade-in" style={{ animationDelay: '0.3s' }}>
+          <div className="mb-12 animate-fade-in" style={{ animationDelay: '0.8s' }}>
             <p className="text-xl lg:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
               Master the art of music production with expert guidance. From beginner basics to advanced techniques, unlock your creative potential and produce professional-quality tracks.
             </p>
           </div>
           
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16 animate-fade-in" style={{ animationDelay: '0.6s' }}>
+          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16 animate-fade-in" style={{ animationDelay: '1s' }}>
             <Button 
               onClick={() => setIsDemoPopupOpen(true)}
               size="lg" 
@@ -55,7 +59,7 @@ const Hero = () => {
           </div>
           
           {/* Stats */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-3xl mx-auto animate-fade-in" style={{ animationDelay: '0.9s' }}>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-3xl mx-auto animate-fade-in" style={{ animationDelay: '1.2s' }}>
             <div className="text-center group hover:scale-105 transition-transform duration-300">
               <div className="flex items-center justify-center mb-3">
                 <Users className="h-8 w-8 text-red-600 mr-2" />

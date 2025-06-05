@@ -57,7 +57,7 @@ const Courses = () => {
                   </div>
                 </div>
                 <CardContent className="p-6">
-                  <h3 className="text-2xl font-bold mb-2">Music Production Batch Mentorship</h3>
+                  <h3 className="text-2xl font-bold mb-2">Complete Music Production Course</h3>
                   <p className="text-gray-600 mb-4">Complete Music Production Live Course</p>
                   <p className="text-sm text-red-600 mb-4">(From Beginner to Advanced Level)</p>
                   
