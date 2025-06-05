@@ -1,4 +1,3 @@
-
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -522,7 +521,7 @@ const Enrollment = () => {
                         </div>
                         
                         <div className="space-y-3">
-                          <h5 className="font-semibold text-gray-900 mb-4">What's Included:</h5>
+                          <h5 className="font-semibold text-gray-900 mb-4">🌟 What's Included:</h5>
                           {courses[selectedCourse as keyof typeof courses].features.map((feature, index) => (
                             <div key={index} className="flex items-start gap-3">
                               <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
@@ -542,8 +541,17 @@ const Enrollment = () => {
                       </div>
                       
                       <div className="border-t-2 border-gray-200 pt-6 space-y-4">
+                        <div className="text-center mb-4">
+                          <p className="text-lg font-semibold text-gray-800 mb-2">
+                            🚀 Your Musical Journey Starts Here
+                          </p>
+                          <p className="text-sm text-gray-600">
+                            Join thousands of successful students worldwide
+                          </p>
+                        </div>
+                        
                         <div className="flex justify-between items-center">
-                          <span className="text-gray-700">Course Fee ({plans[selectedPlan as keyof typeof plans].label})</span>
+                          <span className="text-gray-700">Program Investment ({plans[selectedPlan as keyof typeof plans].label})</span>
                           {getDiscount() > 0 ? (
                             <div className="text-right">
                               <div className="text-lg font-semibold text-gray-400 line-through">₹{getOriginalPrice().toLocaleString()}</div>
@@ -555,19 +563,19 @@ const Enrollment = () => {
                         </div>
                         {getDiscount() > 0 && (
                           <div className="flex justify-between items-center text-green-600">
-                            <span>Discount Savings ({getDiscountPercentage()}% off)</span>
+                            <span>Smart Saver Bonus ({getDiscountPercentage()}% off)</span>
                             <span className="font-semibold">-₹{getDiscount().toLocaleString()}</span>
                           </div>
                         )}
                         <div className="flex justify-between items-center font-bold text-xl border-t-2 border-gray-200 pt-4">
-                          <span className="text-gray-900">Total Investment:</span>
+                          <span className="text-gray-900">Total Excellence Package:</span>
                           <span className={selectedCourse === "oneOnOne" ? "text-amber-600" : "text-red-600"}>
                             ₹{calculatePrice().toLocaleString()}
                           </span>
                         </div>
                         {selectedPlan !== "monthly" && (
                           <p className="text-sm text-gray-600 text-center">
-                            Equivalent to ₹{Math.round(calculatePrice() / (selectedPlan === "halfYearly" ? 6 : 12)).toLocaleString()}/month
+                            Only ₹{Math.round(calculatePrice() / (selectedPlan === "halfYearly" ? 6 : 12)).toLocaleString()}/month
                           </p>
                         )}
                       </div>
@@ -581,7 +589,7 @@ const Enrollment = () => {
                         size="lg"
                       >
                         <CreditCard className="w-6 h-6 mr-3" />
-                        Secure Your Spot Now
+                        🎯 Secure Your Spot Now
                       </Button>
                       
                       <div className="flex items-center justify-center gap-3 mt-6 text-sm text-gray-500">

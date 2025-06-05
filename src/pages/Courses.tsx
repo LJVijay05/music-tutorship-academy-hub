@@ -50,7 +50,7 @@ const Courses = () => {
           <div className="container mx-auto px-4">
             <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
               {/* Batch Mentorship */}
-              <Card className="overflow-hidden border-2 hover:border-red-200 transition-all duration-300 hover:shadow-xl">
+              <Card className="overflow-hidden border-2 hover:border-red-200 transition-all duration-300 hover:shadow-xl rounded-3xl">
                 <div className="h-48 bg-gradient-to-br from-gray-900 to-gray-700 relative overflow-hidden">
                   <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
                     <Users className="w-16 h-16 text-white" />
@@ -72,21 +72,19 @@ const Courses = () => {
                   
                   <div className="flex items-center gap-2 mb-6">
                     <Clock className="w-5 h-5 text-red-600" />
-                    <span className="text-sm text-gray-600">Enroll for 3 Month & Get 20% Off!</span>
+                    <span className="text-sm text-gray-600">Enroll for 1 Year & Get 15% Off!</span>
                   </div>
-                  
-                  <div className="text-3xl font-bold text-gray-900 mb-4">₹11,999</div>
                   
                   <Button className="w-full bg-red-600 hover:bg-red-700" size="lg">
                     <Link to="/enrollment" className="w-full">
-                      Enroll Now
+                      Enquire Now
                     </Link>
                   </Button>
                 </CardContent>
               </Card>
 
               {/* One-on-One Mentorship */}
-              <Card className="overflow-hidden border-2 hover:border-red-200 transition-all duration-300 hover:shadow-xl">
+              <Card className="overflow-hidden border-2 hover:border-red-200 transition-all duration-300 hover:shadow-xl rounded-3xl">
                 <div className="h-48 bg-gradient-to-br from-red-900 to-red-700 relative overflow-hidden">
                   <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
                     <User className="w-16 h-16 text-white" />
@@ -117,11 +115,9 @@ const Courses = () => {
                     <span className="text-sm text-gray-600">Enroll for 1 Year & Get 20% Off!</span>
                   </div>
                   
-                  <div className="text-3xl font-bold text-gray-900 mb-4">₹16,000</div>
-                  
-                  <Button className="w-full bg-red-600 hover:bg-red-700" size="lg">
+                  <Button className="w-full bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-black" size="lg">
                     <Link to="/enrollment" className="w-full">
-                      Enroll Now
+                      Enquire Now
                     </Link>
                   </Button>
                 </CardContent>
