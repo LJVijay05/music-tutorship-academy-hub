@@ -2,6 +2,7 @@
 import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
 import AboutSection from "@/components/AboutSection";
+import WhyChooseSection from "@/components/WhyChooseSection";
 import CoursesSection from "@/components/CoursesSection";
 import FAQSection from "@/components/FAQSection";
 import Footer from "@/components/Footer";
@@ -15,6 +16,9 @@ const Index = () => {
       </div>
       <div className="animate-fade-in" style={{ animationDelay: '0.2s' }}>
         <AboutSection />
+      </div>
+      <div className="animate-fade-in" style={{ animationDelay: '0.3s' }}>
+        <WhyChooseSection />
       </div>
       <div className="animate-fade-in" style={{ animationDelay: '0.4s' }}>
         <CoursesSection />
