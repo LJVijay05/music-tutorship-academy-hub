@@ -30,9 +30,7 @@ const About = () => {
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-24 animate-fade-in">
               <h1 className="text-6xl lg:text-8xl font-bold mb-10 leading-tight">
-                <span className="text-gray-900">Meet Your</span>
-                <br />
-                <span className="text-transparent bg-gradient-to-r from-red-600 via-pink-600 to-purple-600 bg-clip-text">Mentor</span>
+                <span className="text-transparent bg-gradient-to-r from-red-600 via-pink-600 to-purple-600 bg-clip-text">Meet Your Mentor</span>
               </h1>
               <p className="text-2xl lg:text-3xl text-gray-600 max-w-5xl mx-auto leading-relaxed">
                 Transform your musical journey with personalized guidance from an industry expert who has shaped the careers of hundreds of successful artists.
@@ -42,8 +40,8 @@ const About = () => {
             <div className="grid lg:grid-cols-2 gap-24 items-center mb-32">
               {/* Left Content */}
               <div className="space-y-10 animate-fade-in" style={{ animationDelay: '0.2s' }}>
-                <div className="space-y-8 text-xl text-gray-700 leading-relaxed">
-                  <p className="text-2xl font-medium text-gray-800 animate-fade-in" style={{ animationDelay: '0.4s' }}>
+                <div className="space-y-8 text-lg text-gray-700 leading-relaxed">
+                  <p className="animate-fade-in" style={{ animationDelay: '0.4s' }}>
                     With over a decade of experience in music production, I've dedicated my career to helping aspiring artists and producers unlock their creative potential.
                   </p>
                   <p className="animate-fade-in" style={{ animationDelay: '0.6s' }}>
@@ -52,7 +50,7 @@ const About = () => {
                   <p className="animate-fade-in" style={{ animationDelay: '0.8s' }}>
                     My approach combines technical excellence with creative freedom, ensuring that each student develops their unique sound while mastering professional production techniques. I believe that music production is not just about technology—it's about storytelling, emotion, and connecting with your audience.
                   </p>
-                  <p className="text-2xl font-medium text-transparent bg-gradient-to-r from-red-600 to-pink-600 bg-clip-text animate-fade-in" style={{ animationDelay: '1s' }}>
+                  <p className="animate-fade-in" style={{ animationDelay: '1s' }}>
                     Through personalized mentorship, I guide students on a transformative journey that goes beyond just learning software to truly understanding the art and science of music creation.
                   </p>
                 </div>
