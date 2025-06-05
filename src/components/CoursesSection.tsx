@@ -1,14 +1,10 @@
 
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Users, User, Star, Crown } from "lucide-react";
 import { Link } from "react-router-dom";
-import CourseDetailsModal from "./CourseDetailsModal";
 
 const CoursesSection = () => {
-  const [selectedCourse, setSelectedCourse] = useState<{id: string, title: string} | null>(null);
-
   const courses = [
     {
       id: "production-course",
@@ -27,14 +23,6 @@ const CoursesSection = () => {
       premium: true
     }
   ];
-
-  const handleViewMore = (course: {id: string, title: string}) => {
-    setSelectedCourse(course);
-  };
-
-  const closeModal = () => {
-    setSelectedCourse(null);
-  };
 
   return (
     <section className="py-16 bg-gradient-to-br from-gray-50 via-white to-red-50" aria-labelledby="courses-heading">
@@ -95,27 +83,17 @@ const CoursesSection = () => {
                   <h3 className="text-xl font-bold mb-2 text-gray-900">{course.title}</h3>
                   <p className="text-xs text-red-600 mb-6 font-medium">({course.level})</p>
                   
-                  <div className="flex flex-col gap-3">
-                    <Button 
-                      variant="outline" 
-                      className="w-full border-2 border-red-200 text-red-600 hover:bg-red-50 hover:border-red-300 text-sm h-10 transition-all duration-300"
-                      onClick={() => handleViewMore(course)}
-                      aria-label={`View more details about ${course.title}`}
+                  <Button 
+                    className="w-full bg-red-600 hover:bg-red-700 text-sm h-10"
+                    asChild
+                  >
+                    <Link 
+                      to="/enrollment" 
+                      aria-label={`Enquire now about ${course.title}`}
                     >
-                      View More
-                    </Button>
-                    <Button 
-                      className="w-full bg-red-600 hover:bg-red-700 text-sm h-10"
-                      asChild
-                    >
-                      <Link 
-                        to="/enrollment" 
-                        aria-label={`Enquire now about ${course.title}`}
-                      >
-                        Enquire Now
-                      </Link>
-                    </Button>
-                  </div>
+                      Enquire Now
+                    </Link>
+                  </Button>
                 </CardContent>
               </Card>
             </article>
@@ -131,16 +109,6 @@ const CoursesSection = () => {
           </Button>
         </div>
       </div>
-
-      {/* Course Details Modal */}
-      {selectedCourse && (
-        <CourseDetailsModal
-          isOpen={!!selectedCourse}
-          onClose={closeModal}
-          courseId={selectedCourse.id}
-          courseTitle={selectedCourse.title}
-        />
-      )}
     </section>
   );
 };
