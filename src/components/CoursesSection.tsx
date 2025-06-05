@@ -10,7 +10,7 @@ const CoursesSection = () => {
       id: "production-course",
       title: "Complete Music Production Course",
       level: "From Beginner to Advanced Level",
-      image: "bg-gradient-to-br from-gray-900 to-gray-700",
+      image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=800&h=400&fit=crop",
       icon: Users,
       popular: true
     },
@@ -19,7 +19,7 @@ const CoursesSection = () => {
       title: "One-on-One Music Production Mentorship",
       subtitle: "Personalized 90MIN Sessions",
       level: "Master the complete journey of music production",
-      image: "bg-gradient-to-br from-amber-600 to-yellow-600",
+      image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&h=400&fit=crop",
       icon: User,
       premium: true
     }
@@ -51,7 +51,7 @@ const CoursesSection = () => {
             >
               {/* Premium Corner */}
               {course.premium && (
-                <div className="absolute top-0 right-0 w-20 h-20 overflow-hidden">
+                <div className="absolute top-0 right-0 w-20 h-20 overflow-hidden z-20">
                   <div className="absolute top-3 right-[-28px] bg-gradient-to-r from-amber-500 to-yellow-500 text-black px-6 py-1 text-xs font-bold transform rotate-45 shadow-lg">
                     <Crown className="w-3 h-3 inline mr-1" />
                     FLAGSHIP
@@ -70,7 +70,12 @@ const CoursesSection = () => {
               )}
               
               {/* Course Image */}
-              <div className={`h-36 ${course.image} relative overflow-hidden`}>
+              <div className="h-48 relative overflow-hidden">
+                <img 
+                  src={course.image} 
+                  alt={course.title}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                />
                 <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center group-hover:bg-opacity-30 transition-all duration-300">
                   <course.icon className="w-12 h-12 text-white group-hover:scale-110 transition-transform duration-300" />
                 </div>
@@ -85,7 +90,7 @@ const CoursesSection = () => {
                 
                 <Button variant="outline" className="w-full border-2 hover:bg-gray-50 text-sm h-10" size="lg">
                   <Link to="/courses" className="w-full">
-                    Know More
+                    Details
                   </Link>
                 </Button>
               </CardContent>
@@ -97,7 +102,7 @@ const CoursesSection = () => {
         <div className="text-center animate-fade-in" style={{ animationDelay: '600ms' }}>
           <Button asChild size="lg" className="bg-gradient-to-r from-red-600 to-red-500 hover:from-red-700 hover:to-red-600 px-8 py-3 text-sm font-medium shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 rounded-xl">
             <Link to="/courses">
-              Know More
+              Details
             </Link>
           </Button>
         </div>
