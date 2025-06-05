@@ -1,34 +1,36 @@
 
 import Navigation from "@/components/Navigation";
-import PremiumHero from "@/components/PremiumHero";
-import InteractiveCourses from "@/components/InteractiveCourses";
+import Hero from "@/components/Hero";
 import AboutSection from "@/components/AboutSection";
 import WhyChooseSection from "@/components/WhyChooseSection";
 import CoursesSection from "@/components/CoursesSection";
-import InstructorProfile from "@/components/InstructorProfile";
-import StudentTestimonials from "@/components/StudentTestimonials";
-import StreamlinedEnrollment from "@/components/StreamlinedEnrollment";
-import PremiumFAQ from "@/components/PremiumFAQ";
-import PremiumContact from "@/components/PremiumContact";
-import PremiumFooter from "@/components/PremiumFooter";
+import FAQSection from "@/components/FAQSection";
+import Footer from "@/components/Footer";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white overflow-x-hidden">
       <Navigation />
       <main>
-        <PremiumHero />
-        <CoursesSection />
-        <AboutSection />
-        <WhyChooseSection />
-        <InteractiveCourses />
-        <InstructorProfile />
-        <StudentTestimonials />
-        <StreamlinedEnrollment />
-        <PremiumFAQ />
-        <PremiumContact />
+        <div className="animate-fade-in">
+          <Hero />
+        </div>
+        <div className="animate-slide-up" style={{ animationDelay: '0.2s' }}>
+          <AboutSection />
+        </div>
+        <div className="animate-slide-up" style={{ animationDelay: '0.4s' }}>
+          <WhyChooseSection />
+        </div>
+        <div className="animate-slide-up" style={{ animationDelay: '0.6s' }}>
+          <CoursesSection />
+        </div>
+        <div className="animate-slide-up" style={{ animationDelay: '0.8s' }}>
+          <FAQSection />
+        </div>
       </main>
-      <PremiumFooter />
+      <div className="animate-slide-in-bottom" style={{ animationDelay: '1s' }}>
+        <Footer />
+      </div>
     </div>
   );
 };
