@@ -48,7 +48,7 @@ const Hero = () => {
 
   return (
     <section className="relative min-h-screen bg-gradient-to-br from-gray-50 via-white to-red-50 overflow-hidden">
-      {/* New Dynamic Background Elements */}
+      {/* Dynamic Background Elements */}
       <div className="absolute inset-0 opacity-30">
         <div className="absolute top-20 left-20 w-64 h-64 bg-gradient-to-r from-red-500 to-pink-500 rounded-full blur-3xl animate-pulse-wave"></div>
         <div className="absolute bottom-20 right-20 w-96 h-96 bg-gradient-to-r from-purple-500 to-red-500 rounded-full blur-3xl animate-orbit"></div>
@@ -59,7 +59,7 @@ const Hero = () => {
       
       <div className="relative z-10 container mx-auto px-4 lg:px-6 pt-32 pb-20">
         <div className="max-w-6xl mx-auto text-center">
-          {/* New Animated Title with Typewriter Effect */}
+          {/* Animated Title */}
           <div className="mb-12 animate-fade-up">
             <h1 className="text-6xl lg:text-8xl font-bold leading-tight">
               <span className="inline-block animate-slide-bounce text-gray-900 drop-shadow-lg" style={{ animationDelay: '0.1s' }}>
@@ -85,7 +85,7 @@ const Hero = () => {
             <Button 
               onClick={() => setIsDemoPopupOpen(true)}
               size="lg" 
-              className="group bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white px-8 py-4 text-lg font-semibold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:animate-wiggle animate-pulse-glow border-2 border-red-500/20"
+              className="group bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white px-8 py-4 text-lg font-semibold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-500 animate-button-pulse border-2 border-red-500/20"
             >
               <Play className="mr-2 h-5 w-5 group-hover:animate-spin-slow transition-transform duration-300" />
               Book Your Free Demo
@@ -93,7 +93,7 @@ const Hero = () => {
             <Button 
               variant="outline" 
               size="lg" 
-              className="group border-2 border-gray-300 text-gray-700 hover:border-red-600 hover:text-red-600 px-8 py-4 text-lg font-semibold rounded-xl transition-all duration-500 hover:animate-shake hover:shadow-xl backdrop-blur-sm bg-white/80"
+              className="group border-2 border-gray-300 text-gray-700 hover:border-red-600 hover:text-red-600 px-8 py-4 text-lg font-semibold rounded-xl transition-all duration-500 hover:animate-button-bounce hover:shadow-xl backdrop-blur-sm bg-white/80"
             >
               <span className="group-hover:animate-wave">View Courses</span>
             </Button>

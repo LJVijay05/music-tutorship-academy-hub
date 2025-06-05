@@ -117,18 +117,18 @@ const CourseCard = ({
             </div>
           </div>
           
-          {/* Action Buttons */}
+          {/* Action Buttons with new animations */}
           <div className="flex flex-col sm:flex-row gap-4 mt-6">
             <Button 
               variant="outline" 
-              className="flex-1 border-2 border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400 transition-all duration-200 ease-in-out hover:scale-[1.02] h-12 rounded-xl font-semibold"
+              className="flex-1 border-2 border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400 transition-all duration-200 ease-in-out hover:animate-button-bounce h-12 rounded-xl font-semibold"
               onClick={handleDetailsClick}
             >
               <Info className="w-5 h-5 mr-2" />
               View Details
             </Button>
             <Button 
-              className="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-lg hover:shadow-xl transition-all duration-200 ease-in-out hover:scale-[1.02] h-12 rounded-xl font-semibold text-white"
+              className="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-lg hover:shadow-xl transition-all duration-200 ease-in-out animate-button-glow-wave h-12 rounded-xl font-semibold text-white"
               asChild
             >
               <Link to="/enrollment">
