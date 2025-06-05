@@ -1,5 +1,5 @@
 
-import { Music, Mail, Phone, MapPin, Instagram, Youtube, Twitter } from "lucide-react";
+import { Music, Mail, Phone, MapPin, Instagram, Youtube, Twitter, MessageCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
@@ -28,6 +28,9 @@ const Footer = () => {
               <a href="#" className="text-gray-400 hover:text-red-600 transition-colors">
                 <Twitter className="w-5 h-5" />
               </a>
+              <a href="https://wa.me/919514499932" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-red-600 transition-colors">
+                <MessageCircle className="w-5 h-5" />
+              </a>
             </div>
           </div>
 
@@ -46,10 +49,8 @@ const Footer = () => {
           <div>
             <h3 className="font-semibold text-lg mb-4">Our Courses</h3>
             <ul className="space-y-2">
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Batch Mentorship</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">One-on-One Mentorship</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Music Theory</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Sound Design</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Music Production Mentorship</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">1 on 1 Direct Mentorship</a></li>
             </ul>
           </div>
 
@@ -59,11 +60,11 @@ const Footer = () => {
             <div className="space-y-3">
               <div className="flex items-center gap-2">
                 <Mail className="w-4 h-4 text-red-600" />
-                <span className="text-gray-400 text-sm">info@musictutorship.com</span>
+                <span className="text-gray-400 text-sm">contact@musictutorship.com</span>
               </div>
               <div className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-red-600" />
-                <span className="text-gray-400 text-sm">+91 9876543210</span>
+                <span className="text-gray-400 text-sm">+91 9514499932</span>
               </div>
               <div className="flex items-center gap-2">
                 <MapPin className="w-4 h-4 text-red-600" />
