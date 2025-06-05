@@ -1,10 +1,14 @@
 
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Users, User, Star, Crown } from "lucide-react";
+import { Users, User, Star, Crown, Info, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import CourseDetailsModal from "./CourseDetailsModal";
 
 const CoursesSection = () => {
+  const [selectedCourse, setSelectedCourse] = useState<{id: string, title: string} | null>(null);
+
   const courses = [
     {
       id: "production-course",
@@ -23,6 +27,14 @@ const CoursesSection = () => {
       premium: true
     }
   ];
+
+  const handleViewDetails = (course: {id: string, title: string}) => {
+    setSelectedCourse(course);
+  };
+
+  const closeModal = () => {
+    setSelectedCourse(null);
+  };
 
   return (
     <section className="py-16 bg-gradient-to-br from-gray-50 via-white to-red-50" aria-labelledby="courses-heading">
@@ -83,17 +95,35 @@ const CoursesSection = () => {
                   <h3 className="text-xl font-bold mb-2 text-gray-900">{course.title}</h3>
                   <p className="text-xs text-red-600 mb-6 font-medium">({course.level})</p>
                   
-                  <Button 
-                    className="w-full bg-red-600 hover:bg-red-700 text-sm h-10"
-                    asChild
-                  >
-                    <Link 
-                      to="/enrollment" 
-                      aria-label={`Enquire now about ${course.title}`}
+                  {/* Action Buttons */}
+                  <div className="flex flex-col sm:flex-row gap-3">
+                    <Button 
+                      variant="outline" 
+                      className="flex-1 border-2 border-red-200 text-red-600 hover:bg-red-50 hover:border-red-300 text-sm h-11 transition-all duration-300 group/details"
+                      onClick={() => handleViewDetails(course)}
+                      aria-label={`View details about ${course.title}`}
                     >
-                      Enquire Now
-                    </Link>
-                  </Button>
+                      <Info className="w-4 h-4 mr-2 group-hover/details:rotate-12 transition-transform duration-300" />
+                      Details
+                    </Button>
+                    <Button 
+                      className={`flex-1 text-sm h-11 font-medium transition-all duration-300 group/enroll ${
+                        course.premium 
+                          ? 'bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-black shadow-lg' 
+                          : 'bg-red-600 hover:bg-red-700 text-white'
+                      }`}
+                      asChild
+                    >
+                      <Link 
+                        to="/enrollment" 
+                        aria-label={`Enroll now in ${course.title}`}
+                        className="flex items-center justify-center"
+                      >
+                        Enroll Now
+                        <ArrowRight className="w-4 h-4 ml-2 group-hover/enroll:translate-x-1 transition-transform duration-300" />
+                      </Link>
+                    </Button>
+                  </div>
                 </CardContent>
               </Card>
             </article>
@@ -109,6 +139,16 @@ const CoursesSection = () => {
           </Button>
         </div>
       </div>
+
+      {/* Course Details Modal */}
+      {selectedCourse && (
+        <CourseDetailsModal
+          isOpen={!!selectedCourse}
+          onClose={closeModal}
+          courseId={selectedCourse.id}
+          courseTitle={selectedCourse.title}
+        />
+      )}
     </section>
   );
 };
