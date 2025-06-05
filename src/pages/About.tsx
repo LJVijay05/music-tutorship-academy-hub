@@ -4,13 +4,53 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Users, Award, Star, Music, Headphones, Mic, Play, Clock } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+
+// Counter Animation Component
+const AnimatedCounter = ({ target, suffix = "", duration = 2000 }: { target: number; suffix?: string; duration?: number }) => {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    const startTime = Date.now();
+    const endTime = startTime + duration;
+
+    const updateCount = () => {
+      const now = Date.now();
+      const progress = Math.min((now - startTime) / duration, 1);
+      
+      // Easing function for smooth animation
+      const easeOutQuad = 1 - (1 - progress) * (1 - progress);
+      const currentCount = Math.floor(easeOutQuad * target);
+      
+      setCount(currentCount);
+
+      if (now < endTime) {
+        requestAnimationFrame(updateCount);
+      } else {
+        setCount(target);
+      }
+    };
+
+    const timer = setTimeout(() => {
+      updateCount();
+    }, 200); // Small delay to ensure component is visible
+
+    return () => clearTimeout(timer);
+  }, [target, duration]);
+
+  return (
+    <span className="text-5xl font-bold text-gray-900 mb-4 text-transparent bg-gradient-to-r from-red-600 to-pink-600 bg-clip-text">
+      {count}{suffix}
+    </span>
+  );
+};
 
 const About = () => {
   const achievements = [
-    { number: "500+", label: "Students Taught", icon: Users },
-    { number: "10+", label: "Years Experience", icon: Star },
-    { number: "200+", label: "Tracks Produced", icon: Music },
-    { number: "50+", label: "Industry Awards", icon: Award }
+    { number: 320, suffix: "+", label: "Students Mentored", icon: Users },
+    { number: 10, suffix: "+", label: "Years Experience", icon: Star },
+    { number: 200, suffix: "+", label: "Tracks Produced", icon: Music },
+    { number: 50, suffix: "+", label: "Industry Awards", icon: Award }
   ];
 
   return (
@@ -93,8 +133,8 @@ const About = () => {
                     <div className="w-24 h-24 bg-gradient-to-r from-red-600 to-pink-600 rounded-full flex items-center justify-center mx-auto mb-8 group-hover:scale-125 transition-transform duration-500 shadow-2xl">
                       <achievement.icon className="w-12 h-12 text-white" />
                     </div>
-                    <div className="text-5xl font-bold text-gray-900 mb-4 text-transparent bg-gradient-to-r from-red-600 to-pink-600 bg-clip-text">
-                      {achievement.number}
+                    <div className="mb-4">
+                      <AnimatedCounter target={achievement.number} suffix={achievement.suffix} duration={2000 + index * 200} />
                     </div>
                     <div className="text-gray-600 font-semibold text-xl leading-tight">{achievement.label}</div>
                   </CardContent>
