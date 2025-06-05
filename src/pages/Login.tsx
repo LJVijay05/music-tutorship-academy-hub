@@ -24,7 +24,7 @@ const Login = () => {
     if (email && password) {
       login(email, password);
       toast.success("Login successful!");
-      navigate("/courses");
+      navigate("/dashboard");
     } else {
       toast.error("Please fill in all fields");
     }
