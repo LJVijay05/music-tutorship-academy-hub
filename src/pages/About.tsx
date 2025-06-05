@@ -1,7 +1,7 @@
 
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { Music, Award, Users, Star } from "lucide-react";
+import { Music, Award, Users, Star, Play, Volume2 } from "lucide-react";
 
 const About = () => {
   const achievements = [
@@ -61,7 +61,7 @@ const About = () => {
               </div>
 
               {/* Achievements */}
-              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
                 {achievements.map((achievement, index) => (
                   <div key={index} className="text-center p-6 rounded-lg bg-gray-50 hover:bg-red-50 transition-colors">
                     <achievement.icon className="w-12 h-12 text-red-600 mx-auto mb-4" />
@@ -69,6 +69,66 @@ const About = () => {
                     <p className="text-gray-600 text-sm">{achievement.description}</p>
                   </div>
                 ))}
+              </div>
+
+              {/* My Works Section */}
+              <div className="mb-16">
+                <div className="text-center mb-12">
+                  <h2 className="text-4xl font-bold mb-6 bg-gradient-to-r from-red-600 to-red-500 bg-clip-text text-transparent">
+                    My <span className="text-gray-900">Works</span>
+                  </h2>
+                  <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                    Experience the sounds that have shaped careers and inspired countless artists. 
+                    Listen to my professional productions and understand why students trust my expertise.
+                  </p>
+                </div>
+                
+                <div className="max-w-4xl mx-auto">
+                  <div className="bg-gradient-to-br from-gray-900 via-gray-800 to-black rounded-3xl p-8 shadow-2xl">
+                    <div className="flex items-center gap-4 mb-6">
+                      <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
+                        <Play className="w-6 h-6 text-white fill-current" />
+                      </div>
+                      <div>
+                        <h3 className="text-white text-xl font-bold">Featured Playlist</h3>
+                        <p className="text-gray-300">Industry-level productions by your mentor</p>
+                      </div>
+                      <div className="ml-auto">
+                        <Volume2 className="w-6 h-6 text-green-500" />
+                      </div>
+                    </div>
+                    
+                    <div className="bg-black bg-opacity-50 rounded-2xl p-2">
+                      <iframe 
+                        style={{borderRadius: "12px"}} 
+                        src="https://open.spotify.com/embed/playlist/1Baqr6iqDkXbHUCXXK8ThG?utm_source=generator&theme=0" 
+                        width="100%" 
+                        height="352" 
+                        frameBorder="0" 
+                        allowFullScreen 
+                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                        loading="lazy"
+                      />
+                    </div>
+                    
+                    <div className="mt-6 text-center">
+                      <p className="text-gray-300 text-sm mb-4">
+                        🎧 These tracks represent years of industry experience and technical mastery
+                      </p>
+                      <div className="flex justify-center gap-6 text-sm">
+                        <div className="text-green-400">
+                          <span className="font-semibold">✓</span> Professional Quality
+                        </div>
+                        <div className="text-green-400">
+                          <span className="font-semibold">✓</span> Industry Standards
+                        </div>
+                        <div className="text-green-400">
+                          <span className="font-semibold">✓</span> Chart-Ready Sounds
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
