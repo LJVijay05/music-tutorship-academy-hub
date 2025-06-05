@@ -98,7 +98,7 @@ const Courses = () => {
                 </div>
                 <CardContent className="p-6">
                   <h3 className="text-2xl font-bold mb-2">One-on-One Music Production Mentorship</h3>
-                  <p className="text-gray-600 mb-4">Personalized 90MIN Sessions</p>
+                  <p className="text-gray-600 mb-4">Personalised mentorship sessions</p>
                   <p className="text-sm text-red-600 mb-4">(Master the complete journey of music production)</p>
                   
                   <div className="space-y-3 mb-6">

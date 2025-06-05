@@ -1,10 +1,14 @@
 
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Users, User, Star, Crown } from "lucide-react";
 import { Link } from "react-router-dom";
+import CourseDetailsModal from "./CourseDetailsModal";
 
 const CoursesSection = () => {
+  const [selectedCourse, setSelectedCourse] = useState<{id: string, title: string} | null>(null);
+
   const courses = [
     {
       id: "production-course",
@@ -23,6 +27,14 @@ const CoursesSection = () => {
       premium: true
     }
   ];
+
+  const handleViewMore = (course: {id: string, title: string}) => {
+    setSelectedCourse(course);
+  };
+
+  const closeModal = () => {
+    setSelectedCourse(null);
+  };
 
   return (
     <section className="py-16 bg-gradient-to-br from-gray-50 via-white to-red-50">
@@ -81,11 +93,20 @@ const CoursesSection = () => {
                 <h3 className="text-xl font-bold mb-2 text-gray-900">{course.title}</h3>
                 <p className="text-xs text-red-600 mb-6 font-medium">({course.level})</p>
                 
-                <Button variant="outline" className="w-full border-2 hover:bg-gray-50 text-sm h-10" size="lg">
-                  <Link to="/courses" className="w-full">
-                    Details
-                  </Link>
-                </Button>
+                <div className="flex gap-3">
+                  <Button 
+                    variant="outline" 
+                    className="flex-1 border-2 hover:bg-gray-50 text-sm h-10"
+                    onClick={() => handleViewMore(course)}
+                  >
+                    View More
+                  </Button>
+                  <Button className="flex-1 bg-red-600 hover:bg-red-700 text-sm h-10">
+                    <Link to="/enrollment" className="w-full">
+                      Enquire Now
+                    </Link>
+                  </Button>
+                </div>
               </CardContent>
             </Card>
           ))}
@@ -100,6 +121,16 @@ const CoursesSection = () => {
           </Button>
         </div>
       </div>
+
+      {/* Course Details Modal */}
+      {selectedCourse && (
+        <CourseDetailsModal
+          isOpen={!!selectedCourse}
+          onClose={closeModal}
+          courseId={selectedCourse.id}
+          courseTitle={selectedCourse.title}
+        />
+      )}
     </section>
   );
 };
