@@ -43,32 +43,32 @@ const FAQSection = () => {
   ];
 
   return (
-    <section className="py-20 bg-gradient-to-br from-white via-gray-50 to-red-50">
-      <div className="container mx-auto px-6">
-        <div className="max-w-4xl mx-auto">
+    <section className="py-16 bg-gradient-to-br from-white via-gray-50 to-red-50">
+      <div className="container mx-auto px-4 lg:px-6">
+        <div className="max-w-3xl mx-auto">
           {/* Section Header */}
-          <div className="text-center mb-16 animate-fade-in">
-            <h2 className="text-4xl lg:text-5xl font-bold mb-6">
+          <div className="text-center mb-12 animate-fade-in">
+            <h2 className="text-3xl lg:text-4xl font-bold mb-4">
               Frequently Asked <span className="bg-gradient-to-r from-red-600 to-red-500 bg-clip-text text-transparent">Questions</span>
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-base text-gray-600 max-w-2xl mx-auto leading-relaxed">
               Get answers to the most common questions about our music mentorship program
             </p>
           </div>
 
           {/* FAQ Accordion */}
-          <div className="animate-slide-in-up" style={{ animationDelay: '200ms' }}>
-            <Accordion type="single" collapsible className="space-y-4">
+          <div className="animate-slide-up" style={{ animationDelay: '200ms' }}>
+            <Accordion type="single" collapsible className="space-y-3">
               {faqs.map((faq, index) => (
                 <AccordionItem 
                   key={index} 
                   value={`item-${index}`}
-                  className="border border-gray-200 rounded-xl px-6 bg-white shadow-md hover:shadow-lg transition-all duration-300"
+                  className="border border-gray-200 rounded-xl px-4 bg-white shadow-sm hover:shadow-md transition-all duration-300"
                 >
-                  <AccordionTrigger className="text-left hover:no-underline py-6 text-lg font-semibold text-gray-900">
+                  <AccordionTrigger className="text-left hover:no-underline py-4 text-sm font-medium text-gray-900">
                     {faq.question}
                   </AccordionTrigger>
-                  <AccordionContent className="text-gray-700 leading-relaxed pb-6">
+                  <AccordionContent className="text-gray-700 leading-relaxed pb-4 text-sm">
                     {faq.answer}
                   </AccordionContent>
                 </AccordionItem>
@@ -77,20 +77,20 @@ const FAQSection = () => {
           </div>
 
           {/* CTA at bottom */}
-          <div className="text-center mt-12 animate-fade-in" style={{ animationDelay: '400ms' }}>
-            <p className="text-lg text-gray-600 mb-6">Still have questions? We're here to help!</p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="text-center mt-8 animate-fade-in" style={{ animationDelay: '400ms' }}>
+            <p className="text-base text-gray-600 mb-4">Still have questions? We're here to help!</p>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <a 
                 href="https://wa.me/919514499932" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="bg-gradient-to-r from-red-600 to-red-500 hover:from-red-700 hover:to-red-600 text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all duration-300 inline-block"
+                className="bg-gradient-to-r from-red-600 to-red-500 hover:from-red-700 hover:to-red-600 text-white px-6 py-3 rounded-lg font-medium shadow-md hover:shadow-lg transition-all duration-300 inline-block text-sm"
               >
                 Chat with Us
               </a>
               <a 
                 href="mailto:contact@musictutorship.com"
-                className="border-2 border-red-500 text-red-600 hover:bg-red-50 px-8 py-3 rounded-full font-semibold transition-all duration-300 inline-block"
+                className="border-2 border-red-500 text-red-600 hover:bg-red-50 px-6 py-3 rounded-lg font-medium transition-all duration-300 inline-block text-sm"
               >
                 Email Us
               </a>
