@@ -29,7 +29,7 @@ const Courses = () => {
     <div className="min-h-screen bg-white">
       <Navigation />
       
-      <div className="pt-20">
+      <main className="pt-20">
         {/* Hero Section */}
         <section className="py-16 bg-gradient-to-r from-red-50 to-gray-50">
           <div className="container mx-auto px-4 text-center">
@@ -46,86 +46,91 @@ const Courses = () => {
         </section>
 
         {/* Course Selection */}
-        <section className="py-20">
+        <section className="py-20" aria-labelledby="courses-heading">
           <div className="container mx-auto px-4">
+            <h2 id="courses-heading" className="sr-only">Available Music Production Courses</h2>
             <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
               {/* Batch Mentorship */}
-              <Card className="overflow-hidden border-2 hover:border-red-200 transition-all duration-300 hover:shadow-xl rounded-3xl">
-                <div className="h-48 bg-gradient-to-br from-gray-900 to-gray-700 relative overflow-hidden">
-                  <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-                    <Users className="w-16 h-16 text-white" />
-                  </div>
-                </div>
-                <CardContent className="p-6">
-                  <h3 className="text-2xl font-bold mb-2">Complete Music Production Course</h3>
-                  <p className="text-gray-600 mb-4">Complete Music Production Live Course</p>
-                  <p className="text-sm text-red-600 mb-4">(From Beginner to Advanced Level)</p>
-                  
-                  <div className="space-y-3 mb-6">
-                    {batchFeatures.map((feature, index) => (
-                      <div key={index} className="flex items-center gap-2">
-                        <CheckCircle className="w-5 h-5 text-green-600" />
-                        <span className="text-gray-700">{feature}</span>
-                      </div>
-                    ))}
-                  </div>
-                  
-                  <div className="flex items-center gap-2 mb-6">
-                    <Clock className="w-5 h-5 text-red-600" />
-                    <span className="text-sm text-gray-600">Enroll for 1 Year & Get 15% Off!</span>
-                  </div>
-                  
-                  <Button className="w-full bg-red-600 hover:bg-red-700" size="lg">
-                    <Link to="/enrollment" className="w-full">
-                      Enquire Now
-                    </Link>
-                  </Button>
-                </CardContent>
-              </Card>
+              <article className="course-card">
+                <Card className="overflow-hidden border-2 hover:border-red-200 transition-all duration-300 hover:shadow-xl rounded-3xl h-full">
+                  <header className="h-48 bg-gradient-to-br from-gray-900 to-gray-700 relative overflow-hidden">
+                    <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                      <Users className="w-16 h-16 text-white" aria-hidden="true" />
+                    </div>
+                  </header>
+                  <CardContent className="p-6 flex flex-col h-full">
+                    <h3 className="text-2xl font-bold mb-2">Complete Music Production Course</h3>
+                    <p className="text-gray-600 mb-4">Complete Music Production Live Course</p>
+                    <p className="text-sm text-red-600 mb-4">(From Beginner to Advanced Level)</p>
+                    
+                    <ul className="space-y-3 mb-6 flex-grow" role="list">
+                      {batchFeatures.map((feature, index) => (
+                        <li key={index} className="flex items-center gap-2">
+                          <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0" aria-hidden="true" />
+                          <span className="text-gray-700">{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    
+                    <div className="flex items-center gap-2 mb-6">
+                      <Clock className="w-5 h-5 text-red-600" aria-hidden="true" />
+                      <span className="text-sm text-gray-600">Enroll for 1 Year & Get 15% Off!</span>
+                    </div>
+                    
+                    <Button className="w-full bg-red-600 hover:bg-red-700" size="lg" asChild>
+                      <Link to="/enrollment">
+                        Enquire Now
+                      </Link>
+                    </Button>
+                  </CardContent>
+                </Card>
+              </article>
 
               {/* One-on-One Mentorship */}
-              <Card className="overflow-hidden border-2 hover:border-red-200 transition-all duration-300 hover:shadow-xl rounded-3xl">
-                <div className="h-48 bg-gradient-to-br from-red-900 to-red-700 relative overflow-hidden">
-                  <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-                    <User className="w-16 h-16 text-white" />
-                  </div>
-                  <div className="absolute top-4 right-4">
-                    <div className="bg-yellow-500 text-black px-3 py-1 rounded-full text-sm font-bold flex items-center gap-1">
-                      <Star className="w-4 h-4" />
-                      FLAGSHIP
+              <article className="course-card">
+                <Card className="overflow-hidden border-2 hover:border-red-200 transition-all duration-300 hover:shadow-xl rounded-3xl h-full">
+                  <header className="h-48 bg-gradient-to-br from-red-900 to-red-700 relative overflow-hidden">
+                    <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                      <User className="w-16 h-16 text-white" aria-hidden="true" />
                     </div>
-                  </div>
-                </div>
-                <CardContent className="p-6">
-                  <h3 className="text-2xl font-bold mb-2">One-on-One Music Production Mentorship</h3>
-                  <p className="text-gray-600 mb-4">Personalised mentorship sessions</p>
-                  <p className="text-sm text-red-600 mb-4">(Master the complete journey of music production)</p>
-                  
-                  <div className="space-y-3 mb-6">
-                    {oneOnOneFeatures.map((feature, index) => (
-                      <div key={index} className="flex items-center gap-2">
-                        <CheckCircle className="w-5 h-5 text-green-600" />
-                        <span className="text-gray-700">{feature}</span>
+                    <div className="absolute top-4 right-4">
+                      <div className="bg-yellow-500 text-black px-3 py-1 rounded-full text-sm font-bold flex items-center gap-1">
+                        <Star className="w-4 h-4" aria-hidden="true" />
+                        FLAGSHIP
                       </div>
-                    ))}
-                  </div>
-                  
-                  <div className="flex items-center gap-2 mb-6">
-                    <Clock className="w-5 h-5 text-red-600" />
-                    <span className="text-sm text-gray-600">Enroll for 1 Year & Get 20% Off!</span>
-                  </div>
-                  
-                  <Button className="w-full bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-black" size="lg">
-                    <Link to="/enrollment" className="w-full">
-                      Enquire Now
-                    </Link>
-                  </Button>
-                </CardContent>
-              </Card>
+                    </div>
+                  </header>
+                  <CardContent className="p-6 flex flex-col h-full">
+                    <h3 className="text-2xl font-bold mb-2">One-on-One Music Production Mentorship</h3>
+                    <p className="text-gray-600 mb-4">Personalised mentorship sessions</p>
+                    <p className="text-sm text-red-600 mb-4">(Master the complete journey of music production)</p>
+                    
+                    <ul className="space-y-3 mb-6 flex-grow" role="list">
+                      {oneOnOneFeatures.map((feature, index) => (
+                        <li key={index} className="flex items-center gap-2">
+                          <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0" aria-hidden="true" />
+                          <span className="text-gray-700">{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    
+                    <div className="flex items-center gap-2 mb-6">
+                      <Clock className="w-5 h-5 text-red-600" aria-hidden="true" />
+                      <span className="text-sm text-gray-600">Enroll for 1 Year & Get 20% Off!</span>
+                    </div>
+                    
+                    <Button className="w-full bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-black" size="lg" asChild>
+                      <Link to="/enrollment">
+                        Enquire Now
+                      </Link>
+                    </Button>
+                  </CardContent>
+                </Card>
+              </article>
             </div>
           </div>
         </section>
-      </div>
+      </main>
       
       <Footer />
     </div>

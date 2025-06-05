@@ -93,7 +93,14 @@ const CoursesSection = () => {
                 <h3 className="text-xl font-bold mb-2 text-gray-900">{course.title}</h3>
                 <p className="text-xs text-red-600 mb-6 font-medium">({course.level})</p>
                 
-                <div className="flex justify-center">
+                <div className="flex flex-col gap-3">
+                  <Button 
+                    variant="outline" 
+                    className="w-full border-2 border-red-200 text-red-600 hover:bg-red-50 hover:border-red-300 text-sm h-10 transition-all duration-300"
+                    onClick={() => handleViewMore(course)}
+                  >
+                    View More
+                  </Button>
                   <Button className="w-full bg-red-600 hover:bg-red-700 text-sm h-10">
                     <Link to="/enrollment" className="w-full">
                       Enquire Now
