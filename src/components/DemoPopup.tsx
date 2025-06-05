@@ -10,13 +10,13 @@ interface DemoPopupProps {
 }
 
 const DemoPopup = ({ isOpen, onClose }: DemoPopupProps) => {
-  const formData = {
+  const [formData, setFormData] = useState({
     fullName: '',
     mobile: '',
     email: '',
     dateOfBirth: '',
-    interests: []
-  };
+    interests: [] as string[]
+  });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
