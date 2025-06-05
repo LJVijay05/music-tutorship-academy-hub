@@ -1,4 +1,3 @@
-
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -56,8 +55,11 @@ const About = () => {
                 </div>
                 
                 <div className="pt-10 animate-fade-in" style={{ animationDelay: '1.2s' }}>
-                  <Button asChild size="lg" className="bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700 text-xl px-16 py-8 shadow-2xl hover:shadow-red-200 transition-all duration-500 hover:scale-105 rounded-2xl">
-                    <Link to="/enrollment">Start Your Journey</Link>
+                  <Button asChild size="lg" className="bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700 text-xl px-16 py-8 shadow-2xl hover:shadow-red-200 transition-all duration-500 hover:animate-button-smooth-hover active:animate-button-press rounded-2xl relative overflow-hidden group">
+                    <Link to="/enrollment">
+                      <span className="absolute inset-0 bg-gradient-to-r from-red-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                      <span className="relative">Start Your Journey</span>
+                    </Link>
                   </Button>
                 </div>
               </div>
@@ -103,103 +105,55 @@ const About = () => {
         </div>
       </section>
 
-      {/* My Works Section - Enhanced */}
-      <section className="py-40 bg-gradient-to-br from-gray-900 via-black to-gray-900 relative overflow-hidden">
+      {/* Completely Redesigned My Works Section */}
+      <section className="py-32 bg-gradient-to-br from-gray-900 via-gray-800 to-black relative overflow-hidden">
         {/* Enhanced Background Effects */}
         <div className="absolute inset-0">
-          <div className="absolute top-20 left-20 w-96 h-96 bg-red-600/10 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute top-20 left-20 w-96 h-96 bg-green-500/10 rounded-full blur-3xl animate-pulse"></div>
           <div className="absolute bottom-20 right-20 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl animate-bounce"></div>
           <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-pink-600/10 rounded-full blur-3xl animate-pulse"></div>
         </div>
         
         <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-7xl mx-auto">
-            {/* Enhanced Header */}
-            <div className="text-center mb-24 animate-fade-in">
-              <h2 className="text-6xl lg:text-8xl font-bold text-white mb-10 leading-tight">
-                My <span className="text-transparent bg-gradient-to-r from-red-400 to-pink-400 bg-clip-text">Works</span>
+            {/* Header */}
+            <div className="text-center mb-20 animate-fade-in">
+              <h2 className="text-6xl lg:text-8xl font-bold text-white mb-8 leading-tight">
+                My <span className="text-transparent bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text">Works</span>
               </h2>
-              <p className="text-2xl lg:text-3xl text-gray-300 max-w-5xl mx-auto leading-relaxed mb-16">
-                Experience the sound that has captivated audiences worldwide. These tracks represent years of dedication, innovation, and artistic excellence in music production.
+              <p className="text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
+                Explore the sound that has captivated millions worldwide
               </p>
-              
-              {/* Enhanced Feature Highlights */}
-              <div className="flex flex-wrap justify-center gap-8 animate-fade-in" style={{ animationDelay: '0.2s' }}>
-                <div className="flex items-center gap-4 bg-white/10 backdrop-blur-sm px-8 py-4 rounded-full border border-white/20 hover:bg-white/20 transition-all duration-300 hover:scale-105">
-                  <Star className="w-6 h-6 text-yellow-400" />
-                  <span className="text-white font-semibold text-lg">Industry Standard</span>
-                </div>
-                <div className="flex items-center gap-4 bg-white/10 backdrop-blur-sm px-8 py-4 rounded-full border border-white/20 hover:bg-white/20 transition-all duration-300 hover:scale-105">
-                  <Award className="w-6 h-6 text-yellow-400" />
-                  <span className="text-white font-semibold text-lg">Award Winning</span>
-                </div>
-                <div className="flex items-center gap-4 bg-white/10 backdrop-blur-sm px-8 py-4 rounded-full border border-white/20 hover:bg-white/20 transition-all duration-300 hover:scale-105">
-                  <Headphones className="w-6 h-6 text-yellow-400" />
-                  <span className="text-white font-semibold text-lg">Million+ Streams</span>
-                </div>
-              </div>
             </div>
             
-            <div className="grid lg:grid-cols-2 gap-24 items-center">
-              {/* Enhanced Left Content */}
-              <div className="space-y-12 animate-fade-in" style={{ animationDelay: '0.4s' }}>
-                <div className="bg-gradient-to-r from-red-600/20 to-pink-600/20 backdrop-blur-sm rounded-3xl p-10 border border-white/10 hover:border-white/20 transition-all duration-500 hover:scale-105 group">
-                  <div className="flex items-center gap-6 mb-8">
-                    <div className="w-20 h-20 bg-gradient-to-r from-red-500 to-pink-500 rounded-3xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                      <Headphones className="w-10 h-10 text-white" />
-                    </div>
-                    <h3 className="text-3xl font-bold text-white">Industry-Standard Productions</h3>
-                  </div>
-                  <p className="text-gray-300 leading-relaxed text-xl">
-                    Each track showcases different aspects of modern music production - from intricate sound design to masterful mixing and mastering techniques that define today's industry standards.
-                  </p>
-                </div>
-                
-                <div className="bg-gradient-to-r from-purple-600/20 to-blue-600/20 backdrop-blur-sm rounded-3xl p-10 border border-white/10 hover:border-white/20 transition-all duration-500 hover:scale-105 group">
-                  <div className="flex items-center gap-6 mb-8">
-                    <div className="w-20 h-20 bg-gradient-to-r from-purple-500 to-blue-500 rounded-3xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                      <Mic className="w-10 h-10 text-white" />
-                    </div>
-                    <h3 className="text-3xl font-bold text-white">Diverse Genre Expertise</h3>
-                  </div>
-                  <p className="text-gray-300 leading-relaxed text-xl">
-                    From electronic dance music to hip-hop, ambient soundscapes to cinematic scores - this portfolio demonstrates versatility and deep understanding across multiple musical genres.
-                  </p>
-                </div>
-                
-                <div className="bg-gradient-to-r from-yellow-600/20 to-orange-600/20 backdrop-blur-sm rounded-3xl p-10 border border-white/10 hover:border-white/20 transition-all duration-500 hover:scale-105 group">
-                  <div className="flex items-center gap-6 mb-8">
-                    <div className="w-20 h-20 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-3xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                      <Play className="w-10 h-10 text-white" />
-                    </div>
-                    <h3 className="text-3xl font-bold text-white">Learn From Real Examples</h3>
-                  </div>
-                  <p className="text-gray-300 leading-relaxed text-xl">
-                    In our mentorship program, we'll break down the production techniques used in these tracks, giving you insider knowledge of professional music creation processes.
-                  </p>
-                </div>
-              </div>
-
-              {/* Enhanced Right Content - Spotify Embed */}
-              <div className="relative animate-fade-in" style={{ animationDelay: '0.6s' }}>
-                <div className="bg-gradient-to-r from-green-500 to-emerald-600 p-3 rounded-3xl shadow-2xl hover:shadow-green-500/20 transition-all duration-500 hover:scale-105">
-                  <div className="bg-white rounded-3xl p-10 shadow-inner">
-                    <div className="flex items-center gap-8 mb-10">
-                      <div className="w-20 h-20 bg-gradient-to-r from-green-500 to-emerald-600 rounded-full flex items-center justify-center shadow-xl">
+            {/* Main Spotify Section - Redesigned for prominence */}
+            <div className="mb-20 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+              <div className="relative max-w-4xl mx-auto">
+                {/* Spotify Container with enhanced styling */}
+                <div className="bg-gradient-to-br from-green-500 via-green-600 to-emerald-600 p-2 rounded-3xl shadow-2xl hover:shadow-green-500/20 transition-all duration-700 hover:scale-[1.02] group">
+                  <div className="bg-gradient-to-br from-white via-gray-50 to-green-50 rounded-3xl p-8 shadow-inner relative overflow-hidden">
+                    {/* Header with Spotify branding */}
+                    <div className="flex items-center justify-center gap-6 mb-8">
+                      <div className="w-20 h-20 bg-gradient-to-r from-green-500 to-emerald-600 rounded-full flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform duration-500">
                         <Music className="w-10 h-10 text-white" />
                       </div>
-                      <div>
-                        <h4 className="text-3xl font-bold text-gray-900">Featured Portfolio</h4>
-                        <p className="text-gray-600 text-xl">Professional Productions & Collaborations</p>
+                      <div className="text-center">
+                        <h3 className="text-4xl font-bold text-gray-900 mb-2">Featured Portfolio</h3>
+                        <p className="text-xl text-gray-600">Professional Productions & Collaborations</p>
+                        <div className="flex items-center justify-center gap-2 mt-2">
+                          <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+                          <span className="text-lg text-green-600 font-semibold">Live on Spotify</span>
+                        </div>
                       </div>
                     </div>
                     
-                    <div className="rounded-2xl overflow-hidden shadow-2xl">
+                    {/* Enhanced Spotify Embed */}
+                    <div className="rounded-2xl overflow-hidden shadow-2xl border-4 border-green-500/20 hover:border-green-500/40 transition-all duration-500">
                       <iframe 
                         style={{borderRadius: '16px'}} 
                         src="https://open.spotify.com/embed/playlist/1Baqr6iqDkXbHUCXXK8ThG?utm_source=generator&theme=0" 
                         width="100%" 
-                        height="400" 
+                        height="500" 
                         frameBorder="0" 
                         allowFullScreen 
                         allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
@@ -207,28 +161,75 @@ const About = () => {
                       </iframe>
                     </div>
                     
-                    <div className="mt-8 text-center">
-                      <p className="text-gray-600 font-medium text-lg">🎵 Listen to tracks that have shaped careers and inspired thousands</p>
+                    {/* Enhanced Stats under Spotify */}
+                    <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+                      <div className="text-center bg-gradient-to-r from-green-500/10 to-emerald-500/10 rounded-xl p-4 border border-green-500/20">
+                        <div className="text-3xl font-bold text-green-600 mb-1">1M+</div>
+                        <div className="text-gray-600 font-medium">Total Streams</div>
+                      </div>
+                      <div className="text-center bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-xl p-4 border border-blue-500/20">
+                        <div className="text-3xl font-bold text-blue-600 mb-1">50+</div>
+                        <div className="text-gray-600 font-medium">Countries Reached</div>
+                      </div>
+                      <div className="text-center bg-gradient-to-r from-yellow-500/10 to-orange-500/10 rounded-xl p-4 border border-yellow-500/20">
+                        <div className="text-3xl font-bold text-yellow-600 mb-1">15+</div>
+                        <div className="text-gray-600 font-medium">Award Winners</div>
+                      </div>
                     </div>
                   </div>
                 </div>
                 
-                {/* Enhanced Decorative Elements */}
-                <div className="absolute -top-10 -right-10 w-40 h-40 bg-gradient-to-r from-red-500 to-pink-500 rounded-full opacity-20 animate-pulse"></div>
-                <div className="absolute -bottom-10 -left-10 w-48 h-48 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full opacity-20 animate-bounce"></div>
-                <div className="absolute top-1/2 -right-16 w-32 h-32 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full opacity-15"></div>
+                {/* Floating decorative elements */}
+                <div className="absolute -top-6 -right-6 w-24 h-24 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full opacity-20 animate-bounce"></div>
+                <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full opacity-20 animate-pulse"></div>
+              </div>
+            </div>
+            
+            {/* Features Grid - Redesigned */}
+            <div className="grid lg:grid-cols-3 gap-8 mb-20">
+              <div className="bg-gradient-to-br from-red-600/20 to-pink-600/20 backdrop-blur-sm rounded-3xl p-8 border border-white/10 hover:border-white/20 transition-all duration-500 hover:scale-105 group animate-fade-in" style={{ animationDelay: '0.4s' }}>
+                <div className="w-16 h-16 bg-gradient-to-r from-red-500 to-pink-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <Headphones className="w-8 h-8 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-4">Industry Standards</h3>
+                <p className="text-gray-300 leading-relaxed">
+                  Each track showcases cutting-edge production techniques that define today's music industry standards.
+                </p>
+              </div>
+              
+              <div className="bg-gradient-to-br from-purple-600/20 to-blue-600/20 backdrop-blur-sm rounded-3xl p-8 border border-white/10 hover:border-white/20 transition-all duration-500 hover:scale-105 group animate-fade-in" style={{ animationDelay: '0.5s' }}>
+                <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-blue-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <Mic className="w-8 h-8 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-4">Genre Mastery</h3>
+                <p className="text-gray-300 leading-relaxed">
+                  From electronic to acoustic, hip-hop to ambient - demonstrating versatility across all genres.
+                </p>
+              </div>
+              
+              <div className="bg-gradient-to-br from-yellow-600/20 to-orange-600/20 backdrop-blur-sm rounded-3xl p-8 border border-white/10 hover:border-white/20 transition-all duration-500 hover:scale-105 group animate-fade-in" style={{ animationDelay: '0.6s' }}>
+                <div className="w-16 h-16 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <Play className="w-8 h-8 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-4">Learn From Examples</h3>
+                <p className="text-gray-300 leading-relaxed">
+                  In our sessions, we'll break down these exact production techniques for your learning.
+                </p>
               </div>
             </div>
             
             {/* Enhanced Call to Action */}
-            <div className="text-center mt-24 animate-fade-in" style={{ animationDelay: '0.8s' }}>
-              <div className="bg-gradient-to-r from-red-600/20 to-pink-600/20 backdrop-blur-sm rounded-3xl p-16 border border-white/10 max-w-5xl mx-auto hover:border-white/20 transition-all duration-500 hover:scale-105">
-                <h3 className="text-4xl font-bold text-white mb-8">Ready to Create Your Own Masterpiece?</h3>
-                <p className="text-2xl text-gray-300 mb-12 leading-relaxed">
-                  Learn the exact techniques and workflows used in these professional productions
+            <div className="text-center animate-fade-in" style={{ animationDelay: '0.8s' }}>
+              <div className="bg-gradient-to-r from-red-600/20 to-pink-600/20 backdrop-blur-sm rounded-3xl p-12 border border-white/10 max-w-4xl mx-auto hover:border-white/20 transition-all duration-500 hover:scale-105">
+                <h3 className="text-4xl font-bold text-white mb-6">Ready to Create Your Own Masterpiece?</h3>
+                <p className="text-xl text-gray-300 mb-10 leading-relaxed">
+                  Learn the exact techniques used in these chart-topping productions
                 </p>
-                <Button asChild size="lg" className="bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700 text-xl px-16 py-8 shadow-2xl hover:shadow-red-200 transition-all duration-500 hover:scale-105 rounded-2xl">
-                  <Link to="/enrollment">Start Learning Today</Link>
+                <Button asChild size="lg" className="bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700 text-xl px-16 py-8 shadow-2xl hover:shadow-red-200 transition-all duration-500 hover:animate-button-smooth-hover active:animate-button-press rounded-2xl relative overflow-hidden group">
+                  <Link to="/enrollment">
+                    <span className="absolute inset-0 bg-gradient-to-r from-red-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                    <span className="relative">Start Learning Today</span>
+                  </Link>
                 </Button>
               </div>
             </div>

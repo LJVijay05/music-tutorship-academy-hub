@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -286,6 +285,37 @@ export default {
 					'100%': {
 						backgroundPosition: '200% center'
 					}
+				},
+				'button-smooth-hover': {
+					'0%': {
+						transform: 'scale(1) translateY(0)',
+						boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
+					},
+					'100%': {
+						transform: 'scale(1.05) translateY(-2px)',
+						boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)'
+					}
+				},
+				'button-press': {
+					'0%': {
+						transform: 'scale(1.05)'
+					},
+					'50%': {
+						transform: 'scale(0.95)'
+					},
+					'100%': {
+						transform: 'scale(1)'
+					}
+				},
+				'ripple': {
+					'0%': {
+						transform: 'scale(0)',
+						opacity: '1'
+					},
+					'100%': {
+						transform: 'scale(4)',
+						opacity: '0'
+					}
 				}
 			},
 			animation: {
@@ -310,7 +340,10 @@ export default {
 				'zoom-in-up': 'zoom-in-up 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards',
 				'slide-in-bottom': 'slide-in-bottom 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards',
 				'stagger-fade': 'stagger-fade 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards',
-				'text-shimmer': 'text-shimmer 2s linear infinite'
+				'text-shimmer': 'text-shimmer 2s linear infinite',
+				'button-smooth-hover': 'button-smooth-hover 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards',
+				'button-press': 'button-press 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+				'ripple': 'ripple 0.6s ease-out'
 			}
 		}
 	},
