@@ -21,99 +21,95 @@ const Navigation = () => {
 
   const navItems = [
     { path: "/", label: "Home" },
-    { path: "/about", label: "About Me" },
-    { path: "/courses", label: "Courses" },
-    { path: "/blog", label: "Blog" },
-    { path: "/contact", label: "Contact Us" }
+    { path: "/about", label: "About" },
+    { path: "/courses", label: "Programs" },
+    { path: "/contact", label: "Contact" }
   ];
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
       isScrolled 
-        ? 'bg-white/95 backdrop-blur-lg shadow-lg border-b border-gray-100' 
-        : 'bg-white/90 backdrop-blur-sm'
+        ? 'bg-white/80 backdrop-blur-xl shadow-lg' 
+        : 'bg-white/60 backdrop-blur-sm'
     }`}>
-      <div className="container mx-auto px-4 lg:px-6">
-        <div className="flex items-center justify-between h-16">
+      <div className="container mx-auto px-6">
+        <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 font-bold text-lg group transition-all duration-300 hover:scale-105">
-            <div className="w-8 h-8 bg-gradient-to-r from-red-600 to-pink-600 rounded-lg flex items-center justify-center shadow-md group-hover:shadow-red-200 transition-all duration-300 group-hover:rotate-3">
-              <Music className="w-4 h-4 text-white" />
+          <Link to="/" className="flex items-center gap-3 group">
+            <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-all duration-300">
+              <Music className="w-5 h-5 text-white" />
             </div>
-            <span className="text-gray-900 tracking-tight text-base font-semibold">
-              Music <span className="text-transparent bg-gradient-to-r from-red-600 to-pink-600 bg-clip-text">Tutorship</span>
+            <span className="text-xl font-light text-gray-900">
+              Music <span className="font-medium">Academy</span>
             </span>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-1">
-            {navItems.map((item, index) => (
+          <div className="hidden md:flex items-center space-x-8">
+            {navItems.map((item) => (
               <Link
                 key={item.path}
                 to={item.path}
-                className={`relative px-3 py-2 font-medium text-sm transition-all duration-300 rounded-lg hover:bg-gray-50 group ${
-                  isActive(item.path) ? "text-red-600" : "text-gray-700 hover:text-red-600"
+                className={`relative font-light text-base transition-all duration-300 hover:text-blue-600 ${
+                  isActive(item.path) ? "text-blue-600" : "text-gray-700"
                 }`}
-                style={{ animationDelay: `${index * 0.1}s` }}
               >
                 {item.label}
-                <span className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-red-600 to-pink-600 transition-all duration-300 ${
-                  isActive(item.path) ? 'w-6' : 'group-hover:w-6'
+                <span className={`absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 ${
+                  isActive(item.path) ? 'w-full' : 'hover:w-full'
                 }`}></span>
               </Link>
             ))}
           </div>
 
-          {/* Register Button */}
+          {/* CTA Button */}
           <div className="hidden md:block">
             <Button 
               asChild 
-              className="bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700 text-white px-6 py-2 text-sm font-medium shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 rounded-lg"
+              className="bg-black text-white hover:bg-gray-800 px-6 py-2 rounded-full font-medium transition-all duration-300 hover:scale-105"
             >
-              <Link to="/enrollment">Register Now</Link>
+              <Link to="/enrollment">Get Started</Link>
             </Button>
           </div>
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden p-2 rounded-lg bg-gray-50 hover:bg-gray-100 transition-all duration-300"
+            className="md:hidden p-2 rounded-xl hover:bg-gray-100 transition-colors duration-200"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
-            <div className="relative w-5 h-5">
-              <Menu className={`w-5 h-5 transition-all duration-300 ${isMenuOpen ? 'opacity-0 rotate-180' : 'opacity-100'}`} />
-              <X className={`w-5 h-5 absolute top-0 left-0 transition-all duration-300 ${isMenuOpen ? 'opacity-100' : 'opacity-0 rotate-180'}`} />
-            </div>
+            {isMenuOpen ? (
+              <X className="w-6 h-6 text-gray-700" />
+            ) : (
+              <Menu className="w-6 h-6 text-gray-700" />
+            )}
           </button>
         </div>
 
         {/* Mobile Navigation */}
-        <div className={`md:hidden overflow-hidden transition-all duration-500 ${
-          isMenuOpen ? 'max-h-80 opacity-100' : 'max-h-0 opacity-0'
+        <div className={`md:hidden overflow-hidden transition-all duration-300 ${
+          isMenuOpen ? 'max-h-80 opacity-100 pb-6' : 'max-h-0 opacity-0'
         }`}>
-          <div className="py-4 space-y-1 border-t border-gray-100">
-            {navItems.map((item, index) => (
+          <div className="space-y-4 pt-4 border-t border-gray-200">
+            {navItems.map((item) => (
               <Link
                 key={item.path}
                 to={item.path}
-                className={`block px-4 py-3 font-medium text-sm transition-all duration-300 rounded-lg hover:bg-red-50 hover:text-red-600 ${
-                  isActive(item.path) ? "text-red-600 bg-red-50" : "text-gray-700"
+                className={`block py-3 font-light text-lg transition-colors duration-200 ${
+                  isActive(item.path) ? "text-blue-600" : "text-gray-700 hover:text-blue-600"
                 }`}
                 onClick={() => setIsMenuOpen(false)}
-                style={{ animationDelay: `${index * 0.1}s` }}
               >
                 {item.label}
               </Link>
             ))}
-            <div className="px-4 pt-3">
-              <Button 
-                asChild 
-                className="w-full bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700 text-sm py-3 rounded-lg shadow-md"
-              >
-                <Link to="/enrollment" onClick={() => setIsMenuOpen(false)}>
-                  Register Now
-                </Link>
-              </Button>
-            </div>
+            <Button 
+              asChild 
+              className="w-full mt-4 bg-black text-white hover:bg-gray-800 py-3 rounded-full"
+            >
+              <Link to="/enrollment" onClick={() => setIsMenuOpen(false)}>
+                Get Started
+              </Link>
+            </Button>
           </div>
         </div>
       </div>
