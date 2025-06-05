@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Users, User, Star, Crown } from "lucide-react";
@@ -8,7 +9,6 @@ const CoursesSection = () => {
     {
       id: "production-course",
       title: "Complete Music Production Course",
-      subtitle: "Complete Music Production Live Course",
       level: "From Beginner to Advanced Level",
       image: "bg-gradient-to-br from-gray-900 to-gray-700",
       icon: Users,
@@ -78,28 +78,16 @@ const CoursesSection = () => {
               
               <CardContent className="p-6">
                 <h3 className="text-xl font-bold mb-2 text-gray-900">{course.title}</h3>
-                <p className="text-gray-600 mb-1 font-medium text-sm">{course.subtitle}</p>
+                {course.subtitle && (
+                  <p className="text-gray-600 mb-1 font-medium text-sm">{course.subtitle}</p>
+                )}
                 <p className="text-xs text-red-600 mb-6 font-medium">({course.level})</p>
                 
-                <div className="space-y-2">
-                  <Button 
-                    className={`w-full h-10 text-sm font-medium ${
-                      course.premium 
-                        ? 'bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-black shadow-md'
-                        : 'bg-gradient-to-r from-red-600 to-red-500 hover:from-red-700 hover:to-red-600 shadow-md'
-                    }`} 
-                    size="lg"
-                  >
-                    <Link to="/enrollment" className="w-full">
-                      Enroll Now
-                    </Link>
-                  </Button>
-                  <Button variant="outline" className="w-full border-2 hover:bg-gray-50 text-sm h-10" size="lg">
-                    <Link to="/courses" className="w-full">
-                      Know More
-                    </Link>
-                  </Button>
-                </div>
+                <Button variant="outline" className="w-full border-2 hover:bg-gray-50 text-sm h-10" size="lg">
+                  <Link to="/courses" className="w-full">
+                    Know More
+                  </Link>
+                </Button>
               </CardContent>
             </Card>
           ))}

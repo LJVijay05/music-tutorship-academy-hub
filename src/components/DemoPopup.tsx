@@ -44,20 +44,14 @@ const DemoPopup = ({ isOpen, onClose }: DemoPopupProps) => {
 
   const courseOptions = [
     {
-      id: "complete-music-theory",
-      title: "Complete music theory live course",
-      icon: Users,
-      description: "Master music theory fundamentals"
-    },
-    {
-      id: "music-production-course", 
+      id: "complete-music-production-course", 
       title: "Complete Music Production Course",
       icon: Users,
       description: "From beginner to advanced level"
     },
     {
       id: "one-on-one-mentorship",
-      title: "One-on-one music production mentorship",
+      title: "One-on-One Music Production Mentorship",
       icon: User,
       description: "Personalized guidance & feedback"
     }
