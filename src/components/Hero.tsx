@@ -47,7 +47,7 @@ const Hero = () => {
               className="bg-red-600 hover:bg-red-700 text-white px-8 py-4 text-lg font-semibold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
             >
               <Play className="mr-2 h-5 w-5" />
-              Free Demo
+              Book Your Free Demo
             </Button>
             <Button 
               variant="outline" 
