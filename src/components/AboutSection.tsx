@@ -1,16 +1,9 @@
 
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { Award, Users, Music, Star } from "lucide-react";
+import { Music } from "lucide-react";
 
 const AboutSection = () => {
-  const stats = [
-    { icon: Users, number: "500+", label: "Students Taught" },
-    { icon: Star, number: "10+", label: "Years Experience" },
-    { icon: Music, number: "200+", label: "Tracks Produced" },
-    { icon: Award, number: "50+", label: "Industry Awards" }
-  ];
-
   return (
     <section className="py-20 bg-white">
       <div className="container mx-auto px-4 lg:px-6">
@@ -24,7 +17,7 @@ const AboutSection = () => {
           </div>
 
           {/* Content Grid */}
-          <div className="grid lg:grid-cols-2 gap-16 items-start mb-20">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
             {/* Left Content */}
             <div className="space-y-8">
               <div className="space-y-6">
@@ -63,7 +56,7 @@ const AboutSection = () => {
                   {/* Achievement Badges */}
                   <div className="grid grid-cols-2 gap-4">
                     <div className="bg-white rounded-xl p-4 shadow-md border border-gray-100">
-                      <div className="text-2xl font-bold text-red-600">500+</div>
+                      <div className="text-2xl font-bold text-red-600">320+</div>
                       <div className="text-sm text-gray-600">Students</div>
                     </div>
                     <div className="bg-white rounded-xl p-4 shadow-md border border-gray-100">
@@ -81,19 +74,6 @@ const AboutSection = () => {
               <div className="absolute -bottom-4 -left-4 w-8 h-8 bg-red-500 rounded-full opacity-60"></div>
               <div className="absolute top-8 -left-2 w-4 h-4 bg-pink-500 rounded-full opacity-40"></div>
             </div>
-          </div>
-
-          {/* Stats Section */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {stats.map((stat, index) => (
-              <div key={index} className="text-center group hover:scale-105 transition-transform duration-300">
-                <div className="w-16 h-16 bg-gradient-to-r from-red-600 to-pink-600 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:shadow-xl transition-shadow duration-300">
-                  <stat.icon className="w-8 h-8 text-white" />
-                </div>
-                <div className="text-3xl font-bold text-gray-900 mb-2">{stat.number}</div>
-                <div className="text-gray-600 font-medium">{stat.label}</div>
-              </div>
-            ))}
           </div>
         </div>
       </div>
