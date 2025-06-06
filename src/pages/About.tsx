@@ -48,7 +48,7 @@ const AnimatedCounter = ({ target, suffix = "", duration = 2000 }: { target: num
 const About = () => {
   const achievements = [
     { number: 320, suffix: "+", label: "Students Mentored", icon: Users },
-    { number: 131, suffix: "", label: "Countries Reached", icon: Star },
+    { number: 131, suffix: "+", label: "Countries Reached", icon: Star },
     { number: 60, suffix: "M+", label: "Total Streams", icon: Music },
     { number: 30, suffix: "+", label: "Awards Won", icon: Award }
   ];
