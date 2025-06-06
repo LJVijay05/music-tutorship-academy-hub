@@ -85,17 +85,19 @@ const Hero = () => {
             <Button 
               onClick={() => setIsDemoPopupOpen(true)}
               size="lg" 
-              className="group bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white px-8 py-4 text-lg font-semibold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-500 animate-button-pulse border-2 border-red-500/20"
+              className="group bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white px-8 py-4 text-lg font-semibold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:animate-button-hover-lift active:animate-button-press-scale border-2 border-red-500/20 relative overflow-hidden"
             >
-              <Play className="mr-2 h-5 w-5 group-hover:animate-spin-slow transition-transform duration-300" />
-              Book Your Free Demo
+              <Play className="mr-2 h-5 w-5 group-hover:animate-spin-slow transition-transform duration-300 relative z-10" />
+              <span className="relative z-10 group-hover:animate-button-wiggle">Book Your Free Demo</span>
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
             </Button>
             <Button 
               variant="outline" 
               size="lg" 
-              className="group border-2 border-gray-300 text-gray-700 hover:border-red-600 hover:text-red-600 px-8 py-4 text-lg font-semibold rounded-xl transition-all duration-500 hover:animate-button-bounce hover:shadow-xl backdrop-blur-sm bg-white/80"
+              className="group border-2 border-gray-300 text-gray-700 hover:border-red-600 hover:text-red-600 px-8 py-4 text-lg font-semibold rounded-xl transition-all duration-500 hover:animate-button-hover-lift active:animate-button-press-scale hover:shadow-xl backdrop-blur-sm bg-white/80 relative overflow-hidden"
             >
-              <span className="group-hover:animate-wave">View Courses</span>
+              <span className="group-hover:animate-button-wiggle relative z-10">View Courses</span>
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-red-50/50 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
             </Button>
           </div>
           
