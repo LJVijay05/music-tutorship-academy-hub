@@ -71,7 +71,7 @@ const AnimatedCounter = ({
   return (
     <div 
       ref={elementRef}
-      className="text-3xl md:text-4xl font-bold text-gray-900 mb-2"
+      className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-red-600 via-red-500 to-amber-500 bg-clip-text text-transparent mb-2"
     >
       {count}{suffix}
     </div>
