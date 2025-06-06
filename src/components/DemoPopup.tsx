@@ -2,7 +2,10 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
-import { X, Calendar, Users, User } from "lucide-react";
+import { Calendar } from "@/components/ui/calendar";
+import { X, Calendar as CalendarIcon, Users, User, Clock } from "lucide-react";
+import { format } from "date-fns";
+import { cn } from "@/lib/utils";
 
 interface DemoPopupProps {
   isOpen: boolean;
@@ -14,15 +17,38 @@ const DemoPopup = ({ isOpen, onClose }: DemoPopupProps) => {
     fullName: '',
     mobile: '',
     email: '',
-    dateOfBirth: '',
+    selectedDate: undefined as Date | undefined,
+    selectedTime: '',
     interests: [] as string[]
   });
+
+  // Available time slots
+  const timeSlots = [
+    "09:00 AM", "10:00 AM", "11:00 AM", "12:00 PM",
+    "02:00 PM", "03:00 PM", "04:00 PM", "05:00 PM",
+    "06:00 PM", "07:00 PM", "08:00 PM"
+  ];
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
       [name]: value
+    }));
+  };
+
+  const handleDateSelect = (date: Date | undefined) => {
+    setFormData(prev => ({
+      ...prev,
+      selectedDate: date,
+      selectedTime: '' // Reset time when date changes
+    }));
+  };
+
+  const handleTimeSelect = (time: string) => {
+    setFormData(prev => ({
+      ...prev,
+      selectedTime: time
     }));
   };
 
@@ -38,7 +64,6 @@ const DemoPopup = ({ isOpen, onClose }: DemoPopupProps) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log('Form submitted:', formData);
-    // Handle form submission logic here
     onClose();
   };
 
@@ -57,98 +82,144 @@ const DemoPopup = ({ isOpen, onClose }: DemoPopupProps) => {
     }
   ];
 
+  // Disable past dates
+  const disabledDays = (date: Date) => {
+    return date < new Date();
+  };
+
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-lg mx-auto bg-white rounded-3xl p-0 border-0 shadow-2xl">
-        <div className="relative p-8 pt-12">
+      <DialogContent className="max-w-2xl mx-auto bg-white rounded-2xl p-0 border-0 shadow-2xl max-h-[90vh] overflow-y-auto">
+        <div className="relative p-6">
           <button
             onClick={onClose}
-            className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors z-20 bg-white rounded-full p-2 shadow-sm hover:shadow-md"
+            className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors z-20 bg-white rounded-full p-1.5 shadow-sm hover:shadow-md"
           >
-            <X className="w-5 h-5" />
+            <X className="w-4 h-4" />
           </button>
           
           {/* Header */}
-          <div className="text-center mb-8 pr-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">Book Your Free Demo</h2>
-            <p className="text-gray-600">Get personalized guidance and start your musical journey</p>
+          <div className="text-center mb-6">
+            <h2 className="text-xl font-bold text-gray-900 mb-1">Book Your Free Demo</h2>
+            <p className="text-sm text-gray-600">Get personalized guidance and start your musical journey</p>
           </div>
           
-          <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Full Name */}
-            <div>
-              <label className="block text-gray-900 font-semibold mb-3 text-sm">Full Name</label>
-              <input
-                type="text"
-                name="fullName"
-                placeholder="eg: John Doe"
-                value={formData.fullName}
-                onChange={handleInputChange}
-                className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent text-gray-900 placeholder-gray-400"
-                required
-              />
-            </div>
+          <form onSubmit={handleSubmit} className="space-y-5">
+            {/* Basic Info Row */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-gray-900 font-medium mb-2 text-sm">Full Name</label>
+                <input
+                  type="text"
+                  name="fullName"
+                  placeholder="John Doe"
+                  value={formData.fullName}
+                  onChange={handleInputChange}
+                  className="w-full px-3 py-2.5 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent text-sm"
+                  required
+                />
+              </div>
 
-            {/* Mobile Number */}
-            <div>
-              <label className="block text-gray-900 font-semibold mb-3 text-sm">Mobile number</label>
-              <input
-                type="tel"
-                name="mobile"
-                placeholder="9876543210"
-                value={formData.mobile}
-                onChange={handleInputChange}
-                className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent text-gray-900 placeholder-gray-400"
-                required
-              />
+              <div>
+                <label className="block text-gray-900 font-medium mb-2 text-sm">Mobile number</label>
+                <input
+                  type="tel"
+                  name="mobile"
+                  placeholder="9876543210"
+                  value={formData.mobile}
+                  onChange={handleInputChange}
+                  className="w-full px-3 py-2.5 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent text-sm"
+                  required
+                />
+              </div>
             </div>
 
             {/* Email */}
             <div>
-              <label className="block text-gray-900 font-semibold mb-3 text-sm">Email</label>
+              <label className="block text-gray-900 font-medium mb-2 text-sm">Email</label>
               <input
                 type="email"
                 name="email"
-                placeholder="eg: john@email.com"
+                placeholder="john@email.com"
                 value={formData.email}
                 onChange={handleInputChange}
-                className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent text-gray-900 placeholder-gray-400"
+                className="w-full px-3 py-2.5 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent text-sm"
                 required
               />
             </div>
 
-            {/* Date of Birth */}
-            <div>
-              <label className="block text-gray-900 font-semibold mb-3 text-sm">Date of Birth</label>
-              <div className="relative">
-                <input
-                  type="text"
-                  name="dateOfBirth"
-                  placeholder="dd/mm/yyyy"
-                  value={formData.dateOfBirth}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-3 pr-12 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent text-gray-900 placeholder-gray-400"
-                  required
-                />
-                <Calendar className="absolute right-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none" />
+            {/* Date and Time Selection */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+              {/* Calendar */}
+              <div>
+                <label className="block text-gray-900 font-medium mb-2 text-sm flex items-center gap-2">
+                  <CalendarIcon className="w-4 h-4" />
+                  Select Date
+                </label>
+                <div className="border border-gray-200 rounded-lg p-2">
+                  <Calendar
+                    mode="single"
+                    selected={formData.selectedDate}
+                    onSelect={handleDateSelect}
+                    disabled={disabledDays}
+                    className={cn("p-0 pointer-events-auto")}
+                    classNames={{
+                      day_selected: "bg-red-600 text-white hover:bg-red-600 hover:text-white focus:bg-red-600 focus:text-white",
+                      day_today: "bg-red-50 text-red-600 font-medium"
+                    }}
+                  />
+                </div>
+              </div>
+
+              {/* Time Slots */}
+              <div>
+                <label className="block text-gray-900 font-medium mb-2 text-sm flex items-center gap-2">
+                  <Clock className="w-4 h-4" />
+                  Available Time Slots
+                </label>
+                <div className="border border-gray-200 rounded-lg p-3 h-[280px] overflow-y-auto">
+                  {formData.selectedDate ? (
+                    <div className="grid grid-cols-2 gap-2">
+                      {timeSlots.map((time) => (
+                        <button
+                          key={time}
+                          type="button"
+                          onClick={() => handleTimeSelect(time)}
+                          className={cn(
+                            "p-2 rounded-md text-sm font-medium transition-all duration-200",
+                            formData.selectedTime === time
+                              ? "bg-red-600 text-white shadow-md"
+                              : "bg-gray-50 text-gray-700 hover:bg-red-50 hover:text-red-600 border border-gray-200"
+                          )}
+                        >
+                          {time}
+                        </button>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="flex items-center justify-center h-full text-gray-400 text-sm">
+                      Please select a date first
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
 
             {/* Course Interests */}
             <div>
-              <label className="block text-gray-900 font-semibold mb-4 text-sm">Are you interested in?</label>
-              <div className="space-y-3">
+              <label className="block text-gray-900 font-medium mb-3 text-sm">Are you interested in?</label>
+              <div className="space-y-2">
                 {courseOptions.map((course) => (
                   <label key={course.id} className="flex items-start cursor-pointer group">
                     <input
                       type="checkbox"
                       checked={formData.interests.includes(course.title)}
                       onChange={() => handleInterestChange(course.title)}
-                      className="w-5 h-5 text-red-600 border-2 border-gray-300 rounded-md focus:ring-red-500 mt-0.5 flex-shrink-0"
+                      className="w-4 h-4 text-red-600 border-2 border-gray-300 rounded focus:ring-red-500 mt-0.5 flex-shrink-0"
                     />
-                    <div className="ml-4 flex-1">
-                      <div className="flex items-center gap-2 mb-1">
-                        <course.icon className="w-4 h-4 text-red-600" />
+                    <div className="ml-3 flex-1">
+                      <div className="flex items-center gap-2 mb-0.5">
+                        <course.icon className="w-3.5 h-3.5 text-red-600" />
                         <span className="text-gray-900 font-medium text-sm group-hover:text-red-600 transition-colors">
                           {course.title}
                         </span>
@@ -163,9 +234,13 @@ const DemoPopup = ({ isOpen, onClose }: DemoPopupProps) => {
             {/* Submit Button */}
             <Button
               type="submit"
-              className="w-full bg-red-600 hover:bg-red-700 text-white py-4 rounded-xl font-semibold text-lg transition-all duration-300 hover:scale-[1.02] shadow-lg hover:shadow-xl mt-8"
+              disabled={!formData.selectedDate || !formData.selectedTime}
+              className="w-full bg-red-600 hover:bg-red-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white py-3 rounded-lg font-medium text-sm transition-all duration-300 hover:scale-[1.02] shadow-lg hover:shadow-xl mt-6"
             >
-              Submit
+              {formData.selectedDate && formData.selectedTime 
+                ? `Book Demo for ${format(formData.selectedDate, "MMM d")} at ${formData.selectedTime}`
+                : "Select Date & Time to Continue"
+              }
             </Button>
           </form>
         </div>
