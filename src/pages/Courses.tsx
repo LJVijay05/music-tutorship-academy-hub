@@ -48,14 +48,14 @@ const Courses = () => {
 
   const getCourseTitle = (courseId: string) => {
     return courseId === "production-course" 
-      ? "Complete Music Production Course"
+      ? "Complete Music Production Mastery Course"
       : "One-on-One Music Production Mentorship";
   };
 
   const courses = [
     {
       courseId: "production-course",
-      title: "Complete Music Production Course",
+      title: "Complete Music Production Mastery Course",
       description: "Group Learning",
       level: "From Beginner to Advanced Level",
       icon: Users,

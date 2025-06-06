@@ -8,7 +8,7 @@ const CoursesSection = () => {
   const courses = [
     {
       id: "production-course",
-      title: "Complete Music Production Course",
+      title: "Complete Music Production Mastery Course",
       level: "From Beginner to Advanced Level",
       image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=800&h=400&fit=crop",
       icon: Users,
