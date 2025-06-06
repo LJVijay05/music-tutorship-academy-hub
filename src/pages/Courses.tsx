@@ -1,20 +1,13 @@
 
-import { useState } from "react";
 import { Users, User } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import CourseDetailsModal from "@/components/CourseDetailsModal";
 import CoursesHero from "@/components/CoursesHero";
 import CourseCard from "@/components/CourseCard";
 import TrustIndicators from "@/components/TrustIndicators";
 
 const Courses = () => {
-  const [selectedCourse, setSelectedCourse] = useState<string | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
   console.log('Courses component rendered');
-  console.log('Selected course:', selectedCourse);
-  console.log('Modal open:', isModalOpen);
 
   const batchFeatures = [
     "15 students per batch",
@@ -34,22 +27,9 @@ const Courses = () => {
     "Lifetime support access"
   ];
 
+  // Placeholder function since we're now using direct routing
   const handleDetailsClick = (courseId: string) => {
-    console.log('handleDetailsClick called with courseId:', courseId);
-    setSelectedCourse(courseId);
-    setIsModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    console.log('Closing modal');
-    setIsModalOpen(false);
-    setSelectedCourse(null);
-  };
-
-  const getCourseTitle = (courseId: string) => {
-    return courseId === "production-course" 
-      ? "Complete Music Production Mastery Course"
-      : "One-on-One Music Production Mentorship";
+    console.log('Details click handled via routing for course:', courseId);
   };
 
   const courses = [
@@ -154,15 +134,6 @@ const Courses = () => {
       </main>
       
       <Footer />
-      
-      {selectedCourse && (
-        <CourseDetailsModal
-          isOpen={isModalOpen}
-          onClose={handleCloseModal}
-          courseId={selectedCourse}
-          courseTitle={getCourseTitle(selectedCourse)}
-        />
-      )}
     </div>
   );
 };

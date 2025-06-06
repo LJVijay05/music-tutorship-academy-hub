@@ -49,11 +49,6 @@ const CourseCard = ({
   offerSubtext,
   onDetailsClick
 }: CourseCardProps) => {
-  
-  const handleDetailsClick = () => {
-    console.log('Details button clicked for course:', courseId);
-    onDetailsClick(courseId);
-  };
 
   return (
     <article className="group">
@@ -122,10 +117,12 @@ const CourseCard = ({
             <Button 
               variant="outline" 
               className="flex-1 border-2 border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400 transition-all duration-300 h-10 md:h-12 rounded-lg md:rounded-xl font-semibold group relative overflow-hidden hover:shadow-md text-sm md:text-base"
-              onClick={handleDetailsClick}
+              asChild
             >
-              <Info className="w-4 md:w-5 h-4 md:h-5 mr-1 md:mr-2 transition-all duration-300 group-hover:scale-110" />
-              <span className="relative z-10">View Details</span>
+              <Link to={`/courses/${courseId}`}>
+                <Info className="w-4 md:w-5 h-4 md:h-5 mr-1 md:mr-2 transition-all duration-300 group-hover:scale-110" />
+                <span className="relative z-10">View Details</span>
+              </Link>
             </Button>
             <Button 
               className={`flex-1 bg-gradient-to-r ${buttonGradientFrom} ${buttonGradientTo} hover:from-red-700 hover:to-pink-700 text-white group relative overflow-hidden h-10 md:h-12 rounded-lg md:rounded-xl font-semibold transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 text-sm md:text-base ${isPremium ? 'animate-professional-golden-glow' : 'animate-professional-gradient'}`}
