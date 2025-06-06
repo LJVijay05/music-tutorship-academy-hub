@@ -3,8 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { CheckCircle, Users, User, Clock, Star, Info } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useState } from "react";
 import StudentDataForm from "./StudentDataForm";
+import { useStudentForm } from "@/hooks/useStudentForm";
 
 interface CourseCardProps {
   courseId: string;
@@ -51,11 +51,7 @@ const CourseCard = ({
   offerSubtext,
   onDetailsClick
 }: CourseCardProps) => {
-  const [showStudentForm, setShowStudentForm] = useState(false);
-
-  const handleEnquireClick = () => {
-    setShowStudentForm(true);
-  };
+  const { showStudentForm, openForm, closeForm } = useStudentForm();
 
   return (
     <>
@@ -133,7 +129,7 @@ const CourseCard = ({
                 </Link>
               </Button>
               <Button 
-                onClick={handleEnquireClick}
+                onClick={openForm}
                 className={`flex-1 bg-gradient-to-r ${buttonGradientFrom} ${buttonGradientTo} hover:from-red-700 hover:to-pink-700 text-white group relative overflow-hidden h-10 md:h-12 rounded-lg md:rounded-xl font-semibold transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 text-sm md:text-base ${isPremium ? 'animate-professional-golden-glow' : 'animate-professional-gradient'}`}
               >
                 <span className="relative z-10 group-hover:font-bold transition-all duration-300">Enquire Now</span>
@@ -146,7 +142,7 @@ const CourseCard = ({
 
       <StudentDataForm 
         open={showStudentForm} 
-        onOpenChange={setShowStudentForm} 
+        onOpenChange={closeForm} 
       />
     </>
   );
