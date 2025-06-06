@@ -13,23 +13,23 @@ const CourseSyllabus = () => {
     "production-course": {
       title: "Complete Music Production Mastery Course",
       subtitle: "From Beginner to Advanced Level",
-      duration: "12 Weeks",
+      duration: "12 Months",
       batchSize: "15 Students",
       sessions: "Live Weekly Sessions",
-      overview: "Master the complete journey of music production with our comprehensive 12-week program. Learn industry-standard techniques, software mastery, and professional workflow from experienced mentors.",
+      overview: "Master the complete journey of music production with our comprehensive 12-month program. Learn industry-standard techniques, software mastery, and professional workflow from experienced mentors.",
       modules: [
         {
-          week: "Week 1-2",
+          week: "Month 1-2",
           title: "Foundation & Software Setup",
           topics: [
             "Introduction to Music Production",
-            "DAW Installation & Configuration (FL Studio/Ableton Live)",
+            "DAW Installation & Configuration (Logic Pro X/Ableton Live)",
             "Understanding Audio Basics",
             "Interface Navigation & Workflow Setup"
           ]
         },
         {
-          week: "Week 3-4",
+          week: "Month 3-4",
           title: "Beat Making & Rhythm Programming",
           topics: [
             "Drum Programming Fundamentals",
@@ -39,7 +39,7 @@ const CourseSyllabus = () => {
           ]
         },
         {
-          week: "Week 5-6",
+          week: "Month 5-6",
           title: "Melody & Harmony Creation",
           topics: [
             "Music Theory Basics",
@@ -49,7 +49,7 @@ const CourseSyllabus = () => {
           ]
         },
         {
-          week: "Week 7-8",
+          week: "Month 7-8",
           title: "Sound Design & Synthesis",
           topics: [
             "Synthesizer Fundamentals",
@@ -59,7 +59,7 @@ const CourseSyllabus = () => {
           ]
         },
         {
-          week: "Week 9-10",
+          week: "Month 9-10",
           title: "Mixing & Audio Engineering",
           topics: [
             "EQ & Compression Techniques",
@@ -69,7 +69,7 @@ const CourseSyllabus = () => {
           ]
         },
         {
-          week: "Week 11-12",
+          week: "Month 11-12",
           title: "Mastering & Final Production",
           topics: [
             "Mastering Chain Setup",
@@ -81,13 +81,12 @@ const CourseSyllabus = () => {
       ],
       features: [
         "15 students per batch for personalized attention",
-        "12 weeks of intensive hands-on training",
-        "Live weekly sessions with industry professionals",
+        "12 months of intensive hands-on training",
+        "Live weekly sessions with updated insights and guidances",
         "Group collaboration projects",
-        "Industry-standard software training (FL Studio/Ableton Live)",
+        "Industry-standard software training (Logic Pro X/Ableton Live)",
         "Certificate upon successful completion",
-        "Lifetime access to course materials",
-        "Direct mentor support during course period"
+        "Lifetime access to course materials and our exclusive discord server"
       ]
     },
     "mentorship-90": {
