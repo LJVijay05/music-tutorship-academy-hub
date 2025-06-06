@@ -117,24 +117,27 @@ const CourseCard = ({
             </div>
           </div>
           
-          {/* Action Buttons with new animations */}
+          {/* Enhanced Action Buttons with New Course-Specific Animations */}
           <div className="flex flex-col sm:flex-row gap-4 mt-6">
             <Button 
               variant="outline" 
-              className="flex-1 border-2 border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400 transition-all duration-300 ease-in-out hover:animate-button-hover-lift active:animate-button-press-scale h-12 rounded-xl font-semibold group relative overflow-hidden"
+              className="flex-1 border-2 border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400 transition-all duration-300 ease-in-out hover:animate-details-button-hover h-12 rounded-xl font-semibold group relative overflow-hidden transform-gpu"
               onClick={handleDetailsClick}
             >
-              <Info className="w-5 h-5 mr-2 transition-transform duration-300 group-hover:rotate-12" />
-              <span className="relative z-10">View Details</span>
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-100/50 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+              <Info className="w-5 h-5 mr-2 transition-transform duration-300 group-hover:rotate-12 group-hover:scale-110" />
+              <span className="relative z-10 group-hover:font-bold transition-all duration-300">View Details</span>
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-100/80 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-500"></div>
             </Button>
             <Button 
-              className={`flex-1 bg-gradient-to-r ${buttonGradientFrom} ${buttonGradientTo} hover:from-red-700 hover:to-red-800 shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out hover:animate-button-hover-lift active:animate-button-press-scale animate-enquire-glow hover:animate-none h-12 rounded-xl font-semibold text-white group relative overflow-hidden ${isPremium ? 'animate-golden-enquire-glow' : ''}`}
+              className={`flex-1 bg-gradient-to-r ${buttonGradientFrom} ${buttonGradientTo} hover:from-red-700 hover:to-red-800 shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out hover:animate-course-button-lift active:animate-course-button-pulse-scale h-12 rounded-xl font-semibold text-white group relative overflow-hidden transform-gpu ${isPremium ? 'animate-course-button-golden-glow' : 'animate-course-button-glow'}`}
               asChild
             >
               <Link to="/enrollment" className="flex items-center justify-center">
-                <span className="relative z-10 group-hover:animate-button-wiggle">Enquire Now</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+                <span className="relative z-10 group-hover:font-bold transition-all duration-300 group-hover:tracking-wide">Enquire Now</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="absolute inset-0 bg-gradient-to-r from-red-600/20 via-red-400/40 to-red-600/20 animate-course-button-slide-shine"></div>
+                </div>
               </Link>
             </Button>
           </div>
