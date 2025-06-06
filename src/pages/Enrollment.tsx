@@ -1,4 +1,3 @@
-
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -27,7 +26,7 @@ const Enrollment = () => {
 
   const courses = {
     batch: {
-      title: "Music Production Batch Mentorship",
+      title: "Complete Music Production Mastery Course",
       subtitle: "From Beginner to Advanced Level",
       monthlyPrice: 9599,
       sixMonthDiscount: 5, // 5% discount for 6 months
