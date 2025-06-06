@@ -48,9 +48,9 @@ const AnimatedCounter = ({ target, suffix = "", duration = 2000 }: { target: num
 const About = () => {
   const achievements = [
     { number: 320, suffix: "+", label: "Students Mentored", icon: Users },
-    { number: 10, suffix: "+", label: "Years Experience", icon: Star },
-    { number: 200, suffix: "+", label: "Tracks Produced", icon: Music },
-    { number: 50, suffix: "+", label: "Industry Awards", icon: Award }
+    { number: 131, suffix: "", label: "Countries Reached", icon: Star },
+    { number: 60, suffix: "M+", label: "Total Streams", icon: Music },
+    { number: 30, suffix: "+", label: "Awards Won", icon: Award }
   ];
 
   return (
@@ -204,16 +204,16 @@ const About = () => {
                     {/* Enhanced Stats under Spotify */}
                     <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
                       <div className="text-center bg-gradient-to-r from-green-500/10 to-emerald-500/10 rounded-xl p-4 border border-green-500/20">
-                        <div className="text-3xl font-bold text-green-600 mb-1">1M+</div>
+                        <div className="text-3xl font-bold text-green-600 mb-1">60M+</div>
                         <div className="text-gray-600 font-medium">Total Streams</div>
                       </div>
                       <div className="text-center bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-xl p-4 border border-blue-500/20">
-                        <div className="text-3xl font-bold text-blue-600 mb-1">50+</div>
+                        <div className="text-3xl font-bold text-blue-600 mb-1">131</div>
                         <div className="text-gray-600 font-medium">Countries Reached</div>
                       </div>
                       <div className="text-center bg-gradient-to-r from-yellow-500/10 to-orange-500/10 rounded-xl p-4 border border-yellow-500/20">
-                        <div className="text-3xl font-bold text-yellow-600 mb-1">15+</div>
-                        <div className="text-gray-600 font-medium">Award Winners</div>
+                        <div className="text-3xl font-bold text-yellow-600 mb-1">30+</div>
+                        <div className="text-gray-600 font-medium">Awards Won</div>
                       </div>
                     </div>
                   </div>

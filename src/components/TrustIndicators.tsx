@@ -42,9 +42,9 @@ const AnimatedCounter = ({ target, suffix = "", duration = 2000 }: { target: num
 
 const TrustIndicators = () => {
   const indicators = [
-    { value: 320, suffix: "+", label: "Students Mentored" },
-    { value: 95, suffix: "%", label: "Success Rate" },
-    { value: 24, suffix: "/7", label: "Support Available" },
+    { value: 60, suffix: "M+", label: "Total Streams" },
+    { value: 131, suffix: "", label: "Countries Reached" },
+    { value: 30, suffix: "+", label: "Awards Won" },
     { value: 5, suffix: "★", label: "Average Rating" }
   ];
 

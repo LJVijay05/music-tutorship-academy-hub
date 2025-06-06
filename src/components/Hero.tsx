@@ -117,16 +117,16 @@ const Hero = () => {
             <div className="text-center group hover:animate-elastic transition-all duration-500 p-6 rounded-2xl bg-gradient-to-br from-white/50 to-red-50/50 backdrop-blur-sm hover:shadow-xl hover:bg-gradient-to-br hover:from-red-50 hover:to-white border border-red-100/50" style={{ animationDelay: '1.5s' }}>
               <div className="flex items-center justify-center mb-3">
                 <Star className="h-8 w-8 text-red-600 mr-2 group-hover:animate-twinkle" />
-                <AnimatedCounter target={10} suffix="+" duration={2200} />
+                <AnimatedCounter target={131} suffix="" duration={2200} />
               </div>
-              <p className="text-gray-600 font-medium group-hover:text-gray-800 transition-colors duration-300">Years Experience</p>
+              <p className="text-gray-600 font-medium group-hover:text-gray-800 transition-colors duration-300">Countries Reached</p>
             </div>
             <div className="text-center group hover:animate-elastic transition-all duration-500 p-6 rounded-2xl bg-gradient-to-br from-white/50 to-red-50/50 backdrop-blur-sm hover:shadow-xl hover:bg-gradient-to-br hover:from-red-50 hover:to-white border border-red-100/50" style={{ animationDelay: '1.6s' }}>
               <div className="flex items-center justify-center mb-3">
                 <Music className="h-8 w-8 text-red-600 mr-2 group-hover:animate-dance" />
-                <AnimatedCounter target={200} suffix="+" duration={2400} />
+                <AnimatedCounter target={60} suffix="M+" duration={2400} />
               </div>
-              <p className="text-gray-600 font-medium group-hover:text-gray-800 transition-colors duration-300">Tracks Produced</p>
+              <p className="text-gray-600 font-medium group-hover:text-gray-800 transition-colors duration-300">Total Streams</p>
             </div>
           </div>
         </div>
