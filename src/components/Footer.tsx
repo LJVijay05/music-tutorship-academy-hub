@@ -1,84 +1,85 @@
 
-import { Music, Mail, Phone, MapPin, Instagram, Youtube, Twitter, MessageCircle } from "lucide-react";
+import { Music, Mail, Phone, Instagram, Youtube, Twitter, MessageCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
     <footer className="bg-gray-900 text-white">
-      <div className="container mx-auto px-4 py-12">
-        <div className="grid md:grid-cols-4 gap-8">
+      <div className="container mx-auto px-4 py-16">
+        <div className="grid md:grid-cols-4 gap-12">
           {/* Brand Section */}
-          <div>
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 bg-red-600 rounded-lg flex items-center justify-center">
-                <Music className="w-5 h-5 text-white" />
+          <div className="space-y-6">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-red-600 rounded-xl flex items-center justify-center">
+                <Music className="w-6 h-6 text-white" />
               </div>
-              <span className="font-bold text-xl">Music <span className="text-red-600">Tutorship</span></span>
+              <span className="font-bold text-2xl">Music <span className="text-red-600">Tutorship</span></span>
             </div>
-            <p className="text-gray-400 mb-4">
-              Elevate your music production journey with personalized mentorship and comprehensive courses.
+            <p className="text-gray-400 leading-relaxed">
+              Elevate your music production journey with personalized mentorship and comprehensive courses designed to unlock your creative potential.
             </p>
             <div className="flex gap-4">
-              <a href="#" className="text-gray-400 hover:text-red-600 transition-colors">
+              <a href="#" className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center text-gray-400 hover:text-red-600 hover:bg-gray-700 transition-all duration-300">
                 <Instagram className="w-5 h-5" />
               </a>
-              <a href="#" className="text-gray-400 hover:text-red-600 transition-colors">
+              <a href="#" className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center text-gray-400 hover:text-red-600 hover:bg-gray-700 transition-all duration-300">
                 <Youtube className="w-5 h-5" />
               </a>
-              <a href="#" className="text-gray-400 hover:text-red-600 transition-colors">
+              <a href="#" className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center text-gray-400 hover:text-red-600 hover:bg-gray-700 transition-all duration-300">
                 <Twitter className="w-5 h-5" />
               </a>
-              <a href="https://wa.me/919514499932" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-red-600 transition-colors">
+              <a href="https://wa.me/919514499932" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center text-gray-400 hover:text-red-600 hover:bg-gray-700 transition-all duration-300">
                 <MessageCircle className="w-5 h-5" />
               </a>
             </div>
           </div>
 
           {/* Quick Links */}
-          <div>
-            <h3 className="font-semibold text-lg mb-4">Quick Links</h3>
-            <ul className="space-y-2">
-              <li><Link to="/" className="text-gray-400 hover:text-white transition-colors">Home</Link></li>
-              <li><Link to="/about" className="text-gray-400 hover:text-white transition-colors">About Me</Link></li>
-              <li><Link to="/courses" className="text-gray-400 hover:text-white transition-colors">Courses</Link></li>
-              <li><Link to="/contact" className="text-gray-400 hover:text-white transition-colors">Contact Us</Link></li>
+          <div className="space-y-6">
+            <h3 className="font-bold text-xl mb-6 text-white">Quick Links</h3>
+            <ul className="space-y-4">
+              <li><Link to="/" className="text-gray-400 hover:text-white transition-colors duration-300 font-medium">Home</Link></li>
+              <li><Link to="/about" className="text-gray-400 hover:text-white transition-colors duration-300 font-medium">About Me</Link></li>
+              <li><Link to="/courses" className="text-gray-400 hover:text-white transition-colors duration-300 font-medium">Courses</Link></li>
+              <li><Link to="/blog" className="text-gray-400 hover:text-white transition-colors duration-300 font-medium">Blog</Link></li>
+              <li><Link to="/contact" className="text-gray-400 hover:text-white transition-colors duration-300 font-medium">Contact Us</Link></li>
             </ul>
           </div>
 
           {/* Courses */}
-          <div>
-            <h3 className="font-semibold text-lg mb-4">Our Courses</h3>
-            <ul className="space-y-2">
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Music Production Mentorship</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">1 on 1 Direct Mentorship</a></li>
+          <div className="space-y-6">
+            <h3 className="font-bold text-xl mb-6 text-white">Our Courses</h3>
+            <ul className="space-y-4">
+              <li><Link to="/courses" className="text-gray-400 hover:text-white transition-colors duration-300 font-medium">Music Production Mentorship</Link></li>
+              <li><Link to="/courses" className="text-gray-400 hover:text-white transition-colors duration-300 font-medium">1 on 1 Direct Mentorship</Link></li>
             </ul>
           </div>
 
           {/* Contact Info */}
-          <div>
-            <h3 className="font-semibold text-lg mb-4">Contact Info</h3>
-            <div className="space-y-3">
-              <div className="flex items-center gap-2">
-                <Mail className="w-4 h-4 text-red-600" />
-                <span className="text-gray-400 text-sm">contact@musictutorship.com</span>
+          <div className="space-y-6">
+            <h3 className="font-bold text-xl mb-6 text-white">Contact Info</h3>
+            <div className="space-y-4">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 bg-red-600 rounded-lg flex items-center justify-center">
+                  <Mail className="w-4 h-4 text-white" />
+                </div>
+                <span className="text-gray-400 font-medium">contact@musictutorship.com</span>
               </div>
-              <div className="flex items-center gap-2">
-                <Phone className="w-4 h-4 text-red-600" />
-                <span className="text-gray-400 text-sm">+91 9514499932</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <MapPin className="w-4 h-4 text-red-600" />
-                <span className="text-gray-400 text-sm">Mumbai, India</span>
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 bg-red-600 rounded-lg flex items-center justify-center">
+                  <Phone className="w-4 h-4 text-white" />
+                </div>
+                <span className="text-gray-400 font-medium">+91 9514499932</span>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="border-t border-gray-800 mt-8 pt-8 text-center">
-          <p className="text-gray-400 text-sm">
+        <div className="border-t border-gray-800 mt-12 pt-8 text-center">
+          <p className="text-gray-400">
             © 2024 Music Tutorship. All rights reserved. | 
-            <a href="#" className="text-red-600 hover:underline ml-1">Privacy Policy</a> | 
-            <a href="#" className="text-red-600 hover:underline ml-1">Terms of Service</a>
+            <a href="#" className="text-red-600 hover:underline ml-1 font-medium">Privacy Policy</a> | 
+            <a href="#" className="text-red-600 hover:underline ml-1 font-medium">Terms of Service</a>
           </p>
         </div>
       </div>

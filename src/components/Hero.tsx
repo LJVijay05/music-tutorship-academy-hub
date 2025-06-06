@@ -2,6 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Play, Star, Users, Music } from "lucide-react";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import DemoPopup from "./DemoPopup";
 
 // Counter Animation Component
@@ -80,7 +81,7 @@ const Hero = () => {
             </p>
           </div>
           
-          {/* Enhanced CTA Buttons with New Animations */}
+          {/* Enhanced CTA Buttons with Proper Navigation */}
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16 animate-bounce-up" style={{ animationDelay: '1.2s' }}>
             <Button 
               onClick={() => setIsDemoPopupOpen(true)}
@@ -95,9 +96,12 @@ const Hero = () => {
               variant="outline" 
               size="lg" 
               className="group border-2 border-gray-300 text-gray-700 hover:border-red-600 hover:text-red-600 px-8 py-4 text-lg font-semibold rounded-xl transition-all duration-500 hover:animate-button-hover-lift active:animate-button-press-scale hover:shadow-xl backdrop-blur-sm bg-white/80 relative overflow-hidden"
+              asChild
             >
-              <span className="group-hover:animate-button-wiggle relative z-10">View Courses</span>
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-red-50/50 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+              <Link to="/courses">
+                <span className="group-hover:animate-button-wiggle relative z-10">View Courses</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-red-50/50 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+              </Link>
             </Button>
           </div>
           
