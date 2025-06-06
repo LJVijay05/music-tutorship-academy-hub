@@ -1,27 +1,58 @@
+
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { useState, useEffect } from "react";
-import { CheckCircle, CreditCard, Shield, Star, Clock, Users, Award, MessageCircle, Phone, Sparkles, Trophy, Target, Music as MusicIcon } from "lucide-react";
+import { Textarea } from "@/components/ui/textarea";
+import { 
+  CheckCircle, 
+  CreditCard, 
+  Shield, 
+  Star, 
+  Clock, 
+  Users, 
+  Award, 
+  MessageCircle, 
+  Phone, 
+  Sparkles, 
+  Trophy, 
+  Target, 
+  Music as MusicIcon,
+  ThumbsUp,
+  Info
+} from "lucide-react";
+import { useStudentForm } from "@/hooks/useStudentForm";
+import StudentDataForm from "@/components/StudentDataForm";
 
 const Enrollment = () => {
   const [selectedPlan, setSelectedPlan] = useState("annually");
   const [selectedCourse, setSelectedCourse] = useState("batch");
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: "",
-    experience: "",
-    couponCode: ""
-  });
+  const [userNote, setUserNote] = useState("");
+  const [hasExistingData, setHasExistingData] = useState(false);
+  const [studentData, setStudentData] = useState<any>(null);
+  const { showStudentForm, setShowStudentForm } = useStudentForm();
 
   // Scroll to top when page loads
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+    
+    // Check if student data exists in localStorage
+    const storedStudentData = localStorage.getItem('studentData');
+    if (storedStudentData) {
+      try {
+        const parsedData = JSON.parse(storedStudentData);
+        setStudentData(parsedData);
+        setHasExistingData(true);
+      } catch (error) {
+        console.error("Error parsing student data:", error);
+      }
+    } else {
+      // If no data exists, show the form
+      setShowStudentForm(true);
+    }
+  }, [setShowStudentForm]);
 
   const plans = {
     monthly: { label: "Monthly", discount: 0 },
@@ -155,16 +186,12 @@ const Enrollment = () => {
     }
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
-
   return (
     <div className="min-h-screen bg-white font-inter">
       <Navigation />
+      
+      {/* Student Data Form */}
+      <StudentDataForm open={showStudentForm} onOpenChange={setShowStudentForm} />
       
       {/* WhatsApp Floating Button */}
       <div className="fixed bottom-6 right-6 z-50">
@@ -326,84 +353,39 @@ const Enrollment = () => {
                     </div>
                   </div>
 
-                  {/* Compact Personal Information */}
+                  {/* Contact Preference Section - Replacing Personal Information */}
                   <div className="space-y-3 sm:space-y-4">
-                    <h3 className="text-lg sm:text-xl font-semibold text-gray-900">Personal Information</h3>
+                    <h3 className="text-lg sm:text-xl font-semibold text-gray-900">Contact Preference</h3>
                     
-                    <div className="grid md:grid-cols-2 gap-3 sm:gap-4">
-                      <div>
-                        <label className="block text-xs sm:text-sm font-medium mb-1.5 text-gray-700">First Name</label>
-                        <Input 
-                          name="firstName"
-                          value={formData.firstName}
-                          onChange={handleInputChange}
-                          placeholder="Your first name"
-                          className="h-9 sm:h-10 border-2 focus:border-red-500"
-                        />
+                    {hasExistingData && studentData && (
+                      <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 sm:p-4 mb-3">
+                        <div className="flex items-start gap-2">
+                          <Info className="w-5 h-5 text-blue-500 mt-0.5 flex-shrink-0" />
+                          <div>
+                            <p className="text-sm font-medium text-blue-700 mb-1">Student Information Received</p>
+                            <p className="text-xs text-blue-600">
+                              We already have your basic details. Is there anything specific you'd like us to know?
+                            </p>
+                          </div>
+                        </div>
                       </div>
-                      <div>
-                        <label className="block text-xs sm:text-sm font-medium mb-1.5 text-gray-700">Last Name</label>
-                        <Input 
-                          name="lastName"
-                          value={formData.lastName}
-                          onChange={handleInputChange}
-                          placeholder="Your last name"
-                          className="h-9 sm:h-10 border-2 focus:border-red-500"
-                        />
-                      </div>
+                    )}
+                    
+                    <div>
+                      <label className="block text-xs sm:text-sm font-medium mb-1.5 text-gray-700">Additional Notes (Optional)</label>
+                      <Textarea
+                        value={userNote}
+                        onChange={(e) => setUserNote(e.target.value)}
+                        placeholder="Any specific requirements or questions about the program? Let us know here."
+                        className="min-h-[100px] border-2 focus:border-red-500"
+                      />
                     </div>
                     
-                    <div className="grid md:grid-cols-2 gap-3 sm:gap-4">
-                      <div>
-                        <label className="block text-xs sm:text-sm font-medium mb-1.5 text-gray-700">Email Address</label>
-                        <Input 
-                          type="email"
-                          name="email"
-                          value={formData.email}
-                          onChange={handleInputChange}
-                          placeholder="your.email@example.com"
-                          className="h-9 sm:h-10 border-2 focus:border-red-500"
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-xs sm:text-sm font-medium mb-1.5 text-gray-700">Phone Number</label>
-                        <Input 
-                          type="tel"
-                          name="phone"
-                          value={formData.phone}
-                          onChange={handleInputChange}
-                          placeholder="+91 9876543210"
-                          className="h-9 sm:h-10 border-2 focus:border-red-500"
-                        />
-                      </div>
-                    </div>
-                    
-                    <div className="grid md:grid-cols-2 gap-3 sm:gap-4">
-                      <div>
-                        <label className="block text-xs sm:text-sm font-medium mb-1.5 text-gray-700">Experience Level</label>
-                        <select 
-                          name="experience"
-                          value={formData.experience}
-                          onChange={handleInputChange}
-                          className="w-full h-9 sm:h-10 px-2 sm:px-3 py-1.5 sm:py-2 border-2 border-gray-300 rounded-md focus:border-red-500 focus:outline-none text-sm"
-                        >
-                          <option value="">Select experience level</option>
-                          <option value="beginner">Complete Beginner</option>
-                          <option value="some">Some Experience (&lt; 1 year)</option>
-                          <option value="intermediate">Intermediate (1-3 years)</option>
-                          <option value="advanced">Advanced (3+ years)</option>
-                        </select>
-                      </div>
-                      <div>
-                        <label className="block text-xs sm:text-sm font-medium mb-1.5 text-gray-700">Coupon Code (Optional)</label>
-                        <Input 
-                          name="couponCode"
-                          value={formData.couponCode}
-                          onChange={handleInputChange}
-                          placeholder="Enter coupon code"
-                          className="h-9 sm:h-10 border-2 focus:border-red-500"
-                        />
-                      </div>
+                    <div className="flex items-center gap-3 p-3 bg-amber-50 border border-amber-200 rounded-lg">
+                      <ThumbsUp className="w-5 h-5 text-amber-600 flex-shrink-0" />
+                      <p className="text-xs sm:text-sm text-amber-700">
+                        After completing your enrollment, our dedicated student success manager will contact you within 24 hours to guide you through the next steps.
+                      </p>
                     </div>
                     
                     <div className="flex items-start gap-2 p-2 sm:p-3 bg-gray-50 rounded-lg">
@@ -434,10 +416,6 @@ const Enrollment = () => {
                           <Sparkles className="w-14 h-14" />
                         </div>
                         <div className="relative z-10">
-                          <div className="flex items-center gap-2 mb-2">
-                            <Trophy className="w-5 h-5" />
-                            <span className="font-bold">Your Investment</span>
-                          </div>
                           <h3 className="text-base sm:text-lg font-bold mb-1">{courses[selectedCourse as keyof typeof courses].title}</h3>
                           <p className="text-xs sm:text-sm opacity-90">{courses[selectedCourse as keyof typeof courses].subtitle}</p>
                         </div>
@@ -520,7 +498,7 @@ const Enrollment = () => {
                           size="lg"
                         >
                           <CreditCard className="w-4 h-4 sm:w-5 sm:h-5 mr-1.5" />
-                          🚀 Secure Your Future
+                          Secure Your Enrollment
                         </Button>
                         
                         <div className="flex items-center justify-center gap-2 mt-3 text-[10px] sm:text-xs text-gray-500">
