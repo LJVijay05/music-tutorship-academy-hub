@@ -101,21 +101,21 @@ const Courses = () => {
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-red-50">
       <Navigation />
       
-      <main className="pt-20">
+      <main className="pt-16 md:pt-20">
         <CoursesHero />
 
-        <section className="py-20 relative" aria-labelledby="courses-heading">
+        <section className="py-16 md:py-20 relative" aria-labelledby="courses-heading">
           <div className="container mx-auto px-4">
-            <div className="text-center mb-16">
-              <h2 id="courses-heading" className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
+            <div className="text-center mb-12 md:mb-16">
+              <h2 id="courses-heading" className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 text-gray-900 px-2">
                 Choose Your Learning Path
               </h2>
-              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              <p className="text-base md:text-lg text-gray-600 max-w-2xl mx-auto px-4">
                 Whether you prefer collaborative learning or personalized attention, we have the perfect program for you
               </p>
             </div>
 
-            <div className="grid lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 max-w-7xl mx-auto">
               {courses.map((course) => {
                 console.log('Rendering course:', course.courseId);
                 return (
@@ -146,7 +146,9 @@ const Courses = () => {
               })}
             </div>
 
-            <TrustIndicators />
+            <div className="mt-12 md:mt-16">
+              <TrustIndicators />
+            </div>
           </div>
         </section>
       </main>
