@@ -7,34 +7,24 @@
   :root {
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
-
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
-
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
-
     --primary: 222.2 47.4% 11.2%;
     --primary-foreground: 210 40% 98%;
-
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
-
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
-
     --accent: 210 40% 96.1%;
     --accent-foreground: 222.2 47.4% 11.2%;
-
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
-
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
-
     --radius: 0.5rem;
-
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
     --sidebar-primary: 240 5.9% 10%;
@@ -83,11 +73,31 @@
 
   body {
     @apply bg-background text-foreground;
+    font-display: swap;
+  }
+
+  /* Performance optimizations */
+  img {
+    content-visibility: auto;
+  }
+
+  /* Responsive typography */
+  html {
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  @media (max-width: 640px) {
+    html {
+      font-size: 14px;
+    }
   }
 }
 
 @layer utilities {
-  /* Professional Course Card Button Animations */
+  /* Optimized animations for better performance */
   @keyframes professional-gradient {
     0%, 100% {
       box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
@@ -106,93 +116,6 @@
     }
   }
 
-  @keyframes professional-glow {
-    0%, 100% {
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    }
-    50% {
-      box-shadow: 0 6px 20px -3px rgba(220, 38, 38, 0.3);
-    }
-  }
-
-  /* Text Animations */
-  @keyframes slide-bounce {
-    0% {
-      opacity: 0;
-      transform: translateY(100px) scale(0.8);
-    }
-    60% {
-      opacity: 1;
-      transform: translateY(-10px) scale(1.05);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
-  }
-
-  @keyframes glow-reveal {
-    0% {
-      opacity: 0;
-      transform: translateX(-50px);
-      filter: blur(10px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateX(0);
-      filter: blur(0px);
-    }
-  }
-
-  @keyframes fade-up-slow {
-    0% {
-      opacity: 0;
-      transform: translateY(40px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes stagger-up {
-    0% {
-      opacity: 0;
-      transform: translateY(60px) rotateX(45deg);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0) rotateX(0deg);
-    }
-  }
-
-  @keyframes bounce-up {
-    0% {
-      opacity: 0;
-      transform: translateY(50px) scale(0.9);
-    }
-    60% {
-      opacity: 1;
-      transform: translateY(-5px) scale(1.02);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
-  }
-
-  @keyframes twinkle {
-    0%, 100% { 
-      transform: scale(1) rotate(0deg);
-      opacity: 1;
-    }
-    50% { 
-      transform: scale(1.1) rotate(180deg);
-      opacity: 0.8;
-    }
-  }
-
-  /* Basic Animations */
   @keyframes fade-in {
     0% {
       opacity: 0;
@@ -215,164 +138,63 @@
     }
   }
 
-  /* Animation Classes */
-  .animate-professional-gradient {
-    animation: professional-gradient 3s ease-in-out infinite;
+  /* Responsive utilities */
+  .container-responsive {
+    @apply w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
 
-  .animate-professional-golden-glow {
-    animation: professional-golden-glow 2.5s ease-in-out infinite;
+  .text-responsive {
+    @apply text-sm sm:text-base lg:text-lg;
   }
 
-  .animate-professional-glow {
-    animation: professional-glow 2s ease-in-out infinite;
+  .heading-responsive {
+    @apply text-xl sm:text-2xl lg:text-3xl xl:text-4xl;
   }
 
-  .animate-slide-bounce {
-    animation: slide-bounce 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
-  }
-
-  .animate-glow-reveal {
-    animation: glow-reveal 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-  }
-
-  .animate-fade-up-slow {
-    animation: fade-up-slow 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-  }
-
-  .animate-stagger-up {
-    animation: stagger-up 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-  }
-
-  .animate-bounce-up {
-    animation: bounce-up 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
-  }
-
-  .animate-twinkle {
-    animation: twinkle 1s ease-in-out;
-  }
-
-  .animate-fade-in {
-    animation: fade-in 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-  }
-
-  .animate-slide-up {
-    animation: slide-up 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-  }
-
-  /* Legacy Animations */
-  @keyframes accordion-down {
-    from {
-      height: 0;
+  /* Animation classes with reduced motion support */
+  @media (prefers-reduced-motion: no-preference) {
+    .animate-professional-gradient {
+      animation: professional-gradient 3s ease-in-out infinite;
     }
-    to {
-      height: var(--radix-accordion-content-height);
+
+    .animate-professional-golden-glow {
+      animation: professional-golden-glow 2.5s ease-in-out infinite;
+    }
+
+    .animate-fade-in {
+      animation: fade-in 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    }
+
+    .animate-slide-up {
+      animation: slide-up 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
     }
   }
 
-  @keyframes accordion-up {
-    from {
-      height: var(--radix-accordion-content-height);
-    }
-    to {
-      height: 0;
-    }
-  }
-
-  @keyframes scale-in {
-    0% {
-      transform: scale(0.95);
-      opacity: 0;
-    }
-    100% {
-      transform: scale(1);
-      opacity: 1;
+  /* Reduced motion fallbacks */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-professional-gradient,
+    .animate-professional-golden-glow,
+    .animate-fade-in,
+    .animate-slide-up {
+      animation: none;
     }
   }
 
-  @keyframes slide-down {
-    0% {
-      transform: translateY(-30px);
-      opacity: 0;
-    }
-    100% {
-      transform: translateY(0);
-      opacity: 1;
-    }
+  /* Focus visible for accessibility */
+  .focus-visible-ring {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2;
   }
+}
 
-  @keyframes slide-left {
-    0% {
-      transform: translateX(50px);
-      opacity: 0;
-    }
-    100% {
-      transform: translateX(0);
-      opacity: 1;
-    }
-  }
+/* Performance critical CSS inlined */
+.critical-above-fold {
+  contain: layout style paint;
+}
 
-  @keyframes slide-right {
-    0% {
-      transform: translateX(-50px);
-      opacity: 0;
-    }
-    100% {
-      transform: translateX(0);
-      opacity: 1;
-    }
-  }
-
-  @keyframes bounce-in {
-    0% {
-      transform: scale(0.3);
-      opacity: 0;
-    }
-    50% {
-      transform: scale(1.05);
-    }
-    70% {
-      transform: scale(0.95);
-    }
-    100% {
-      transform: scale(1);
-      opacity: 1;
-    }
-  }
-
-  @keyframes slide-in-bottom {
-    0% {
-      opacity: 0;
-      transform: translateY(100px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  .animate-accordion-down {
-    animation: accordion-down 0.2s ease-out;
-  }
-  .animate-accordion-up {
-    animation: accordion-up 0.2s ease-out;
-  }
-  .animate-scale-in {
-    animation: scale-in 0.2s ease-out;
-  }
-  .animate-slide-down {
-    animation: slide-down 0.3s ease-out;
-  }
-  .animate-slide-left {
-    animation: slide-left 0.3s ease-out;
-  }
-  .animate-slide-right {
-    animation: slide-right 0.3s ease-out;
-  }
-  .animate-bounce-in {
-    animation: bounce-in 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  }
-  .animate-slide-in-bottom {
-    animation: slide-in-bottom 0.6s ease-out;
+/* Mobile-first responsive design utilities */
+@media (max-width: 640px) {
+  .mobile-optimized {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
   }
 }

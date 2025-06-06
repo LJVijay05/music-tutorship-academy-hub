@@ -1,0 +1,22 @@
+
+{
+  "name": "Music Tutorship Academy Hub",
+  "short_name": "Music Academy",
+  "description": "Professional Music Production Training & Mentorship",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#dc2626",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "16x16 32x32 48x48",
+      "type": "image/x-icon"
+    }
+  ],
+  "categories": ["education", "music", "training"],
+  "lang": "en-US",
+  "scope": "/",
+  "id": "music-tutorship-academy-hub"
+}

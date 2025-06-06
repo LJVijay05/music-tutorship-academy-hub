@@ -72,7 +72,7 @@ const DemoPopup = ({ isOpen, onClose }: DemoPopupProps) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
+    console.log('Demo booking submitted:', formData);
     onClose();
   };
 
@@ -98,105 +98,109 @@ const DemoPopup = ({ isOpen, onClose }: DemoPopupProps) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-4xl mx-auto bg-white rounded-3xl p-0 border-0 shadow-2xl max-h-[95vh] overflow-y-auto">
-        <DialogTitle className="sr-only">Book Your Free Demo</DialogTitle>
-        <DialogDescription className="sr-only">Get personalized guidance and start your musical journey</DialogDescription>
+      <DialogContent className="w-[95vw] max-w-6xl h-[95vh] max-h-[900px] mx-auto bg-white rounded-2xl p-0 border-0 shadow-2xl overflow-hidden">
+        <DialogTitle className="sr-only">Book Your Free Music Production Demo Session</DialogTitle>
+        <DialogDescription className="sr-only">Schedule a personalized music production consultation with our expert instructors at Music Tutorship Academy Hub</DialogDescription>
         
-        <div className="relative p-8">
+        <div className="relative h-full overflow-y-auto">
+          {/* Close Button */}
           <button
             onClick={onClose}
-            className="absolute top-6 right-6 text-gray-400 hover:text-gray-600 transition-colors z-20 bg-gray-50 rounded-full p-2 hover:bg-gray-100"
-            aria-label="Close dialog"
+            className="absolute top-4 right-4 z-20 text-gray-400 hover:text-gray-600 transition-colors bg-gray-50 rounded-full p-2 hover:bg-gray-100"
+            aria-label="Close demo booking dialog"
           >
             <X className="w-5 h-5" />
           </button>
           
           {/* Header */}
-          <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold text-gray-900 mb-2">Book Your Free Demo</h2>
-            <p className="text-gray-600 text-lg">Get personalized guidance and start your musical journey</p>
+          <div className="text-center px-4 sm:px-6 lg:px-8 pt-6 pb-4">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Book Your Free Demo</h2>
+            <p className="text-gray-600 text-base sm:text-lg">Get personalized guidance and start your musical journey</p>
           </div>
           
-          <form onSubmit={handleSubmit} className="space-y-8">
+          <form onSubmit={handleSubmit} className="px-4 sm:px-6 lg:px-8 pb-6 space-y-6">
             {/* Personal Information */}
-            <div className="bg-gray-50 rounded-2xl p-6">
+            <div className="bg-gray-50 rounded-xl p-4 sm:p-6">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Personal Information</h3>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 <div>
-                  <label className="block text-gray-700 font-medium mb-2">Full Name</label>
+                  <label className="block text-gray-700 font-medium mb-2 text-sm">Full Name</label>
                   <input
                     type="text"
                     name="fullName"
                     placeholder="John Doe"
                     value={formData.fullName}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all"
+                    className="w-full px-3 py-2.5 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all text-sm"
                     required
                   />
                 </div>
 
                 <div>
-                  <label className="block text-gray-700 font-medium mb-2">Mobile Number</label>
+                  <label className="block text-gray-700 font-medium mb-2 text-sm">Mobile Number</label>
                   <input
                     type="tel"
                     name="mobile"
                     placeholder="9876543210"
                     value={formData.mobile}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all"
+                    className="w-full px-3 py-2.5 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all text-sm"
                     required
                   />
                 </div>
 
-                <div>
-                  <label className="block text-gray-700 font-medium mb-2">Email Address</label>
+                <div className="sm:col-span-2 lg:col-span-1">
+                  <label className="block text-gray-700 font-medium mb-2 text-sm">Email Address</label>
                   <input
                     type="email"
                     name="email"
                     placeholder="john@email.com"
                     value={formData.email}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all"
+                    className="w-full px-3 py-2.5 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all text-sm"
                     required
                   />
                 </div>
               </div>
             </div>
 
-            {/* Date and Time Selection */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* Date and Time Selection - Responsive Layout */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {/* Calendar */}
-              <div className="bg-gray-50 rounded-2xl p-6">
+              <div className="bg-gray-50 rounded-xl p-4 sm:p-6">
                 <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
                   <CalendarIcon className="w-5 h-5 text-red-600" />
                   Select Date
                 </h3>
-                <div className="bg-white rounded-xl p-4 shadow-sm">
+                <div className="bg-white rounded-lg p-3 shadow-sm">
                   <Calendar
                     mode="single"
                     selected={formData.selectedDate}
                     onSelect={handleDateSelect}
                     disabled={disabledDays}
-                    className={cn("p-0 pointer-events-auto")}
+                    className={cn("p-0 pointer-events-auto w-full")}
                     classNames={{
                       day_selected: "bg-red-600 text-white hover:bg-red-600 hover:text-white focus:bg-red-600 focus:text-white",
                       day_today: "bg-red-50 text-red-600 font-medium",
                       cell: "text-center p-0 relative [&:has([aria-selected])]:bg-red-100 first:[&:has([aria-selected])]:rounded-l-md last:[&:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20",
-                      day: "h-9 w-9 p-0 font-normal aria-selected:opacity-100"
+                      day: "h-8 w-8 sm:h-9 sm:w-9 p-0 font-normal aria-selected:opacity-100 text-sm",
+                      head_cell: "text-muted-foreground rounded-md w-8 sm:w-9 font-normal text-[0.8rem]",
+                      caption_label: "text-sm font-medium",
+                      nav_button: "h-6 w-6 sm:h-7 sm:w-7 bg-transparent p-0 opacity-50 hover:opacity-100"
                     }}
                   />
                 </div>
               </div>
 
               {/* Time Slots */}
-              <div className="bg-gray-50 rounded-2xl p-6">
+              <div className="bg-gray-50 rounded-xl p-4 sm:p-6">
                 <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
                   <Clock className="w-5 h-5 text-red-600" />
                   Available Time Slots
                 </h3>
-                <div className="bg-white rounded-xl p-4 shadow-sm h-80 overflow-y-auto">
+                <div className="bg-white rounded-lg p-3 shadow-sm h-64 sm:h-80 overflow-y-auto">
                   {formData.selectedDate ? (
-                    <div className="grid grid-cols-2 gap-3">
+                    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-2">
                       {timeSlots.map(({ time, isBooked }) => (
                         <button
                           key={time}
@@ -204,7 +208,7 @@ const DemoPopup = ({ isOpen, onClose }: DemoPopupProps) => {
                           onClick={() => handleTimeSelect(time, isBooked)}
                           disabled={isBooked}
                           className={cn(
-                            "p-3 rounded-lg text-sm font-medium transition-all duration-200 border",
+                            "p-2 sm:p-3 rounded-lg text-xs sm:text-sm font-medium transition-all duration-200 border",
                             isBooked 
                               ? "bg-gray-100 text-gray-400 border-gray-200 cursor-not-allowed"
                               : formData.selectedTime === time
@@ -220,8 +224,8 @@ const DemoPopup = ({ isOpen, onClose }: DemoPopupProps) => {
                   ) : (
                     <div className="flex items-center justify-center h-full text-gray-400 text-center">
                       <div>
-                        <CalendarIcon className="w-12 h-12 mx-auto mb-2 opacity-50" />
-                        <p>Please select a date first</p>
+                        <CalendarIcon className="w-8 sm:w-12 h-8 sm:h-12 mx-auto mb-2 opacity-50" />
+                        <p className="text-sm">Please select a date first</p>
                       </div>
                     </div>
                   )}
@@ -229,38 +233,38 @@ const DemoPopup = ({ isOpen, onClose }: DemoPopupProps) => {
               </div>
             </div>
 
-            {/* Course Interests */}
-            <div className="bg-gray-50 rounded-2xl p-6">
+            {/* Course Interests - Mobile Optimized */}
+            <div className="bg-gray-50 rounded-xl p-4 sm:p-6">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">What interests you?</h3>
-              <div className="space-y-4">
+              <div className="space-y-3">
                 {courseOptions.map((course) => (
-                  <label key={course.id} className="flex items-start cursor-pointer group bg-white rounded-xl p-4 border border-gray-200 hover:border-red-200 hover:bg-red-50 transition-all">
+                  <label key={course.id} className="flex items-start cursor-pointer group bg-white rounded-lg p-3 sm:p-4 border border-gray-200 hover:border-red-200 hover:bg-red-50 transition-all">
                     <input
                       type="checkbox"
                       checked={formData.interests.includes(course.title)}
                       onChange={() => handleInterestChange(course.title)}
-                      className="w-5 h-5 text-red-600 border-2 border-gray-300 rounded focus:ring-red-500 mt-1 flex-shrink-0"
+                      className="w-4 h-4 sm:w-5 sm:h-5 text-red-600 border-2 border-gray-300 rounded focus:ring-red-500 mt-1 flex-shrink-0"
                     />
-                    <div className="ml-4 flex-1">
-                      <div className="flex items-center gap-3 mb-1">
-                        <course.icon className="w-5 h-5 text-red-600 flex-shrink-0" />
-                        <span className="text-gray-900 font-medium group-hover:text-red-600 transition-colors">
+                    <div className="ml-3 flex-1">
+                      <div className="flex items-center gap-2 sm:gap-3 mb-1">
+                        <course.icon className="w-4 h-4 sm:w-5 sm:h-5 text-red-600 flex-shrink-0" />
+                        <span className="text-gray-900 font-medium group-hover:text-red-600 transition-colors text-sm sm:text-base">
                           {course.title}
                         </span>
                       </div>
-                      <p className="text-sm text-gray-500">{course.description}</p>
+                      <p className="text-xs sm:text-sm text-gray-500">{course.description}</p>
                     </div>
                   </label>
                 ))}
               </div>
             </div>
 
-            {/* Submit Button */}
-            <div className="text-center">
+            {/* Submit Button - Mobile Optimized */}
+            <div className="text-center pt-2">
               <Button
                 type="submit"
                 disabled={!formData.selectedDate || !formData.selectedTime}
-                className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 disabled:from-gray-300 disabled:to-gray-300 disabled:cursor-not-allowed text-white py-4 px-8 rounded-xl font-semibold text-lg transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl min-w-[300px]"
+                className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 disabled:from-gray-300 disabled:to-gray-300 disabled:cursor-not-allowed text-white py-3 sm:py-4 px-6 sm:px-8 rounded-xl font-semibold text-sm sm:text-lg transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl w-full sm:w-auto sm:min-w-[300px]"
               >
                 {formData.selectedDate && formData.selectedTime 
                   ? `Book Demo for ${format(formData.selectedDate, "MMM d")} at ${formData.selectedTime}`
