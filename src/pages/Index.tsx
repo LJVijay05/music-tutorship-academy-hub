@@ -10,6 +10,9 @@ import { useEffect } from "react";
 
 const Index = () => {
   useEffect(() => {
+    // Scroll to top on page load
+    window.scrollTo(0, 0);
+    
     // Optimize loading performance
     const loadImages = () => {
       const images = document.querySelectorAll('img[data-src]');
