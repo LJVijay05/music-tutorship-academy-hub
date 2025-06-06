@@ -117,27 +117,31 @@ const CourseCard = ({
             </div>
           </div>
           
-          {/* Enhanced Action Buttons with New Course-Specific Animations */}
+          {/* Enhanced Action Buttons with New Animations */}
           <div className="flex flex-col sm:flex-row gap-4 mt-6">
             <Button 
               variant="outline" 
-              className="flex-1 border-2 border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400 transition-all duration-300 ease-in-out hover:animate-details-button-hover h-12 rounded-xl font-semibold group relative overflow-hidden transform-gpu"
+              className="flex-1 border-2 border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400 transition-all duration-300 ease-in-out h-12 rounded-xl font-semibold group relative overflow-hidden transform-gpu hover:animate-details-magnetic hover:shadow-lg active:animate-details-press"
               onClick={handleDetailsClick}
             >
-              <Info className="w-5 h-5 mr-2 transition-transform duration-300 group-hover:rotate-12 group-hover:scale-110" />
-              <span className="relative z-10 group-hover:font-bold transition-all duration-300">View Details</span>
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-100/80 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-500"></div>
+              <Info className="w-5 h-5 mr-2 transition-all duration-300 group-hover:rotate-12 group-hover:scale-110 group-hover:text-blue-600" />
+              <span className="relative z-10 group-hover:font-bold transition-all duration-300 group-hover:text-blue-600">View Details</span>
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-50/0 via-blue-100/60 to-blue-50/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-out"></div>
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-200/30 to-transparent animate-details-ripple"></div>
+              </div>
             </Button>
             <Button 
-              className={`flex-1 bg-gradient-to-r ${buttonGradientFrom} ${buttonGradientTo} hover:from-red-700 hover:to-red-800 shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out hover:animate-course-button-lift active:animate-course-button-pulse-scale h-12 rounded-xl font-semibold text-white group relative overflow-hidden transform-gpu ${isPremium ? 'animate-course-button-golden-glow' : 'animate-course-button-glow'}`}
+              className={`flex-1 bg-gradient-to-r ${buttonGradientFrom} ${buttonGradientTo} hover:from-red-600 hover:to-pink-600 shadow-lg hover:shadow-2xl transition-all duration-300 ease-in-out h-12 rounded-xl font-semibold text-white group relative overflow-hidden transform-gpu hover:animate-enquire-bounce active:animate-enquire-pulse ${isPremium ? 'animate-enquire-golden-pulse' : 'animate-enquire-glow'}`}
               asChild
             >
               <Link to="/enrollment" className="flex items-center justify-center">
-                <span className="relative z-10 group-hover:font-bold transition-all duration-300 group-hover:tracking-wide">Enquire Now</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+                <span className="relative z-10 group-hover:font-bold transition-all duration-300 group-hover:tracking-wide group-hover:text-yellow-100">Enquire Now</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-500 ease-out"></div>
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <div className="absolute inset-0 bg-gradient-to-r from-red-600/20 via-red-400/40 to-red-600/20 animate-course-button-slide-shine"></div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/20 via-red-400/40 to-pink-400/20 animate-enquire-wave"></div>
                 </div>
+                <div className="absolute -inset-1 bg-gradient-to-r from-red-600 via-pink-500 to-red-600 rounded-xl opacity-0 group-hover:opacity-30 transition-opacity duration-300 blur-sm animate-enquire-halo"></div>
               </Link>
             </Button>
           </div>

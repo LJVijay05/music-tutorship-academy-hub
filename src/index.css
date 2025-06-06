@@ -87,6 +87,142 @@
 }
 
 @layer utilities {
+  /* New Course Card Button Animations */
+  @keyframes details-magnetic {
+    0% {
+      transform: translateY(0) scale(1);
+    }
+    100% {
+      transform: translateY(-4px) scale(1.02);
+    }
+  }
+
+  @keyframes details-press {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(0.95);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  @keyframes details-ripple {
+    0% {
+      transform: scale(0) rotate(0deg);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1.5) rotate(180deg);
+      opacity: 0;
+    }
+  }
+
+  @keyframes enquire-bounce {
+    0% {
+      transform: translateY(0) scale(1);
+    }
+    50% {
+      transform: translateY(-6px) scale(1.05);
+    }
+    100% {
+      transform: translateY(-2px) scale(1.02);
+    }
+  }
+
+  @keyframes enquire-pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(0.92);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  @keyframes enquire-glow {
+    0%, 100% {
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    50% {
+      box-shadow: 0 0 25px rgba(220, 38, 38, 0.4), 0 0 50px rgba(236, 72, 153, 0.2);
+    }
+  }
+
+  @keyframes enquire-golden-pulse {
+    0%, 100% {
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    50% {
+      box-shadow: 0 0 30px rgba(245, 158, 11, 0.6), 0 0 60px rgba(251, 191, 36, 0.3);
+    }
+  }
+
+  @keyframes enquire-wave {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  @keyframes enquire-halo {
+    0%, 100% {
+      transform: scale(1) rotate(0deg);
+      opacity: 0;
+    }
+    50% {
+      transform: scale(1.1) rotate(180deg);
+      opacity: 0.3;
+    }
+  }
+
+  /* Animation Classes for Course Card Buttons */
+  .animate-details-magnetic {
+    animation: details-magnetic 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  .animate-details-press {
+    animation: details-press 0.15s ease-in-out;
+  }
+
+  .animate-details-ripple {
+    animation: details-ripple 0.6s ease-out infinite;
+  }
+
+  .animate-enquire-bounce {
+    animation: enquire-bounce 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+  }
+
+  .animate-enquire-pulse {
+    animation: enquire-pulse 0.2s ease-in-out;
+  }
+
+  .animate-enquire-glow {
+    animation: enquire-glow 2.5s ease-in-out infinite;
+  }
+
+  .animate-enquire-golden-pulse {
+    animation: enquire-golden-pulse 2s ease-in-out infinite;
+  }
+
+  .animate-enquire-wave {
+    background-size: 200% 200%;
+    animation: enquire-wave 3s ease-in-out infinite;
+  }
+
+  .animate-enquire-halo {
+    animation: enquire-halo 2s ease-in-out infinite;
+  }
+
   /* Optimized Course Card Button Animations */
   @keyframes course-button-lift {
     0% {
