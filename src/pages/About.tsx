@@ -1,7 +1,6 @@
 
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import TrustIndicators from "@/components/TrustIndicators";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Users, Award, Star, Music, Headphones, Mic, Play, Clock } from "lucide-react";
@@ -129,9 +128,6 @@ const About = () => {
           </div>
         </div>
       </section>
-
-      {/* Trust Indicators Section with Paper Splash Effects */}
-      <TrustIndicators />
 
       {/* Completely Redesigned My Works Section */}
       <section className="py-32 bg-gradient-to-br from-gray-900 via-gray-800 to-black relative overflow-hidden">
