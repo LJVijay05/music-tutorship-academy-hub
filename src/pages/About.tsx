@@ -1,5 +1,7 @@
+
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import TrustIndicators from "@/components/TrustIndicators";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Users, Award, Star, Music, Headphones, Mic, Play, Clock } from "lucide-react";
@@ -58,7 +60,7 @@ const About = () => {
       <Navigation />
       
       {/* Meet Your Mentor Section */}
-      <section className="pt-32 pb-40 bg-gradient-to-br from-gray-50 via-white to-red-50 relative overflow-hidden">
+      <section className="pt-32 pb-20 bg-gradient-to-br from-gray-50 via-white to-red-50 relative overflow-hidden">
         {/* Background Animation Elements */}
         <div className="absolute inset-0 opacity-5">
           <div className="absolute top-20 right-20 w-96 h-96 bg-red-600 rounded-full blur-3xl animate-pulse"></div>
@@ -124,26 +126,12 @@ const About = () => {
                 <div className="absolute -bottom-8 -left-8 w-40 h-40 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full opacity-20 animate-bounce"></div>
               </div>
             </div>
-
-            {/* Enhanced Achievements Section */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-10 mb-32">
-              {achievements.map((achievement, index) => (
-                <Card key={index} className="bg-white shadow-2xl border-0 hover:shadow-red-200 transition-all duration-500 hover:-translate-y-6 group animate-fade-in" style={{ animationDelay: `${0.2 + index * 0.1}s` }}>
-                  <CardContent className="p-10 text-center">
-                    <div className="w-24 h-24 bg-gradient-to-r from-red-600 to-pink-600 rounded-full flex items-center justify-center mx-auto mb-8 group-hover:scale-125 transition-transform duration-500 shadow-2xl">
-                      <achievement.icon className="w-12 h-12 text-white" />
-                    </div>
-                    <div className="mb-4">
-                      <AnimatedCounter target={achievement.number} suffix={achievement.suffix} duration={2000 + index * 200} />
-                    </div>
-                    <div className="text-gray-600 font-semibold text-xl leading-tight">{achievement.label}</div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
           </div>
         </div>
       </section>
+
+      {/* Trust Indicators Section with Paper Splash Effects */}
+      <TrustIndicators />
 
       {/* Completely Redesigned My Works Section */}
       <section className="py-32 bg-gradient-to-br from-gray-900 via-gray-800 to-black relative overflow-hidden">
@@ -208,7 +196,7 @@ const About = () => {
                         <div className="text-gray-600 font-medium">Total Streams</div>
                       </div>
                       <div className="text-center bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-xl p-4 border border-blue-500/20">
-                        <div className="text-3xl font-bold text-blue-600 mb-1">131</div>
+                        <div className="text-3xl font-bold text-blue-600 mb-1">131+</div>
                         <div className="text-gray-600 font-medium">Countries Reached</div>
                       </div>
                       <div className="text-center bg-gradient-to-r from-yellow-500/10 to-orange-500/10 rounded-xl p-4 border border-yellow-500/20">
