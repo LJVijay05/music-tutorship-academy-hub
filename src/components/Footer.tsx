@@ -50,8 +50,8 @@ const Footer = () => {
           <div className="space-y-6">
             <h3 className="font-bold text-xl mb-6 text-white">Our Courses</h3>
             <ul className="space-y-4">
-              <li><Link to="/courses" className="text-gray-400 hover:text-white transition-colors duration-300 font-medium">Music Production Mentorship</Link></li>
-              <li><Link to="/courses" className="text-gray-400 hover:text-white transition-colors duration-300 font-medium">1 on 1 Direct Mentorship</Link></li>
+              <li><Link to="/courses" className="text-gray-400 hover:text-white transition-colors duration-300 font-medium">Complete Music Production Mastery Course</Link></li>
+              <li><Link to="/courses" className="text-gray-400 hover:text-white transition-colors duration-300 font-medium">One-on-One Music Production Mentorship</Link></li>
             </ul>
           </div>
 
