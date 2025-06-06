@@ -1,11 +1,10 @@
-
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { useState, useEffect } from "react";
-import { CheckCircle, CreditCard, Shield, Star, Clock, Users, Award, MessageCircle, Phone, Sparkles, Trophy, Target } from "lucide-react";
+import { CheckCircle, CreditCard, Shield, Star, Clock, Users, Award, MessageCircle, Phone, Sparkles, Trophy, Target, Music as MusicIcon } from "lucide-react";
 
 const Enrollment = () => {
   const [selectedPlan, setSelectedPlan] = useState("annually");
@@ -185,7 +184,7 @@ const Enrollment = () => {
           <div className="container mx-auto px-4 sm:px-6">
             <div className="max-w-4xl mx-auto text-center">
               <div className="inline-flex items-center gap-2 bg-red-50 text-red-600 rounded-full px-4 py-1.5 mb-4 border border-red-100">
-                <Music className="w-3.5 h-3.5" />
+                <MusicIcon className="w-3.5 h-3.5" />
                 <span className="text-xs sm:text-sm font-medium">India's Premier Music Production Academy</span>
               </div>
 
