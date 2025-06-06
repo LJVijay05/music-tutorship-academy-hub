@@ -10,7 +10,6 @@ const CoursesSection = () => {
       id: "production-course",
       title: "Complete Music Production Mastery Course",
       level: "From Beginner to Advanced Level",
-      image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=800&h=400&fit=crop",
       icon: Users,
       popular: true
     },
@@ -18,7 +17,6 @@ const CoursesSection = () => {
       id: "mentorship-90",
       title: "One-on-One Music Production Mentorship",
       level: "Master the complete journey of music production",
-      image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&h=400&fit=crop",
       icon: User,
       premium: true
     }
@@ -79,36 +77,47 @@ const CoursesSection = () => {
                   </div>
                 )}
                 
-                {/* Enhanced Course Image */}
-                <div className="h-56 relative overflow-hidden rounded-t-3xl">
-                  <img 
-                    src={course.image} 
-                    alt={`${course.title} - Professional music production training`}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent group-hover:from-black/30 transition-all duration-500"></div>
+                {/* Course Icon Header */}
+                <div className="h-56 relative overflow-hidden rounded-t-3xl bg-gradient-to-br from-gray-900 to-gray-700">
+                  <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                    <div className="text-center">
+                      <course.icon className="w-20 h-20 text-white mb-4 mx-auto opacity-90" />
+                      <div className="bg-white/20 backdrop-blur-sm rounded-2xl px-6 py-3">
+                        <span className="text-white font-semibold text-lg">Professional Training</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                 </div>
                 
                 <CardContent className="p-8">
                   <h3 className="text-2xl font-bold mb-3 text-gray-900 group-hover:text-red-600 transition-colors duration-300">{course.title}</h3>
                   <p className="text-sm text-red-600 mb-8 font-semibold">({course.level})</p>
                   
-                  <Button 
-                    className={`w-full h-12 text-base font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-500 hover:scale-105 ${
-                      course.premium 
-                        ? 'bg-gradient-to-r from-amber-500 to-yellow-600 hover:from-amber-600 hover:to-yellow-700 text-amber-900 animate-golden-glow' 
-                        : 'bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white animate-premium-glow'
-                    }`}
-                    asChild
-                  >
-                    <Link 
-                      to="/enrollment" 
-                      aria-label={`Enquire now about ${course.title}`}
+                  <div className="flex flex-col gap-3">
+                    <Button 
+                      variant="outline" 
+                      className="w-full border-2 border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400 transition-all duration-300 h-12 rounded-xl font-semibold group/btn relative overflow-hidden hover:shadow-md"
                     >
-                      Enquire Now
-                    </Link>
-                  </Button>
+                      <span className="relative z-10">View Course Details</span>
+                    </Button>
+                    
+                    <Button 
+                      className={`w-full h-12 text-base font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 ${
+                        course.premium 
+                          ? 'bg-gradient-to-r from-amber-500 to-yellow-600 hover:from-amber-600 hover:to-yellow-700 text-amber-900' 
+                          : 'bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white'
+                      }`}
+                      asChild
+                    >
+                      <Link 
+                        to="/enrollment" 
+                        aria-label={`Enquire now about ${course.title}`}
+                      >
+                        Enquire Now
+                      </Link>
+                    </Button>
+                  </div>
                 </CardContent>
               </Card>
             </article>
@@ -117,7 +126,7 @@ const CoursesSection = () => {
 
         {/* Enhanced CTA Section */}
         <div className="text-center animate-slide-in-bottom" style={{ animationDelay: '800ms' }}>
-          <Button asChild size="lg" className="bg-gradient-to-r from-red-600 via-pink-600 to-red-700 hover:from-red-700 hover:via-pink-700 hover:to-red-800 px-10 py-4 text-lg font-semibold shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-1 hover:scale-105 rounded-2xl animate-premium-glow border-2 border-red-500/20">
+          <Button asChild size="lg" className="bg-gradient-to-r from-red-600 via-pink-600 to-red-700 hover:from-red-700 hover:via-pink-700 hover:to-red-800 px-10 py-4 text-lg font-semibold shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-1 hover:scale-105 rounded-2xl border-2 border-red-500/20">
             <Link to="/courses" aria-label="View detailed course information">
               View Course Details
             </Link>
