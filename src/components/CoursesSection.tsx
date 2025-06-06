@@ -96,13 +96,6 @@ const CoursesSection = () => {
                   
                   <div className="flex flex-col gap-3">
                     <Button 
-                      variant="outline" 
-                      className="w-full border-2 border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400 transition-all duration-300 h-12 rounded-xl font-semibold group/btn relative overflow-hidden hover:shadow-md"
-                    >
-                      <span className="relative z-10">View Course Details</span>
-                    </Button>
-                    
-                    <Button 
                       className={`w-full h-12 text-base font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 ${
                         course.premium 
                           ? 'bg-gradient-to-r from-amber-500 to-yellow-600 hover:from-amber-600 hover:to-yellow-700 text-amber-900' 
