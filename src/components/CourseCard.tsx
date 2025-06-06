@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { CheckCircle, Users, User, Clock, Star, Info } from "lucide-react";
@@ -116,31 +117,23 @@ const CourseCard = ({
             </div>
           </div>
           
-          {/* Enhanced Action Buttons with Updated Animations */}
+          {/* Professional Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 mt-6">
             <Button 
               variant="outline" 
-              className="flex-1 border-2 border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400 transition-all duration-500 ease-out h-12 rounded-xl font-semibold group relative overflow-hidden transform-gpu hover:animate-details-dynamic-bounce hover:shadow-lg active:animate-details-elastic-press"
+              className="flex-1 border-2 border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400 transition-all duration-300 h-12 rounded-xl font-semibold group relative overflow-hidden hover:shadow-md"
               onClick={handleDetailsClick}
             >
-              <Info className="w-5 h-5 mr-2 transition-all duration-500 group-hover:rotate-[360deg] group-hover:scale-125 group-hover:text-blue-600" />
-              <span className="relative z-10 group-hover:font-bold transition-all duration-300 group-hover:text-blue-600">View Details</span>
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-50/0 via-blue-200/80 to-blue-50/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-out"></div>
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-300/50 to-transparent animate-details-shimmer-wave"></div>
-              </div>
+              <Info className="w-5 h-5 mr-2 transition-all duration-300 group-hover:scale-110" />
+              <span className="relative z-10">View Details</span>
             </Button>
             <Button 
-              className={`flex-1 bg-gradient-to-r ${buttonGradientFrom} ${buttonGradientTo} hover:from-red-700 hover:to-pink-700 shadow-lg hover:shadow-2xl transition-all duration-500 ease-out h-12 rounded-xl font-semibold text-white group relative overflow-hidden transform-gpu hover:animate-enquire-elastic-bounce active:animate-enquire-powerful-pulse ${isPremium ? 'animate-enquire-premium-golden-glow' : 'animate-enquire-enhanced-glow'}`}
+              className={`flex-1 bg-gradient-to-r ${buttonGradientFrom} ${buttonGradientTo} hover:from-red-700 hover:to-pink-700 text-white group relative overflow-hidden h-12 rounded-xl font-semibold transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 ${isPremium ? 'animate-professional-golden-glow' : 'animate-professional-gradient'}`}
               asChild
             >
               <Link to="/enrollment" className="flex items-center justify-center">
-                <span className="relative z-10 group-hover:font-bold transition-all duration-300 group-hover:tracking-wider group-hover:text-yellow-100">Enquire Now</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/50 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-out"></div>
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                  <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/30 via-red-400/60 to-pink-400/30 animate-enquire-ripple-wave"></div>
-                </div>
-                <div className={`absolute -inset-2 ${isPremium ? 'bg-gradient-to-r from-amber-400 via-yellow-500 to-amber-400' : 'bg-gradient-to-r from-red-600 via-pink-500 to-red-600'} rounded-xl opacity-0 group-hover:opacity-40 transition-opacity duration-500 blur-md animate-enquire-dynamic-halo`}></div>
+                <span className="relative z-10 group-hover:font-bold transition-all duration-300">Enquire Now</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-out"></div>
               </Link>
             </Button>
           </div>
