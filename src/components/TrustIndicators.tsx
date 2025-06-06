@@ -49,9 +49,9 @@ const AnimatedCounter = ({
         const now = Date.now();
         const progress = Math.min((now - startTime) / duration, 1);
         
-        // Enhanced easing function for smoother animation
-        const easeOutElastic = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress) * Math.sin((progress * 10 - 0.75) * (2 * Math.PI) / 3);
-        const currentCount = Math.floor(easeOutElastic * target);
+        // Smooth easing function
+        const easeOut = 1 - Math.pow(1 - progress, 3);
+        const currentCount = Math.floor(easeOut * target);
         
         setCount(currentCount);
 
@@ -71,63 +71,57 @@ const AnimatedCounter = ({
   return (
     <div 
       ref={elementRef}
-      className="text-3xl font-bold text-red-600 mb-2"
+      className="text-4xl md:text-5xl font-bold text-red-600 mb-3"
     >
       {count}{suffix}
     </div>
   );
 };
 
-// Enhanced Colorful Paper Splash Component
-const PaperSplash = ({ delay = 0 }: { delay?: number }) => {
-  const paperPieces = useMemo(() => [
-    { color: "bg-red-500", size: "w-3 h-3", shape: "rounded-full", position: { top: "20%", left: "10%" }, animation: "animate-bounce", duration: "2s" },
-    { color: "bg-blue-500", size: "w-2 h-4", shape: "transform rotate-45", position: { top: "30%", right: "15%" }, animation: "animate-pulse", duration: "1.5s" },
-    { color: "bg-yellow-500", size: "w-4 h-2", shape: "rounded", position: { bottom: "25%", left: "20%" }, animation: "animate-ping", duration: "2.5s" },
-    { color: "bg-green-500", size: "w-3 h-3", shape: "transform rotate-12", position: { top: "40%", right: "25%" }, animation: "animate-bounce", duration: "1.8s" },
-    { color: "bg-purple-500", size: "w-2 h-3", shape: "rounded-full", position: { bottom: "20%", right: "10%" }, animation: "animate-pulse", duration: "2.2s" },
-    { color: "bg-pink-500", size: "w-4 h-1", shape: "", position: { top: "15%", left: "30%" }, animation: "animate-ping", duration: "1.7s" },
-    { color: "bg-orange-500", size: "w-2 h-2", shape: "rounded", position: { bottom: "35%", left: "35%" }, animation: "animate-bounce", duration: "2.1s" },
-    { color: "bg-cyan-500", size: "w-3 h-2", shape: "transform -rotate-12", position: { top: "25%", left: "45%" }, animation: "animate-pulse", duration: "1.9s" }
-  ], []);
-
-  return (
-    <div className="absolute inset-0 pointer-events-none overflow-hidden">
-      {paperPieces.map((piece, index) => (
-        <div 
-          key={`paper-${index}`}
-          className={`absolute ${piece.size} ${piece.color} ${piece.shape} opacity-70 ${piece.animation}`}
-          style={{ 
-            ...piece.position,
-            animationDelay: `${delay + (index * 200)}ms`,
-            animationDuration: piece.duration
-          }}
-        />
-      ))}
-    </div>
-  );
-};
-
 const TrustIndicators = () => {
   const indicators = useMemo(() => [
-    { value: 60, suffix: "M+", label: "Total Streams", color: "from-green-500 to-emerald-600" },
-    { value: 131, suffix: "+", label: "Countries Reached", color: "from-blue-500 to-purple-600" },
-    { value: 30, suffix: "+", label: "Awards Won", color: "from-yellow-500 to-orange-600" },
-    { value: 5, suffix: "★", label: "Average Rating", color: "from-red-500 to-pink-600" }
+    { 
+      value: 60, 
+      suffix: "M+", 
+      label: "Total Streams", 
+      bgColor: "bg-gradient-to-br from-green-500 to-green-600",
+      shadowColor: "shadow-green-500/20"
+    },
+    { 
+      value: 131, 
+      suffix: "+", 
+      label: "Countries Reached", 
+      bgColor: "bg-gradient-to-br from-blue-500 to-purple-600",
+      shadowColor: "shadow-blue-500/20"
+    },
+    { 
+      value: 30, 
+      suffix: "+", 
+      label: "Awards Won", 
+      bgColor: "bg-gradient-to-br from-yellow-500 to-orange-600",
+      shadowColor: "shadow-orange-500/20"
+    },
+    { 
+      value: 5, 
+      suffix: "★", 
+      label: "Average Rating", 
+      bgColor: "bg-gradient-to-br from-red-500 to-pink-600",
+      shadowColor: "shadow-red-500/20"
+    }
   ], []);
 
   return (
-    <section className="py-20 bg-gradient-to-br from-white via-gray-50 to-white relative overflow-hidden">
-      {/* Background gradient effects */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-0 left-1/4 w-32 h-32 bg-gradient-to-r from-red-500 to-pink-500 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-0 right-1/4 w-40 h-40 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full blur-3xl animate-bounce"></div>
+    <section className="py-20 bg-gradient-to-br from-slate-50 via-white to-red-50 relative overflow-hidden">
+      {/* Subtle background elements */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute top-1/4 left-1/6 w-64 h-64 bg-red-500 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-1/4 right-1/6 w-48 h-48 bg-gray-500 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
       </div>
       
-      <div className="container mx-auto px-6">
-        <div className="text-center mb-16">
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="text-center mb-16 animate-fade-in">
           <h2 className="text-4xl lg:text-6xl font-bold mb-6">
-            <span className="text-transparent bg-gradient-to-r from-red-600 via-pink-600 to-purple-600 bg-clip-text">
+            <span className="text-transparent bg-gradient-to-r from-red-600 via-red-700 to-gray-800 bg-clip-text">
               Trust & Excellence
             </span>
           </h2>
@@ -136,37 +130,40 @@ const TrustIndicators = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto relative z-10">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 max-w-6xl mx-auto">
           {indicators.map((indicator, index) => (
-            <div key={`indicator-${indicator.label}-${index}`} className="text-center relative group">
-              {/* Enhanced card with gradient borders and hover effects */}
-              <div className={`relative bg-white rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-105 border-2 border-transparent hover:border-opacity-50 bg-gradient-to-br ${indicator.color} bg-clip-padding`}>
-                {/* Inner content container */}
-                <div className="bg-white rounded-xl p-4 relative z-10">
+            <div 
+              key={`indicator-${indicator.label}-${index}`} 
+              className="text-center group animate-fade-in"
+              style={{ animationDelay: `${index * 150}ms` }}
+            >
+              {/* Modern card design */}
+              <div className={`relative ${indicator.bgColor} rounded-3xl p-8 transform transition-all duration-500 hover:scale-105 hover:-translate-y-2 ${indicator.shadowColor} shadow-xl hover:shadow-2xl`}>
+                {/* White content container */}
+                <div className="bg-white rounded-2xl p-6 relative z-10 transition-all duration-300 group-hover:bg-gray-50">
                   <AnimatedCounter 
                     target={indicator.value} 
                     suffix={indicator.suffix} 
                     duration={2000} 
-                    delay={index * 300}
+                    delay={index * 200}
                   />
-                  <div className="text-gray-600 font-semibold">{indicator.label}</div>
+                  <div className="text-gray-700 font-semibold text-sm md:text-base leading-tight">
+                    {indicator.label}
+                  </div>
                 </div>
                 
-                {/* Paper splash effects */}
-                <PaperSplash delay={index * 300} />
-                
-                {/* Gradient overlay for hover effect */}
-                <div className={`absolute inset-0 bg-gradient-to-r ${indicator.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500 rounded-2xl`}></div>
+                {/* Hover glow effect */}
+                <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity duration-500 rounded-3xl"></div>
               </div>
             </div>
           ))}
         </div>
         
-        {/* Additional floating elements */}
-        <div className="absolute -top-10 left-10 w-6 h-6 bg-red-400 rounded-full opacity-30 animate-bounce" style={{ animationDelay: '1s' }}></div>
-        <div className="absolute -bottom-10 right-10 w-8 h-8 bg-blue-400 rounded-full opacity-40 animate-pulse" style={{ animationDelay: '1.5s' }}></div>
-        <div className="absolute top-1/2 -left-5 w-4 h-4 bg-yellow-400 rounded-full opacity-50 animate-ping" style={{ animationDelay: '2s' }}></div>
-        <div className="absolute top-1/2 -right-5 w-5 h-5 bg-purple-400 rounded-full opacity-35 animate-bounce" style={{ animationDelay: '2.5s' }}></div>
+        {/* Decorative floating elements */}
+        <div className="absolute top-20 left-10 w-3 h-3 bg-red-400 rounded-full opacity-60 animate-bounce" style={{ animationDelay: '1s', animationDuration: '3s' }}></div>
+        <div className="absolute bottom-20 right-10 w-4 h-4 bg-gray-400 rounded-full opacity-50 animate-bounce" style={{ animationDelay: '2s', animationDuration: '4s' }}></div>
+        <div className="absolute top-1/2 left-5 w-2 h-2 bg-red-500 rounded-full opacity-70 animate-ping" style={{ animationDelay: '1.5s' }}></div>
+        <div className="absolute top-1/3 right-5 w-3 h-3 bg-gray-500 rounded-full opacity-60 animate-pulse" style={{ animationDelay: '3s' }}></div>
       </div>
     </section>
   );
