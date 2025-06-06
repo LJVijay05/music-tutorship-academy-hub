@@ -1,12 +1,34 @@
-
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import NewsletterPopup from "@/components/NewsletterPopup";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Calendar, User, Clock, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 const Blog = () => {
+  const [showNewsletterPopup, setShowNewsletterPopup] = useState(false);
+
+  // Show newsletter popup after 3 seconds on page load
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      // Check if user has already seen the popup (localStorage check)
+      const hasSeenPopup = localStorage.getItem('blog-newsletter-popup-seen');
+      if (!hasSeenPopup) {
+        setShowNewsletterPopup(true);
+      }
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  const handleCloseNewsletterPopup = () => {
+    setShowNewsletterPopup(false);
+    // Mark popup as seen so it doesn't show again
+    localStorage.setItem('blog-newsletter-popup-seen', 'true');
+  };
+
   // Sample blog posts data - replace with actual content
   const blogPosts = [
     {
@@ -208,6 +230,12 @@ const Blog = () => {
       </main>
       
       <Footer />
+
+      {/* Newsletter Popup */}
+      <NewsletterPopup 
+        isOpen={showNewsletterPopup} 
+        onClose={handleCloseNewsletterPopup}
+      />
     </div>
   );
 };
