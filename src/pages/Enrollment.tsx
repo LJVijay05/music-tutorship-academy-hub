@@ -159,7 +159,7 @@ const Enrollment = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-red-50 font-inter">
+    <div className="min-h-screen bg-white font-inter">
       <Navigation />
       
       {/* WhatsApp Floating Button */}
@@ -174,174 +174,130 @@ const Enrollment = () => {
       </div>
 
       <div className="pt-20">
-        {/* Hero Section - Redesigned */}
-        <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-          {/* Background with animated gradient */}
-          <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-800"></div>
-          <div className="absolute inset-0 bg-gradient-to-tr from-red-600/30 via-transparent to-orange-500/20"></div>
-          
-          {/* Animated background elements */}
-          <div className="absolute inset-0 overflow-hidden">
-            <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-red-500/10 rounded-full blur-3xl animate-pulse"></div>
-            <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-orange-500/10 rounded-full blur-3xl animate-pulse delay-2000"></div>
-          </div>
-
-          <div className="container mx-auto px-6 text-center relative z-10">
-            <div className="max-w-5xl mx-auto">
+        {/* Hero Section - Minimal Design */}
+        <section className="py-20 bg-white">
+          <div className="container mx-auto px-6">
+            <div className="max-w-4xl mx-auto text-center">
               {/* Badge */}
-              <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-3 mb-8">
-                <Sparkles className="w-5 h-5 text-yellow-400" />
-                <span className="text-white font-medium">India's Premier Music Production Academy</span>
+              <div className="inline-flex items-center gap-2 bg-red-50 text-red-600 rounded-full px-6 py-2 mb-8 border border-red-100">
+                <Music className="w-4 h-4" />
+                <span className="text-sm font-medium">India's Premier Music Production Academy</span>
               </div>
 
               {/* Main heading */}
-              <h1 className="text-6xl md:text-8xl font-bold mb-8 leading-tight tracking-tight text-white">
+              <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight text-gray-900">
                 Transform Your
-                <span className="block bg-gradient-to-r from-red-400 via-orange-400 to-yellow-400 bg-clip-text text-transparent">
+                <span className="block text-red-600 mt-2">
                   Musical Dreams
                 </span>
-                Into Reality
+                <span className="block text-gray-900 mt-2">
+                  Into Reality
+                </span>
               </h1>
 
               {/* Subtitle */}
-              <p className="text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto mb-12 leading-relaxed">
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-12 leading-relaxed">
                 Join India's most exclusive music production mentorship program designed for serious artists, 
                 creative professionals, and NRI students seeking world-class education that transcends boundaries.
               </p>
 
-              {/* Stats */}
+              {/* Stats - Simple Grid */}
               <div className="grid md:grid-cols-3 gap-8 mb-12">
-                <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6">
-                  <div className="flex items-center justify-center mb-4">
-                    <div className="w-12 h-12 bg-gradient-to-r from-red-500 to-orange-500 rounded-full flex items-center justify-center">
-                      <Award className="w-6 h-6 text-white" />
-                    </div>
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-red-50 rounded-xl mx-auto mb-4 flex items-center justify-center">
+                    <Award className="w-8 h-8 text-red-600" />
                   </div>
-                  <div className="text-3xl font-bold text-white mb-2">Premium</div>
-                  <div className="text-gray-300">Quality Education</div>
+                  <div className="text-2xl font-bold text-gray-900 mb-2">Premium</div>
+                  <div className="text-gray-600">Quality Education</div>
                 </div>
-                <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6">
-                  <div className="flex items-center justify-center mb-4">
-                    <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
-                      <Globe className="w-6 h-6 text-white" />
-                    </div>
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-red-50 rounded-xl mx-auto mb-4 flex items-center justify-center">
+                    <Globe className="w-8 h-8 text-red-600" />
                   </div>
-                  <div className="text-3xl font-bold text-white mb-2">Global</div>
-                  <div className="text-gray-300">Time Zone Support</div>
+                  <div className="text-2xl font-bold text-gray-900 mb-2">Global</div>
+                  <div className="text-gray-600">Time Zone Support</div>
                 </div>
-                <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6">
-                  <div className="flex items-center justify-center mb-4">
-                    <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center">
-                      <Trophy className="w-6 h-6 text-white" />
-                    </div>
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-red-50 rounded-xl mx-auto mb-4 flex items-center justify-center">
+                    <Trophy className="w-8 h-8 text-red-600" />
                   </div>
-                  <div className="text-3xl font-bold text-white mb-2">Industry</div>
-                  <div className="text-gray-300">Recognition</div>
+                  <div className="text-2xl font-bold text-gray-900 mb-2">Industry</div>
+                  <div className="text-gray-600">Recognition</div>
                 </div>
               </div>
 
               {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-                <Button className="bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-700 hover:to-orange-700 text-white px-8 py-4 text-lg font-bold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
-                  <PlayCircle className="w-6 h-6 mr-3" />
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <Button className="bg-red-600 hover:bg-red-700 text-white px-8 py-3 text-lg font-semibold rounded-lg">
                   Start Your Journey Today
                 </Button>
                 <Button 
                   onClick={openWhatsApp}
                   variant="outline" 
-                  className="border-2 border-white/30 text-white hover:bg-white/10 px-8 py-4 text-lg font-semibold rounded-full backdrop-blur-sm"
+                  className="border-red-200 text-red-600 hover:bg-red-50 px-8 py-3 text-lg font-semibold rounded-lg"
                 >
-                  <MessageCircle className="w-5 h-5 mr-2" />
                   Get Free Consultation
                 </Button>
               </div>
             </div>
           </div>
-
-          {/* Scroll indicator */}
-          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-            <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
-              <div className="w-1 h-3 bg-white rounded-full mt-2 animate-pulse"></div>
-            </div>
-          </div>
         </section>
 
-        {/* AI Assistant Section - Redesigned */}
-        <section className="py-24 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 relative overflow-hidden">
-          {/* Background pattern */}
-          <div className="absolute inset-0 bg-black/20"></div>
-          <div className="absolute inset-0 opacity-10">
-            <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1)_1px,transparent_1px)] bg-[length:50px_50px]"></div>
-          </div>
-
-          <div className="container mx-auto px-6 relative z-10">
-            <div className="max-w-5xl mx-auto">
+        {/* AI Assistant Section - Minimal Design */}
+        <section className="py-20 bg-gray-50">
+          <div className="container mx-auto px-6">
+            <div className="max-w-4xl mx-auto">
               <div className="grid lg:grid-cols-2 gap-12 items-center">
                 {/* Left side - Content */}
-                <div className="text-white">
-                  <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2 mb-6">
-                    <Zap className="w-4 h-4 text-yellow-400" />
+                <div>
+                  <div className="inline-flex items-center gap-2 bg-blue-50 text-blue-600 rounded-full px-4 py-2 mb-6">
+                    <Zap className="w-4 h-4" />
                     <span className="text-sm font-medium">AI-Powered Support</span>
                   </div>
                   
-                  <h2 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
+                  <h2 className="text-4xl md:text-5xl font-bold mb-6 leading-tight text-gray-900">
                     Need Expert
-                    <span className="block text-transparent bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text">
+                    <span className="block text-red-600">
                       Guidance?
                     </span>
                   </h2>
                   
-                  <p className="text-xl text-purple-100 mb-8 leading-relaxed">
+                  <p className="text-lg text-gray-600 mb-8 leading-relaxed">
                     Our intelligent assistant is available 24/7 to help you navigate your music production journey, 
                     answer course questions, and guide you toward the perfect program for your goals.
                   </p>
 
                   {/* Features */}
-                  <div className="space-y-4 mb-8">
+                  <div className="space-y-4">
                     <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
-                        <CheckCircle className="w-5 h-5 text-white" />
-                      </div>
-                      <span className="text-purple-100">Instant course recommendations</span>
+                      <CheckCircle className="w-5 h-5 text-green-600" />
+                      <span className="text-gray-700">Instant course recommendations</span>
                     </div>
                     <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
-                        <CheckCircle className="w-5 h-5 text-white" />
-                      </div>
-                      <span className="text-purple-100">Personalized learning paths</span>
+                      <CheckCircle className="w-5 h-5 text-green-600" />
+                      <span className="text-gray-700">Personalized learning paths</span>
                     </div>
                     <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
-                        <CheckCircle className="w-5 h-5 text-white" />
-                      </div>
-                      <span className="text-purple-100">Global student support</span>
+                      <CheckCircle className="w-5 h-5 text-green-600" />
+                      <span className="text-gray-700">Global student support</span>
                     </div>
                   </div>
                 </div>
 
                 {/* Right side - Action buttons */}
-                <div className="text-center lg:text-left">
-                  <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-3xl p-8 shadow-2xl">
-                    <div className="flex justify-center mb-6">
-                      <div className="w-20 h-20 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full flex items-center justify-center shadow-lg">
-                        <MessageCircle className="w-10 h-10 text-white" />
-                      </div>
-                    </div>
+                <div>
+                  <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
+                    <h3 className="text-xl font-bold text-gray-900 mb-2">Start Your Conversation</h3>
+                    <p className="text-gray-600 mb-6">Choose your preferred way to connect with us</p>
                     
-                    <h3 className="text-2xl font-bold text-white mb-4">Start Your Conversation</h3>
-                    <p className="text-purple-100 mb-8">Choose your preferred way to connect with us</p>
-                    
-                    <div className="space-y-4">
-                      <Button className="w-full bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-white py-4 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
-                        <MessageCircle className="w-5 h-5 mr-3" />
+                    <div className="space-y-3">
+                      <Button className="w-full bg-red-600 hover:bg-red-700 text-white py-3 text-base font-semibold rounded-lg">
                         Chat with AI Assistant
                       </Button>
                       <Button 
                         onClick={openWhatsApp}
-                        className="w-full bg-green-500 hover:bg-green-600 text-white py-4 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+                        className="w-full bg-green-500 hover:bg-green-600 text-white py-3 text-base font-semibold rounded-lg"
                       >
-                        <Phone className="w-5 h-5 mr-3" />
                         WhatsApp Support
                       </Button>
                     </div>
@@ -352,23 +308,23 @@ const Enrollment = () => {
           </div>
         </section>
 
-        {/* Why Choose Us Section - Redesigned */}
-        <section className="py-24 bg-gradient-to-br from-slate-50 to-gray-100">
+        {/* Why Choose Us Section - Minimal Design */}
+        <section className="py-20 bg-white">
           <div className="container mx-auto px-6">
             <div className="max-w-6xl mx-auto">
               {/* Header */}
               <div className="text-center mb-16">
-                <div className="inline-flex items-center gap-2 bg-red-100 text-red-700 rounded-full px-6 py-3 mb-6">
-                  <Star className="w-5 h-5" />
-                  <span className="font-semibold">Why We're Different</span>
+                <div className="inline-flex items-center gap-2 bg-yellow-50 text-yellow-600 rounded-full px-6 py-2 mb-6">
+                  <Star className="w-4 h-4" />
+                  <span className="font-medium">Why Choose Us</span>
                 </div>
-                <h2 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
+                <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
                   Excellence That
-                  <span className="block text-transparent bg-gradient-to-r from-red-600 to-orange-600 bg-clip-text">
+                  <span className="block text-red-600">
                     Sets Us Apart
                   </span>
                 </h2>
-                <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                <p className="text-lg text-gray-600 max-w-3xl mx-auto">
                   Discover the premium features and world-class support that make our music production courses 
                   the preferred choice for serious artists worldwide.
                 </p>
@@ -377,93 +333,69 @@ const Enrollment = () => {
               {/* Features Grid */}
               <div className="grid lg:grid-cols-3 gap-8">
                 {/* Expert Mentorship */}
-                <div className="group">
-                  <Card className="h-full border-0 shadow-lg hover:shadow-2xl transition-all duration-500 group-hover:scale-105 bg-white">
-                    <CardContent className="p-8 text-center">
-                      <div className="w-20 h-20 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl mx-auto mb-6 flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300">
-                        <Users className="w-10 h-10 text-white" />
-                      </div>
-                      <h3 className="text-2xl font-bold text-gray-900 mb-4">Expert Mentorship</h3>
-                      <p className="text-gray-600 leading-relaxed mb-6">
-                        Learn directly from industry veterans with decades of experience in music production, 
-                        sound engineering, and artist development across multiple genres.
-                      </p>
-                      <div className="space-y-2">
-                        <div className="flex items-center justify-center gap-2 text-sm text-blue-600">
-                          <CheckCircle className="w-4 h-4" />
-                          <span>Grammy-nominated producers</span>
-                        </div>
-                        <div className="flex items-center justify-center gap-2 text-sm text-blue-600">
-                          <CheckCircle className="w-4 h-4" />
-                          <span>Multi-platinum engineers</span>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
+                <div className="text-center">
+                  <div className="w-20 h-20 bg-blue-50 rounded-2xl mx-auto mb-6 flex items-center justify-center">
+                    <Users className="w-10 h-10 text-blue-600" />
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-4">Expert Mentorship</h3>
+                  <p className="text-gray-600 leading-relaxed mb-6">
+                    Learn directly from industry veterans with decades of experience in music production, 
+                    sound engineering, and artist development across multiple genres.
+                  </p>
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-center gap-2 text-sm text-blue-600">
+                      <CheckCircle className="w-4 h-4" />
+                      <span>Grammy-nominated producers</span>
+                    </div>
+                    <div className="flex items-center justify-center gap-2 text-sm text-blue-600">
+                      <CheckCircle className="w-4 h-4" />
+                      <span>Multi-platinum engineers</span>
+                    </div>
+                  </div>
                 </div>
 
                 {/* Industry Recognition */}
-                <div className="group">
-                  <Card className="h-full border-0 shadow-lg hover:shadow-2xl transition-all duration-500 group-hover:scale-105 bg-white">
-                    <CardContent className="p-8 text-center">
-                      <div className="w-20 h-20 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl mx-auto mb-6 flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300">
-                        <Award className="w-10 h-10 text-white" />
-                      </div>
-                      <h3 className="text-2xl font-bold text-gray-900 mb-4">Industry Recognition</h3>
-                      <p className="text-gray-600 leading-relaxed mb-6">
-                        Earn certifications that open doors to top recording studios, production houses, 
-                        and streaming platforms worldwide. Our credentials are respected globally.
-                      </p>
-                      <div className="space-y-2">
-                        <div className="flex items-center justify-center gap-2 text-sm text-purple-600">
-                          <CheckCircle className="w-4 h-4" />
-                          <span>Industry-standard certification</span>
-                        </div>
-                        <div className="flex items-center justify-center gap-2 text-sm text-purple-600">
-                          <CheckCircle className="w-4 h-4" />
-                          <span>Global career opportunities</span>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
+                <div className="text-center">
+                  <div className="w-20 h-20 bg-purple-50 rounded-2xl mx-auto mb-6 flex items-center justify-center">
+                    <Award className="w-10 h-10 text-purple-600" />
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-4">Industry Recognition</h3>
+                  <p className="text-gray-600 leading-relaxed mb-6">
+                    Earn certifications that open doors to top recording studios, production houses, 
+                    and streaming platforms worldwide. Our credentials are respected globally.
+                  </p>
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-center gap-2 text-sm text-purple-600">
+                      <CheckCircle className="w-4 h-4" />
+                      <span>Industry-standard certification</span>
+                    </div>
+                    <div className="flex items-center justify-center gap-2 text-sm text-purple-600">
+                      <CheckCircle className="w-4 h-4" />
+                      <span>Global career opportunities</span>
+                    </div>
+                  </div>
                 </div>
 
                 {/* Global Accessibility */}
-                <div className="group">
-                  <Card className="h-full border-0 shadow-lg hover:shadow-2xl transition-all duration-500 group-hover:scale-105 bg-white">
-                    <CardContent className="p-8 text-center">
-                      <div className="w-20 h-20 bg-gradient-to-r from-green-500 to-teal-500 rounded-2xl mx-auto mb-6 flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300">
-                        <Globe className="w-10 h-10 text-white" />
-                      </div>
-                      <h3 className="text-2xl font-bold text-gray-900 mb-4">Global Accessibility</h3>
-                      <p className="text-gray-600 leading-relaxed mb-6">
-                        Connect with students and mentors from around the world. Our flexible scheduling 
-                        accommodates every time zone, making quality education accessible globally.
-                      </p>
-                      <div className="space-y-2">
-                        <div className="flex items-center justify-center gap-2 text-sm text-green-600">
-                          <CheckCircle className="w-4 h-4" />
-                          <span>24/7 global support</span>
-                        </div>
-                        <div className="flex items-center justify-center gap-2 text-sm text-green-600">
-                          <CheckCircle className="w-4 h-4" />
-                          <span>Multi-timezone scheduling</span>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </div>
-              </div>
-
-              {/* Bottom CTA */}
-              <div className="text-center mt-16">
-                <div className="bg-gradient-to-r from-red-600 to-orange-600 rounded-3xl p-8 text-white shadow-2xl">
-                  <h3 className="text-3xl font-bold mb-4">Ready to Experience the Difference?</h3>
-                  <p className="text-xl text-red-100 mb-6">Join thousands of successful students who've transformed their musical careers with us</p>
-                  <Button className="bg-white text-red-600 hover:bg-gray-100 px-8 py-4 text-lg font-bold rounded-full shadow-lg hover:shadow-xl transition-all duration-300">
-                    <Music className="w-5 h-5 mr-3" />
-                    Explore Our Programs
-                  </Button>
+                <div className="text-center">
+                  <div className="w-20 h-20 bg-green-50 rounded-2xl mx-auto mb-6 flex items-center justify-center">
+                    <Globe className="w-10 h-10 text-green-600" />
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-4">Global Accessibility</h3>
+                  <p className="text-gray-600 leading-relaxed mb-6">
+                    Connect with students and mentors from around the world. Our flexible scheduling 
+                    accommodates every time zone, making quality education accessible globally.
+                  </p>
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-center gap-2 text-sm text-green-600">
+                      <CheckCircle className="w-4 h-4" />
+                      <span>24/7 global support</span>
+                    </div>
+                    <div className="flex items-center justify-center gap-2 text-sm text-green-600">
+                      <CheckCircle className="w-4 h-4" />
+                      <span>Multi-timezone scheduling</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
