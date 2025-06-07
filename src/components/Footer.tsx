@@ -1,5 +1,5 @@
 
-import { Music, Mail, Phone, Instagram, Youtube, Twitter, MessageCircle } from "lucide-react";
+import { Music, Mail, Phone, Instagram, Youtube, Facebook, MessageCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
@@ -19,16 +19,36 @@ const Footer = () => {
               Elevate your music production journey with personalized mentorship and comprehensive courses designed to unlock your creative potential.
             </p>
             <div className="flex gap-4">
-              <a href="#" className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center text-gray-400 hover:text-red-600 hover:bg-gray-700 transition-all duration-300">
+              <a 
+                href="https://www.instagram.com/musictutorship?igsh=MXY0c3EzaWRxeHBqaA%3D%3D" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center text-gray-400 hover:text-red-600 hover:bg-gray-700 transition-all duration-300"
+              >
                 <Instagram className="w-5 h-5" />
               </a>
-              <a href="#" className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center text-gray-400 hover:text-red-600 hover:bg-gray-700 transition-all duration-300">
+              <a 
+                href="https://www.youtube.com/@Musictutorship" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center text-gray-400 hover:text-red-600 hover:bg-gray-700 transition-all duration-300"
+              >
                 <Youtube className="w-5 h-5" />
               </a>
-              <a href="#" className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center text-gray-400 hover:text-red-600 hover:bg-gray-700 transition-all duration-300">
-                <Twitter className="w-5 h-5" />
+              <a 
+                href="https://www.facebook.com/profile.php?id=61572486945998&mibextid=wwXIfr&rdid=7uYOinh9BkTDM21W#" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center text-gray-400 hover:text-red-600 hover:bg-gray-700 transition-all duration-300"
+              >
+                <Facebook className="w-5 h-5" />
               </a>
-              <a href="https://wa.me/919514499932" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center text-gray-400 hover:text-red-600 hover:bg-gray-700 transition-all duration-300">
+              <a 
+                href="https://wa.me/919514499932" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center text-gray-400 hover:text-red-600 hover:bg-gray-700 transition-all duration-300"
+              >
                 <MessageCircle className="w-5 h-5" />
               </a>
             </div>
@@ -59,18 +79,24 @@ const Footer = () => {
           <div className="space-y-6">
             <h3 className="font-bold text-xl mb-6 text-white">Contact Info</h3>
             <div className="space-y-4">
-              <div className="flex items-center gap-3">
+              <a 
+                href="mailto:contact@musictutorship.com" 
+                className="flex items-center gap-3 text-gray-400 hover:text-white transition-colors duration-300"
+              >
                 <div className="w-8 h-8 bg-red-600 rounded-lg flex items-center justify-center">
                   <Mail className="w-4 h-4 text-white" />
                 </div>
-                <span className="text-gray-400 font-medium">contact@musictutorship.com</span>
-              </div>
-              <div className="flex items-center gap-3">
+                <span className="font-medium">contact@musictutorship.com</span>
+              </a>
+              <a 
+                href="tel:+919514499932" 
+                className="flex items-center gap-3 text-gray-400 hover:text-white transition-colors duration-300"
+              >
                 <div className="w-8 h-8 bg-red-600 rounded-lg flex items-center justify-center">
                   <Phone className="w-4 h-4 text-white" />
                 </div>
-                <span className="text-gray-400 font-medium">+91 9514499932</span>
-              </div>
+                <span className="font-medium">+91 9514499932</span>
+              </a>
             </div>
           </div>
         </div>
