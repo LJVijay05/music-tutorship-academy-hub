@@ -26,6 +26,7 @@ import {
 import { useStudentForm } from "@/hooks/useStudentForm";
 import StudentDataForm from "@/components/StudentDataForm";
 import SuccessPopup from "@/components/SuccessPopup";
+import { Badge } from "@/components/ui/badge";
 
 const Enrollment = () => {
   const [selectedPlan, setSelectedPlan] = useState("annually");
@@ -91,8 +92,8 @@ const Enrollment = () => {
       title: "Complete Music Production Mastery Course",
       subtitle: "From Beginner to Advanced Level",
       monthlyPrice: 11599, // Updated base monthly price
-      sixMonthDiscount: 17, // Increased discount to maintain ₹9,599 effective rate
-      annualDiscount: 17, // Increased discount to maintain ₹9,599 effective rate
+      sixMonthDiscount: 10, // Updated to 10%
+      annualDiscount: 15, // Updated to 15%
       duration: "12 Months Duration",
       batchSize: "15 Students Per Batch",
       popular: true,
@@ -118,8 +119,8 @@ const Enrollment = () => {
       title: "One-on-One Music Production Mentorship",
       subtitle: "Premium Individual Coaching",
       monthlyPrice: 18000, // Adjusted proportionally
-      sixMonthDiscount: 11, // Adjusted to maintain similar pricing structure
-      annualDiscount: 22, // Adjusted to maintain similar pricing structure
+      sixMonthDiscount: 15, // Updated to 15%
+      annualDiscount: 20, // Updated to 20%
       duration: "Personalized Learning Journey",
       batchSize: "Exclusive 1-on-1 Sessions",
       popular: false,
@@ -302,6 +303,11 @@ const Enrollment = () => {
                               <div className="text-[10px] sm:text-xs opacity-80">Save {courses[selectedCourse as keyof typeof courses].annualDiscount}%</div>
                             )}
                           </div>
+                          {(key === "halfYearly" || key === "annually") && (
+                            <Badge className="absolute -top-2 -right-2 bg-orange-500 text-white text-[8px] px-1 py-0.5 animate-pulse">
+                              LIMITED OFFER
+                            </Badge>
+                          )}
                         </Button>
                       ))}
                     </div>
@@ -309,10 +315,10 @@ const Enrollment = () => {
                       <div className="flex items-center gap-2">
                         <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0" />
                         <span className="text-green-800 font-medium text-xs sm:text-sm">
-                          {selectedPlan === "annually" && selectedCourse === "oneOnOne" && `Save ₹${getDiscount().toLocaleString()} with annual payment! Exclusive 22% discount.`}
-                          {selectedPlan === "annually" && selectedCourse === "batch" && `Save ₹${getDiscount().toLocaleString()} with annual payment! 17% discount.`}
-                          {selectedPlan === "halfYearly" && selectedCourse === "oneOnOne" && `Save ₹${getDiscount().toLocaleString()} with 6-month payment! 11% discount.`}
-                          {selectedPlan === "halfYearly" && selectedCourse === "batch" && `Save ₹${getDiscount().toLocaleString()} with 6-month payment! 17% discount.`}
+                          {selectedPlan === "annually" && selectedCourse === "oneOnOne" && `Save ₹${getDiscount().toLocaleString()} with annual payment! Exclusive 20% discount.`}
+                          {selectedPlan === "annually" && selectedCourse === "batch" && `Save ₹${getDiscount().toLocaleString()} with annual payment! 15% discount.`}
+                          {selectedPlan === "halfYearly" && selectedCourse === "oneOnOne" && `Save ₹${getDiscount().toLocaleString()} with 6-month payment! 15% discount.`}
+                          {selectedPlan === "halfYearly" && selectedCourse === "batch" && `Save ₹${getDiscount().toLocaleString()} with 6-month payment! 10% discount.`}
                           {selectedPlan === "monthly" && "Flexible monthly payments with premium support included."}
                         </span>
                       </div>
