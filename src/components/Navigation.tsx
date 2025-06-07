@@ -4,13 +4,14 @@ import { Music, Menu, X } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import StudentDataForm from "./StudentDataForm";
+import SuccessPopup from "./SuccessPopup";
 import { useStudentForm } from "@/hooks/useStudentForm";
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
-  const { showStudentForm, openForm, closeForm } = useStudentForm();
+  const { showStudentForm, showSuccessPopup, openForm, closeForm, showSuccess, closeSuccess } = useStudentForm();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -34,6 +35,11 @@ const Navigation = () => {
     { path: "/blog", label: "Blog" },
     { path: "/contact", label: "Contact Us" }
   ];
+
+  const handleFormSuccess = () => {
+    console.log('Navigation: Student form submitted successfully');
+    showSuccess();
+  };
 
   return (
     <>
@@ -130,7 +136,17 @@ const Navigation = () => {
 
       <StudentDataForm 
         open={showStudentForm} 
-        onOpenChange={closeForm} 
+        onOpenChange={closeForm}
+        onSuccess={handleFormSuccess}
+      />
+
+      <SuccessPopup
+        open={showSuccessPopup}
+        onOpenChange={closeSuccess}
+        title="Successful Registration"
+        message="Thank you! You have successfully registered on our website. You can now proceed to the payment process."
+        buttonText="Continue"
+        redirectTo="/enrollment"
       />
     </>
   );
