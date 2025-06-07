@@ -25,6 +25,7 @@ import {
 } from "lucide-react";
 import { useStudentForm } from "@/hooks/useStudentForm";
 import StudentDataForm from "@/components/StudentDataForm";
+import SuccessPopup from "@/components/SuccessPopup";
 
 const Enrollment = () => {
   const [selectedPlan, setSelectedPlan] = useState("annually");
@@ -32,7 +33,13 @@ const Enrollment = () => {
   const [userNote, setUserNote] = useState("");
   const [hasExistingData, setHasExistingData] = useState(false);
   const [studentData, setStudentData] = useState<any>(null);
-  const { showStudentForm, setShowStudentForm } = useStudentForm();
+  const { 
+    showStudentForm, 
+    showSuccessPopup, 
+    setShowStudentForm, 
+    showSuccess, 
+    closeSuccess 
+  } = useStudentForm();
 
   // Scroll to top when page loads
   useEffect(() => {
@@ -43,16 +50,35 @@ const Enrollment = () => {
     if (storedStudentData) {
       try {
         const parsedData = JSON.parse(storedStudentData);
+        console.log('Enrollment: Found existing student data:', parsedData);
         setStudentData(parsedData);
         setHasExistingData(true);
       } catch (error) {
-        console.error("Error parsing student data:", error);
+        console.error("Enrollment: Error parsing student data:", error);
+        localStorage.removeItem('studentData'); // Clear corrupted data
       }
     } else {
       // If no data exists, show the form
+      console.log('Enrollment: No existing data found, showing form');
       setShowStudentForm(true);
     }
   }, [setShowStudentForm]);
+
+  const handleFormSuccess = () => {
+    console.log('Enrollment: Student form submitted successfully');
+    // Refresh the page data
+    const storedStudentData = localStorage.getItem('studentData');
+    if (storedStudentData) {
+      try {
+        const parsedData = JSON.parse(storedStudentData);
+        setStudentData(parsedData);
+        setHasExistingData(true);
+      } catch (error) {
+        console.error("Enrollment: Error parsing updated student data:", error);
+      }
+    }
+    showSuccess();
+  };
 
   const plans = {
     monthly: { label: "Monthly", discount: 0 },
@@ -191,7 +217,21 @@ const Enrollment = () => {
       <Navigation />
       
       {/* Student Data Form */}
-      <StudentDataForm open={showStudentForm} onOpenChange={setShowStudentForm} />
+      <StudentDataForm 
+        open={showStudentForm} 
+        onOpenChange={setShowStudentForm}
+        onSuccess={handleFormSuccess}
+      />
+
+      {/* Success Popup */}
+      <SuccessPopup
+        open={showSuccessPopup}
+        onOpenChange={closeSuccess}
+        title="Registration Complete!"
+        message="Your information has been successfully saved. You can now proceed with the enrollment and payment process."
+        buttonText="Continue"
+        redirectTo="/enrollment"
+      />
       
       {/* WhatsApp Floating Button */}
       <div className="fixed bottom-6 right-6 z-50">

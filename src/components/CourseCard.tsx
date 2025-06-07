@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { CheckCircle, Users, User, Clock, Star, Info } from "lucide-react";
 import { Link } from "react-router-dom";
 import StudentDataForm from "./StudentDataForm";
+import SuccessPopup from "./SuccessPopup";
 import { useStudentForm } from "@/hooks/useStudentForm";
 
 interface CourseCardProps {
@@ -51,7 +52,24 @@ const CourseCard = ({
   offerSubtext,
   onDetailsClick
 }: CourseCardProps) => {
-  const { showStudentForm, openForm, closeForm } = useStudentForm();
+  const { 
+    showStudentForm, 
+    showSuccessPopup, 
+    openForm, 
+    closeForm, 
+    showSuccess, 
+    closeSuccess 
+  } = useStudentForm();
+
+  const handleEnquireClick = () => {
+    console.log(`CourseCard: Enquire clicked for course ${courseId}`);
+    openForm();
+  };
+
+  const handleFormSuccess = () => {
+    console.log(`CourseCard: Student form submitted successfully for course ${courseId}`);
+    showSuccess();
+  };
 
   return (
     <>
@@ -136,7 +154,7 @@ const CourseCard = ({
                 </Link>
               </Button>
               <Button 
-                onClick={openForm}
+                onClick={handleEnquireClick}
                 className={`bg-gradient-to-r ${buttonGradientFrom} ${buttonGradientTo} hover:from-red-600 hover:to-pink-600 text-white h-7 sm:h-8 rounded-lg font-medium text-xs flex-1 px-2`}
               >
                 <span className="hidden sm:inline">Enquire Now</span>
@@ -149,7 +167,17 @@ const CourseCard = ({
 
       <StudentDataForm 
         open={showStudentForm} 
-        onOpenChange={closeForm} 
+        onOpenChange={closeForm}
+        onSuccess={handleFormSuccess}
+      />
+
+      <SuccessPopup
+        open={showSuccessPopup}
+        onOpenChange={closeSuccess}
+        title="Successful Registration"
+        message="Thank you! You have successfully registered your interest. You can now proceed to explore our enrollment options."
+        buttonText="Continue"
+        redirectTo="/enrollment"
       />
     </>
   );

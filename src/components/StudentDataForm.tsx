@@ -3,7 +3,6 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { useNavigate } from 'react-router-dom';
 import {
   Dialog,
   DialogContent,
@@ -44,10 +43,10 @@ type FormData = z.infer<typeof formSchema>;
 interface StudentDataFormProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  onSuccess?: () => void;
 }
 
-const StudentDataForm = ({ open, onOpenChange }: StudentDataFormProps) => {
-  const navigate = useNavigate();
+const StudentDataForm = ({ open, onOpenChange, onSuccess }: StudentDataFormProps) => {
   const { toast } = useToast();
 
   const form = useForm<FormData>({
@@ -64,21 +63,37 @@ const StudentDataForm = ({ open, onOpenChange }: StudentDataFormProps) => {
   });
 
   const onSubmit = (data: FormData) => {
-    console.log('Student data submitted:', data);
+    console.log('StudentDataForm: Form submitted with data:', data);
     
-    // Store data in localStorage for potential use in enrollment page
-    localStorage.setItem('studentData', JSON.stringify(data));
-    
-    toast({
-      title: "Information Submitted Successfully!",
-      description: "Redirecting you to course enrollment...",
-    });
+    try {
+      // Store data in localStorage for potential use in enrollment page
+      localStorage.setItem('studentData', JSON.stringify(data));
+      console.log('StudentDataForm: Data stored in localStorage');
+      
+      toast({
+        title: "Information Submitted Successfully!",
+        description: "Your details have been saved.",
+      });
 
-    // Close the dialog and redirect to enrollment page
-    onOpenChange(false);
-    setTimeout(() => {
-      navigate('/enrollment');
-    }, 1000);
+      // Close the form and trigger success callback
+      onOpenChange(false);
+      
+      // Small delay to ensure smooth transition
+      setTimeout(() => {
+        if (onSuccess) {
+          console.log('StudentDataForm: Triggering success callback');
+          onSuccess();
+        }
+      }, 300);
+      
+    } catch (error) {
+      console.error('StudentDataForm: Error submitting form:', error);
+      toast({
+        title: "Error",
+        description: "There was an error submitting your information. Please try again.",
+        variant: "destructive",
+      });
+    }
   };
 
   return (
@@ -224,9 +239,10 @@ const StudentDataForm = ({ open, onOpenChange }: StudentDataFormProps) => {
             <div className="pt-4">
               <Button 
                 type="submit" 
+                disabled={form.formState.isSubmitting}
                 className="w-full bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-semibold py-3 rounded-xl transition-all duration-300"
               >
-                Continue to Enrollment
+                {form.formState.isSubmitting ? "Submitting..." : "Continue to Enrollment"}
               </Button>
             </div>
           </form>

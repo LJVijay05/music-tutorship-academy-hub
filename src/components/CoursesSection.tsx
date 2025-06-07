@@ -4,10 +4,18 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import StudentDataForm from "./StudentDataForm";
+import SuccessPopup from "./SuccessPopup";
 import { useStudentForm } from "@/hooks/useStudentForm";
 
 const CoursesSection = () => {
-  const { showStudentForm, openForm, closeForm } = useStudentForm();
+  const { 
+    showStudentForm, 
+    showSuccessPopup, 
+    openForm, 
+    closeForm, 
+    showSuccess, 
+    closeSuccess 
+  } = useStudentForm();
 
   const courses = [
     {
@@ -61,6 +69,16 @@ const CoursesSection = () => {
       offerSubtext: "Enroll for 1 Year & Get 20% Off!"
     }
   ];
+
+  const handleEnquireClick = () => {
+    console.log('CoursesSection: Enquire Now clicked');
+    openForm();
+  };
+
+  const handleFormSuccess = () => {
+    console.log('CoursesSection: Student form submitted successfully');
+    showSuccess();
+  };
 
   return (
     <>
@@ -144,7 +162,7 @@ const CoursesSection = () => {
                         </Link>
                       </Button>
                       <Button 
-                        onClick={openForm}
+                        onClick={handleEnquireClick}
                         className={`bg-gradient-to-r ${course.buttonGradientFrom} ${course.buttonGradientTo} hover:from-red-600 hover:to-pink-600 text-white h-8 rounded-lg font-medium text-xs flex-1`}
                       >
                         Enquire Now
@@ -169,7 +187,17 @@ const CoursesSection = () => {
 
       <StudentDataForm 
         open={showStudentForm} 
-        onOpenChange={closeForm} 
+        onOpenChange={closeForm}
+        onSuccess={handleFormSuccess}
+      />
+
+      <SuccessPopup
+        open={showSuccessPopup}
+        onOpenChange={closeSuccess}
+        title="Successful Registration"
+        message="Thank you! You have successfully registered your interest. You can now proceed to explore our enrollment options."
+        buttonText="Continue"
+        redirectTo="/enrollment"
       />
     </>
   );
