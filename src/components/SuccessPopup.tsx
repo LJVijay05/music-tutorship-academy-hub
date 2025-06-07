@@ -3,7 +3,6 @@ import React from 'react';
 import {
   Dialog,
   DialogContent,
-  DialogHeader,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { CheckCircle } from "lucide-react";
@@ -21,9 +20,9 @@ interface SuccessPopupProps {
 const SuccessPopup = ({ 
   open, 
   onOpenChange,
-  title = "Successful Registration",
-  message = "Thank you! You have successfully registered on our website. You can now proceed to the payment process.",
-  buttonText = "Continue",
+  title = "Registration Complete!",
+  message = "Welcome aboard! Your registration was successful. You can now proceed to enrollment.",
+  buttonText = "Continue to Enrollment",
   redirectTo = "/enrollment"
 }: SuccessPopupProps) => {
   const navigate = useNavigate();
@@ -38,26 +37,43 @@ const SuccessPopup = ({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[400px] bg-gradient-to-br from-white via-red-50 to-white border-0 shadow-2xl">
-        <DialogHeader className="text-center space-y-4 pt-4">
-          <div className="mx-auto w-20 h-20 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-lg">
-            <CheckCircle className="w-10 h-10 text-white" />
+      <DialogContent className="sm:max-w-[420px] bg-white border border-gray-100 shadow-xl rounded-2xl p-0 gap-0">
+        {/* Header with animated checkmark */}
+        <div className="text-center pt-8 pb-6 px-6">
+          <div className="mx-auto w-16 h-16 mb-6 relative">
+            <div 
+              className={`w-16 h-16 bg-green-500 rounded-full flex items-center justify-center shadow-lg transform transition-all duration-700 ${
+                open ? 'scale-100 rotate-0' : 'scale-0 rotate-180'
+              }`}
+            >
+              <CheckCircle 
+                className={`w-8 h-8 text-white transform transition-all duration-500 delay-300 ${
+                  open ? 'scale-100 opacity-100' : 'scale-0 opacity-0'
+                }`} 
+              />
+            </div>
+            {/* Pulse ring animation */}
+            <div 
+              className={`absolute inset-0 w-16 h-16 bg-green-500 rounded-full animate-ping opacity-20 ${
+                open ? 'block' : 'hidden'
+              }`}
+              style={{ animationDuration: '2s', animationIterationCount: '3' }}
+            />
           </div>
           
-          <div className="space-y-2">
-            <h2 className="text-2xl font-bold text-gray-900">
-              {title}
-            </h2>
-            <p className="text-gray-600 text-sm leading-relaxed px-2">
-              {message}
-            </p>
-          </div>
-        </DialogHeader>
+          <h2 className="text-2xl font-bold text-gray-900 mb-3">
+            {title}
+          </h2>
+          <p className="text-gray-600 text-sm leading-relaxed max-w-sm mx-auto">
+            {message}
+          </p>
+        </div>
 
-        <div className="pb-4 pt-2">
+        {/* Footer with button */}
+        <div className="px-6 pb-6">
           <Button 
             onClick={handleContinue}
-            className="w-full bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700 text-white font-semibold py-3 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl"
+            className="w-full bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700 text-white font-medium py-3 h-12 rounded-xl transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-[1.02]"
           >
             {buttonText}
           </Button>
