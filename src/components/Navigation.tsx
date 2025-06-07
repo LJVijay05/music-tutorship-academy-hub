@@ -1,82 +1,86 @@
-
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
-import { Music, Menu, X } from "lucide-react";
-import { Link, useLocation } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { Menu, X } from "lucide-react";
+import DemoPopup from "./DemoPopup";
 import StudentDataForm from "./StudentDataForm";
+import SuccessPopup from "./SuccessPopup";
 import { useStudentForm } from "@/hooks/useStudentForm";
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-  const location = useLocation();
-  const { showStudentForm, openForm, closeForm } = useStudentForm();
+  const [showDemo, setShowDemo] = useState(false);
+  const { 
+    showStudentForm, 
+    showSuccessPopup, 
+    openForm, 
+    closeForm, 
+    showSuccess, 
+    closeSuccess 
+  } = useStudentForm();
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  const toggleMenu = () => {
+    console.log('Navigation: Toggling mobile menu');
+    setIsMenuOpen(!isMenuOpen);
+  };
 
-  // Close mobile menu when location changes
-  useEffect(() => {
-    setIsMenuOpen(false);
-  }, [location.pathname]);
+  const openDemoPopup = () => {
+    console.log('Navigation: Opening demo popup');
+    setShowDemo(true);
+  };
 
-  const isActive = (path: string) => location.pathname === path;
+  const handleRegisterClick = () => {
+    console.log('Navigation: Register Now clicked');
+    openForm();
+  };
 
-  const navItems = [
-    { path: "/", label: "Home" },
-    { path: "/about", label: "About Me" },
-    { path: "/courses", label: "Courses" },
-    { path: "/blog", label: "Blog" },
-    { path: "/contact", label: "Contact Us" }
-  ];
+  const handleFormSuccess = () => {
+    console.log('Navigation: Student form submitted successfully');
+    showSuccess();
+  };
 
   return (
     <>
-      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled 
-          ? 'bg-white/95 backdrop-blur-lg shadow-lg border-b border-gray-100' 
-          : 'bg-white/90 backdrop-blur-sm'
-      }`}>
-        <div className="container mx-auto px-3 sm:px-4 lg:px-6">
-          <div className="flex items-center justify-between h-14 sm:h-16">
-            {/* Logo */}
-            <Link to="/" className="flex items-center gap-1.5 sm:gap-2 font-bold text-base sm:text-lg group transition-all duration-300 hover:scale-105">
-              <div className="w-7 h-7 sm:w-8 sm:h-8 bg-gradient-to-r from-red-600 to-pink-600 rounded-lg flex items-center justify-center shadow-md group-hover:shadow-red-200 transition-all duration-300 group-hover:rotate-3">
-                <Music className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white" />
-              </div>
-              <span className="text-gray-900 tracking-tight text-sm sm:text-base font-semibold">
-                Music <span className="text-transparent bg-gradient-to-r from-red-600 to-pink-600 bg-clip-text">Tutorship</span>
-              </span>
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between h-16">
+            {/* Logo Section */}
+            <Link to="/" className="flex items-center font-bold text-xl text-gray-900">
+              <img src="/logo.svg" alt="Music Tutorship Academy Logo" className="h-8 mr-2" />
+              <span className="hidden sm:inline">Music Tutorship Academy</span>
             </Link>
-
+            
             {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center space-x-1">
-              {navItems.map((item, index) => (
-                <Link
-                  key={item.path}
-                  to={item.path}
-                  className={`relative px-2 xl:px-3 py-2 font-medium text-sm transition-all duration-300 rounded-lg hover:bg-gray-50 group ${
-                    isActive(item.path) ? "text-red-600" : "text-gray-700 hover:text-red-600"
-                  }`}
-                >
-                  {item.label}
-                  <span className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-red-600 to-pink-600 transition-all duration-300 ${
-                    isActive(item.path) ? 'w-6' : 'group-hover:w-6'
-                  }`}></span>
-                </Link>
-              ))}
+            <div className="hidden md:flex items-center space-x-8">
+              <Link to="/" className="text-gray-700 hover:text-red-600 transition-colors duration-300">
+                Home
+              </Link>
+              <Link to="/about" className="text-gray-700 hover:text-red-600 transition-colors duration-300">
+                About
+              </Link>
+              <Link to="/courses" className="text-gray-700 hover:text-red-600 transition-colors duration-300">
+                Courses
+              </Link>
+              <Link to="/blog" className="text-gray-700 hover:text-red-600 transition-colors duration-300">
+                Blog
+              </Link>
+              <Link to="/contact" className="text-gray-700 hover:text-red-600 transition-colors duration-300">
+                Contact
+              </Link>
             </div>
 
-            {/* Register Button - Desktop */}
-            <div className="hidden md:block">
-              <Button 
-                onClick={openForm}
-                className="bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700 text-white px-4 xl:px-6 py-2 text-sm font-medium shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 rounded-lg"
+            {/* Desktop CTA Buttons */}
+            <div className="hidden md:flex items-center space-x-4">
+              <Button
+                variant="outline"
+                onClick={() => setShowDemo(true)}
+                className="border-red-600 text-red-600 hover:bg-red-50 hover:border-red-700 transition-all duration-300"
+              >
+                Book Free Demo
+              </Button>
+              <Button
+                onClick={handleRegisterClick}
+                className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white px-6 py-2 transition-all duration-300"
               >
                 Register Now
               </Button>
@@ -84,53 +88,74 @@ const Navigation = () => {
 
             {/* Mobile Menu Button */}
             <button
-              className="md:hidden p-2 rounded-lg bg-gray-50 hover:bg-gray-100 transition-all duration-300"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+              onClick={toggleMenu}
+              className="md:hidden text-gray-700 focus:outline-none"
+              aria-label="Toggle Menu"
             >
-              <div className="relative w-5 h-5">
-                <Menu className={`w-5 h-5 transition-all duration-300 ${isMenuOpen ? 'opacity-0 rotate-180' : 'opacity-100'}`} />
-                <X className={`w-5 h-5 absolute top-0 left-0 transition-all duration-300 ${isMenuOpen ? 'opacity-100' : 'opacity-0 rotate-180'}`} />
-              </div>
+              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
           </div>
+        </div>
 
-          {/* Mobile Navigation */}
-          <div className={`md:hidden overflow-hidden transition-all duration-500 ${
-            isMenuOpen ? 'max-h-80 opacity-100' : 'max-h-0 opacity-0'
-          }`}>
-            <div className="py-3 space-y-1 border-t border-gray-100">
-              {navItems.map((item, index) => (
-                <Link
-                  key={item.path}
-                  to={item.path}
-                  className={`block px-3 py-2.5 font-medium text-sm transition-all duration-300 rounded-lg hover:bg-red-50 hover:text-red-600 ${
-                    isActive(item.path) ? "text-red-600 bg-red-50" : "text-gray-700"
-                  }`}
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {item.label}
-                </Link>
-              ))}
-              <div className="px-3 pt-2">
-                <Button 
-                  onClick={() => {
-                    openForm();
-                    setIsMenuOpen(false);
-                  }}
-                  className="w-full bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700 text-sm py-2.5 rounded-lg shadow-md"
-                >
-                  Register Now
-                </Button>
-              </div>
+        {/* Mobile Menu */}
+        <div className={`md:hidden fixed top-0 right-0 w-64 h-full bg-white shadow-lg z-50 transform ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'} transition-transform duration-300 ease-in-out`}>
+          <div className="p-4">
+            <div className="flex justify-end mb-4">
+              <button onClick={toggleMenu} className="text-gray-700 focus:outline-none">
+                <X className="h-6 w-6" />
+              </button>
             </div>
+            <nav className="flex flex-col space-y-4">
+              <Link to="/" className="text-gray-700 hover:text-red-600 transition-colors duration-300 block py-2" onClick={toggleMenu}>
+                Home
+              </Link>
+              <Link to="/about" className="text-gray-700 hover:text-red-600 transition-colors duration-300 block py-2" onClick={toggleMenu}>
+                About
+              </Link>
+              <Link to="/courses" className="text-gray-700 hover:text-red-600 transition-colors duration-300 block py-2" onClick={toggleMenu}>
+                Courses
+              </Link>
+              <Link to="/blog" className="text-gray-700 hover:text-red-600 transition-colors duration-300 block py-2" onClick={toggleMenu}>
+                Blog
+              </Link>
+              <Link to="/contact" className="text-gray-700 hover:text-red-600 transition-colors duration-300 block py-2" onClick={toggleMenu}>
+                Contact
+              </Link>
+              <Button
+                variant="outline"
+                onClick={() => { setShowDemo(true); toggleMenu(); }}
+                className="border-red-600 text-red-600 hover:bg-red-50 hover:border-red-700 transition-all duration-300 w-full"
+              >
+                Book Free Demo
+              </Button>
+              <Button
+                onClick={() => { handleRegisterClick(); toggleMenu(); }}
+                className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white py-2 transition-all duration-300 w-full"
+              >
+                Register Now
+              </Button>
+            </nav>
           </div>
         </div>
       </nav>
 
+      <DemoPopup open={showDemo} onOpenChange={setShowDemo} />
+      
+      {/* Student Data Form */}
       <StudentDataForm 
         open={showStudentForm} 
-        onOpenChange={closeForm} 
+        onOpenChange={closeForm}
+        onSuccess={handleFormSuccess}
+      />
+
+      {/* Success Popup */}
+      <SuccessPopup
+        open={showSuccessPopup}
+        onOpenChange={closeSuccess}
+        title="Registration Successful"
+        message="Thank you! You have successfully registered your interest. You can now proceed to explore our enrollment options."
+        buttonText="Continue"
+        redirectTo="/enrollment"
       />
     </>
   );

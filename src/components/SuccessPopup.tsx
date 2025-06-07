@@ -22,7 +22,7 @@ const SuccessPopup = ({
   open, 
   onOpenChange,
   title = "Successful Registration",
-  message = "Thank you! You have successfully registered on our website. You can now proceed to the payment process.",
+  message = "Thank you! You have successfully registered your interest. You can now proceed to explore our enrollment options.",
   buttonText = "Continue",
   redirectTo = "/enrollment"
 }: SuccessPopupProps) => {

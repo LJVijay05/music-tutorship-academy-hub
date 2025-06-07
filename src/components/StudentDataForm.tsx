@@ -27,11 +27,13 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
+import { countries, getAllCities } from "@/data/countries";
 
 const formSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
   email: z.string().email("Please enter a valid email address"),
   phone: z.string().min(10, "Phone number must be at least 10 digits"),
+  countryCode: z.string().min(1, "Please select country code"),
   country: z.string().min(1, "Please select your country"),
   city: z.string().min(2, "City must be at least 2 characters"),
   pincode: z.string().min(4, "Pincode must be at least 4 characters"),
@@ -48,6 +50,7 @@ interface StudentDataFormProps {
 
 const StudentDataForm = ({ open, onOpenChange, onSuccess }: StudentDataFormProps) => {
   const { toast } = useToast();
+  const allCities = getAllCities();
 
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
@@ -55,6 +58,7 @@ const StudentDataForm = ({ open, onOpenChange, onSuccess }: StudentDataFormProps
       name: '',
       email: '',
       phone: '',
+      countryCode: '+91',
       country: '',
       city: '',
       pincode: '',
@@ -138,19 +142,48 @@ const StudentDataForm = ({ open, onOpenChange, onSuccess }: StudentDataFormProps
               )}
             />
 
-            <FormField
-              control={form.control}
-              name="phone"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Phone Number *</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Enter your phone number" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            <div className="grid grid-cols-3 gap-2">
+              <FormField
+                control={form.control}
+                name="countryCode"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Code *</FormLabel>
+                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Code" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent className="max-h-60">
+                        {countries.map((country) => (
+                          <SelectItem key={country.code} value={country.phoneCode}>
+                            {country.phoneCode} ({country.code})
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <div className="col-span-2">
+                <FormField
+                  control={form.control}
+                  name="phone"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Phone Number *</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Enter phone number" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+            </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <FormField
@@ -165,15 +198,12 @@ const StudentDataForm = ({ open, onOpenChange, onSuccess }: StudentDataFormProps
                           <SelectValue placeholder="Select country" />
                         </SelectTrigger>
                       </FormControl>
-                      <SelectContent>
-                        <SelectItem value="india">India</SelectItem>
-                        <SelectItem value="usa">United States</SelectItem>
-                        <SelectItem value="uk">United Kingdom</SelectItem>
-                        <SelectItem value="canada">Canada</SelectItem>
-                        <SelectItem value="australia">Australia</SelectItem>
-                        <SelectItem value="germany">Germany</SelectItem>
-                        <SelectItem value="france">France</SelectItem>
-                        <SelectItem value="other">Other</SelectItem>
+                      <SelectContent className="max-h-60">
+                        {countries.map((country) => (
+                          <SelectItem key={country.code} value={country.name}>
+                            {country.name}
+                          </SelectItem>
+                        ))}
                       </SelectContent>
                     </Select>
                     <FormMessage />
@@ -213,9 +243,20 @@ const StudentDataForm = ({ open, onOpenChange, onSuccess }: StudentDataFormProps
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>City *</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Enter your city" {...field} />
-                    </FormControl>
+                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select or type city" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent className="max-h-60">
+                        {allCities.map((city) => (
+                          <SelectItem key={city} value={city}>
+                            {city}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
                     <FormMessage />
                   </FormItem>
                 )}
