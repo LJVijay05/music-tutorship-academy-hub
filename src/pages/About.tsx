@@ -1,3 +1,4 @@
+
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -149,65 +150,67 @@ const About = () => {
               </p>
             </div>
             
-            {/* Main Spotify Section - Optimized for better fit */}
+            {/* Main Spotify Section - Better fitting within borders */}
             <div className="mb-12 md:mb-16 animate-fade-in" style={{ animationDelay: '0.2s' }}>
               <div className="relative max-w-4xl mx-auto">
-                {/* Spotify Container with optimized styling */}
-                <div className="bg-gradient-to-br from-green-500 via-green-600 to-emerald-600 p-1.5 md:p-2 rounded-2xl md:rounded-3xl shadow-2xl hover:shadow-green-500/20 transition-all duration-700 hover:scale-[1.01] group">
-                  <div className="bg-gradient-to-br from-white via-gray-50 to-green-50 rounded-2xl md:rounded-3xl p-4 md:p-6 lg:p-8 shadow-inner relative overflow-hidden">
+                {/* Spotify Container with improved border fitting */}
+                <div className="bg-gradient-to-br from-green-500 via-green-600 to-emerald-600 p-2 rounded-3xl shadow-2xl hover:shadow-green-500/20 transition-all duration-700 hover:scale-[1.01] group">
+                  <div className="bg-gradient-to-br from-white via-gray-50 to-green-50 rounded-2xl p-6 lg:p-8 shadow-inner relative overflow-hidden">
                     {/* Header with Spotify branding */}
-                    <div className="flex flex-col sm:flex-row items-center justify-center sm:gap-4 md:gap-6 mb-4 md:mb-6">
-                      <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-r from-green-500 to-emerald-600 rounded-full flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform duration-500 mb-2 sm:mb-0">
-                        <Music className="w-8 h-8 md:w-10 md:h-10 text-white" />
+                    <div className="flex flex-col sm:flex-row items-center justify-center sm:gap-6 mb-6">
+                      <div className="w-20 h-20 bg-gradient-to-r from-green-500 to-emerald-600 rounded-full flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform duration-500 mb-3 sm:mb-0">
+                        <Music className="w-10 h-10 text-white" />
                       </div>
                       <div className="text-center sm:text-left">
-                        <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-1 md:mb-2">Featured Portfolio</h3>
-                        <p className="text-lg md:text-xl text-gray-600">Professional Productions & Collaborations</p>
-                        <div className="flex items-center justify-center sm:justify-start gap-2 mt-1 md:mt-2">
-                          <div className="w-2 h-2 md:w-3 md:h-3 bg-green-500 rounded-full animate-pulse"></div>
-                          <span className="text-base md:text-lg text-green-600 font-semibold">Live on Spotify</span>
+                        <h3 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-2">Featured Portfolio</h3>
+                        <p className="text-xl text-gray-600">Professional Productions & Collaborations</p>
+                        <div className="flex items-center justify-center sm:justify-start gap-2 mt-2">
+                          <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+                          <span className="text-lg text-green-600 font-semibold">Live on Spotify</span>
                         </div>
                       </div>
                     </div>
                     
-                    {/* Responsive Spotify Embed */}
-                    <div className="rounded-xl md:rounded-2xl overflow-hidden shadow-xl border-2 md:border-4 border-green-500/20 hover:border-green-500/40 transition-all duration-500">
-                      <div className="aspect-video max-h-[400px]">
-                        <iframe 
-                          style={{borderRadius: '12px'}} 
-                          src="https://open.spotify.com/embed/playlist/1Baqr6iqDkXbHUCXXK8ThG?utm_source=generator&theme=0" 
-                          width="100%" 
-                          height="100%" 
-                          frameBorder="0" 
-                          allowFullScreen 
-                          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
-                          loading="lazy"
-                          className="w-full h-[300px] md:h-[350px] lg:h-[400px]">
-                        </iframe>
-                      </div>
+                    {/* Spotify Embed with improved border fitting */}
+                    <div className="rounded-2xl overflow-hidden shadow-xl border-4 border-green-500/20 hover:border-green-500/40 transition-all duration-500">
+                      <iframe 
+                        style={{
+                          borderRadius: '16px',
+                          border: 'none',
+                          outline: 'none'
+                        }} 
+                        src="https://open.spotify.com/embed/playlist/1Baqr6iqDkXbHUCXXK8ThG?utm_source=generator&theme=0" 
+                        width="100%" 
+                        height="380" 
+                        frameBorder="0" 
+                        allowFullScreen 
+                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                        loading="lazy"
+                        className="w-full h-[280px] sm:h-[320px] md:h-[360px] lg:h-[380px]">
+                      </iframe>
                     </div>
                     
-                    {/* Optimized Stats Grid */}
-                    <div className="mt-4 md:mt-6 lg:mt-8 grid grid-cols-3 gap-2 md:gap-4 lg:gap-6">
-                      <div className="text-center bg-gradient-to-r from-green-500/10 to-emerald-500/10 rounded-lg p-2 md:p-3 lg:p-4 border border-green-500/20">
-                        <div className="text-xl md:text-2xl lg:text-3xl font-bold text-green-600 mb-0.5 md:mb-1">60M+</div>
-                        <div className="text-xs md:text-sm lg:text-base text-gray-600 font-medium">Total Streams</div>
+                    {/* Stats Grid */}
+                    <div className="mt-8 grid grid-cols-3 gap-6">
+                      <div className="text-center bg-gradient-to-r from-green-500/10 to-emerald-500/10 rounded-lg p-4 border border-green-500/20">
+                        <div className="text-3xl font-bold text-green-600 mb-1">60M+</div>
+                        <div className="text-base text-gray-600 font-medium">Total Streams</div>
                       </div>
-                      <div className="text-center bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-lg p-2 md:p-3 lg:p-4 border border-blue-500/20">
-                        <div className="text-xl md:text-2xl lg:text-3xl font-bold text-blue-600 mb-0.5 md:mb-1">131+</div>
-                        <div className="text-xs md:text-sm lg:text-base text-gray-600 font-medium">Countries Reached</div>
+                      <div className="text-center bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-lg p-4 border border-blue-500/20">
+                        <div className="text-3xl font-bold text-blue-600 mb-1">131+</div>
+                        <div className="text-base text-gray-600 font-medium">Countries Reached</div>
                       </div>
-                      <div className="text-center bg-gradient-to-r from-yellow-500/10 to-orange-500/10 rounded-lg p-2 md:p-3 lg:p-4 border border-yellow-500/20">
-                        <div className="text-xl md:text-2xl lg:text-3xl font-bold text-yellow-600 mb-0.5 md:mb-1">30+</div>
-                        <div className="text-xs md:text-sm lg:text-base text-gray-600 font-medium">Awards Won</div>
+                      <div className="text-center bg-gradient-to-r from-yellow-500/10 to-orange-500/10 rounded-lg p-4 border border-yellow-500/20">
+                        <div className="text-3xl font-bold text-yellow-600 mb-1">30+</div>
+                        <div className="text-base text-gray-600 font-medium">Awards Won</div>
                       </div>
                     </div>
                   </div>
                 </div>
                 
                 {/* Floating decorative elements */}
-                <div className="absolute -top-4 -right-4 w-16 h-16 md:w-24 md:h-24 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full opacity-20 animate-bounce"></div>
-                <div className="absolute -bottom-4 -left-4 w-20 h-20 md:w-32 md:h-32 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full opacity-20 animate-pulse"></div>
+                <div className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full opacity-20 animate-bounce"></div>
+                <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full opacity-20 animate-pulse"></div>
               </div>
             </div>
             
