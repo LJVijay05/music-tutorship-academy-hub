@@ -82,18 +82,18 @@ const Courses = () => {
       <main className="pt-16">
         <CoursesHero />
 
-        <section className="py-12 relative" aria-labelledby="courses-heading">
+        <section className="py-8 sm:py-10 md:py-12 relative" aria-labelledby="courses-heading">
           <div className="container mx-auto px-4">
-            <div className="text-center mb-8">
-              <h2 id="courses-heading" className="text-3xl font-bold mb-3 text-gray-900">
+            <div className="text-center mb-6 sm:mb-8">
+              <h2 id="courses-heading" className="text-2xl sm:text-3xl font-bold mb-2 sm:mb-3 text-gray-900">
                 Choose Your Learning Path
               </h2>
-              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto px-4">
                 Whether you prefer collaborative learning or personalized attention, we have the perfect program for you
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 max-w-5xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 max-w-6xl mx-auto">
               {courses.map((course) => (
                 <CourseCard
                   key={course.courseId}
@@ -121,7 +121,7 @@ const Courses = () => {
               ))}
             </div>
 
-            <div className="mt-10">
+            <div className="mt-8 sm:mt-10">
               <TrustIndicators />
             </div>
           </div>
