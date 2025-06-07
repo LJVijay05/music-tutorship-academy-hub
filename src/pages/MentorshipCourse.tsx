@@ -67,10 +67,8 @@ const MentorshipCourse = () => {
         ]
       }
     ],
-    price: "₹49,999",
-    originalPrice: "₹59,999",
-    discount: "20%",
-    courseType: "individual" as const
+    courseType: "individual" as const,
+    showPricing: false
   };
 
   return (

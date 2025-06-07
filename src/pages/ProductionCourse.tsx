@@ -67,10 +67,8 @@ const ProductionCourse = () => {
         ]
       }
     ],
-    price: "₹24,999",
-    originalPrice: "₹29,999",
-    discount: "15%",
-    courseType: "group" as const
+    courseType: "group" as const,
+    showPricing: false
   };
 
   return (
