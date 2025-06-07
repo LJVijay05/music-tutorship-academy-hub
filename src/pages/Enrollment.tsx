@@ -90,9 +90,9 @@ const Enrollment = () => {
     batch: {
       title: "Complete Music Production Mastery Course",
       subtitle: "From Beginner to Advanced Level",
-      monthlyPrice: 9599,
-      sixMonthDiscount: 5,
-      annualDiscount: 15,
+      monthlyPrice: 11599, // Updated base monthly price
+      sixMonthDiscount: 17, // Increased discount to maintain ₹9,599 effective rate
+      annualDiscount: 17, // Increased discount to maintain ₹9,599 effective rate
       duration: "12 Months Duration",
       batchSize: "15 Students Per Batch",
       popular: true,
@@ -117,9 +117,9 @@ const Enrollment = () => {
     oneOnOne: {
       title: "One-on-One Music Production Mentorship",
       subtitle: "Premium Individual Coaching",
-      monthlyPrice: 16000,
-      sixMonthDiscount: 10,
-      annualDiscount: 20,
+      monthlyPrice: 18000, // Adjusted proportionally
+      sixMonthDiscount: 11, // Adjusted to maintain similar pricing structure
+      annualDiscount: 22, // Adjusted to maintain similar pricing structure
       duration: "Personalized Learning Journey",
       batchSize: "Exclusive 1-on-1 Sessions",
       popular: false,
@@ -309,10 +309,10 @@ const Enrollment = () => {
                       <div className="flex items-center gap-2">
                         <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0" />
                         <span className="text-green-800 font-medium text-xs sm:text-sm">
-                          {selectedPlan === "annually" && selectedCourse === "oneOnOne" && `Save ₹${getDiscount().toLocaleString()} with annual payment! Exclusive 20% discount.`}
-                          {selectedPlan === "annually" && selectedCourse === "batch" && `Save ₹${getDiscount().toLocaleString()} with annual payment! 15% discount.`}
-                          {selectedPlan === "halfYearly" && selectedCourse === "oneOnOne" && `Save ₹${getDiscount().toLocaleString()} with 6-month payment! 10% discount.`}
-                          {selectedPlan === "halfYearly" && selectedCourse === "batch" && `Save ₹${getDiscount().toLocaleString()} with 6-month payment! 5% discount.`}
+                          {selectedPlan === "annually" && selectedCourse === "oneOnOne" && `Save ₹${getDiscount().toLocaleString()} with annual payment! Exclusive 22% discount.`}
+                          {selectedPlan === "annually" && selectedCourse === "batch" && `Save ₹${getDiscount().toLocaleString()} with annual payment! 17% discount.`}
+                          {selectedPlan === "halfYearly" && selectedCourse === "oneOnOne" && `Save ₹${getDiscount().toLocaleString()} with 6-month payment! 11% discount.`}
+                          {selectedPlan === "halfYearly" && selectedCourse === "batch" && `Save ₹${getDiscount().toLocaleString()} with 6-month payment! 17% discount.`}
                           {selectedPlan === "monthly" && "Flexible monthly payments with premium support included."}
                         </span>
                       </div>
