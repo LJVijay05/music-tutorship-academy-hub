@@ -93,7 +93,8 @@ const Courses = () => {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 max-w-8xl mx-auto">
+            {/* Optimized grid for better screen fit */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 max-w-6xl mx-auto">
               {courses.map((course) => (
                 <CourseCard
                   key={course.courseId}
