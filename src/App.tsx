@@ -10,6 +10,7 @@ import Courses from "./pages/Courses";
 import CourseSyllabus from "./pages/CourseSyllabus";
 import ProductionCourse from "./pages/ProductionCourse";
 import MentorshipCourse from "./pages/MentorshipCourse";
+import RecordedCourses from "./pages/RecordedCourses";
 import Contact from "./pages/Contact";
 import Blog from "./pages/Blog";
 import Enrollment from "./pages/Enrollment";
@@ -30,6 +31,7 @@ const App = () => (
           <Route path="/courses/:courseId" element={<CourseSyllabus />} />
           <Route path="/courses/production-course" element={<ProductionCourse />} />
           <Route path="/courses/mentorship-90" element={<MentorshipCourse />} />
+          <Route path="/recorded-courses" element={<RecordedCourses />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/enrollment" element={<Enrollment />} />

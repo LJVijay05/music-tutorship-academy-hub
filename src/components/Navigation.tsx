@@ -1,16 +1,23 @@
 
 import { Button } from "@/components/ui/button";
-import { Music, Menu, X } from "lucide-react";
-import { Link, useLocation } from "react-router-dom";
+import { Music, Menu, X, ChevronDown } from "lucide-react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import StudentDataForm from "./StudentDataForm";
 import SuccessPopup from "./SuccessPopup";
 import { useStudentForm } from "@/hooks/useStudentForm";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
   const { showStudentForm, showSuccessPopup, openForm, closeForm, showSuccess, closeSuccess } = useStudentForm();
 
   useEffect(() => {
@@ -31,7 +38,7 @@ const Navigation = () => {
   const navItems = [
     { path: "/", label: "Home" },
     { path: "/about", label: "About Me" },
-    { path: "/courses", label: "Courses" },
+    { path: "/courses", label: "Courses", hasDropdown: true },
     { path: "/blog", label: "Blog" },
     { path: "/contact", label: "Contact Us" }
   ];
@@ -39,6 +46,14 @@ const Navigation = () => {
   const handleFormSuccess = () => {
     console.log('Navigation: Student form submitted successfully');
     showSuccess();
+  };
+
+  const handleRecordedCoursesClick = () => {
+    navigate('/recorded-courses');
+  };
+
+  const handleLiveMentorshipClick = () => {
+    navigate('/courses');
   };
 
   return (
@@ -63,18 +78,48 @@ const Navigation = () => {
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center space-x-1">
               {navItems.map((item, index) => (
-                <Link
-                  key={item.path}
-                  to={item.path}
-                  className={`relative px-2 xl:px-3 py-2 font-medium text-sm transition-all duration-300 rounded-lg hover:bg-gray-50 group ${
-                    isActive(item.path) ? "text-red-600" : "text-gray-700 hover:text-red-600"
-                  }`}
-                >
-                  {item.label}
-                  <span className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-red-600 to-pink-600 transition-all duration-300 ${
-                    isActive(item.path) ? 'w-6' : 'group-hover:w-6'
-                  }`}></span>
-                </Link>
+                item.hasDropdown ? (
+                  <DropdownMenu key={item.path}>
+                    <DropdownMenuTrigger asChild>
+                      <button className={`relative px-2 xl:px-3 py-2 font-medium text-sm transition-all duration-300 rounded-lg hover:bg-gray-50 group flex items-center gap-1 ${
+                        isActive(item.path) ? "text-red-600" : "text-gray-700 hover:text-red-600"
+                      }`}>
+                        {item.label}
+                        <ChevronDown className="w-3 h-3" />
+                        <span className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-red-600 to-pink-600 transition-all duration-300 ${
+                          isActive(item.path) ? 'w-6' : 'group-hover:w-6'
+                        }`}></span>
+                      </button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent className="w-56 bg-white border border-gray-200 shadow-lg rounded-lg z-50">
+                      <DropdownMenuItem 
+                        onClick={handleRecordedCoursesClick}
+                        className="px-4 py-3 hover:bg-red-50 hover:text-red-600 cursor-pointer transition-colors"
+                      >
+                        Recorded Courses
+                      </DropdownMenuItem>
+                      <DropdownMenuItem 
+                        onClick={handleLiveMentorshipClick}
+                        className="px-4 py-3 hover:bg-red-50 hover:text-red-600 cursor-pointer transition-colors"
+                      >
+                        Live Mentorship Courses
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                ) : (
+                  <Link
+                    key={item.path}
+                    to={item.path}
+                    className={`relative px-2 xl:px-3 py-2 font-medium text-sm transition-all duration-300 rounded-lg hover:bg-gray-50 group ${
+                      isActive(item.path) ? "text-red-600" : "text-gray-700 hover:text-red-600"
+                    }`}
+                  >
+                    {item.label}
+                    <span className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-red-600 to-pink-600 transition-all duration-300 ${
+                      isActive(item.path) ? 'w-6' : 'group-hover:w-6'
+                    }`}></span>
+                  </Link>
+                )
               ))}
             </div>
 
@@ -107,16 +152,46 @@ const Navigation = () => {
           }`}>
             <div className="py-3 space-y-1 border-t border-gray-100">
               {navItems.map((item, index) => (
-                <Link
-                  key={item.path}
-                  to={item.path}
-                  className={`block px-3 py-2.5 font-medium text-sm transition-all duration-300 rounded-lg hover:bg-red-50 hover:text-red-600 ${
-                    isActive(item.path) ? "text-red-600 bg-red-50" : "text-gray-700"
-                  }`}
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {item.label}
-                </Link>
+                item.hasDropdown ? (
+                  <div key={item.path} className="space-y-1">
+                    <div className={`block px-3 py-2.5 font-medium text-sm transition-all duration-300 rounded-lg ${
+                      isActive(item.path) ? "text-red-600 bg-red-50" : "text-gray-700"
+                    }`}>
+                      {item.label}
+                    </div>
+                    <div className="pl-6 space-y-1">
+                      <button
+                        onClick={() => {
+                          handleRecordedCoursesClick();
+                          setIsMenuOpen(false);
+                        }}
+                        className="block w-full text-left px-3 py-2 text-sm text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all duration-300"
+                      >
+                        Recorded Courses
+                      </button>
+                      <button
+                        onClick={() => {
+                          handleLiveMentorshipClick();
+                          setIsMenuOpen(false);
+                        }}
+                        className="block w-full text-left px-3 py-2 text-sm text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all duration-300"
+                      >
+                        Live Mentorship Courses
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <Link
+                    key={item.path}
+                    to={item.path}
+                    className={`block px-3 py-2.5 font-medium text-sm transition-all duration-300 rounded-lg hover:bg-red-50 hover:text-red-600 ${
+                      isActive(item.path) ? "text-red-600 bg-red-50" : "text-gray-700"
+                    }`}
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {item.label}
+                  </Link>
+                )
               ))}
               <div className="px-3 pt-2">
                 <Button 
