@@ -1,7 +1,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { CheckCircle, Users, User, Clock, Star, Info } from "lucide-react";
+import { CheckCircle, Clock, Star, Info } from "lucide-react";
 import { Link } from "react-router-dom";
 import StudentDataForm from "./StudentDataForm";
 import SuccessPopup from "./SuccessPopup";
@@ -12,7 +12,7 @@ interface CourseCardProps {
   title: string;
   description: string;
   level: string;
-  icon: typeof Users | typeof User;
+  icon: any;
   features: string[];
   isPopular?: boolean;
   isPremium?: boolean;
@@ -73,92 +73,96 @@ const CourseCard = ({
 
   return (
     <>
-      <article className="group">
-        <Card className={`overflow-hidden border-0 shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl h-full bg-white hover:-translate-y-1 relative ${isPremium ? 'ring-2 ring-amber-200' : ''}`}>
+      <article className="group w-full">
+        <Card className={`overflow-hidden border-0 shadow-xl hover:shadow-2xl transition-all duration-500 rounded-2xl h-full bg-white hover:-translate-y-2 relative group-hover:scale-[1.02] ${isPremium ? 'ring-2 ring-amber-200/50' : ''}`}>
           {/* Popular Badge */}
           {isPopular && (
-            <div className="absolute top-2 sm:top-3 left-2 sm:left-3 z-10">
-              <div className="bg-green-500 text-white px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full text-xs font-bold flex items-center gap-1 shadow-md">
-                <Star className="w-2.5 h-2.5 sm:w-3 sm:h-3 fill-current" />
-                <span className="hidden sm:inline">POPULAR</span>
-                <span className="sm:hidden">POP</span>
+            <div className="absolute top-4 left-4 z-20">
+              <div className="bg-gradient-to-r from-green-500 to-emerald-600 text-white px-3 py-1.5 rounded-full text-xs font-bold flex items-center gap-1.5 shadow-lg backdrop-blur-sm">
+                <Star className="w-3 h-3 fill-current" />
+                <span>POPULAR</span>
               </div>
             </div>
           )}
 
           {/* Premium Badge */}
           {isPremium && (
-            <div className="absolute top-0 right-0 w-12 sm:w-16 h-12 sm:h-16 overflow-hidden z-20">
-              <div className="absolute top-2 sm:top-3 right-[-15px] sm:right-[-20px] bg-gradient-to-r from-amber-500 to-yellow-500 text-xs font-bold px-3 sm:px-5 py-0.5 sm:py-1 transform rotate-45 shadow-md">
-                <span className="text-xs">PREMIUM</span>
+            <div className="absolute top-0 right-0 w-20 h-20 overflow-hidden z-20">
+              <div className="absolute top-4 right-[-25px] bg-gradient-to-r from-amber-500 to-yellow-500 text-white text-xs font-bold px-6 py-1 transform rotate-45 shadow-lg">
+                PREMIUM
               </div>
             </div>
           )}
 
-          <header className={`h-24 sm:h-32 lg:h-36 bg-gradient-to-br ${gradientFrom} ${gradientTo} relative overflow-hidden`}>
+          {/* Header with Image Placeholder */}
+          <header className={`h-48 md:h-56 bg-gradient-to-br ${gradientFrom} ${gradientTo} relative overflow-hidden`}>
             <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-              <div className="text-center px-2 sm:px-3">
-                <IconComponent className="w-6 h-6 sm:w-8 sm:h-8 lg:w-10 lg:h-10 text-white mb-1 sm:mb-2 mx-auto opacity-90" />
-                <div className="bg-white/20 backdrop-blur-sm rounded-lg px-2 sm:px-3 py-0.5 sm:py-1">
-                  <span className="text-white font-semibold text-xs sm:text-sm">{description}</span>
+              <div className="text-center px-4">
+                {/* Placeholder for future image - currently using icon */}
+                <div className="w-16 h-16 md:w-20 md:h-20 mx-auto mb-4 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center">
+                  <IconComponent className="w-8 h-8 md:w-10 md:h-10 text-white opacity-90" />
+                </div>
+                <div className="bg-white/20 backdrop-blur-sm rounded-xl px-4 py-2">
+                  <span className="text-white font-semibold text-sm md:text-base">{description}</span>
                 </div>
               </div>
             </div>
-            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
           </header>
 
-          <CardContent className="p-3 sm:p-4 flex flex-col">
-            <div className="mb-2 sm:mb-3">
-              <h3 className="text-sm sm:text-base lg:text-lg font-bold mb-1 text-gray-900 leading-tight line-clamp-2">{title}</h3>
-              <p className="text-xs sm:text-sm text-gray-600 mb-1">{level}</p>
-              <div className={`text-xs ${textColor} font-semibold ${bgColor} px-2 py-0.5 rounded-full inline-block mb-1 sm:mb-2`}>
+          <CardContent className="p-6 md:p-8 flex flex-col h-auto">
+            {/* Title and Level */}
+            <div className="mb-6">
+              <h3 className="text-lg md:text-xl lg:text-2xl font-bold mb-2 text-gray-900 leading-tight line-clamp-2">{title}</h3>
+              <p className="text-sm md:text-base text-gray-600 mb-3">{level}</p>
+              <div className={`text-xs md:text-sm ${textColor} font-semibold ${bgColor} px-3 py-1.5 rounded-full inline-block`}>
                 {description}
               </div>
             </div>
             
-            <div className="flex-grow">
-              <ul className="space-y-0.5 sm:space-y-1 mb-2 sm:mb-3 text-xs sm:text-sm">
+            {/* Features */}
+            <div className="flex-grow mb-6">
+              <ul className="space-y-2 md:space-y-3 mb-4 text-sm md:text-base">
                 {features.slice(0, 4).map((feature, index) => (
-                  <li key={index} className="flex items-start gap-1.5 sm:gap-2">
-                    <CheckCircle className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-green-600 flex-shrink-0 mt-0.5" />
-                    <span className="text-gray-700 line-clamp-1">{feature}</span>
+                  <li key={index} className="flex items-start gap-3">
+                    <CheckCircle className="w-4 h-4 md:w-5 md:h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                    <span className="text-gray-700 leading-relaxed">{feature}</span>
                   </li>
                 ))}
                 {features.length > 4 && (
-                  <li className="text-xs text-gray-500 pl-4 sm:pl-5">
+                  <li className="text-sm text-gray-500 pl-7 md:pl-8 font-medium">
                     +{features.length - 4} more features
                   </li>
                 )}
               </ul>
               
-              <div className={`flex items-start gap-1.5 sm:gap-2 mb-2 sm:mb-3 p-1.5 sm:p-2 ${bgColor} rounded-lg border ${borderColor} text-xs sm:text-sm`}>
-                <Clock className={`w-3 h-3 sm:w-4 sm:h-4 ${textColor.replace('text-', 'text-').replace('-700', '-600')} flex-shrink-0 mt-0.5`} />
+              {/* Offer Banner */}
+              <div className={`flex items-start gap-3 p-4 ${bgColor} rounded-xl border ${borderColor} text-sm md:text-base shadow-sm`}>
+                <Clock className={`w-4 h-4 md:w-5 md:h-5 ${textColor.replace('text-', 'text-').replace('-700', '-600')} flex-shrink-0 mt-0.5`} />
                 <div>
-                  <p className={`font-semibold ${textColor} text-xs`}>{offerText}</p>
-                  <p className={`text-xs ${textColor.replace('text-', 'text-').replace('-700', '-600')} line-clamp-1`}>{offerSubtext}</p>
+                  <p className={`font-bold ${textColor} text-sm md:text-base`}>{offerText}</p>
+                  <p className={`text-xs md:text-sm ${textColor.replace('text-', 'text-').replace('-700', '-600')} mt-1`}>{offerSubtext}</p>
                 </div>
               </div>
             </div>
             
             {/* Action Buttons */}
-            <div className="flex gap-1.5 sm:gap-2 mt-1 sm:mt-2">
+            <div className="flex gap-3 mt-auto">
               <Button 
                 variant="outline" 
-                className="border border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400 transition-all duration-300 h-7 sm:h-8 rounded-lg font-medium text-xs flex-1 px-2"
+                className="border-2 border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400 transition-all duration-300 h-11 md:h-12 rounded-xl font-semibold text-sm md:text-base flex-1 hover:scale-105"
                 asChild
               >
                 <Link to={`/courses/${courseId}`}>
-                  <Info className="w-2.5 h-2.5 sm:w-3 sm:h-3 mr-1" />
-                  <span className="hidden sm:inline">Details</span>
-                  <span className="sm:hidden">Info</span>
+                  <Info className="w-4 h-4 mr-2" />
+                  Details
                 </Link>
               </Button>
               <Button 
                 onClick={handleEnquireClick}
-                className={`bg-gradient-to-r ${buttonGradientFrom} ${buttonGradientTo} hover:from-red-600 hover:to-pink-600 text-white h-7 sm:h-8 rounded-lg font-medium text-xs flex-1 px-2`}
+                className={`bg-gradient-to-r ${buttonGradientFrom} ${buttonGradientTo} hover:from-red-600 hover:to-pink-600 text-white h-11 md:h-12 rounded-xl font-semibold text-sm md:text-base flex-1 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105`}
               >
-                <span className="hidden sm:inline">Enquire Now</span>
-                <span className="sm:hidden">Enquire</span>
+                Enquire Now
               </Button>
             </div>
           </CardContent>
