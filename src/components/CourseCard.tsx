@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import StudentDataForm from "./StudentDataForm";
 import SuccessPopup from "./SuccessPopup";
 import { useStudentForm } from "@/hooks/useStudentForm";
+import { memo, useCallback } from "react";
 
 interface CourseCardProps {
   courseId: string;
@@ -31,7 +32,7 @@ interface CourseCardProps {
   imageUrl?: string;
 }
 
-const CourseCard = ({
+const CourseCard = memo(({
   courseId,
   title,
   description,
@@ -63,20 +64,20 @@ const CourseCard = ({
     closeSuccess 
   } = useStudentForm();
 
-  const handleEnquireClick = () => {
+  const handleEnquireClick = useCallback(() => {
     console.log(`CourseCard: Enquire clicked for course ${courseId}`);
     openForm();
-  };
+  }, [courseId, openForm]);
 
-  const handleFormSuccess = () => {
+  const handleFormSuccess = useCallback(() => {
     console.log(`CourseCard: Student form submitted successfully for course ${courseId}`);
     showSuccess();
-  };
+  }, [courseId, showSuccess]);
 
   return (
     <>
       <article className="group w-full h-full">
-        <Card className={`overflow-hidden border-0 shadow-xl hover:shadow-2xl transition-all duration-500 ease-out rounded-2xl h-full bg-white hover:-translate-y-2 relative group-hover:scale-[1.02] ${isPremium ? 'ring-2 ring-amber-200/60 animate-premium-golden-glow' : ''} max-w-lg mx-auto`}>
+        <Card className={`overflow-hidden border-0 shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-2xl h-full bg-white relative ${isPremium ? 'ring-2 ring-amber-200/60' : ''} max-w-lg mx-auto`}>
           {/* Popular Badge */}
           {isPopular && (
             <div className="absolute top-4 left-4 z-30">
@@ -96,7 +97,7 @@ const CourseCard = ({
             </div>
           )}
 
-          {/* Optimized Header with better screen fit */}
+          {/* Header */}
           <header className={`h-48 md:h-52 bg-gradient-to-br ${gradientFrom} ${gradientTo} relative overflow-hidden`}>
             <div className="absolute inset-0">
               {imageUrl ? (
@@ -113,7 +114,6 @@ const CourseCard = ({
             
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/20 flex items-center justify-center">
               <div className="text-center px-4 max-w-xs">
-                {/* Optimized icon container for better screen fit */}
                 <div className="w-16 h-16 md:w-18 md:h-18 mx-auto mb-4 bg-white/15 backdrop-blur-lg rounded-2xl flex items-center justify-center border border-white/20 shadow-xl">
                   <IconComponent className="w-8 h-8 md:w-9 md:h-9 text-white opacity-95" />
                 </div>
@@ -125,7 +125,7 @@ const CourseCard = ({
           </header>
 
           <CardContent className="p-6 md:p-7 flex flex-col h-auto">
-            {/* Optimized Title and Level Section */}
+            {/* Title and Level Section */}
             <div className="mb-6">
               <h3 className="text-lg md:text-xl font-bold mb-3 text-gray-900 leading-tight line-clamp-2">{title}</h3>
               <p className="text-sm md:text-base text-gray-600 mb-3 font-medium">{level}</p>
@@ -134,7 +134,7 @@ const CourseCard = ({
               </div>
             </div>
             
-            {/* Optimized Features Section */}
+            {/* Features Section */}
             <div className="flex-grow mb-6">
               <ul className="space-y-2.5 mb-5 text-sm md:text-base">
                 {features.slice(0, 4).map((feature, index) => (
@@ -150,7 +150,7 @@ const CourseCard = ({
                 )}
               </ul>
               
-              {/* Optimized Offer Banner */}
+              {/* Offer Banner */}
               <div className={`flex items-start gap-3 p-4 ${bgColor} rounded-xl border-2 ${borderColor} text-sm md:text-base shadow-lg`}>
                 <Clock className={`w-5 h-5 ${textColor.replace('text-', 'text-').replace('-700', '-600')} flex-shrink-0 mt-0.5`} />
                 <div>
@@ -160,11 +160,11 @@ const CourseCard = ({
               </div>
             </div>
             
-            {/* Optimized Action Buttons */}
+            {/* Action Buttons */}
             <div className="flex gap-3 mt-auto">
               <Button 
                 variant="outline" 
-                className="border-2 border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400 transition-all duration-300 h-11 md:h-12 rounded-xl font-bold text-sm md:text-base flex-1 hover:scale-105 shadow-md hover:shadow-lg"
+                className="border-2 border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400 transition-colors duration-200 h-11 md:h-12 rounded-xl font-bold text-sm md:text-base flex-1 shadow-md"
                 asChild
               >
                 <Link to={`/courses/${courseId}`}>
@@ -174,7 +174,7 @@ const CourseCard = ({
               </Button>
               <Button 
                 onClick={handleEnquireClick}
-                className={`bg-gradient-to-r ${buttonGradientFrom} ${buttonGradientTo} hover:from-red-600 hover:to-pink-600 text-white h-11 md:h-12 rounded-xl font-bold text-sm md:text-base flex-1 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 border-2 border-white/20`}
+                className={`bg-gradient-to-r ${buttonGradientFrom} ${buttonGradientTo} hover:from-red-600 hover:to-pink-600 text-white h-11 md:h-12 rounded-xl font-bold text-sm md:text-base flex-1 shadow-lg transition-colors duration-200 border-2 border-white/20`}
               >
                 Enquire Now
               </Button>
@@ -199,6 +199,8 @@ const CourseCard = ({
       />
     </>
   );
-};
+});
+
+CourseCard.displayName = 'CourseCard';
 
 export default CourseCard;

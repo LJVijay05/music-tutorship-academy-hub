@@ -5,8 +5,9 @@ import Footer from "@/components/Footer";
 import CoursesHero from "@/components/CoursesHero";
 import CourseCard from "@/components/CourseCard";
 import TrustIndicators from "@/components/TrustIndicators";
+import { memo } from "react";
 
-const Courses = () => {
+const Courses = memo(() => {
   const batchFeatures = [
     "15 students per batch",
     "12 months intensive program",
@@ -93,7 +94,6 @@ const Courses = () => {
               </p>
             </div>
 
-            {/* Optimized grid for better screen fit */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 max-w-6xl mx-auto">
               {courses.map((course) => (
                 <CourseCard
@@ -132,6 +132,8 @@ const Courses = () => {
       <Footer />
     </div>
   );
-};
+});
+
+Courses.displayName = 'Courses';
 
 export default Courses;
