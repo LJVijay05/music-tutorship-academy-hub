@@ -82,18 +82,18 @@ const Courses = () => {
       <main className="pt-16">
         <CoursesHero />
 
-        <section className="py-8 sm:py-10 md:py-12 relative" aria-labelledby="courses-heading">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-6 sm:mb-8">
-              <h2 id="courses-heading" className="text-2xl sm:text-3xl font-bold mb-2 sm:mb-3 text-gray-900">
+        <section className="py-12 sm:py-16 md:py-20 relative" aria-labelledby="courses-heading">
+          <div className="container mx-auto px-4 md:px-6 lg:px-8 xl:px-12">
+            <div className="text-center mb-12 sm:mb-16">
+              <h2 id="courses-heading" className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 text-gray-900">
                 Choose Your Learning Path
               </h2>
-              <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto px-4">
+              <p className="text-lg sm:text-xl md:text-2xl text-gray-600 max-w-4xl mx-auto px-4 font-medium">
                 Whether you prefer collaborative learning or personalized attention, we have the perfect program for you
               </p>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 max-w-8xl mx-auto">
               {courses.map((course) => (
                 <CourseCard
                   key={course.courseId}
@@ -121,7 +121,7 @@ const Courses = () => {
               ))}
             </div>
 
-            <div className="mt-8 sm:mt-10">
+            <div className="mt-12 sm:mt-16">
               <TrustIndicators />
             </div>
           </div>

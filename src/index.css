@@ -76,65 +76,75 @@
     font-display: swap;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
   }
 
-  /* Performance optimizations */
+  /* Enhanced performance optimizations */
   img {
     content-visibility: auto;
     will-change: transform;
+    image-rendering: optimizeQuality;
   }
 
   /* Responsive typography with better scaling */
   html {
-    font-size: clamp(14px, 2.5vw, 16px);
+    font-size: clamp(14px, 2.5vw, 18px);
     -webkit-text-size-adjust: 100%;
+  }
+
+  /* Critical CSS for above-the-fold content */
+  .critical-above-fold {
+    contain: layout style paint;
   }
 
   /* Optimize for touch devices */
   @media (hover: none) and (pointer: coarse) {
-    .hover\:scale-105:hover {
+    .hover\:scale-105:hover,
+    .hover\:scale-\[1\.02\]:hover,
+    .hover\:scale-\[1\.03\]:hover {
       transform: none;
     }
     
-    .hover\:-translate-y-2:hover {
+    .hover\:-translate-y-2:hover,
+    .hover\:-translate-y-3:hover {
       transform: none;
     }
   }
 }
 
 @layer utilities {
-  /* Enhanced animations with hardware acceleration */
+  /* Enhanced premium animations */
   @keyframes premium-float {
     0%, 100% {
       transform: translate3d(0, 0, 0) scale(1);
     }
     50% {
-      transform: translate3d(0, -8px, 0) scale(1.02);
+      transform: translate3d(0, -12px, 0) scale(1.02);
     }
   }
 
   @keyframes premium-gradient {
     0%, 100% {
-      box-shadow: 0 10px 40px -10px rgba(220, 38, 38, 0.3);
+      box-shadow: 0 15px 50px -15px rgba(220, 38, 38, 0.4);
     }
     50% {
-      box-shadow: 0 20px 60px -10px rgba(220, 38, 38, 0.4), 0 0 30px rgba(220, 38, 38, 0.2);
+      box-shadow: 0 25px 80px -15px rgba(220, 38, 38, 0.5), 0 0 40px rgba(220, 38, 38, 0.25);
     }
   }
 
   @keyframes premium-golden-glow {
     0%, 100% {
-      box-shadow: 0 10px 40px -10px rgba(245, 158, 11, 0.3);
+      box-shadow: 0 15px 50px -15px rgba(245, 158, 11, 0.4);
     }
     50% {
-      box-shadow: 0 20px 60px -10px rgba(251, 191, 36, 0.4), 0 0 30px rgba(251, 191, 36, 0.2);
+      box-shadow: 0 25px 80px -15px rgba(251, 191, 36, 0.5), 0 0 40px rgba(251, 191, 36, 0.3);
     }
   }
 
   @keyframes fade-in-up {
     0% {
       opacity: 0;
-      transform: translate3d(0, 30px, 0);
+      transform: translate3d(0, 40px, 0);
     }
     100% {
       opacity: 1;
@@ -145,7 +155,7 @@
   @keyframes stagger-fade {
     0% {
       opacity: 0;
-      transform: translate3d(0, 20px, 0) scale(0.95);
+      transform: translate3d(0, 30px, 0) scale(0.95);
     }
     100% {
       opacity: 1;
@@ -153,61 +163,57 @@
     }
   }
 
-  /* Responsive container utilities */
+  /* Enhanced responsive utilities */
   .container-responsive {
-    @apply w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+    @apply w-full max-w-8xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16;
   }
 
   .text-responsive {
-    @apply text-sm sm:text-base lg:text-lg;
+    @apply text-base sm:text-lg md:text-xl;
   }
 
   .heading-responsive {
-    @apply text-xl sm:text-2xl lg:text-3xl xl:text-4xl;
+    @apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl;
   }
 
-  /* Premium card utilities */
+  /* Premium card utilities with enhanced shadows */
   .card-premium {
-    @apply shadow-xl hover:shadow-2xl transition-all duration-500 rounded-2xl;
+    @apply shadow-2xl hover:shadow-3xl transition-all duration-700 rounded-3xl;
     will-change: transform, box-shadow;
   }
 
   .card-premium:hover {
-    transform: translate3d(0, -8px, 0) scale(1.02);
+    transform: translate3d(0, -12px, 0) scale(1.03);
   }
 
-  /* Animation classes with reduced motion support */
+  /* Enhanced animation classes */
   @media (prefers-reduced-motion: no-preference) {
     .animate-premium-float {
-      animation: premium-float 4s ease-in-out infinite;
-    }
-
-    .animate-premium-gradient {
-      animation: premium-gradient 3s ease-in-out infinite;
-    }
-
-    .animate-premium-golden-glow {
-      animation: premium-golden-glow 2.5s ease-in-out infinite;
-    }
-
-    .animate-fade-in-up {
-      animation: fade-in-up 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-    }
-
-    .animate-stagger-fade {
-      animation: stagger-fade 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-    }
-
-    .animate-zoom-in-up {
-      animation: fade-in-up 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-    }
-
-    .animate-float {
       animation: premium-float 6s ease-in-out infinite;
     }
 
+    .animate-premium-gradient {
+      animation: premium-gradient 4s ease-in-out infinite;
+    }
+
+    .animate-premium-golden-glow {
+      animation: premium-golden-glow 3s ease-in-out infinite;
+    }
+
+    .animate-fade-in-up {
+      animation: fade-in-up 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    }
+
+    .animate-stagger-fade {
+      animation: stagger-fade 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    }
+
+    .animate-float {
+      animation: premium-float 8s ease-in-out infinite;
+    }
+
     .animate-float-delayed {
-      animation: premium-float 6s ease-in-out infinite 2s;
+      animation: premium-float 8s ease-in-out infinite 3s;
     }
   }
 
@@ -218,7 +224,6 @@
     .animate-premium-golden-glow,
     .animate-fade-in-up,
     .animate-stagger-fade,
-    .animate-zoom-in-up,
     .animate-float,
     .animate-float-delayed {
       animation: none;
@@ -229,12 +234,12 @@
     }
   }
 
-  /* Focus visible for accessibility */
+  /* Enhanced focus styles for accessibility */
   .focus-visible-ring {
-    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2;
+    @apply focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-red-500 focus-visible:ring-offset-4;
   }
 
-  /* Text utilities */
+  /* Enhanced text utilities */
   .line-clamp-1 {
     display: -webkit-box;
     -webkit-line-clamp: 1;
@@ -256,28 +261,63 @@
     overflow: hidden;
   }
 
-  /* Performance critical CSS */
-  .critical-above-fold {
-    contain: layout style paint;
+  /* Enhanced shadow utilities */
+  .shadow-3xl {
+    box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.1);
+  }
+
+  /* Performance optimizations */
+  .gpu-accelerated {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
   }
 }
 
-/* Performance optimizations for mobile */
+/* Enhanced mobile optimizations */
 @media (max-width: 640px) {
   .mobile-optimized {
     touch-action: manipulation;
     -webkit-tap-highlight-color: transparent;
   }
 
-  /* Reduce animations on mobile for battery saving */
+  /* Optimize animations for mobile performance */
   .card-premium:hover {
-    transform: translate3d(0, -4px, 0);
+    transform: translate3d(0, -6px, 0) scale(1.02);
+  }
+
+  /* Reduce motion intensity on mobile */
+  .animate-premium-float {
+    animation-duration: 8s;
   }
 }
 
-/* Improve font loading performance */
-@media (min-width: 768px) {
-  body {
+/* Tablet optimizations */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .tablet-optimized {
     font-size: 16px;
+  }
+}
+
+/* Desktop optimizations */
+@media (min-width: 1025px) {
+  .desktop-optimized {
+    font-size: 18px;
+  }
+}
+
+/* Performance critical loading states */
+@media (prefers-reduced-data: reduce) {
+  .animate-premium-float,
+  .animate-premium-gradient,
+  .animate-premium-golden-glow {
+    animation: none;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .card-premium {
+    border: 2px solid currentColor;
   }
 }

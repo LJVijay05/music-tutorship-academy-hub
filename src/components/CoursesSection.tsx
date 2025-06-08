@@ -82,94 +82,94 @@ const CoursesSection = () => {
 
   return (
     <>
-      <section id="courses" className="py-16 lg:py-24 bg-gradient-to-br from-slate-50 via-white to-red-50 relative overflow-hidden">
-        {/* Background Effects */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-20 left-20 w-40 h-40 bg-gradient-to-r from-red-400 to-pink-500 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-20 right-20 w-48 h-48 bg-gradient-to-r from-yellow-400 to-red-500 rounded-full blur-3xl animate-pulse delay-1000"></div>
+      <section id="courses" className="py-20 lg:py-28 bg-gradient-to-br from-slate-50 via-white to-red-50 relative overflow-hidden">
+        {/* Optimized Background Effects */}
+        <div className="absolute inset-0 opacity-10 pointer-events-none">
+          <div className="absolute top-20 left-20 w-40 h-40 bg-gradient-to-r from-red-400 to-pink-500 rounded-full blur-3xl animate-float"></div>
+          <div className="absolute bottom-20 right-20 w-48 h-48 bg-gradient-to-r from-yellow-400 to-red-500 rounded-full blur-3xl animate-float-delayed"></div>
         </div>
         
-        <div className="container mx-auto px-4 lg:px-8 relative z-10">
-          <div className="text-center mb-12 lg:mb-16">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
+        <div className="container mx-auto px-4 md:px-6 lg:px-8 xl:px-12 relative z-10">
+          <div className="text-center mb-16 lg:mb-20">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-8">
               Choose Your <span className="bg-gradient-to-r from-red-600 to-pink-600 bg-clip-text text-transparent">Musical Journey</span>
             </h2>
-            <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl md:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed font-medium">
               Whether you prefer collaborative learning or personalized attention, we have the perfect program for you
             </p>
           </div>
           
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 max-w-7xl mx-auto">
+          {/* Optimized Grid Layout */}
+          <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 max-w-8xl mx-auto">
             {courses.map((course, index) => (
-              <article key={course.id} className="group" style={{ animationDelay: `${index * 0.2}s` }}>
-                <Card className="overflow-hidden border-0 shadow-xl hover:shadow-2xl transition-all duration-500 rounded-2xl h-full bg-white hover:-translate-y-2 relative group-hover:scale-[1.02]">
+              <article key={course.id} className="group animate-fade-in-up" style={{ animationDelay: `${index * 0.3}s` }}>
+                <Card className="overflow-hidden border-0 shadow-2xl hover:shadow-3xl transition-all duration-700 ease-out rounded-3xl h-full bg-white hover:-translate-y-3 relative group-hover:scale-[1.03]">
                   {/* Popular Badge */}
                   {course.isPopular && (
-                    <div className="absolute top-4 left-4 z-20">
-                      <div className="bg-gradient-to-r from-green-500 to-emerald-600 text-white px-3 py-1.5 rounded-full text-xs font-bold flex items-center gap-1.5 shadow-lg backdrop-blur-sm">
-                        <Star className="w-3 h-3 fill-current" />
+                    <div className="absolute top-6 left-6 z-30">
+                      <div className="bg-gradient-to-r from-green-500 to-emerald-600 text-white px-4 py-2 rounded-full text-sm font-bold flex items-center gap-2 shadow-xl backdrop-blur-sm border border-white/20">
+                        <Star className="w-4 h-4 fill-current" />
                         POPULAR
                       </div>
                     </div>
                   )}
 
-                  <header className={`h-48 md:h-56 bg-gradient-to-br ${course.gradientFrom} ${course.gradientTo} relative overflow-hidden`}>
-                    <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-                      <div className="text-center px-4">
-                        {/* Placeholder for future image - currently using icon */}
-                        <div className="w-16 h-16 md:w-20 md:h-20 mx-auto mb-4 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center">
-                          <course.icon className="w-8 h-8 md:w-10 md:h-10 text-white opacity-90" />
+                  <header className={`h-64 md:h-72 lg:h-80 bg-gradient-to-br ${course.gradientFrom} ${course.gradientTo} relative overflow-hidden`}>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/20 flex items-center justify-center">
+                      <div className="text-center px-6 max-w-md">
+                        {/* Enhanced icon container */}
+                        <div className="w-20 h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 mx-auto mb-6 bg-white/15 backdrop-blur-lg rounded-3xl flex items-center justify-center border border-white/20 shadow-2xl">
+                          <course.icon className="w-10 h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 text-white opacity-95" />
                         </div>
-                        <div className="bg-white/20 backdrop-blur-sm rounded-xl px-4 py-2">
-                          <span className="text-white font-semibold text-sm md:text-base">{course.description}</span>
+                        <div className="bg-white/20 backdrop-blur-lg rounded-2xl px-6 py-3 border border-white/20">
+                          <span className="text-white font-bold text-base md:text-lg">{course.description}</span>
                         </div>
                       </div>
                     </div>
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
                   </header>
 
-                  <CardContent className="p-6 md:p-8 flex flex-col h-auto">
+                  <CardContent className="p-8 md:p-10 lg:p-12 flex flex-col h-auto">
                     {/* Title and Level */}
-                    <div className="mb-6">
-                      <h3 className="text-lg md:text-xl lg:text-2xl font-bold mb-2 text-gray-900 leading-tight">{course.title}</h3>
-                      <p className="text-sm md:text-base text-gray-600 mb-3">{course.level}</p>
+                    <div className="mb-8">
+                      <h3 className="text-xl md:text-2xl lg:text-3xl font-bold mb-4 text-gray-900 leading-tight">{course.title}</h3>
+                      <p className="text-base md:text-lg text-gray-600 mb-4 font-medium">{course.level}</p>
                     </div>
                     
                     {/* Features */}
-                    <div className="flex-grow mb-6">
-                      <ul className="space-y-2 md:space-y-3 mb-4 text-sm md:text-base">
+                    <div className="flex-grow mb-8">
+                      <ul className="space-y-3 md:space-y-4 mb-6 text-base md:text-lg">
                         {course.features.map((feature, featureIndex) => (
-                          <li key={featureIndex} className="flex items-center gap-3">
-                            <CheckCircle className="w-4 h-4 md:w-5 md:h-5 text-green-600 flex-shrink-0" />
-                            <span className="text-gray-700 leading-relaxed">{feature}</span>
+                          <li key={featureIndex} className="flex items-center gap-4">
+                            <CheckCircle className="w-5 h-5 md:w-6 md:h-6 text-green-600 flex-shrink-0" />
+                            <span className="text-gray-700 leading-relaxed font-medium">{feature}</span>
                           </li>
                         ))}
                       </ul>
                       
                       {/* Offer Banner */}
-                      <div className={`flex items-center gap-3 p-4 ${course.bgColor} rounded-xl border ${course.borderColor} text-sm md:text-base shadow-sm`}>
+                      <div className={`flex items-center gap-4 p-6 ${course.bgColor} rounded-2xl border-2 ${course.borderColor} text-base md:text-lg shadow-xl`}>
                         <div>
-                          <p className={`font-bold ${course.textColor} text-sm md:text-base`}>{course.offerText}</p>
-                          <p className={`text-xs md:text-sm ${course.textColor.replace('text-', 'text-').replace('-700', '-600')} mt-1`}>{course.offerSubtext}</p>
+                          <p className={`font-bold ${course.textColor} text-base md:text-lg mb-2`}>{course.offerText}</p>
+                          <p className={`text-sm md:text-base ${course.textColor.replace('text-', 'text-').replace('-700', '-600')}`}>{course.offerSubtext}</p>
                         </div>
                       </div>
                     </div>
                     
                     {/* Action Buttons */}
-                    <div className="flex gap-3 mt-auto">
+                    <div className="flex gap-4 mt-auto">
                       <Button 
                         variant="outline" 
-                        className="border-2 border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400 transition-all duration-300 h-11 md:h-12 rounded-xl font-semibold text-sm md:text-base flex-1 hover:scale-105"
+                        className="border-3 border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400 transition-all duration-300 h-14 md:h-16 rounded-2xl font-bold text-base md:text-lg flex-1 hover:scale-105 shadow-lg hover:shadow-xl"
                         asChild
                       >
                         <Link to={`/courses/${course.id}`}>
-                          <Info className="w-4 h-4 mr-2" />
+                          <Info className="w-5 h-5 mr-3" />
                           Details
                         </Link>
                       </Button>
                       <Button 
                         onClick={handleEnquireClick}
-                        className={`bg-gradient-to-r ${course.buttonGradientFrom} ${course.buttonGradientTo} hover:from-red-600 hover:to-pink-600 text-white h-11 md:h-12 rounded-xl font-semibold text-sm md:text-base flex-1 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105`}
+                        className={`bg-gradient-to-r ${course.buttonGradientFrom} ${course.buttonGradientTo} hover:from-red-600 hover:to-pink-600 text-white h-14 md:h-16 rounded-2xl font-bold text-base md:text-lg flex-1 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 border-2 border-white/20`}
                       >
                         Enquire Now
                       </Button>
@@ -180,10 +180,10 @@ const CoursesSection = () => {
             ))}
           </div>
 
-          <div className="text-center mt-12 lg:mt-16">
+          <div className="text-center mt-16 lg:mt-20">
             <Button 
               asChild
-              className="bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700 text-white px-8 py-4 text-lg font-semibold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
+              className="bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700 text-white px-10 py-6 text-xl font-bold rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-105"
             >
               <Link to="/courses">View All Courses</Link>
             </Button>
