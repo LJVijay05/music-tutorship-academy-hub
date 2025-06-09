@@ -176,6 +176,17 @@ const DemoPopup = ({ isOpen, onClose }: DemoPopupProps) => {
     return date < new Date();
   };
 
+  const handleApiKeySet = () => {
+    // Reload countries after API key is set
+    const loadCountries = async () => {
+      const countriesData = await fetchCountries();
+      if (Array.isArray(countriesData)) {
+        setCountries(countriesData);
+      }
+    };
+    loadCountries();
+  };
+
   return (
     <>
       <Dialog open={isOpen} onOpenChange={onClose}>
