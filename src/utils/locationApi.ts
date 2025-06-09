@@ -33,8 +33,21 @@ export interface City {
 export const fetchCountries = async (): Promise<Country[]> => {
   try {
     const response = await fetch("https://api.countrystatecity.in/v1/countries", requestOptions);
+    
+    if (!response.ok) {
+      console.error('API Error:', response.status, await response.text());
+      return [];
+    }
+    
     const result = await response.json();
-    return result;
+    
+    // Ensure we always return an array
+    if (Array.isArray(result)) {
+      return result;
+    } else {
+      console.error('API returned non-array data:', result);
+      return [];
+    }
   } catch (error) {
     console.error('Error fetching countries:', error);
     return [];
@@ -43,9 +56,26 @@ export const fetchCountries = async (): Promise<Country[]> => {
 
 export const fetchStates = async (countryCode: string): Promise<State[]> => {
   try {
+    if (!countryCode) {
+      return [];
+    }
+    
     const response = await fetch(`https://api.countrystatecity.in/v1/countries/${countryCode}/states`, requestOptions);
+    
+    if (!response.ok) {
+      console.error('API Error:', response.status, await response.text());
+      return [];
+    }
+    
     const result = await response.json();
-    return result;
+    
+    // Ensure we always return an array
+    if (Array.isArray(result)) {
+      return result;
+    } else {
+      console.error('API returned non-array data:', result);
+      return [];
+    }
   } catch (error) {
     console.error('Error fetching states:', error);
     return [];
@@ -54,9 +84,26 @@ export const fetchStates = async (countryCode: string): Promise<State[]> => {
 
 export const fetchCities = async (countryCode: string, stateCode: string): Promise<City[]> => {
   try {
+    if (!countryCode || !stateCode) {
+      return [];
+    }
+    
     const response = await fetch(`https://api.countrystatecity.in/v1/countries/${countryCode}/states/${stateCode}/cities`, requestOptions);
+    
+    if (!response.ok) {
+      console.error('API Error:', response.status, await response.text());
+      return [];
+    }
+    
     const result = await response.json();
-    return result;
+    
+    // Ensure we always return an array
+    if (Array.isArray(result)) {
+      return result;
+    } else {
+      console.error('API returned non-array data:', result);
+      return [];
+    }
   } catch (error) {
     console.error('Error fetching cities:', error);
     return [];

@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -57,6 +56,7 @@ const StudentDataForm = ({ open, onOpenChange, onSuccess }: StudentDataFormProps
   const [selectedState, setSelectedState] = useState<string>('');
   const [isLoadingStates, setIsLoadingStates] = useState(false);
   const [isLoadingCities, setIsLoadingCities] = useState(false);
+  const [isLoadingCountries, setIsLoadingCountries] = useState(false);
 
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
@@ -75,20 +75,55 @@ const StudentDataForm = ({ open, onOpenChange, onSuccess }: StudentDataFormProps
   // Load countries on component mount
   useEffect(() => {
     const loadCountries = async () => {
-      const countriesData = await fetchCountries();
-      setCountries(countriesData);
+      if (open) {
+        setIsLoadingCountries(true);
+        console.log('StudentDataForm: Loading countries...');
+        try {
+          const countriesData = await fetchCountries();
+          console.log('StudentDataForm: Countries loaded:', countriesData);
+          
+          // Ensure countriesData is always an array
+          if (Array.isArray(countriesData)) {
+            setCountries(countriesData);
+          } else {
+            console.error('StudentDataForm: Countries data is not an array:', countriesData);
+            setCountries([]);
+          }
+        } catch (error) {
+          console.error('StudentDataForm: Error loading countries:', error);
+          setCountries([]);
+        } finally {
+          setIsLoadingCountries(false);
+        }
+      }
     };
     loadCountries();
-  }, []);
+  }, [open]);
 
   // Load states when country changes
   useEffect(() => {
     const loadStates = async () => {
       if (selectedCountry) {
         setIsLoadingStates(true);
-        const statesData = await fetchStates(selectedCountry);
-        setStates(statesData);
-        setIsLoadingStates(false);
+        console.log('StudentDataForm: Loading states for country:', selectedCountry);
+        try {
+          const statesData = await fetchStates(selectedCountry);
+          console.log('StudentDataForm: States loaded:', statesData);
+          
+          // Ensure statesData is always an array
+          if (Array.isArray(statesData)) {
+            setStates(statesData);
+          } else {
+            console.error('StudentDataForm: States data is not an array:', statesData);
+            setStates([]);
+          }
+        } catch (error) {
+          console.error('StudentDataForm: Error loading states:', error);
+          setStates([]);
+        } finally {
+          setIsLoadingStates(false);
+        }
+        
         setCities([]); // Clear cities when country changes
         form.setValue('state', '');
         form.setValue('city', '');
@@ -102,9 +137,25 @@ const StudentDataForm = ({ open, onOpenChange, onSuccess }: StudentDataFormProps
     const loadCities = async () => {
       if (selectedCountry && selectedState) {
         setIsLoadingCities(true);
-        const citiesData = await fetchCities(selectedCountry, selectedState);
-        setCities(citiesData);
-        setIsLoadingCities(false);
+        console.log('StudentDataForm: Loading cities for state:', selectedState);
+        try {
+          const citiesData = await fetchCities(selectedCountry, selectedState);
+          console.log('StudentDataForm: Cities loaded:', citiesData);
+          
+          // Ensure citiesData is always an array
+          if (Array.isArray(citiesData)) {
+            setCities(citiesData);
+          } else {
+            console.error('StudentDataForm: Cities data is not an array:', citiesData);
+            setCities([]);
+          }
+        } catch (error) {
+          console.error('StudentDataForm: Error loading cities:', error);
+          setCities([]);
+        } finally {
+          setIsLoadingCities(false);
+        }
+        
         form.setValue('city', '');
       }
     };
@@ -211,18 +262,18 @@ const StudentDataForm = ({ open, onOpenChange, onSuccess }: StudentDataFormProps
                     <Select 
                       onValueChange={(value) => {
                         field.onChange(value);
-                        const country = countries.find(c => c.iso2 === value);
                         setSelectedCountry(value);
                       }} 
                       defaultValue={field.value}
+                      disabled={isLoadingCountries}
                     >
                       <FormControl>
                         <SelectTrigger>
-                          <SelectValue placeholder="Select country" />
+                          <SelectValue placeholder={isLoadingCountries ? "Loading..." : "Select country"} />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        {countries.map((country) => (
+                        {Array.isArray(countries) && countries.map((country) => (
                           <SelectItem key={country.iso2} value={country.iso2}>
                             {country.name}
                           </SelectItem>
@@ -280,7 +331,7 @@ const StudentDataForm = ({ open, onOpenChange, onSuccess }: StudentDataFormProps
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        {states.map((state) => (
+                        {Array.isArray(states) && states.map((state) => (
                           <SelectItem key={state.iso2} value={state.iso2}>
                             {state.name}
                           </SelectItem>
@@ -309,7 +360,7 @@ const StudentDataForm = ({ open, onOpenChange, onSuccess }: StudentDataFormProps
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        {cities.map((city) => (
+                        {Array.isArray(cities) && cities.map((city) => (
                           <SelectItem key={city.id} value={city.name}>
                             {city.name}
                           </SelectItem>
