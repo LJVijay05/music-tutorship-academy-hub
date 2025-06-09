@@ -66,7 +66,9 @@ const DemoPopup = ({ isOpen, onClose }: DemoPopupProps) => {
           return;
         }
         
+        console.log('Loading countries...');
         const countriesData = await fetchCountries();
+        console.log('Countries loaded:', countriesData);
         if (Array.isArray(countriesData)) {
           setCountries(countriesData);
         }
@@ -79,11 +81,14 @@ const DemoPopup = ({ isOpen, onClose }: DemoPopupProps) => {
   useEffect(() => {
     const loadStates = async () => {
       if (selectedCountry) {
+        console.log('Loading states for country:', selectedCountry);
         setIsLoadingStates(true);
         const statesData = await fetchStates(selectedCountry);
+        console.log('States loaded:', statesData);
         setStates(statesData);
         setIsLoadingStates(false);
         setCities([]); // Clear cities when country changes
+        setSelectedState('');
         setFormData(prev => ({ ...prev, state: '', city: '' }));
       }
     };
@@ -94,8 +99,10 @@ const DemoPopup = ({ isOpen, onClose }: DemoPopupProps) => {
   useEffect(() => {
     const loadCities = async () => {
       if (selectedCountry && selectedState) {
+        console.log('Loading cities for state:', selectedState, 'in country:', selectedCountry);
         setIsLoadingCities(true);
         const citiesData = await fetchCities(selectedCountry, selectedState);
+        console.log('Cities loaded:', citiesData);
         setCities(citiesData);
         setIsLoadingCities(false);
         setFormData(prev => ({ ...prev, city: '' }));
@@ -113,6 +120,7 @@ const DemoPopup = ({ isOpen, onClose }: DemoPopupProps) => {
   };
 
   const handleSelectChange = (name: string, value: string) => {
+    console.log(`Selection changed - ${name}:`, value);
     setFormData(prev => ({
       ...prev,
       [name]: value
@@ -120,6 +128,8 @@ const DemoPopup = ({ isOpen, onClose }: DemoPopupProps) => {
 
     if (name === 'country') {
       setSelectedCountry(value);
+      setSelectedState('');
+      setCities([]);
     } else if (name === 'state') {
       setSelectedState(value);
     }
@@ -177,9 +187,12 @@ const DemoPopup = ({ isOpen, onClose }: DemoPopupProps) => {
   };
 
   const handleApiKeySet = () => {
+    setShowApiKeyManager(false);
     // Reload countries after API key is set
     const loadCountries = async () => {
+      console.log('Reloading countries after API key set...');
       const countriesData = await fetchCountries();
+      console.log('Countries reloaded:', countriesData);
       if (Array.isArray(countriesData)) {
         setCountries(countriesData);
       }
@@ -281,13 +294,14 @@ const DemoPopup = ({ isOpen, onClose }: DemoPopupProps) => {
                     <Select 
                       onValueChange={(value) => handleSelectChange('country', value)}
                       value={formData.country}
+                      disabled={countries.length === 0}
                     >
-                      <SelectTrigger className="w-full">
-                        <SelectValue placeholder="Select country" />
+                      <SelectTrigger className="w-full bg-white">
+                        <SelectValue placeholder={countries.length === 0 ? "Loading countries..." : "Select country"} />
                       </SelectTrigger>
-                      <SelectContent>
+                      <SelectContent className="bg-white border border-gray-200 shadow-lg z-50">
                         {countries.map((country) => (
-                          <SelectItem key={country.iso2} value={country.iso2}>
+                          <SelectItem key={country.iso2} value={country.iso2} className="hover:bg-gray-100">
                             {country.name}
                           </SelectItem>
                         ))}
@@ -300,14 +314,19 @@ const DemoPopup = ({ isOpen, onClose }: DemoPopupProps) => {
                     <Select 
                       onValueChange={(value) => handleSelectChange('state', value)}
                       value={formData.state}
-                      disabled={!selectedCountry || isLoadingStates}
+                      disabled={!selectedCountry || isLoadingStates || states.length === 0}
                     >
-                      <SelectTrigger className="w-full">
-                        <SelectValue placeholder={isLoadingStates ? "Loading..." : "Select state"} />
+                      <SelectTrigger className="w-full bg-white">
+                        <SelectValue placeholder={
+                          !selectedCountry ? "Select country first" :
+                          isLoadingStates ? "Loading states..." : 
+                          states.length === 0 ? "No states available" :
+                          "Select state"
+                        } />
                       </SelectTrigger>
-                      <SelectContent>
+                      <SelectContent className="bg-white border border-gray-200 shadow-lg z-50">
                         {states.map((state) => (
-                          <SelectItem key={state.iso2} value={state.iso2}>
+                          <SelectItem key={state.iso2} value={state.iso2} className="hover:bg-gray-100">
                             {state.name}
                           </SelectItem>
                         ))}
@@ -320,14 +339,19 @@ const DemoPopup = ({ isOpen, onClose }: DemoPopupProps) => {
                     <Select 
                       onValueChange={(value) => handleSelectChange('city', value)}
                       value={formData.city}
-                      disabled={!selectedState || isLoadingCities}
+                      disabled={!selectedState || isLoadingCities || cities.length === 0}
                     >
-                      <SelectTrigger className="w-full">
-                        <SelectValue placeholder={isLoadingCities ? "Loading..." : "Select city"} />
+                      <SelectTrigger className="w-full bg-white">
+                        <SelectValue placeholder={
+                          !selectedState ? "Select state first" :
+                          isLoadingCities ? "Loading cities..." :
+                          cities.length === 0 ? "No cities available" :
+                          "Select city"
+                        } />
                       </SelectTrigger>
-                      <SelectContent>
+                      <SelectContent className="bg-white border border-gray-200 shadow-lg z-50">
                         {cities.map((city) => (
-                          <SelectItem key={city.id} value={city.name}>
+                          <SelectItem key={city.id} value={city.name} className="hover:bg-gray-100">
                             {city.name}
                           </SelectItem>
                         ))}
