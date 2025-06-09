@@ -1,11 +1,19 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Calendar } from "@/components/ui/calendar";
 import { X, Calendar as CalendarIcon, Users, User, Clock } from "lucide-react";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { fetchCountries, fetchStates, fetchCities, Country, State, City } from "@/utils/locationApi";
 
 interface DemoPopupProps {
   isOpen: boolean;
@@ -17,10 +25,21 @@ const DemoPopup = ({ isOpen, onClose }: DemoPopupProps) => {
     fullName: '',
     mobile: '',
     email: '',
+    country: '',
+    state: '',
+    city: '',
     selectedDate: undefined as Date | undefined,
     selectedTime: '',
     interests: [] as string[]
   });
+
+  const [countries, setCountries] = useState<Country[]>([]);
+  const [states, setStates] = useState<State[]>([]);
+  const [cities, setCities] = useState<City[]>([]);
+  const [selectedCountry, setSelectedCountry] = useState<string>('');
+  const [selectedState, setSelectedState] = useState<string>('');
+  const [isLoadingStates, setIsLoadingStates] = useState(false);
+  const [isLoadingCities, setIsLoadingCities] = useState(false);
 
   // Available time slots with booking status
   const timeSlots = [
@@ -37,12 +56,65 @@ const DemoPopup = ({ isOpen, onClose }: DemoPopupProps) => {
     { time: "08:00 PM", isBooked: false }
   ];
 
+  // Load countries on component mount
+  useEffect(() => {
+    const loadCountries = async () => {
+      const countriesData = await fetchCountries();
+      setCountries(countriesData);
+    };
+    if (isOpen) {
+      loadCountries();
+    }
+  }, [isOpen]);
+
+  // Load states when country changes
+  useEffect(() => {
+    const loadStates = async () => {
+      if (selectedCountry) {
+        setIsLoadingStates(true);
+        const statesData = await fetchStates(selectedCountry);
+        setStates(statesData);
+        setIsLoadingStates(false);
+        setCities([]); // Clear cities when country changes
+        setFormData(prev => ({ ...prev, state: '', city: '' }));
+      }
+    };
+    loadStates();
+  }, [selectedCountry]);
+
+  // Load cities when state changes
+  useEffect(() => {
+    const loadCities = async () => {
+      if (selectedCountry && selectedState) {
+        setIsLoadingCities(true);
+        const citiesData = await fetchCities(selectedCountry, selectedState);
+        setCities(citiesData);
+        setIsLoadingCities(false);
+        setFormData(prev => ({ ...prev, city: '' }));
+      }
+    };
+    loadCities();
+  }, [selectedCountry, selectedState]);
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
       [name]: value
     }));
+  };
+
+  const handleSelectChange = (name: string, value: string) => {
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+
+    if (name === 'country') {
+      setSelectedCountry(value);
+    } else if (name === 'state') {
+      setSelectedState(value);
+    }
   };
 
   const handleDateSelect = (date: Date | undefined) => {
@@ -160,6 +232,68 @@ const DemoPopup = ({ isOpen, onClose }: DemoPopupProps) => {
                     className="w-full px-3 py-2.5 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all text-sm"
                     required
                   />
+                </div>
+              </div>
+
+              {/* Location Fields */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+                <div>
+                  <label className="block text-gray-700 font-medium mb-2 text-sm">Country</label>
+                  <Select 
+                    onValueChange={(value) => handleSelectChange('country', value)}
+                    value={formData.country}
+                  >
+                    <SelectTrigger className="w-full">
+                      <SelectValue placeholder="Select country" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {countries.map((country) => (
+                        <SelectItem key={country.iso2} value={country.iso2}>
+                          {country.name}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div>
+                  <label className="block text-gray-700 font-medium mb-2 text-sm">State</label>
+                  <Select 
+                    onValueChange={(value) => handleSelectChange('state', value)}
+                    value={formData.state}
+                    disabled={!selectedCountry || isLoadingStates}
+                  >
+                    <SelectTrigger className="w-full">
+                      <SelectValue placeholder={isLoadingStates ? "Loading..." : "Select state"} />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {states.map((state) => (
+                        <SelectItem key={state.iso2} value={state.iso2}>
+                          {state.name}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div className="sm:col-span-2 lg:col-span-1">
+                  <label className="block text-gray-700 font-medium mb-2 text-sm">City</label>
+                  <Select 
+                    onValueChange={(value) => handleSelectChange('city', value)}
+                    value={formData.city}
+                    disabled={!selectedState || isLoadingCities}
+                  >
+                    <SelectTrigger className="w-full">
+                      <SelectValue placeholder={isLoadingCities ? "Loading..." : "Select city"} />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {cities.map((city) => (
+                        <SelectItem key={city.id} value={city.name}>
+                          {city.name}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                 </div>
               </div>
             </div>

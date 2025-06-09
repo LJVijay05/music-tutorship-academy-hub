@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -27,13 +27,15 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
+import { fetchCountries, fetchStates, fetchCities, Country, State, City } from "@/utils/locationApi";
 
 const formSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
   email: z.string().email("Please enter a valid email address"),
   phone: z.string().min(10, "Phone number must be at least 10 digits"),
   country: z.string().min(1, "Please select your country"),
-  city: z.string().min(2, "City must be at least 2 characters"),
+  state: z.string().min(1, "Please select your state"),
+  city: z.string().min(1, "Please select your city"),
   pincode: z.string().min(4, "Pincode must be at least 4 characters"),
   gender: z.string().min(1, "Please select your gender"),
 });
@@ -48,6 +50,13 @@ interface StudentDataFormProps {
 
 const StudentDataForm = ({ open, onOpenChange, onSuccess }: StudentDataFormProps) => {
   const { toast } = useToast();
+  const [countries, setCountries] = useState<Country[]>([]);
+  const [states, setStates] = useState<State[]>([]);
+  const [cities, setCities] = useState<City[]>([]);
+  const [selectedCountry, setSelectedCountry] = useState<string>('');
+  const [selectedState, setSelectedState] = useState<string>('');
+  const [isLoadingStates, setIsLoadingStates] = useState(false);
+  const [isLoadingCities, setIsLoadingCities] = useState(false);
 
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
@@ -56,11 +65,51 @@ const StudentDataForm = ({ open, onOpenChange, onSuccess }: StudentDataFormProps
       email: '',
       phone: '',
       country: '',
+      state: '',
       city: '',
       pincode: '',
       gender: '',
     },
   });
+
+  // Load countries on component mount
+  useEffect(() => {
+    const loadCountries = async () => {
+      const countriesData = await fetchCountries();
+      setCountries(countriesData);
+    };
+    loadCountries();
+  }, []);
+
+  // Load states when country changes
+  useEffect(() => {
+    const loadStates = async () => {
+      if (selectedCountry) {
+        setIsLoadingStates(true);
+        const statesData = await fetchStates(selectedCountry);
+        setStates(statesData);
+        setIsLoadingStates(false);
+        setCities([]); // Clear cities when country changes
+        form.setValue('state', '');
+        form.setValue('city', '');
+      }
+    };
+    loadStates();
+  }, [selectedCountry, form]);
+
+  // Load cities when state changes
+  useEffect(() => {
+    const loadCities = async () => {
+      if (selectedCountry && selectedState) {
+        setIsLoadingCities(true);
+        const citiesData = await fetchCities(selectedCountry, selectedState);
+        setCities(citiesData);
+        setIsLoadingCities(false);
+        form.setValue('city', '');
+      }
+    };
+    loadCities();
+  }, [selectedCountry, selectedState, form]);
 
   const onSubmit = (data: FormData) => {
     console.log('StudentDataForm: Form submitted with data:', data);
@@ -159,21 +208,25 @@ const StudentDataForm = ({ open, onOpenChange, onSuccess }: StudentDataFormProps
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Country *</FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                    <Select 
+                      onValueChange={(value) => {
+                        field.onChange(value);
+                        const country = countries.find(c => c.iso2 === value);
+                        setSelectedCountry(value);
+                      }} 
+                      defaultValue={field.value}
+                    >
                       <FormControl>
                         <SelectTrigger>
                           <SelectValue placeholder="Select country" />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        <SelectItem value="india">India</SelectItem>
-                        <SelectItem value="usa">United States</SelectItem>
-                        <SelectItem value="uk">United Kingdom</SelectItem>
-                        <SelectItem value="canada">Canada</SelectItem>
-                        <SelectItem value="australia">Australia</SelectItem>
-                        <SelectItem value="germany">Germany</SelectItem>
-                        <SelectItem value="france">France</SelectItem>
-                        <SelectItem value="other">Other</SelectItem>
+                        {countries.map((country) => (
+                          <SelectItem key={country.iso2} value={country.iso2}>
+                            {country.name}
+                          </SelectItem>
+                        ))}
                       </SelectContent>
                     </Select>
                     <FormMessage />
@@ -209,13 +262,31 @@ const StudentDataForm = ({ open, onOpenChange, onSuccess }: StudentDataFormProps
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <FormField
                 control={form.control}
-                name="city"
+                name="state"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>City *</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Enter your city" {...field} />
-                    </FormControl>
+                    <FormLabel>State *</FormLabel>
+                    <Select 
+                      onValueChange={(value) => {
+                        field.onChange(value);
+                        setSelectedState(value);
+                      }} 
+                      defaultValue={field.value}
+                      disabled={!selectedCountry || isLoadingStates}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder={isLoadingStates ? "Loading..." : "Select state"} />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {states.map((state) => (
+                          <SelectItem key={state.iso2} value={state.iso2}>
+                            {state.name}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -223,18 +294,47 @@ const StudentDataForm = ({ open, onOpenChange, onSuccess }: StudentDataFormProps
 
               <FormField
                 control={form.control}
-                name="pincode"
+                name="city"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Pin Code *</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Enter pin code" {...field} />
-                    </FormControl>
+                    <FormLabel>City *</FormLabel>
+                    <Select 
+                      onValueChange={field.onChange} 
+                      defaultValue={field.value}
+                      disabled={!selectedState || isLoadingCities}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder={isLoadingCities ? "Loading..." : "Select city"} />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {cities.map((city) => (
+                          <SelectItem key={city.id} value={city.name}>
+                            {city.name}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
                     <FormMessage />
                   </FormItem>
                 )}
               />
             </div>
+
+            <FormField
+              control={form.control}
+              name="pincode"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Pin Code *</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Enter pin code" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
             <div className="pt-4">
               <Button 
