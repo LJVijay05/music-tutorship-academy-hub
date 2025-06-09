@@ -7,6 +7,7 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
+  DialogDescription,
 } from "@/components/ui/dialog";
 import {
   Form,
@@ -26,7 +27,9 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
-import { fetchCountries, fetchStates, fetchCities, Country, State, City } from "@/utils/locationApi";
+import { fetchCountries, fetchStates, fetchCities, Country, State, City, hasApiKey } from "@/utils/locationApi";
+import ApiKeyManager from "@/components/ApiKeyManager";
+import { Settings } from "lucide-react";
 
 const formSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -57,6 +60,7 @@ const StudentDataForm = ({ open, onOpenChange, onSuccess }: StudentDataFormProps
   const [isLoadingStates, setIsLoadingStates] = useState(false);
   const [isLoadingCities, setIsLoadingCities] = useState(false);
   const [isLoadingCountries, setIsLoadingCountries] = useState(false);
+  const [showApiKeyManager, setShowApiKeyManager] = useState(false);
 
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
@@ -76,13 +80,17 @@ const StudentDataForm = ({ open, onOpenChange, onSuccess }: StudentDataFormProps
   useEffect(() => {
     const loadCountries = async () => {
       if (open) {
+        if (!hasApiKey()) {
+          setShowApiKeyManager(true);
+          return;
+        }
+
         setIsLoadingCountries(true);
         console.log('StudentDataForm: Loading countries...');
         try {
           const countriesData = await fetchCountries();
           console.log('StudentDataForm: Countries loaded:', countriesData);
           
-          // Ensure countriesData is always an array
           if (Array.isArray(countriesData)) {
             setCountries(countriesData);
           } else {
@@ -110,7 +118,6 @@ const StudentDataForm = ({ open, onOpenChange, onSuccess }: StudentDataFormProps
           const statesData = await fetchStates(selectedCountry);
           console.log('StudentDataForm: States loaded:', statesData);
           
-          // Ensure statesData is always an array
           if (Array.isArray(statesData)) {
             setStates(statesData);
           } else {
@@ -142,7 +149,6 @@ const StudentDataForm = ({ open, onOpenChange, onSuccess }: StudentDataFormProps
           const citiesData = await fetchCities(selectedCountry, selectedState);
           console.log('StudentDataForm: Cities loaded:', citiesData);
           
-          // Ensure citiesData is always an array
           if (Array.isArray(citiesData)) {
             setCities(citiesData);
           } else {
@@ -166,7 +172,6 @@ const StudentDataForm = ({ open, onOpenChange, onSuccess }: StudentDataFormProps
     console.log('StudentDataForm: Form submitted with data:', data);
     
     try {
-      // Store data in localStorage for potential use in enrollment page
       localStorage.setItem('studentData', JSON.stringify(data));
       console.log('StudentDataForm: Data stored in localStorage');
       
@@ -175,10 +180,8 @@ const StudentDataForm = ({ open, onOpenChange, onSuccess }: StudentDataFormProps
         description: "Your details have been saved.",
       });
 
-      // Close the form and trigger success callback
       onOpenChange(false);
       
-      // Small delay to ensure smooth transition
       setTimeout(() => {
         if (onSuccess) {
           console.log('StudentDataForm: Triggering success callback');
@@ -196,148 +199,63 @@ const StudentDataForm = ({ open, onOpenChange, onSuccess }: StudentDataFormProps
     }
   };
 
+  const handleApiKeySet = async () => {
+    setIsLoadingCountries(true);
+    try {
+      const countriesData = await fetchCountries();
+      if (Array.isArray(countriesData)) {
+        setCountries(countriesData);
+      }
+    } catch (error) {
+      console.error('Error loading countries after API key set:', error);
+    } finally {
+      setIsLoadingCountries(false);
+    }
+  };
+
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[500px] max-h-[90vh] overflow-y-auto">
-        <DialogHeader>
-          <DialogTitle className="text-2xl font-bold text-center text-gray-900 mb-2">
-            Student Information
-          </DialogTitle>
-          <p className="text-center text-gray-600 text-sm">
-            Please fill in your details to proceed with enrollment
-          </p>
-        </DialogHeader>
+    <>
+      <Dialog open={open} onOpenChange={onOpenChange}>
+        <DialogContent className="sm:max-w-[500px] max-h-[90vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="text-2xl font-bold text-center text-gray-900 mb-2">
+              Student Information
+            </DialogTitle>
+            <DialogDescription className="text-center text-gray-600 text-sm">
+              Please fill in your details to proceed with enrollment
+            </DialogDescription>
+          </DialogHeader>
 
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Full Name *</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Enter your full name" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Email Address *</FormLabel>
-                  <FormControl>
-                    <Input type="email" placeholder="Enter your email" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="phone"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Phone Number *</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Enter your phone number" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <FormField
-                control={form.control}
-                name="country"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Country *</FormLabel>
-                    <Select 
-                      onValueChange={(value) => {
-                        field.onChange(value);
-                        setSelectedCountry(value);
-                      }} 
-                      defaultValue={field.value}
-                      disabled={isLoadingCountries}
-                    >
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder={isLoadingCountries ? "Loading..." : "Select country"} />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        {Array.isArray(countries) && countries.map((country) => (
-                          <SelectItem key={country.iso2} value={country.iso2}>
-                            {country.name}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="gender"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Gender *</FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select gender" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        <SelectItem value="male">Male</SelectItem>
-                        <SelectItem value="female">Female</SelectItem>
-                        <SelectItem value="other">Other</SelectItem>
-                        <SelectItem value="prefer-not-to-say">Prefer not to say</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+          {!hasApiKey() && (
+            <div className="mb-4 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+              <div className="flex items-center justify-between">
+                <p className="text-sm text-yellow-700">
+                  API key required for location data
+                </p>
+                <Button
+                  onClick={() => setShowApiKeyManager(true)}
+                  variant="outline"
+                  size="sm"
+                  className="ml-2"
+                >
+                  <Settings className="w-4 h-4 mr-1" />
+                  Set API Key
+                </Button>
+              </div>
             </div>
+          )}
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
               <FormField
                 control={form.control}
-                name="state"
+                name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>State *</FormLabel>
-                    <Select 
-                      onValueChange={(value) => {
-                        field.onChange(value);
-                        setSelectedState(value);
-                      }} 
-                      defaultValue={field.value}
-                      disabled={!selectedCountry || isLoadingStates}
-                    >
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder={isLoadingStates ? "Loading..." : "Select state"} />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        {Array.isArray(states) && states.map((state) => (
-                          <SelectItem key={state.iso2} value={state.iso2}>
-                            {state.name}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
+                    <FormLabel>Full Name *</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Enter your full name" {...field} />
+                    </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -345,61 +263,187 @@ const StudentDataForm = ({ open, onOpenChange, onSuccess }: StudentDataFormProps
 
               <FormField
                 control={form.control}
-                name="city"
+                name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>City *</FormLabel>
-                    <Select 
-                      onValueChange={field.onChange} 
-                      defaultValue={field.value}
-                      disabled={!selectedState || isLoadingCities}
-                    >
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder={isLoadingCities ? "Loading..." : "Select city"} />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        {Array.isArray(cities) && cities.map((city) => (
-                          <SelectItem key={city.id} value={city.name}>
-                            {city.name}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
+                    <FormLabel>Email Address *</FormLabel>
+                    <FormControl>
+                      <Input type="email" placeholder="Enter your email" {...field} />
+                    </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-            </div>
 
-            <FormField
-              control={form.control}
-              name="pincode"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Pin Code *</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Enter pin code" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+              <FormField
+                control={form.control}
+                name="phone"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Phone Number *</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Enter your phone number" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-            <div className="pt-4">
-              <Button 
-                type="submit" 
-                disabled={form.formState.isSubmitting}
-                className="w-full bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-semibold py-3 rounded-xl transition-all duration-300"
-              >
-                {form.formState.isSubmitting ? "Submitting..." : "Continue to Enrollment"}
-              </Button>
-            </div>
-          </form>
-        </Form>
-      </DialogContent>
-    </Dialog>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <FormField
+                  control={form.control}
+                  name="country"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Country *</FormLabel>
+                      <Select 
+                        onValueChange={(value) => {
+                          field.onChange(value);
+                          setSelectedCountry(value);
+                        }} 
+                        defaultValue={field.value}
+                        disabled={isLoadingCountries}
+                      >
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder={isLoadingCountries ? "Loading..." : "Select country"} />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          {Array.isArray(countries) && countries.map((country) => (
+                            <SelectItem key={country.iso2} value={country.iso2}>
+                              {country.name}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="gender"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Gender *</FormLabel>
+                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select gender" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          <SelectItem value="male">Male</SelectItem>
+                          <SelectItem value="female">Female</SelectItem>
+                          <SelectItem value="other">Other</SelectItem>
+                          <SelectItem value="prefer-not-to-say">Prefer not to say</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <FormField
+                  control={form.control}
+                  name="state"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>State *</FormLabel>
+                      <Select 
+                        onValueChange={(value) => {
+                          field.onChange(value);
+                          setSelectedState(value);
+                        }} 
+                        defaultValue={field.value}
+                        disabled={!selectedCountry || isLoadingStates}
+                      >
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder={isLoadingStates ? "Loading..." : "Select state"} />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          {Array.isArray(states) && states.map((state) => (
+                            <SelectItem key={state.iso2} value={state.iso2}>
+                              {state.name}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="city"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>City *</FormLabel>
+                      <Select 
+                        onValueChange={field.onChange} 
+                        defaultValue={field.value}
+                        disabled={!selectedState || isLoadingCities}
+                      >
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder={isLoadingCities ? "Loading..." : "Select city"} />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          {Array.isArray(cities) && cities.map((city) => (
+                            <SelectItem key={city.id} value={city.name}>
+                              {city.name}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+
+              <FormField
+                control={form.control}
+                name="pincode"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Pin Code *</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Enter pin code" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <div className="pt-4">
+                <Button 
+                  type="submit" 
+                  disabled={form.formState.isSubmitting}
+                  className="w-full bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-semibold py-3 rounded-xl transition-all duration-300"
+                >
+                  {form.formState.isSubmitting ? "Submitting..." : "Continue to Enrollment"}
+                </Button>
+              </div>
+            </form>
+          </Form>
+        </DialogContent>
+      </Dialog>
+
+      <ApiKeyManager 
+        open={showApiKeyManager}
+        onOpenChange={setShowApiKeyManager}
+        onApiKeySet={handleApiKeySet}
+      />
+    </>
   );
 };
 

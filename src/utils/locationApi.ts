@@ -1,13 +1,33 @@
 
-const API_KEY = "API_KEY"; // You'll need to replace this with your actual API key
+const getApiKey = (): string => {
+  const apiKey = localStorage.getItem('csc_api_key');
+  if (!apiKey) {
+    throw new Error('API key not found. Please set your Country State City API key.');
+  }
+  return apiKey;
+};
 
-const headers = new Headers();
-headers.append("X-CSCAPI-KEY", API_KEY);
+export const setApiKey = (apiKey: string): void => {
+  localStorage.setItem('csc_api_key', apiKey);
+};
 
-const requestOptions = {
-  method: 'GET',
-  headers: headers,
-  redirect: 'follow' as RequestRedirect
+export const clearApiKey = (): void => {
+  localStorage.removeItem('csc_api_key');
+};
+
+export const hasApiKey = (): boolean => {
+  return !!localStorage.getItem('csc_api_key');
+};
+
+const createRequestOptions = (): RequestInit => {
+  const headers = new Headers();
+  headers.append("X-CSCAPI-KEY", getApiKey());
+
+  return {
+    method: 'GET',
+    headers: headers,
+    redirect: 'follow' as RequestRedirect
+  };
 };
 
 export interface Country {
@@ -32,7 +52,12 @@ export interface City {
 
 export const fetchCountries = async (): Promise<Country[]> => {
   try {
-    const response = await fetch("https://api.countrystatecity.in/v1/countries", requestOptions);
+    if (!hasApiKey()) {
+      console.error('API key not found');
+      return [];
+    }
+
+    const response = await fetch("https://api.countrystatecity.in/v1/countries", createRequestOptions());
     
     if (!response.ok) {
       console.error('API Error:', response.status, await response.text());
@@ -41,7 +66,6 @@ export const fetchCountries = async (): Promise<Country[]> => {
     
     const result = await response.json();
     
-    // Ensure we always return an array
     if (Array.isArray(result)) {
       return result;
     } else {
@@ -56,11 +80,11 @@ export const fetchCountries = async (): Promise<Country[]> => {
 
 export const fetchStates = async (countryCode: string): Promise<State[]> => {
   try {
-    if (!countryCode) {
+    if (!countryCode || !hasApiKey()) {
       return [];
     }
     
-    const response = await fetch(`https://api.countrystatecity.in/v1/countries/${countryCode}/states`, requestOptions);
+    const response = await fetch(`https://api.countrystatecity.in/v1/countries/${countryCode}/states`, createRequestOptions());
     
     if (!response.ok) {
       console.error('API Error:', response.status, await response.text());
@@ -69,7 +93,6 @@ export const fetchStates = async (countryCode: string): Promise<State[]> => {
     
     const result = await response.json();
     
-    // Ensure we always return an array
     if (Array.isArray(result)) {
       return result;
     } else {
@@ -84,11 +107,11 @@ export const fetchStates = async (countryCode: string): Promise<State[]> => {
 
 export const fetchCities = async (countryCode: string, stateCode: string): Promise<City[]> => {
   try {
-    if (!countryCode || !stateCode) {
+    if (!countryCode || !stateCode || !hasApiKey()) {
       return [];
     }
     
-    const response = await fetch(`https://api.countrystatecity.in/v1/countries/${countryCode}/states/${stateCode}/cities`, requestOptions);
+    const response = await fetch(`https://api.countrystatecity.in/v1/countries/${countryCode}/states/${stateCode}/cities`, createRequestOptions());
     
     if (!response.ok) {
       console.error('API Error:', response.status, await response.text());
@@ -97,7 +120,6 @@ export const fetchCities = async (countryCode: string, stateCode: string): Promi
     
     const result = await response.json();
     
-    // Ensure we always return an array
     if (Array.isArray(result)) {
       return result;
     } else {
