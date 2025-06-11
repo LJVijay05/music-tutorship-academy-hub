@@ -6,8 +6,9 @@ import { Link } from "react-router-dom";
 import StudentDataForm from "./StudentDataForm";
 import SuccessPopup from "./SuccessPopup";
 import { useStudentForm } from "@/hooks/useStudentForm";
+import { memo, useCallback } from "react";
 
-const CoursesSection = () => {
+const CoursesSection = memo(() => {
   const { 
     showStudentForm, 
     showSuccessPopup, 
@@ -34,6 +35,7 @@ const CoursesSection = () => {
         "Certificate upon completion"
       ],
       isPopular: true,
+      isPremium: false,
       gradientFrom: "from-gray-900",
       gradientTo: "to-gray-700",
       borderColor: "border-red-100",
@@ -60,6 +62,7 @@ const CoursesSection = () => {
         "Lifetime support access"
       ],
       isPopular: false,
+      isPremium: true,
       gradientFrom: "from-amber-600",
       gradientTo: "to-red-700",
       borderColor: "border-amber-200", 
@@ -72,15 +75,15 @@ const CoursesSection = () => {
     }
   ];
 
-  const handleEnquireClick = () => {
+  const handleEnquireClick = useCallback(() => {
     console.log('CoursesSection: Enquire Now clicked');
     openForm();
-  };
+  }, [openForm]);
 
-  const handleFormSuccess = () => {
+  const handleFormSuccess = useCallback(() => {
     console.log('CoursesSection: Student form submitted successfully');
     showSuccess();
-  };
+  }, [showSuccess]);
 
   return (
     <>
@@ -105,13 +108,22 @@ const CoursesSection = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 max-w-6xl mx-auto">
             {courses.map((course, index) => (
               <article key={course.id} className="group animate-fade-in-up h-full" style={{ animationDelay: `${index * 0.3}s` }}>
-                <Card className="overflow-hidden border-0 shadow-xl hover:shadow-2xl transition-all duration-500 ease-out rounded-2xl h-full bg-white hover:-translate-y-2 relative group-hover:scale-[1.02]">
+                <Card className={`overflow-hidden border-0 shadow-xl hover:shadow-2xl transition-all duration-500 ease-out rounded-2xl h-full bg-white hover:-translate-y-2 relative group-hover:scale-[1.02] ${course.isPremium ? 'ring-2 ring-amber-200/60' : ''}`}>
                   {/* Popular Badge */}
                   {course.isPopular && (
                     <div className="absolute top-4 right-4 z-30">
                       <div className="bg-gradient-to-r from-green-500 to-emerald-600 text-white px-3 py-1.5 rounded-full text-xs font-bold flex items-center gap-1.5 shadow-lg backdrop-blur-sm border border-white/20">
                         <Star className="w-3 h-3 fill-current" />
                         POPULAR
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Premium Badge */}
+                  {course.isPremium && (
+                    <div className="absolute top-0 right-0 w-20 h-20 overflow-hidden z-30">
+                      <div className="absolute top-4 right-[-24px] bg-gradient-to-r from-amber-500 to-yellow-500 text-white text-xs font-bold px-6 py-1 transform rotate-45 shadow-lg border-t border-b border-white/20">
+                        PREMIUM
                       </div>
                     </div>
                   )}
@@ -225,6 +237,8 @@ const CoursesSection = () => {
       />
     </>
   );
-};
+});
+
+CoursesSection.displayName = 'CoursesSection';
 
 export default CoursesSection;

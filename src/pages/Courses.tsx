@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import CoursesHero from "@/components/CoursesHero";
 import CourseCard from "@/components/CourseCard";
 import TrustIndicators from "@/components/TrustIndicators";
-import { memo } from "react";
+import { memo, useCallback } from "react";
 
 const Courses = memo(() => {
   const courseData = {
@@ -27,9 +27,9 @@ const Courses = memo(() => {
     ]
   };
 
-  const handleDetailsClick = (courseId: string) => {
+  const handleDetailsClick = useCallback((courseId: string) => {
     console.log('Details click handled via routing for course:', courseId);
-  };
+  }, []);
 
   const courses = [
     {
