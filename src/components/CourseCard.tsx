@@ -80,7 +80,7 @@ const CourseCard = memo(({
         <Card className={`overflow-hidden border-0 shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-2xl h-full bg-white relative ${isPremium ? 'ring-2 ring-amber-200/60' : ''} max-w-lg mx-auto`}>
           {/* Popular Badge */}
           {isPopular && (
-            <div className="absolute top-4 left-4 z-30">
+            <div className="absolute top-4 right-4 z-30">
               <div className="bg-gradient-to-r from-green-500 to-emerald-600 text-white px-3 py-1.5 rounded-full text-xs font-bold flex items-center gap-1.5 shadow-lg backdrop-blur-sm border border-white/20">
                 <Star className="w-3 h-3 fill-current" />
                 <span>POPULAR</span>
@@ -97,6 +97,13 @@ const CourseCard = memo(({
             </div>
           )}
 
+          {/* Course Icon - Redesigned placement */}
+          <div className="absolute top-4 left-4 z-30">
+            <div className="w-12 h-12 bg-white/95 backdrop-blur-lg rounded-xl flex items-center justify-center border border-white/30 shadow-lg">
+              <IconComponent className="w-6 h-6 text-gray-700" />
+            </div>
+          </div>
+
           {/* Header */}
           <header className={`h-48 md:h-52 bg-gradient-to-br ${gradientFrom} ${gradientTo} relative overflow-hidden`}>
             <div className="absolute inset-0">
@@ -112,11 +119,8 @@ const CourseCard = memo(({
               )}
             </div>
             
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/20 flex items-center justify-center">
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/20 flex items-end justify-center pb-6">
               <div className="text-center px-4 max-w-xs">
-                <div className="w-16 h-16 md:w-18 md:h-18 mx-auto mb-4 bg-white/15 backdrop-blur-lg rounded-2xl flex items-center justify-center border border-white/20 shadow-xl">
-                  <IconComponent className="w-8 h-8 md:w-9 md:h-9 text-white opacity-95" />
-                </div>
                 <div className="bg-white/20 backdrop-blur-lg rounded-xl px-4 py-2 border border-white/20">
                   <span className="text-white font-bold text-sm md:text-base">{description}</span>
                 </div>
@@ -130,7 +134,7 @@ const CourseCard = memo(({
               <h3 className="text-lg md:text-xl font-bold mb-3 text-gray-900 leading-tight line-clamp-2">{title}</h3>
               <p className="text-sm md:text-base text-gray-600 mb-3 font-medium">{level}</p>
               <div className={`text-xs md:text-sm ${textColor} font-bold ${bgColor} px-3 py-2 rounded-xl inline-block shadow-md border ${borderColor}`}>
-                {description}
+                Course Type: {description}
               </div>
             </div>
             

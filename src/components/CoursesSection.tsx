@@ -1,3 +1,4 @@
+
 import { Users, User, Star, CheckCircle, Info } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -107,13 +108,20 @@ const CoursesSection = () => {
                 <Card className="overflow-hidden border-0 shadow-xl hover:shadow-2xl transition-all duration-500 ease-out rounded-2xl h-full bg-white hover:-translate-y-2 relative group-hover:scale-[1.02]">
                   {/* Popular Badge */}
                   {course.isPopular && (
-                    <div className="absolute top-4 left-4 z-30">
+                    <div className="absolute top-4 right-4 z-30">
                       <div className="bg-gradient-to-r from-green-500 to-emerald-600 text-white px-3 py-1.5 rounded-full text-xs font-bold flex items-center gap-1.5 shadow-lg backdrop-blur-sm border border-white/20">
                         <Star className="w-3 h-3 fill-current" />
                         POPULAR
                       </div>
                     </div>
                   )}
+
+                  {/* Course Icon - Redesigned placement */}
+                  <div className="absolute top-4 left-4 z-30">
+                    <div className="w-12 h-12 bg-white/95 backdrop-blur-lg rounded-xl flex items-center justify-center border border-white/30 shadow-lg">
+                      <course.icon className="w-6 h-6 text-gray-700" />
+                    </div>
+                  </div>
 
                   <header className={`h-48 md:h-52 bg-gradient-to-br ${course.gradientFrom} ${course.gradientTo} relative overflow-hidden`}>
                     <div className="absolute inset-0">
@@ -129,11 +137,8 @@ const CoursesSection = () => {
                       )}
                     </div>
                     
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/20 flex items-center justify-center">
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/20 flex items-end justify-center pb-6">
                       <div className="text-center px-4 max-w-xs">
-                        <div className="w-16 h-16 md:w-18 md:h-18 mx-auto mb-4 bg-white/15 backdrop-blur-lg rounded-2xl flex items-center justify-center border border-white/20 shadow-xl">
-                          <course.icon className="w-8 h-8 md:w-9 md:h-9 text-white opacity-95" />
-                        </div>
                         <div className="bg-white/20 backdrop-blur-lg rounded-xl px-4 py-2 border border-white/20">
                           <span className="text-white font-bold text-sm md:text-base">{course.description}</span>
                         </div>
