@@ -1,4 +1,3 @@
-
 import { Users, User, Star, CheckCircle, Info } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -50,6 +49,7 @@ const CoursesSection = () => {
       description: "1-on-1 Mentorship",
       level: "Personalized learning experience",
       icon: User,
+      imageUrl: "/lovable-uploads/41512049-f13b-4a51-9366-65e165c66344.png",
       features: [
         "Personalized curriculum",
         "Flexible scheduling",

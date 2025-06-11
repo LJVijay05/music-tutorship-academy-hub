@@ -60,6 +60,7 @@ const Courses = memo(() => {
       description: "1-on-1 Mentorship",
       level: "Personalized learning experience",
       icon: User,
+      imageUrl: "/lovable-uploads/41512049-f13b-4a51-9366-65e165c66344.png",
       features: courseData.oneOnOneFeatures,
       isPopular: false,
       isPremium: true,
