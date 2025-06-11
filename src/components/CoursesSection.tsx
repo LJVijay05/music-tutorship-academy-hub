@@ -1,3 +1,4 @@
+
 import { Users, User, Star, CheckCircle, Info } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -23,6 +24,7 @@ const CoursesSection = () => {
       description: "Group Learning",
       level: "From Beginner to Advanced Level",
       icon: Users,
+      imageUrl: "/lovable-uploads/fd4cf1bf-e786-42ff-8762-0f6086327f43.png",
       features: [
         "15 students per batch",
         "12 months intensive program", 
@@ -114,6 +116,19 @@ const CoursesSection = () => {
                   )}
 
                   <header className={`h-48 md:h-52 bg-gradient-to-br ${course.gradientFrom} ${course.gradientTo} relative overflow-hidden`}>
+                    <div className="absolute inset-0">
+                      {course.imageUrl ? (
+                        <img 
+                          src={course.imageUrl} 
+                          alt={course.title}
+                          className="w-full h-full object-cover"
+                          loading="lazy"
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-gradient-to-br from-black/20 to-black/40" />
+                      )}
+                    </div>
+                    
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/20 flex items-center justify-center">
                       <div className="text-center px-4 max-w-xs">
                         <div className="w-16 h-16 md:w-18 md:h-18 mx-auto mb-4 bg-white/15 backdrop-blur-lg rounded-2xl flex items-center justify-center border border-white/20 shadow-xl">

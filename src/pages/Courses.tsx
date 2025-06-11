@@ -38,6 +38,7 @@ const Courses = memo(() => {
       description: "Group Learning",
       level: "From Beginner to Advanced Level",
       icon: Users,
+      imageUrl: "/lovable-uploads/fd4cf1bf-e786-42ff-8762-0f6086327f43.png",
       features: courseData.batchFeatures,
       isPopular: true,
       isPremium: false,
