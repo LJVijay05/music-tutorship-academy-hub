@@ -12,29 +12,25 @@ const AnimatedCounter = ({ target, suffix = "", duration = 2000 }: AnimatedCount
 
   useEffect(() => {
     const startTime = Date.now();
-    const endTime = startTime + duration;
-
+    
     const updateCount = () => {
-      const now = Date.now();
-      const progress = Math.min((now - startTime) / duration, 1);
+      const elapsed = Date.now() - startTime;
+      const progress = Math.min(elapsed / duration, 1);
       
-      // Easing function for smooth animation
+      // Smooth easing function
       const easeOutQuad = 1 - (1 - progress) * (1 - progress);
       const currentCount = Math.floor(easeOutQuad * target);
       
       setCount(currentCount);
 
-      if (now < endTime) {
+      if (progress < 1) {
         requestAnimationFrame(updateCount);
       } else {
         setCount(target);
       }
     };
 
-    const timer = setTimeout(() => {
-      updateCount();
-    }, 200); // Small delay to ensure component is visible
-
+    const timer = setTimeout(updateCount, 200);
     return () => clearTimeout(timer);
   }, [target, duration]);
 

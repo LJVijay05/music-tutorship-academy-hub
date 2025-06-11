@@ -1,7 +1,6 @@
 
 import { useEffect, useState, useRef, useMemo } from "react";
 
-// Optimized Counter Animation Component
 const AnimatedCounter = ({ 
   target, 
   suffix = "", 
@@ -29,13 +28,8 @@ const AnimatedCounter = ({
     );
 
     const element = elementRef.current;
-    if (element) {
-      observer.observe(element);
-    }
-
-    return () => {
-      observer.disconnect();
-    };
+    if (element) observer.observe(element);
+    return () => observer.disconnect();
   }, [isVisible]);
 
   useEffect(() => {
@@ -48,14 +42,12 @@ const AnimatedCounter = ({
       const updateCount = () => {
         const now = Date.now();
         const progress = Math.min((now - startTime) / duration, 1);
-        
-        // Smooth easing function
         const easeOut = 1 - Math.pow(1 - progress, 3);
         const currentCount = Math.floor(easeOut * target);
         
         setCount(currentCount);
 
-        if (now < endTime && progress < 1) {
+        if (progress < 1) {
           requestAnimationFrame(updateCount);
         } else {
           setCount(target);
@@ -80,26 +72,10 @@ const AnimatedCounter = ({
 
 const TrustIndicators = () => {
   const indicators = useMemo(() => [
-    { 
-      value: 60, 
-      suffix: "M+", 
-      label: "Total Streams"
-    },
-    { 
-      value: 131, 
-      suffix: "+", 
-      label: "Countries Reached"
-    },
-    { 
-      value: 30, 
-      suffix: "+", 
-      label: "Awards Won"
-    },
-    { 
-      value: 5, 
-      suffix: "★", 
-      label: "Average Rating"
-    }
+    { value: 60, suffix: "M+", label: "Total Streams" },
+    { value: 131, suffix: "+", label: "Countries Reached" },
+    { value: 30, suffix: "+", label: "Awards Won" },
+    { value: 5, suffix: "★", label: "Average Rating" }
   ], []);
 
   return (
@@ -117,7 +93,7 @@ const TrustIndicators = () => {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
           {indicators.map((indicator, index) => (
             <div 
-              key={`indicator-${indicator.label}-${index}`} 
+              key={indicator.label}
               className="text-center group animate-fade-in"
               style={{ animationDelay: `${index * 150}ms` }}
             >

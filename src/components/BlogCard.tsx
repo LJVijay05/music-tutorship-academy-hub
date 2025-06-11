@@ -11,6 +11,14 @@ interface BlogCardProps {
 }
 
 const BlogCard = ({ post, index }: BlogCardProps) => {
+  const formatDate = (date: string) => new Date(date).toLocaleDateString();
+  
+  const metadata = [
+    { icon: User, value: post.author },
+    { icon: Calendar, value: formatDate(post.date) },
+    { icon: Clock, value: post.readTime }
+  ];
+
   return (
     <Card 
       className="group hover:shadow-xl transition-all duration-500 hover:-translate-y-2 border-0 shadow-lg rounded-2xl overflow-hidden bg-white animate-stagger-up"
@@ -35,21 +43,19 @@ const BlogCard = ({ post, index }: BlogCardProps) => {
         </CardTitle>
       </CardHeader>
       
-      <CardContent className="px-4 lg:px-6 pb-4 lg:pb-6">
-        <p className="text-gray-600 mb-6 line-clamp-3 leading-relaxed text-sm lg:text-base">
+      <CardContent className="px-4 lg:px-6 pb-4 lg:pb-6 space-y-6">
+        <p className="text-gray-600 line-clamp-3 leading-relaxed text-sm lg:text-base">
           {post.excerpt}
         </p>
         
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between text-xs lg:text-sm text-gray-500 mb-6 gap-2">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between text-xs lg:text-sm text-gray-500 gap-2">
           <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
-            <div className="flex items-center gap-1">
-              <User className="w-4 h-4 flex-shrink-0" />
-              <span className="truncate">{post.author}</span>
-            </div>
-            <div className="flex items-center gap-1">
-              <Calendar className="w-4 h-4 flex-shrink-0" />
-              <span>{new Date(post.date).toLocaleDateString()}</span>
-            </div>
+            {metadata.slice(0, 2).map(({ icon: Icon, value }, i) => (
+              <div key={i} className="flex items-center gap-1">
+                <Icon className="w-4 h-4 flex-shrink-0" />
+                <span className="truncate">{value}</span>
+              </div>
+            ))}
           </div>
           <div className="flex items-center gap-1">
             <Clock className="w-4 h-4 flex-shrink-0" />
@@ -64,7 +70,7 @@ const BlogCard = ({ post, index }: BlogCardProps) => {
           <Link to={`/blog/${post.id}`} className="flex items-center justify-center">
             <span className="relative z-10 text-sm lg:text-base">Read More</span>
             <ArrowRight className="w-4 h-4 ml-2 group-hover/btn:translate-x-1 transition-transform duration-300 relative z-10" />
-            <div className="absolute inset-0 bg-gradient-to-r from-red-700 to-red-800 translate-x-[-100%] group-hover/btn:translate-x-0 transition-transform duration-300"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-red-700 to-red-800 translate-x-[-100%] group-hover/btn:translate-x-0 transition-transform duration-300" />
           </Link>
         </Button>
       </CardContent>

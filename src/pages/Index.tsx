@@ -10,10 +10,8 @@ import { useEffect } from "react";
 
 const Index = () => {
   useEffect(() => {
-    // Scroll to top on page load
     window.scrollTo(0, 0);
     
-    // Enhanced performance optimizations
     const optimizePerformance = () => {
       // Lazy load images below the fold
       const images = document.querySelectorAll('img[data-src]');
@@ -52,11 +50,8 @@ const Index = () => {
       }
     };
 
-    // Run optimizations after initial render
     const timer = setTimeout(optimizePerformance, 100);
-    return () => {
-      clearTimeout(timer);
-    };
+    return () => clearTimeout(timer);
   }, []);
 
   return (

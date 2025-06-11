@@ -8,25 +8,25 @@ import TrustIndicators from "@/components/TrustIndicators";
 import { memo } from "react";
 
 const Courses = memo(() => {
-  const batchFeatures = [
-    "15 students per batch",
-    "12 months intensive program",
-    "Live weekly sessions",
-    "Group collaboration projects",
-    "Industry-standard software training",
-    "Certificate upon completion"
-  ];
+  const courseData = {
+    batchFeatures: [
+      "15 students per batch",
+      "12 months intensive program",
+      "Live weekly sessions",
+      "Group collaboration projects",
+      "Industry-standard software training",
+      "Certificate upon completion"
+    ],
+    oneOnOneFeatures: [
+      "Personalized curriculum",
+      "Flexible scheduling",
+      "Direct mentor feedback",
+      "Custom project development",
+      "Industry networking opportunities",
+      "Lifetime support access"
+    ]
+  };
 
-  const oneOnOneFeatures = [
-    "Personalized curriculum",
-    "Flexible scheduling",
-    "Direct mentor feedback",
-    "Custom project development",
-    "Industry networking opportunities",
-    "Lifetime support access"
-  ];
-
-  // Placeholder function since we're now using direct routing
   const handleDetailsClick = (courseId: string) => {
     console.log('Details click handled via routing for course:', courseId);
   };
@@ -38,7 +38,7 @@ const Courses = memo(() => {
       description: "Group Learning",
       level: "From Beginner to Advanced Level",
       icon: Users,
-      features: batchFeatures,
+      features: courseData.batchFeatures,
       isPopular: true,
       isPremium: false,
       gradientFrom: "from-gray-900",
@@ -59,7 +59,7 @@ const Courses = memo(() => {
       description: "1-on-1 Mentorship",
       level: "Personalized learning experience",
       icon: User,
-      features: oneOnOneFeatures,
+      features: courseData.oneOnOneFeatures,
       isPopular: false,
       isPremium: true,
       gradientFrom: "from-amber-600",
@@ -83,46 +83,28 @@ const Courses = memo(() => {
       <main className="pt-16">
         <CoursesHero />
 
-        <section className="py-12 sm:py-16 md:py-20 relative" aria-labelledby="courses-heading">
-          <div className="container mx-auto px-4 md:px-6 lg:px-8 xl:px-12">
-            <div className="text-center mb-12 sm:mb-16">
-              <h2 id="courses-heading" className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 text-gray-900">
+        <section className="py-20 relative" aria-labelledby="courses-heading">
+          <div className="container mx-auto px-6 lg:px-8 xl:px-12">
+            <div className="text-center mb-16">
+              <h2 id="courses-heading" className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
                 Choose Your Learning Path
               </h2>
-              <p className="text-lg sm:text-xl md:text-2xl text-gray-600 max-w-4xl mx-auto px-4 font-medium">
+              <p className="text-xl md:text-2xl text-gray-600 max-w-4xl mx-auto font-medium">
                 Whether you prefer collaborative learning or personalized attention, we have the perfect program for you
               </p>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
               {courses.map((course) => (
                 <CourseCard
                   key={course.courseId}
-                  courseId={course.courseId}
-                  title={course.title}
-                  description={course.description}
-                  level={course.level}
-                  icon={course.icon}
-                  features={course.features}
-                  isPopular={course.isPopular}
-                  isPremium={course.isPremium}
-                  gradientFrom={course.gradientFrom}
-                  gradientTo={course.gradientTo}
-                  borderColor={course.borderColor}
-                  textColor={course.textColor}
-                  bgColor={course.bgColor}
-                  buttonGradientFrom={course.buttonGradientFrom}
-                  buttonGradientTo={course.buttonGradientTo}
-                  buttonHoverFrom={course.buttonHoverFrom}
-                  buttonHoverTo={course.buttonHoverTo}
-                  offerText={course.offerText}
-                  offerSubtext={course.offerSubtext}
+                  {...course}
                   onDetailsClick={handleDetailsClick}
                 />
               ))}
             </div>
 
-            <div className="mt-12 sm:mt-16">
+            <div className="mt-16">
               <TrustIndicators />
             </div>
           </div>
