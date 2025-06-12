@@ -1,4 +1,3 @@
-
 import { Users, User, Star, CheckCircle, Info } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -128,10 +127,10 @@ const CoursesSection = memo(() => {
                     </div>
                   )}
 
-                  {/* Course Icon - Redesigned placement */}
-                  <div className="absolute top-4 left-4 z-30">
-                    <div className="w-12 h-12 bg-white/95 backdrop-blur-lg rounded-xl flex items-center justify-center border border-white/30 shadow-lg">
-                      <course.icon className="w-6 h-6 text-gray-700" />
+                  {/* Course Type Icon - repositioned to bottom-right of image */}
+                  <div className="absolute bottom-4 right-4 z-30" style={{ transform: 'translateY(-50%)' }}>
+                    <div className="w-10 h-10 bg-white/95 backdrop-blur-lg rounded-full flex items-center justify-center border border-white/30 shadow-lg">
+                      <course.icon className="w-5 h-5 text-gray-700" />
                     </div>
                   </div>
 
@@ -147,14 +146,6 @@ const CoursesSection = memo(() => {
                       ) : (
                         <div className="w-full h-full bg-gradient-to-br from-black/20 to-black/40" />
                       )}
-                    </div>
-                    
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/20 flex items-end justify-center pb-6">
-                      <div className="text-center px-4 max-w-xs">
-                        <div className="bg-white/20 backdrop-blur-lg rounded-xl px-4 py-2 border border-white/20">
-                          <span className="text-white font-bold text-sm md:text-base">{course.description}</span>
-                        </div>
-                      </div>
                     </div>
                   </header>
 
