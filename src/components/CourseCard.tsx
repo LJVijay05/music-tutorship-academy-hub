@@ -78,6 +78,13 @@ const CourseCard = memo(({
     <>
       <article className="group w-full h-full">
         <Card className={`overflow-hidden border-0 shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-2xl h-full bg-white relative ${isPremium ? 'ring-2 ring-amber-200/60' : ''} max-w-lg mx-auto`}>
+          {/* Course Type Icon - moved to top-left as floating badge */}
+          <div className="absolute top-4 left-4 z-30">
+            <div className="w-8 h-8 bg-white/90 backdrop-blur-sm rounded-lg flex items-center justify-center border border-white/40 shadow-md">
+              <IconComponent className="w-4 h-4 text-gray-600" />
+            </div>
+          </div>
+
           {/* Popular Badge */}
           {isPopular && (
             <div className="absolute top-4 right-4 z-30">
@@ -96,13 +103,6 @@ const CourseCard = memo(({
               </div>
             </div>
           )}
-
-          {/* Course Type Icon - repositioned to bottom-right of image */}
-          <div className="absolute bottom-4 right-4 z-30" style={{ transform: 'translateY(-50%)' }}>
-            <div className="w-10 h-10 bg-white/95 backdrop-blur-lg rounded-full flex items-center justify-center border border-white/30 shadow-lg">
-              <IconComponent className="w-5 h-5 text-gray-700" />
-            </div>
-          </div>
 
           {/* Header - Clean image without overlay text */}
           <header className={`h-48 md:h-52 bg-gradient-to-br ${gradientFrom} ${gradientTo} relative overflow-hidden`}>

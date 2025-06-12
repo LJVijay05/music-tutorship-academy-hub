@@ -1,3 +1,4 @@
+
 import { Users, User, Star, CheckCircle, Info } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -108,6 +109,13 @@ const CoursesSection = memo(() => {
             {courses.map((course, index) => (
               <article key={course.id} className="group animate-fade-in-up h-full" style={{ animationDelay: `${index * 0.3}s` }}>
                 <Card className={`overflow-hidden border-0 shadow-xl hover:shadow-2xl transition-all duration-500 ease-out rounded-2xl h-full bg-white hover:-translate-y-2 relative group-hover:scale-[1.02] ${course.isPremium ? 'ring-2 ring-amber-200/60' : ''}`}>
+                  {/* Course Type Icon - moved to top-left as floating badge */}
+                  <div className="absolute top-4 left-4 z-30">
+                    <div className="w-8 h-8 bg-white/90 backdrop-blur-sm rounded-lg flex items-center justify-center border border-white/40 shadow-md">
+                      <course.icon className="w-4 h-4 text-gray-600" />
+                    </div>
+                  </div>
+
                   {/* Popular Badge */}
                   {course.isPopular && (
                     <div className="absolute top-4 right-4 z-30">
@@ -126,13 +134,6 @@ const CoursesSection = memo(() => {
                       </div>
                     </div>
                   )}
-
-                  {/* Course Type Icon - repositioned to bottom-right of image */}
-                  <div className="absolute bottom-4 right-4 z-30" style={{ transform: 'translateY(-50%)' }}>
-                    <div className="w-10 h-10 bg-white/95 backdrop-blur-lg rounded-full flex items-center justify-center border border-white/30 shadow-lg">
-                      <course.icon className="w-5 h-5 text-gray-700" />
-                    </div>
-                  </div>
 
                   <header className={`h-48 md:h-52 bg-gradient-to-br ${course.gradientFrom} ${course.gradientTo} relative overflow-hidden`}>
                     <div className="absolute inset-0">
