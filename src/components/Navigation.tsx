@@ -1,6 +1,6 @@
 
 import { Button } from "@/components/ui/button";
-import { Music, Menu, X, ChevronDown } from "lucide-react";
+import { Music, Menu, X, ChevronDown, LogIn, UserPlus } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import StudentDataForm from "./StudentDataForm";
@@ -54,6 +54,16 @@ const Navigation = () => {
 
   const handleLiveMentorshipClick = () => {
     navigate('/courses');
+  };
+
+  const handleLoginClick = () => {
+    // Placeholder for login functionality
+    console.log('Login clicked');
+  };
+
+  const handleRegisterClick = () => {
+    // Placeholder for register functionality
+    console.log('Register clicked');
   };
 
   return (
@@ -123,8 +133,29 @@ const Navigation = () => {
               ))}
             </div>
 
-            {/* Register Button - Desktop */}
-            <div className="hidden md:block">
+            {/* Auth Buttons & Register Button - Desktop */}
+            <div className="hidden md:flex items-center gap-3">
+              {/* Login Button */}
+              <Button 
+                onClick={handleLoginClick}
+                variant="ghost"
+                className="text-gray-700 hover:text-red-600 hover:bg-red-50 px-3 py-2 text-sm font-medium transition-all duration-300 rounded-lg flex items-center gap-2"
+              >
+                <LogIn className="w-4 h-4" />
+                Login
+              </Button>
+
+              {/* Register Button */}
+              <Button 
+                onClick={handleRegisterClick}
+                variant="outline"
+                className="border-red-600 text-red-600 hover:bg-red-600 hover:text-white px-4 py-2 text-sm font-medium transition-all duration-300 rounded-lg flex items-center gap-2"
+              >
+                <UserPlus className="w-4 h-4" />
+                Register
+              </Button>
+
+              {/* Main CTA Button */}
               <Button 
                 onClick={openForm}
                 className="bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700 text-white px-4 xl:px-6 py-2 text-sm font-medium shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 rounded-lg"
@@ -148,7 +179,7 @@ const Navigation = () => {
 
           {/* Mobile Navigation */}
           <div className={`md:hidden overflow-hidden transition-all duration-500 ${
-            isMenuOpen ? 'max-h-80 opacity-100' : 'max-h-0 opacity-0'
+            isMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
           }`}>
             <div className="py-3 space-y-1 border-t border-gray-100">
               {navItems.map((item, index) => (
@@ -193,7 +224,33 @@ const Navigation = () => {
                   </Link>
                 )
               ))}
-              <div className="px-3 pt-2">
+              
+              {/* Mobile Auth Buttons */}
+              <div className="px-3 pt-2 space-y-2">
+                <Button 
+                  onClick={() => {
+                    handleLoginClick();
+                    setIsMenuOpen(false);
+                  }}
+                  variant="ghost"
+                  className="w-full text-gray-700 hover:text-red-600 hover:bg-red-50 py-2.5 rounded-lg flex items-center justify-center gap-2"
+                >
+                  <LogIn className="w-4 h-4" />
+                  Login
+                </Button>
+                
+                <Button 
+                  onClick={() => {
+                    handleRegisterClick();
+                    setIsMenuOpen(false);
+                  }}
+                  variant="outline"
+                  className="w-full border-red-600 text-red-600 hover:bg-red-600 hover:text-white py-2.5 rounded-lg flex items-center justify-center gap-2"
+                >
+                  <UserPlus className="w-4 h-4" />
+                  Register
+                </Button>
+
                 <Button 
                   onClick={() => {
                     openForm();
