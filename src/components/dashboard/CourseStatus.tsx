@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -20,9 +19,9 @@ export const CourseStatus = () => {
       status: 'active',
       daw: 'Logic Pro X',
       icon: Music,
-      color: 'from-blue-500 to-purple-600',
-      bgColor: 'bg-blue-50',
-      borderColor: 'border-blue-200',
+      color: 'from-red-500 to-purple-600',
+      bgColor: 'bg-red-50',
+      borderColor: 'border-red-200',
     },
     {
       id: 2,
@@ -45,7 +44,7 @@ export const CourseStatus = () => {
   const getStatusBadge = (status: string) => {
     switch (status) {
       case 'active':
-        return <Badge className="bg-blue-100 text-blue-800">In Progress</Badge>;
+        return <Badge className="bg-red-100 text-red-800">In Progress</Badge>;
       case 'scheduled':
         return <Badge className="bg-purple-100 text-purple-800">Next Session</Badge>;
       default:
@@ -129,7 +128,7 @@ export const CourseStatus = () => {
           ))}
         </div>
 
-        <div className="mt-6 p-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg border border-blue-200">
+        <div className="mt-6 p-4 bg-gradient-to-r from-red-50 to-purple-50 rounded-lg border border-red-200">
           <h4 className="font-medium text-gray-900 mb-2">🎯 This Week's Focus</h4>
           <ul className="text-sm text-gray-700 space-y-1">
             <li>• Master Logic Pro X's channel EQ and multipressor</li>

@@ -66,7 +66,7 @@ export const ScheduleManager = () => {
     switch (status) {
       case 'confirmed': return 'bg-green-100 text-green-800';
       case 'pending': return 'bg-yellow-100 text-yellow-800';
-      case 'scheduled': return 'bg-blue-100 text-blue-800';
+      case 'scheduled': return 'bg-red-100 text-red-800';
       default: return 'bg-gray-100 text-gray-800';
     }
   };
@@ -79,7 +79,7 @@ export const ScheduleManager = () => {
             <Calendar className="w-5 h-5" />
             Upcoming Production Sessions
           </CardTitle>
-          <Button size="sm" variant="outline" className="bg-gradient-to-r from-blue-50 to-purple-50 border-blue-200">
+          <Button size="sm" variant="outline" className="bg-gradient-to-r from-red-50 to-purple-50 border-red-200">
             <Plus className="w-4 h-4 mr-2" />
             Request Session
           </Button>
@@ -91,8 +91,8 @@ export const ScheduleManager = () => {
             <div key={session.id} className="border rounded-lg p-5 hover:shadow-sm transition-shadow bg-gradient-to-r from-gray-50 to-purple-50">
               <div className="flex items-start justify-between mb-3">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-gradient-to-r from-blue-100 to-purple-100 rounded-lg flex items-center justify-center">
-                    <session.icon className="w-5 h-5 text-blue-600" />
+                  <div className="w-10 h-10 bg-gradient-to-r from-red-100 to-purple-100 rounded-lg flex items-center justify-center">
+                    <session.icon className="w-5 h-5 text-red-600" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900">{session.type}</h3>
@@ -127,7 +127,7 @@ export const ScheduleManager = () => {
               <div className="flex gap-2">
                 <Button 
                   size="sm" 
-                  className="flex-1 bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700"
+                  className="flex-1 bg-gradient-to-r from-green-600 to-red-600 hover:from-green-700 hover:to-red-700"
                 >
                   <Video className="w-4 h-4 mr-2" />
                   Join Session
@@ -176,7 +176,7 @@ export const ScheduleManager = () => {
                 <Button onClick={() => setIsDialogOpen(false)} variant="outline" className="flex-1">
                   Cancel
                 </Button>
-                <Button onClick={() => setIsDialogOpen(false)} className="flex-1 bg-gradient-to-r from-blue-600 to-purple-600">
+                <Button onClick={() => setIsDialogOpen(false)} className="flex-1 bg-gradient-to-r from-red-600 to-purple-600">
                   Send Request
                 </Button>
               </div>

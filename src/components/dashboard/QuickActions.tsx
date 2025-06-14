@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -9,7 +8,7 @@ export const QuickActions = () => {
     { 
       icon: Calendar, 
       label: 'Schedule Session', 
-      color: 'text-blue-600 bg-blue-50 hover:bg-blue-100',
+      color: 'text-red-600 bg-red-50 hover:bg-red-100',
       description: 'Book mentorship'
     },
     { 
@@ -21,7 +20,7 @@ export const QuickActions = () => {
     { 
       icon: Music, 
       label: 'Ableton Live Files', 
-      color: 'text-blue-600 bg-blue-50 hover:bg-blue-100',
+      color: 'text-red-600 bg-red-50 hover:bg-red-100',
       description: 'Live 12 sessions'
     },
     { 
@@ -33,7 +32,7 @@ export const QuickActions = () => {
     { 
       icon: Headphones, 
       label: 'Sample Library', 
-      color: 'text-blue-600 bg-blue-50 hover:bg-blue-100',
+      color: 'text-red-600 bg-red-50 hover:bg-red-100',
       description: 'Browse sounds'
     },
     { 
@@ -69,10 +68,10 @@ export const QuickActions = () => {
           ))}
         </div>
         
-        <div className="mt-6 p-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg border border-blue-200">
+        <div className="mt-6 p-4 bg-gradient-to-r from-red-50 to-purple-50 rounded-lg border border-red-200">
           <h4 className="font-medium text-gray-900 mb-2">Today's DAW Challenge</h4>
           <p className="text-sm text-gray-600 mb-3">Create a 16-bar loop using Logic Pro X's Sculpture and Alchemy plugins</p>
-          <Button size="sm" className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
+          <Button size="sm" className="w-full bg-gradient-to-r from-red-600 to-purple-600 hover:from-red-700 hover:to-purple-700">
             Start Challenge
           </Button>
         </div>
