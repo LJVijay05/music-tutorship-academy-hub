@@ -2,22 +2,55 @@
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Calendar, MessageSquare, BookOpen, Settings, Download, Star } from 'lucide-react';
+import { Calendar, MessageSquare, Download, Upload, Headphones, Settings, Mic, Music } from 'lucide-react';
 
 export const QuickActions = () => {
   const actions = [
-    { icon: Calendar, label: 'Schedule Lesson', color: 'text-blue-600 bg-blue-50 hover:bg-blue-100' },
-    { icon: BookOpen, label: 'Browse Courses', color: 'text-green-600 bg-green-50 hover:bg-green-100' },
-    { icon: Download, label: 'Download Materials', color: 'text-purple-600 bg-purple-50 hover:bg-purple-100' },
-    { icon: Star, label: 'Rate Instructor', color: 'text-yellow-600 bg-yellow-50 hover:bg-yellow-100' },
-    { icon: MessageSquare, label: 'Support Center', color: 'text-red-600 bg-red-50 hover:bg-red-100' },
-    { icon: Settings, label: 'Account Settings', color: 'text-gray-600 bg-gray-50 hover:bg-gray-100' },
+    { 
+      icon: Calendar, 
+      label: 'Schedule Session', 
+      color: 'text-blue-600 bg-blue-50 hover:bg-blue-100',
+      description: 'Book mentorship'
+    },
+    { 
+      icon: Download, 
+      label: 'Sample Packs', 
+      color: 'text-green-600 bg-green-50 hover:bg-green-100',
+      description: 'Download sounds'
+    },
+    { 
+      icon: Music, 
+      label: 'DAW Templates', 
+      color: 'text-purple-600 bg-purple-50 hover:bg-purple-100',
+      description: 'Project files'
+    },
+    { 
+      icon: Upload, 
+      label: 'Submit Track', 
+      color: 'text-orange-600 bg-orange-50 hover:bg-orange-100',
+      description: 'Get feedback'
+    },
+    { 
+      icon: Headphones, 
+      label: 'Production Library', 
+      color: 'text-pink-600 bg-pink-50 hover:bg-pink-100',
+      description: 'Browse resources'
+    },
+    { 
+      icon: Mic, 
+      label: 'Connect Mentor', 
+      color: 'text-indigo-600 bg-indigo-50 hover:bg-indigo-100',
+      description: 'Direct message'
+    },
   ];
 
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Quick Actions</CardTitle>
+        <CardTitle className="flex items-center gap-2">
+          <Settings className="w-5 h-5" />
+          Production Tools
+        </CardTitle>
       </CardHeader>
       <CardContent>
         <div className="grid grid-cols-2 gap-3">
@@ -25,12 +58,23 @@ export const QuickActions = () => {
             <Button
               key={index}
               variant="ghost"
-              className={`h-auto p-4 flex flex-col items-center gap-2 ${action.color}`}
+              className={`h-auto p-4 flex flex-col items-center gap-2 transition-all duration-200 hover:scale-105 ${action.color}`}
             >
               <action.icon className="w-6 h-6" />
-              <span className="text-xs font-medium text-center">{action.label}</span>
+              <div className="text-center">
+                <span className="text-xs font-medium block">{action.label}</span>
+                <span className="text-xs opacity-75">{action.description}</span>
+              </div>
             </Button>
           ))}
+        </div>
+        
+        <div className="mt-6 p-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg border border-blue-200">
+          <h4 className="font-medium text-gray-900 mb-2">Today's Practice Goal</h4>
+          <p className="text-sm text-gray-600 mb-3">Complete the "808 Pattern Creation" exercise</p>
+          <Button size="sm" className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
+            Start Practice Session
+          </Button>
         </div>
       </CardContent>
     </Card>
