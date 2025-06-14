@@ -10,6 +10,8 @@ import { PracticeMaterials } from '@/components/dashboard/PracticeMaterials';
 import { TrackSubmission } from '@/components/dashboard/TrackSubmission';
 
 const Dashboard = () => {
+  console.log('Dashboard component rendered');
+  
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50">
       <DashboardHeader />
