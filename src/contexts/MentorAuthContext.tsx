@@ -48,6 +48,27 @@ export const MentorAuthProvider: React.FC<{ children: React.ReactNode }> = ({ ch
     setIsLoading(true);
     
     try {
+      // Check for hardcoded mentor credentials first
+      if (email === 'producingwithvijay@gmail.com' && password === 'Vijay@0104') {
+        // Create a mock user session for the mentor
+        const mockUser = {
+          id: 'mentor-mock-id',
+          email: 'producingwithvijay@gmail.com',
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString(),
+          aud: 'authenticated',
+          role: 'authenticated',
+          email_confirmed_at: new Date().toISOString(),
+          user_metadata: {},
+          app_metadata: {}
+        } as User;
+        
+        setUser(mockUser);
+        setIsMentor(true);
+        return true;
+      }
+
+      // If not the hardcoded credentials, try regular Supabase auth
       const { data, error } = await supabase.auth.signInWithPassword({
         email,
         password,
@@ -70,6 +91,13 @@ export const MentorAuthProvider: React.FC<{ children: React.ReactNode }> = ({ ch
   };
 
   const logout = async () => {
+    // For mock session, just clear the state
+    if (user?.id === 'mentor-mock-id') {
+      setUser(null);
+      setIsMentor(false);
+      return;
+    }
+    // For real Supabase session, sign out normally
     await supabase.auth.signOut();
   };
 
