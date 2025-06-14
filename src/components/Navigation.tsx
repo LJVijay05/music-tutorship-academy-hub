@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Music, Menu, X, ChevronDown, LogIn, UserPlus } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -133,24 +134,27 @@ const Navigation = () => {
             </div>
 
             {/* Auth Buttons - Desktop */}
-            <div className="hidden md:flex items-center gap-4">
+            <div className="hidden md:flex items-center gap-3">
               {/* Login Button */}
               <Button 
                 onClick={handleLoginClick}
                 variant="ghost"
-                className="text-gray-700 hover:text-red-600 hover:bg-red-50 px-4 py-2 text-sm font-medium transition-all duration-300 rounded-lg flex items-center gap-2"
+                className="relative group text-gray-700 hover:text-white hover:bg-transparent px-5 py-2.5 text-sm font-semibold transition-all duration-300 rounded-xl overflow-hidden border border-gray-300 hover:border-red-500 flex items-center gap-2"
               >
-                <LogIn className="w-4 h-4" />
-                Login
+                <div className="absolute inset-0 bg-gradient-to-r from-red-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <LogIn className="w-4 h-4 relative z-10" />
+                <span className="relative z-10">Login</span>
               </Button>
 
               {/* Register Button */}
               <Button 
                 onClick={handleRegisterClick}
-                className="bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700 text-white px-4 py-2 text-sm font-medium shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 rounded-lg flex items-center gap-2"
+                className="relative group bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700 text-white px-6 py-2.5 text-sm font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 rounded-xl overflow-hidden flex items-center gap-2 border-0"
               >
-                <UserPlus className="w-4 h-4" />
-                Register
+                <div className="absolute inset-0 bg-gradient-to-r from-pink-600 to-red-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <UserPlus className="w-4 h-4 relative z-10" />
+                <span className="relative z-10">Register</span>
+                <div className="absolute -top-1 -right-1 w-3 h-3 bg-yellow-400 rounded-full animate-pulse"></div>
               </Button>
             </div>
 
@@ -216,17 +220,18 @@ const Navigation = () => {
               ))}
               
               {/* Mobile Auth Buttons */}
-              <div className="px-3 pt-2 space-y-3">
+              <div className="px-3 pt-3 space-y-3">
                 <Button 
                   onClick={() => {
                     handleLoginClick();
                     setIsMenuOpen(false);
                   }}
                   variant="ghost"
-                  className="w-full text-gray-700 hover:text-red-600 hover:bg-red-50 py-2.5 rounded-lg flex items-center justify-center gap-2"
+                  className="w-full relative group text-gray-700 hover:text-white hover:bg-transparent py-3 rounded-xl border border-gray-300 hover:border-red-500 flex items-center justify-center gap-2 overflow-hidden transition-all duration-300"
                 >
-                  <LogIn className="w-4 h-4" />
-                  Login
+                  <div className="absolute inset-0 bg-gradient-to-r from-red-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <LogIn className="w-4 h-4 relative z-10" />
+                  <span className="relative z-10 font-semibold">Login</span>
                 </Button>
                 
                 <Button 
@@ -234,10 +239,12 @@ const Navigation = () => {
                     handleRegisterClick();
                     setIsMenuOpen(false);
                   }}
-                  className="w-full bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700 text-white py-2.5 rounded-lg shadow-md flex items-center justify-center gap-2"
+                  className="w-full relative group bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700 text-white py-3 rounded-xl shadow-lg flex items-center justify-center gap-2 overflow-hidden border-0 transition-all duration-300"
                 >
-                  <UserPlus className="w-4 h-4" />
-                  Register
+                  <div className="absolute inset-0 bg-gradient-to-r from-pink-600 to-red-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <UserPlus className="w-4 h-4 relative z-10" />
+                  <span className="relative z-10 font-semibold">Register</span>
+                  <div className="absolute -top-1 -right-1 w-3 h-3 bg-yellow-400 rounded-full animate-pulse"></div>
                 </Button>
               </div>
             </div>
