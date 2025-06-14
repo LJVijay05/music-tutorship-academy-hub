@@ -6,10 +6,10 @@ import { Music, Clock, Award, Download, Headphones, Mic } from 'lucide-react';
 
 export const ProgressOverview = () => {
   const stats = [
-    { icon: Music, label: 'Courses Enrolled', value: '2', color: 'text-red-600', bgColor: 'bg-red-50' },
-    { icon: Download, label: 'Practice Materials', value: '45', color: 'text-red-600', bgColor: 'bg-red-50' },
-    { icon: Clock, label: 'Hours Completed', value: '87', color: 'text-red-600', bgColor: 'bg-red-50' },
-    { icon: Award, label: 'Achievements', value: '12', color: 'text-red-600', bgColor: 'bg-red-50' },
+    { icon: Music, label: 'Courses Enrolled', value: '2', color: 'text-blue-600', bgColor: 'bg-blue-50' },
+    { icon: Download, label: 'Practice Materials', value: '45', color: 'text-purple-600', bgColor: 'bg-purple-50' },
+    { icon: Clock, label: 'Hours Completed', value: '87', color: 'text-blue-600', bgColor: 'bg-blue-50' },
+    { icon: Award, label: 'Achievements', value: '12', color: 'text-purple-600', bgColor: 'bg-purple-50' },
   ];
 
   const achievements = [
@@ -30,7 +30,7 @@ export const ProgressOverview = () => {
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {stats.map((stat, index) => (
-          <Card key={index} className="hover:shadow-md transition-shadow border-l-4 border-l-red-500">
+          <Card key={index} className="hover:shadow-md transition-shadow border-l-4 border-l-blue-500">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
@@ -92,10 +92,10 @@ export const ProgressOverview = () => {
               {achievements.map((achievement, index) => (
                 <div key={index} className="flex items-center gap-3">
                   <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                    achievement.earned ? 'bg-red-100' : 'bg-gray-100'
+                    achievement.earned ? 'bg-blue-100' : 'bg-gray-100'
                   }`}>
                     <achievement.icon className={`w-4 h-4 ${
-                      achievement.earned ? 'text-red-600' : 'text-gray-400'
+                      achievement.earned ? 'text-blue-600' : 'text-gray-400'
                     }`} />
                   </div>
                   <span className={`text-sm ${
@@ -104,7 +104,7 @@ export const ProgressOverview = () => {
                     {achievement.title}
                   </span>
                   {achievement.earned && (
-                    <span className="ml-auto text-xs text-red-600 font-medium">Earned</span>
+                    <span className="ml-auto text-xs text-blue-600 font-medium">Earned</span>
                   )}
                 </div>
               ))}

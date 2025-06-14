@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -80,7 +79,7 @@ export const ScheduleManager = () => {
             <Calendar className="w-5 h-5" />
             Upcoming Production Sessions
           </CardTitle>
-          <Button size="sm" variant="outline" className="bg-gradient-to-r from-green-50 to-blue-50 border-green-200">
+          <Button size="sm" variant="outline" className="bg-gradient-to-r from-blue-50 to-purple-50 border-blue-200">
             <Plus className="w-4 h-4 mr-2" />
             Request Session
           </Button>
@@ -89,7 +88,7 @@ export const ScheduleManager = () => {
       <CardContent>
         <div className="space-y-4">
           {upcomingSessions.map((session) => (
-            <div key={session.id} className="border rounded-lg p-5 hover:shadow-sm transition-shadow bg-gradient-to-r from-gray-50 to-blue-50">
+            <div key={session.id} className="border rounded-lg p-5 hover:shadow-sm transition-shadow bg-gradient-to-r from-gray-50 to-purple-50">
               <div className="flex items-start justify-between mb-3">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 bg-gradient-to-r from-blue-100 to-purple-100 rounded-lg flex items-center justify-center">

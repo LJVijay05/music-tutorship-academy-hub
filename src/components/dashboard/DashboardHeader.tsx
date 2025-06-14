@@ -70,7 +70,7 @@ export const DashboardHeader = () => {
 
             <Button variant="ghost" size="sm" className="relative">
               <Bell className="w-4 h-4" />
-              <span className="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+              <span className="absolute -top-1 -right-1 w-2 h-2 bg-blue-500 rounded-full"></span>
             </Button>
 
             <DropdownMenu>

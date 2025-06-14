@@ -9,37 +9,37 @@ export const QuickActions = () => {
     { 
       icon: Calendar, 
       label: 'Schedule Session', 
-      color: 'text-red-600 bg-red-50 hover:bg-red-100',
+      color: 'text-blue-600 bg-blue-50 hover:bg-blue-100',
       description: 'Book mentorship'
     },
     { 
       icon: Download, 
       label: 'Logic Pro Templates', 
-      color: 'text-orange-600 bg-orange-50 hover:bg-orange-100',
+      color: 'text-purple-600 bg-purple-50 hover:bg-purple-100',
       description: 'Download projects'
     },
     { 
       icon: Music, 
       label: 'Ableton Live Files', 
-      color: 'text-red-600 bg-red-50 hover:bg-red-100',
+      color: 'text-blue-600 bg-blue-50 hover:bg-blue-100',
       description: 'Live 12 sessions'
     },
     { 
       icon: Upload, 
       label: 'Submit Track', 
-      color: 'text-orange-600 bg-orange-50 hover:bg-orange-100',
+      color: 'text-purple-600 bg-purple-50 hover:bg-purple-100',
       description: 'Get feedback'
     },
     { 
       icon: Headphones, 
       label: 'Sample Library', 
-      color: 'text-red-600 bg-red-50 hover:bg-red-100',
+      color: 'text-blue-600 bg-blue-50 hover:bg-blue-100',
       description: 'Browse sounds'
     },
     { 
       icon: Mic, 
       label: 'Live Chat', 
-      color: 'text-orange-600 bg-orange-50 hover:bg-orange-100',
+      color: 'text-purple-600 bg-purple-50 hover:bg-purple-100',
       description: 'Connect mentor'
     },
   ];
@@ -69,10 +69,10 @@ export const QuickActions = () => {
           ))}
         </div>
         
-        <div className="mt-6 p-4 bg-gradient-to-r from-red-50 to-orange-50 rounded-lg border border-red-200">
+        <div className="mt-6 p-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg border border-blue-200">
           <h4 className="font-medium text-gray-900 mb-2">Today's DAW Challenge</h4>
           <p className="text-sm text-gray-600 mb-3">Create a 16-bar loop using Logic Pro X's Sculpture and Alchemy plugins</p>
-          <Button size="sm" className="w-full bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-700 hover:to-orange-700">
+          <Button size="sm" className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
             Start Challenge
           </Button>
         </div>

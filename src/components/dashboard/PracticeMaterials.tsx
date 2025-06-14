@@ -15,7 +15,7 @@ export const PracticeMaterials = () => {
       downloads: 2340,
       category: 'Logic Pro X',
       icon: Music,
-      gradient: 'from-red-500 to-orange-600',
+      gradient: 'from-blue-500 to-purple-600',
     },
     {
       id: 2,
@@ -25,7 +25,7 @@ export const PracticeMaterials = () => {
       downloads: 1890,
       category: 'Ableton Live',
       icon: File,
-      gradient: 'from-red-500 to-pink-600',
+      gradient: 'from-purple-500 to-pink-600',
     },
     {
       id: 3,
@@ -35,7 +35,7 @@ export const PracticeMaterials = () => {
       downloads: 3650,
       category: 'Processing',
       icon: Headphones,
-      gradient: 'from-orange-500 to-red-600',
+      gradient: 'from-blue-500 to-purple-600',
     },
     {
       id: 4,
@@ -45,7 +45,7 @@ export const PracticeMaterials = () => {
       downloads: 1100,
       category: 'Mixing',
       icon: Play,
-      gradient: 'from-red-600 to-purple-600',
+      gradient: 'from-purple-500 to-pink-600',
     },
   ];
 
@@ -90,12 +90,12 @@ export const PracticeMaterials = () => {
           ))}
         </div>
         
-        <div className="mt-6 p-4 bg-gradient-to-r from-red-50 to-orange-50 rounded-lg border border-red-200">
+        <div className="mt-6 p-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg border border-blue-200">
           <h4 className="font-medium text-gray-900 mb-2">🎵 DAW Pro Tip of the Day</h4>
           <p className="text-sm text-gray-700 mb-3">
             In Logic Pro X, use the Sculpture plugin to create unique textures and layers. In Ableton Live 12, experiment with the new Meld device for creative sound morphing.
           </p>
-          <Button size="sm" variant="outline" className="text-xs border-red-300 text-red-700 hover:bg-red-50">
+          <Button size="sm" variant="outline" className="text-xs border-blue-300 text-blue-700 hover:bg-blue-50">
             View More Tips
           </Button>
         </div>
