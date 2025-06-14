@@ -22,7 +22,8 @@ const Login = () => {
     setTimeout(() => {
       setIsLoading(false);
       console.log('Login attempt:', { email, password });
-      // Add actual login logic here
+      // Redirect to dashboard after successful login
+      navigate('/dashboard');
     }, 1000);
   };
 

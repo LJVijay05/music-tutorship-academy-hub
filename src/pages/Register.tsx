@@ -41,7 +41,8 @@ const Register = () => {
     setTimeout(() => {
       setIsLoading(false);
       console.log('Registration attempt:', formData);
-      // Add actual registration logic here
+      // Redirect to dashboard after successful registration
+      navigate('/dashboard');
     }, 1000);
   };
 
