@@ -10,16 +10,16 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 
 export const InternalChat = () => {
   const [message, setMessage] = useState('');
-  const [activeChannel, setActiveChannel] = useState('sarah-mentor');
+  const [activeChannel, setActiveChannel] = useState('mentor-chat');
   const [messages, setMessages] = useState([
     {
       id: 1,
-      sender: 'Sarah Johnson',
+      sender: 'Your Mentor',
       role: 'mentor',
       message: 'Great work on your Logic Pro X arrangement! The automation on the filter sweep really adds movement. Try using Sculpture for the lead sound next.',
       time: '10:30 AM',
       isOwn: false,
-      channel: 'sarah-mentor',
+      channel: 'mentor-chat',
       hasAttachment: false,
     },
     {
@@ -29,17 +29,17 @@ export const InternalChat = () => {
       message: 'Thanks! Should I bounce the MIDI to audio first or keep it as software instruments?',
       time: '10:35 AM',
       isOwn: true,
-      channel: 'sarah-mentor',
+      channel: 'mentor-chat',
       hasAttachment: false,
     },
     {
       id: 3,
-      sender: 'Sarah Johnson',
+      sender: 'Your Mentor',
       role: 'mentor',
       message: 'Keep it as MIDI for now - easier to make changes. Once we finalize the arrangement, then bounce to audio for mixing.',
       time: '10:37 AM',
       isOwn: false,
-      channel: 'sarah-mentor',
+      channel: 'mentor-chat',
       hasAttachment: false,
     },
     {
@@ -54,21 +54,20 @@ export const InternalChat = () => {
     },
     {
       id: 5,
-      sender: 'Alex Rodriguez',
+      sender: 'Your Mentor',
       role: 'mentor',
       message: 'Just listened to your track submission. The mix is solid! Lets work on the mastering chain in our next Ableton session.',
       time: '11:15 AM',
       isOwn: false,
-      channel: 'alex-mentor',
+      channel: 'feedback',
       hasAttachment: false,
     },
   ]);
 
   const channels = [
-    { id: 'sarah-mentor', name: 'Sarah (Logic Pro)', online: true, unread: 1, specialty: 'Logic Pro X' },
-    { id: 'alex-mentor', name: 'Alex (Ableton)', online: true, unread: 1, specialty: 'Ableton Live' },
+    { id: 'mentor-chat', name: 'Your Mentor', online: true, unread: 1, specialty: 'Logic Pro & Ableton' },
     { id: 'support', name: 'Technical Support', online: true, unread: 1, specialty: 'DAW Setup' },
-    { id: 'feedback', name: 'Track Reviews', online: true, unread: 0, specialty: 'Mix Feedback' },
+    { id: 'feedback', name: 'Track Reviews', online: true, unread: 1, specialty: 'Mix Feedback' },
   ];
 
   const handleSendMessage = () => {
@@ -90,9 +89,9 @@ export const InternalChat = () => {
 
   const getRoleColor = (role: string) => {
     switch (role) {
-      case 'mentor': return 'bg-red-100 text-red-800';
-      case 'support': return 'bg-orange-100 text-orange-800';
-      case 'feedback': return 'bg-red-100 text-red-800';
+      case 'mentor': return 'bg-blue-100 text-blue-800';
+      case 'support': return 'bg-gray-100 text-gray-800';
+      case 'feedback': return 'bg-blue-100 text-blue-800';
       default: return 'bg-gray-100 text-gray-800';
     }
   };
@@ -101,21 +100,21 @@ export const InternalChat = () => {
   const activeChannelInfo = channels.find(ch => ch.id === activeChannel);
 
   return (
-    <Card className="h-96 flex flex-col">
-      <CardHeader className="pb-3">
+    <Card className="h-96 flex flex-col border-gray-200">
+      <CardHeader className="pb-3 bg-gray-50">
         <div className="flex items-center justify-between">
-          <CardTitle className="flex items-center gap-2">
-            <MessageSquare className="w-5 h-5" />
-            DAW Production Chat
+          <CardTitle className="flex items-center gap-2 text-gray-800">
+            <MessageSquare className="w-5 h-5 text-blue-600" />
+            Production Chat
           </CardTitle>
           <div className="flex gap-1">
-            <Button size="sm" variant="ghost">
+            <Button size="sm" variant="ghost" className="text-gray-600 hover:text-blue-600 hover:bg-blue-50">
               <File className="w-4 h-4" />
             </Button>
-            <Button size="sm" variant="ghost">
+            <Button size="sm" variant="ghost" className="text-gray-600 hover:text-blue-600 hover:bg-blue-50">
               <Phone className="w-4 h-4" />
             </Button>
-            <Button size="sm" variant="ghost">
+            <Button size="sm" variant="ghost" className="text-gray-600 hover:text-blue-600 hover:bg-blue-50">
               <Video className="w-4 h-4" />
             </Button>
           </div>
@@ -131,8 +130,8 @@ export const InternalChat = () => {
               onClick={() => setActiveChannel(channel.id)}
               className={`flex items-center gap-2 whitespace-nowrap relative ${
                 activeChannel === channel.id 
-                  ? 'bg-gradient-to-r from-red-600 to-orange-600 text-white' 
-                  : 'border-red-200 text-red-700 hover:bg-red-50'
+                  ? 'bg-blue-600 text-white hover:bg-blue-700' 
+                  : 'border-gray-300 text-gray-700 hover:bg-gray-50'
               }`}
             >
               <div className={`w-2 h-2 rounded-full ${channel.online ? 'bg-green-500' : 'bg-gray-400'}`} />
@@ -141,7 +140,7 @@ export const InternalChat = () => {
                 <div className="text-xs opacity-75">{channel.specialty}</div>
               </div>
               {channel.unread > 0 && (
-                <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">
+                <span className="absolute -top-1 -right-1 w-4 h-4 bg-blue-500 text-white text-xs rounded-full flex items-center justify-center">
                   {channel.unread}
                 </span>
               )}
@@ -156,13 +155,13 @@ export const InternalChat = () => {
             {filteredMessages.map((msg) => (
               <div key={msg.id} className={`flex gap-3 ${msg.isOwn ? 'flex-row-reverse' : ''}`}>
                 <Avatar className="w-8 h-8">
-                  <AvatarFallback className="text-xs bg-gradient-to-r from-red-500 to-orange-500 text-white">
+                  <AvatarFallback className={`text-xs ${msg.isOwn ? 'bg-gray-600 text-white' : 'bg-blue-600 text-white'}`}>
                     {msg.sender.split(' ').map(n => n[0]).join('')}
                   </AvatarFallback>
                 </Avatar>
                 <div className={`flex-1 ${msg.isOwn ? 'text-right' : ''}`}>
                   <div className="flex items-center gap-2 mb-1">
-                    <span className="text-sm font-medium">{msg.sender}</span>
+                    <span className="text-sm font-medium text-gray-800">{msg.sender}</span>
                     {!msg.isOwn && (
                       <Badge className={`text-xs ${getRoleColor(msg.role)}`}>
                         {msg.role}
@@ -172,8 +171,8 @@ export const InternalChat = () => {
                   </div>
                   <div className={`max-w-xs p-3 rounded-lg text-sm ${
                     msg.isOwn 
-                      ? 'bg-gradient-to-r from-red-600 to-orange-600 text-white ml-auto' 
-                      : 'bg-gray-100 text-gray-900'
+                      ? 'bg-gray-600 text-white ml-auto' 
+                      : 'bg-blue-50 text-gray-900 border border-blue-200'
                   }`}>
                     {msg.message}
                     {msg.hasAttachment && (
@@ -196,15 +195,15 @@ export const InternalChat = () => {
               onChange={(e) => setMessage(e.target.value)}
               placeholder={`Message ${activeChannelInfo?.name}...`}
               onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
-              className="flex-1"
+              className="flex-1 border-gray-300"
             />
-            <Button size="sm" variant="outline" className="border-red-200 text-red-700 hover:bg-red-50">
+            <Button size="sm" variant="outline" className="border-gray-300 text-gray-600 hover:bg-gray-50">
               <Paperclip className="w-4 h-4" />
             </Button>
-            <Button size="sm" variant="outline" className="border-red-200 text-red-700 hover:bg-red-50">
+            <Button size="sm" variant="outline" className="border-gray-300 text-gray-600 hover:bg-gray-50">
               <Mic className="w-4 h-4" />
             </Button>
-            <Button onClick={handleSendMessage} size="sm" className="bg-gradient-to-r from-red-600 to-orange-600">
+            <Button onClick={handleSendMessage} size="sm" className="bg-blue-600 hover:bg-blue-700">
               <Send className="w-4 h-4" />
             </Button>
           </div>
