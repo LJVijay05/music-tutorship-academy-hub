@@ -39,7 +39,7 @@ CREATE POLICY "Mentor only access"
   USING (EXISTS (
     SELECT 1 
     FROM auth.users 
-    WHERE auth.email() = 'contact@musictutorship.com'
+    WHERE auth.email() = 'producingwithvijay@gmail.com'
   ));
 
 CREATE POLICY "Mentor only access" 
@@ -48,7 +48,7 @@ CREATE POLICY "Mentor only access"
   USING (EXISTS (
     SELECT 1 
     FROM auth.users 
-    WHERE auth.email() = 'contact@musictutorship.com'
+    WHERE auth.email() = 'producingwithvijay@gmail.com'
   ));
 
 CREATE POLICY "Mentor only access" 
@@ -57,5 +57,5 @@ CREATE POLICY "Mentor only access"
   USING (EXISTS (
     SELECT 1 
     FROM auth.users 
-    WHERE auth.email() = 'contact@musictutorship.com'
+    WHERE auth.email() = 'producingwithvijay@gmail.com'
   ));

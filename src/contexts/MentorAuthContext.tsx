@@ -31,14 +31,14 @@ export const MentorAuthProvider: React.FC<{ children: React.ReactNode }> = ({ ch
     supabase.auth.getSession().then(({ data: { session } }) => {
       if (session?.user) {
         setUser(session.user);
-        setIsMentor(session.user.email === 'contact@musictutorship.com');
+        setIsMentor(session.user.email === 'producingwithvijay@gmail.com');
       }
     });
 
     // Listen for auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       setUser(session?.user ?? null);
-      setIsMentor(session?.user?.email === 'contact@musictutorship.com');
+      setIsMentor(session?.user?.email === 'producingwithvijay@gmail.com');
     });
 
     return () => subscription.unsubscribe();
@@ -55,7 +55,7 @@ export const MentorAuthProvider: React.FC<{ children: React.ReactNode }> = ({ ch
 
       if (error) throw error;
 
-      if (data.user?.email !== 'contact@musictutorship.com') {
+      if (data.user?.email !== 'producingwithvijay@gmail.com') {
         await supabase.auth.signOut();
         throw new Error('Access denied. This area is restricted to mentors only.');
       }
