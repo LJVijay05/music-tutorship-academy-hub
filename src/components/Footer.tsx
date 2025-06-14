@@ -1,5 +1,5 @@
 
-import { Music, Mail, Phone, Instagram, Youtube, Facebook, MessageCircle } from "lucide-react";
+import { Music, Mail, Phone, Instagram, Youtube, Facebook, MessageCircle, Shield } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
@@ -75,7 +75,7 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Contact Info */}
+          {/* Contact Info & Mentor Access */}
           <div className="space-y-6">
             <h3 className="font-bold text-xl mb-6 text-white">Contact Info</h3>
             <div className="space-y-4">
@@ -97,6 +97,20 @@ const Footer = () => {
                 </div>
                 <span className="font-medium">+91 9514499932</span>
               </a>
+              
+              {/* Mentor Login Button */}
+              <div className="pt-4 border-t border-gray-700">
+                <Link 
+                  to="/mentor-login"
+                  className="flex items-center gap-3 text-purple-400 hover:text-purple-300 transition-colors duration-300 group"
+                >
+                  <div className="w-8 h-8 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg flex items-center justify-center group-hover:shadow-lg transition-all duration-300">
+                    <Shield className="w-4 h-4 text-white" />
+                  </div>
+                  <span className="font-medium">Mentor Access</span>
+                </Link>
+                <p className="text-xs text-gray-500 mt-1 ml-11">Restricted Area</p>
+              </div>
             </div>
           </div>
         </div>
