@@ -9,20 +9,20 @@ export const QuickActions = () => {
     { 
       icon: Calendar, 
       label: 'Schedule Session', 
-      color: 'text-blue-600 bg-blue-50 hover:bg-blue-100',
+      color: 'text-red-600 bg-red-50 hover:bg-red-100',
       description: 'Book mentorship'
     },
     { 
       icon: Download, 
-      label: 'Sample Packs', 
-      color: 'text-green-600 bg-green-50 hover:bg-green-100',
-      description: 'Download sounds'
+      label: 'Logic Pro Templates', 
+      color: 'text-orange-600 bg-orange-50 hover:bg-orange-100',
+      description: 'Download projects'
     },
     { 
       icon: Music, 
-      label: 'DAW Templates', 
-      color: 'text-purple-600 bg-purple-50 hover:bg-purple-100',
-      description: 'Project files'
+      label: 'Ableton Live Files', 
+      color: 'text-red-600 bg-red-50 hover:bg-red-100',
+      description: 'Live 12 sessions'
     },
     { 
       icon: Upload, 
@@ -32,15 +32,15 @@ export const QuickActions = () => {
     },
     { 
       icon: Headphones, 
-      label: 'Production Library', 
-      color: 'text-pink-600 bg-pink-50 hover:bg-pink-100',
-      description: 'Browse resources'
+      label: 'Sample Library', 
+      color: 'text-red-600 bg-red-50 hover:bg-red-100',
+      description: 'Browse sounds'
     },
     { 
       icon: Mic, 
-      label: 'Connect Mentor', 
-      color: 'text-indigo-600 bg-indigo-50 hover:bg-indigo-100',
-      description: 'Direct message'
+      label: 'Live Chat', 
+      color: 'text-orange-600 bg-orange-50 hover:bg-orange-100',
+      description: 'Connect mentor'
     },
   ];
 
@@ -49,7 +49,7 @@ export const QuickActions = () => {
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <Settings className="w-5 h-5" />
-          Production Tools
+          DAW Production Tools
         </CardTitle>
       </CardHeader>
       <CardContent>
@@ -69,11 +69,11 @@ export const QuickActions = () => {
           ))}
         </div>
         
-        <div className="mt-6 p-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg border border-blue-200">
-          <h4 className="font-medium text-gray-900 mb-2">Today's Practice Goal</h4>
-          <p className="text-sm text-gray-600 mb-3">Complete the "808 Pattern Creation" exercise</p>
-          <Button size="sm" className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
-            Start Practice Session
+        <div className="mt-6 p-4 bg-gradient-to-r from-red-50 to-orange-50 rounded-lg border border-red-200">
+          <h4 className="font-medium text-gray-900 mb-2">Today's DAW Challenge</h4>
+          <p className="text-sm text-gray-600 mb-3">Create a 16-bar loop using Logic Pro X's Sculpture and Alchemy plugins</p>
+          <Button size="sm" className="w-full bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-700 hover:to-orange-700">
+            Start Challenge
           </Button>
         </div>
       </CardContent>

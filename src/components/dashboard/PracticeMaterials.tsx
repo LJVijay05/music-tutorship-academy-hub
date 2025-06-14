@@ -9,43 +9,43 @@ export const PracticeMaterials = () => {
   const materials = [
     {
       id: 1,
-      title: 'Trap Sample Pack Vol. 3',
-      type: 'Sample Pack',
-      size: '450 MB',
-      downloads: 1240,
-      category: 'Drums',
-      icon: Headphones,
-      gradient: 'from-blue-500 to-purple-600',
+      title: 'Logic Pro X Trap Template Pack',
+      type: 'Logic Pro Project',
+      size: '850 MB',
+      downloads: 2340,
+      category: 'Logic Pro X',
+      icon: Music,
+      gradient: 'from-red-500 to-orange-600',
     },
     {
       id: 2,
-      title: 'FL Studio Mixing Template',
-      type: 'Project File',
-      size: '12 MB',
-      downloads: 890,
-      category: 'Templates',
+      title: 'Ableton Live 12 Hip-Hop Session',
+      type: 'Ableton Project',
+      size: '1.2 GB',
+      downloads: 1890,
+      category: 'Ableton Live',
       icon: File,
-      gradient: 'from-green-500 to-blue-600',
+      gradient: 'from-red-500 to-pink-600',
     },
     {
       id: 3,
-      title: 'Vocal Processing Presets',
-      type: 'Preset Pack',
-      size: '8 MB',
-      downloads: 650,
-      category: 'Effects',
-      icon: Music,
-      gradient: 'from-purple-500 to-pink-600',
+      title: 'Professional Vocal Chain Presets',
+      type: 'Plugin Presets',
+      size: '15 MB',
+      downloads: 3650,
+      category: 'Processing',
+      icon: Headphones,
+      gradient: 'from-orange-500 to-red-600',
     },
     {
       id: 4,
-      title: 'Beat Making Tutorial Files',
-      type: 'Learning Pack',
-      size: '180 MB',
+      title: 'Logic Pro X Mixing Masterclass Files',
+      type: 'Logic Session',
+      size: '2.1 GB',
       downloads: 1100,
-      category: 'Education',
+      category: 'Mixing',
       icon: Play,
-      gradient: 'from-orange-500 to-red-600',
+      gradient: 'from-red-600 to-purple-600',
     },
   ];
 
@@ -54,7 +54,7 @@ export const PracticeMaterials = () => {
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <Download className="w-5 h-5" />
-          Practice Materials & Resources
+          DAW Templates & Production Resources
         </CardTitle>
       </CardHeader>
       <CardContent>
@@ -90,12 +90,12 @@ export const PracticeMaterials = () => {
           ))}
         </div>
         
-        <div className="mt-6 p-4 bg-gradient-to-r from-yellow-50 to-orange-50 rounded-lg border border-yellow-200">
-          <h4 className="font-medium text-gray-900 mb-2">💡 Production Tip of the Day</h4>
+        <div className="mt-6 p-4 bg-gradient-to-r from-red-50 to-orange-50 rounded-lg border border-red-200">
+          <h4 className="font-medium text-gray-900 mb-2">🎵 DAW Pro Tip of the Day</h4>
           <p className="text-sm text-gray-700 mb-3">
-            Layer your 808s with a sub bass to create a fuller low-end. Use a sine wave tuned an octave lower than your 808.
+            In Logic Pro X, use the Sculpture plugin to create unique textures and layers. In Ableton Live 12, experiment with the new Meld device for creative sound morphing.
           </p>
-          <Button size="sm" variant="outline" className="text-xs">
+          <Button size="sm" variant="outline" className="text-xs border-red-300 text-red-700 hover:bg-red-50">
             View More Tips
           </Button>
         </div>
