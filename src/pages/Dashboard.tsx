@@ -3,7 +3,7 @@ import React from 'react';
 import { DashboardHeader } from '@/components/dashboard/DashboardHeader';
 import { CourseStatus } from '@/components/dashboard/CourseStatus';
 import { ScheduleManager } from '@/components/dashboard/ScheduleManager';
-import { InternalChat } from '@/components/dashboard/InternalChat';
+import { ChatWithMentor } from '@/components/dashboard/ChatWithMentor';
 import { QuickActions } from '@/components/dashboard/QuickActions';
 import { ProgressOverview } from '@/components/dashboard/ProgressOverview';
 import { PracticeMaterials } from '@/components/dashboard/PracticeMaterials';
@@ -28,10 +28,11 @@ const Dashboard = () => {
           {/* Sidebar */}
           <div className="space-y-8">
             <QuickActions />
-            <InternalChat />
           </div>
         </div>
       </div>
+      
+      <ChatWithMentor />
     </div>
   );
 };
