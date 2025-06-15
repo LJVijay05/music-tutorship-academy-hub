@@ -30,12 +30,14 @@ const Profile = () => {
     if (!user?.email) return;
     setLoading(true);
 
-    supabase
-      .from("students")
-      .select("*")
-      .eq("email", user.email)
-      .maybeSingle()
-      .then(({ data, error }) => {
+    (async () => {
+      try {
+        const { data, error } = await supabase
+          .from("students")
+          .select("*")
+          .eq("email", user.email)
+          .maybeSingle();
+
         if (error || !data) {
           toast({
             title: "Profile Not Found",
@@ -51,8 +53,10 @@ const Profile = () => {
             phone: data.phone || "",
           });
         }
-      })
-      .finally(() => setLoading(false));
+      } finally {
+        setLoading(false);
+      }
+    })();
   }, [user, toast]);
 
   // Detect if form has unsaved changes
