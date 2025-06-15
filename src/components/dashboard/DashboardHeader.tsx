@@ -39,7 +39,6 @@ export const DashboardHeader = () => {
     <header className="bg-white/80 backdrop-blur-md border-b border-gray-200 sticky top-0 z-50 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 bg-gradient-to-r from-red-600 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
               <span className="text-white font-bold text-sm">MP</span>
@@ -52,7 +51,6 @@ export const DashboardHeader = () => {
             </div>
           </div>
 
-          {/* Search */}
           <div className="flex-1 max-w-md mx-8">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
@@ -63,7 +61,6 @@ export const DashboardHeader = () => {
             </div>
           </div>
 
-          {/* Right side */}
           <div className="flex items-center gap-4">
             <Button 
               variant="ghost" 
@@ -94,7 +91,7 @@ export const DashboardHeader = () => {
                   </span>
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-56 bg-white">
+              <DropdownMenuContent align="end" className="w-56 bg-white shadow-lg border border-gray-200 z-50">
                 <DropdownMenuLabel>My Account</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={handleProfileClick}>

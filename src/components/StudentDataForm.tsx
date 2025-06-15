@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -8,6 +7,7 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
+  DialogDescription,
 } from "@/components/ui/dialog";
 import {
   Form,
@@ -66,7 +66,6 @@ const StudentDataForm = ({ open, onOpenChange, onSuccess }: StudentDataFormProps
     console.log('StudentDataForm: Form submitted with data:', data);
     
     try {
-      // Store data in localStorage for potential use in enrollment page
       localStorage.setItem('studentData', JSON.stringify(data));
       console.log('StudentDataForm: Data stored in localStorage');
       
@@ -75,10 +74,8 @@ const StudentDataForm = ({ open, onOpenChange, onSuccess }: StudentDataFormProps
         description: "Your details have been saved.",
       });
 
-      // Close the form and trigger success callback
       onOpenChange(false);
       
-      // Small delay to ensure smooth transition
       setTimeout(() => {
         if (onSuccess) {
           console.log('StudentDataForm: Triggering success callback');
@@ -103,9 +100,9 @@ const StudentDataForm = ({ open, onOpenChange, onSuccess }: StudentDataFormProps
           <DialogTitle className="text-2xl font-bold text-center text-gray-900 mb-2">
             Student Information
           </DialogTitle>
-          <p className="text-center text-gray-600 text-sm">
+          <DialogDescription className="text-center text-gray-600 text-sm">
             Please fill in your details to proceed with enrollment
-          </p>
+          </DialogDescription>
         </DialogHeader>
 
         <Form {...form}>
