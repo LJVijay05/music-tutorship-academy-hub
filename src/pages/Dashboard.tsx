@@ -3,7 +3,7 @@ import React from 'react';
 import { DashboardHeader } from '@/components/dashboard/DashboardHeader';
 import { CourseStatus } from '@/components/dashboard/CourseStatus';
 import { ChatWithMentor } from '@/components/dashboard/ChatWithMentor';
-import { QuickActions } from '@/components/dashboard/QuickActions';
+// Removed: import { QuickActions } from '@/components/dashboard/QuickActions';
 import { ProgressOverview } from '@/components/dashboard/ProgressOverview';
 import { TrackSubmission } from '@/components/dashboard/TrackSubmission';
 
@@ -24,9 +24,10 @@ const Dashboard = () => {
           </div>
           
           {/* Sidebar */}
-          <div className="space-y-8">
+          {/* QuickActions removed */}
+          {/* <div className="space-y-8">
             <QuickActions />
-          </div>
+          </div> */}
         </div>
       </div>
       
@@ -36,3 +37,4 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
