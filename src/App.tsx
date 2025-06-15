@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -22,6 +21,7 @@ import Dashboard from "./pages/Dashboard";
 import MentorLogin from "./pages/MentorLogin";
 import MentorDashboard from "./pages/MentorDashboard";
 import NotFound from "./pages/NotFound";
+import Terms from "./pages/Terms";
 
 const queryClient = new QueryClient();
 
@@ -49,6 +49,10 @@ const App = () => (
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/mentor-login" element={<MentorLogin />} />
               <Route path="/mentor-dashboard" element={<MentorDashboard />} />
+
+              {/* Legal: Terms of Service */}
+              <Route path="/terms" element={<Terms />} />
+
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
