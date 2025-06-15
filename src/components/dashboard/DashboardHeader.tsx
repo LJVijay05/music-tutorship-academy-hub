@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Bell, Search, User, LogOut, Settings, Home } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -26,6 +25,10 @@ export const DashboardHeader = () => {
 
   const handleHomeClick = () => {
     navigate('/');
+  };
+
+  const handleProfileClick = () => {
+    navigate("/profile");
   };
 
   return (
@@ -90,7 +93,7 @@ export const DashboardHeader = () => {
               <DropdownMenuContent align="end" className="w-56 bg-white">
                 <DropdownMenuLabel>My Account</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem>
+                <DropdownMenuItem onClick={handleProfileClick}>
                   <User className="mr-2 h-4 w-4" />
                   Profile
                 </DropdownMenuItem>
