@@ -23,6 +23,7 @@ import MentorDashboard from "./pages/MentorDashboard";
 import NotFound from "./pages/NotFound";
 import Terms from "./pages/Terms";
 import Profile from "./pages/Profile";
+import Settings from "./pages/Settings";
 
 const queryClient = new QueryClient();
 
@@ -51,6 +52,7 @@ const App = () => (
               <Route path="/mentor-login" element={<MentorLogin />} />
               <Route path="/mentor-dashboard" element={<MentorDashboard />} />
               <Route path="/profile" element={<Profile />} />
+              <Route path="/settings" element={<Settings />} />
 
               {/* Legal: Terms of Service */}
               <Route path="/terms" element={<Terms />} />

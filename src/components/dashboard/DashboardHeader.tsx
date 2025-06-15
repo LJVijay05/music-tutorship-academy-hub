@@ -31,6 +31,10 @@ export const DashboardHeader = () => {
     navigate("/profile");
   };
 
+  const handleSettingsClick = () => {
+    navigate("/settings");
+  };
+
   return (
     <header className="bg-white/80 backdrop-blur-md border-b border-gray-200 sticky top-0 z-50 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -97,7 +101,7 @@ export const DashboardHeader = () => {
                   <User className="mr-2 h-4 w-4" />
                   Profile
                 </DropdownMenuItem>
-                <DropdownMenuItem>
+                <DropdownMenuItem onClick={handleSettingsClick}>
                   <Settings className="mr-2 h-4 w-4" />
                   Settings
                 </DropdownMenuItem>
