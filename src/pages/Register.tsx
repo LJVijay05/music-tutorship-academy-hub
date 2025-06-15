@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -135,7 +134,7 @@ const Register = () => {
           </Link>
         </div>
 
-        <Card className="shadow-xl border-0 bg-white/80 backdrop-blur-sm">
+        <Card className="rounded-[2rem] shadow-[0_10px_32px_0_rgba(0,0,0,0.09),0_1.5px_12px_0_rgba(0,0,0,0.08)] border-0 bg-white/75 backdrop-blur-xl overflow-hidden transition-all duration-300">
           <CardHeader className="text-center pb-6">
             <CardTitle className="text-2xl font-bold text-gray-900">Create Account</CardTitle>
             <p className="text-gray-600 mt-2">Join our music community today</p>
@@ -188,7 +187,7 @@ const Register = () => {
             <div className="relative">
               <Separator className="my-6" />
               <div className="absolute inset-0 flex items-center justify-center">
-                <span className="bg-white px-4 text-sm text-gray-500">Or register with email</span>
+                <span className="bg-white/80 px-4 text-sm text-gray-500">Or register with email</span>
               </div>
             </div>
 
