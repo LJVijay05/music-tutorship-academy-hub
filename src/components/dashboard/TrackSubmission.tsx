@@ -12,7 +12,6 @@ export const TrackSubmission = () => {
   const [trackLink, setTrackLink] = useState('');
   const [trackTitle, setTrackTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [showMentorComment, setShowMentorComment] = useState(true);
 
   // Simulated mentor comment - replace with dynamic data as needed
   const mentorComment = "Your work on the mixdown is impressive! Try to emphasize the bassline more in the next version for punchier rhythm.";
@@ -67,7 +66,6 @@ export const TrackSubmission = () => {
     if (trackLink) {
       window.open(trackLink, "_blank");
     }
-    // You may add API integration for form save/feedback here.
   };
 
   return (
@@ -93,6 +91,7 @@ export const TrackSubmission = () => {
                 className="rounded-xl bg-white border-gray-300 focus:border-purple-500 focus:ring-2 focus:ring-purple-200"
               />
             </div>
+            
             <div>
               <Label htmlFor="track-description" className="mb-1 block">Description <span className="text-xs text-gray-400">(Optional)</span></Label>
               <Textarea
@@ -104,9 +103,10 @@ export const TrackSubmission = () => {
                 className="rounded-xl bg-white border-gray-300 focus:border-purple-500 focus:ring-2 focus:ring-purple-200"
               />
             </div>
+
             <div>
-              <Label htmlFor="track-link">Share Track Link</Label>
-              <div className="relative mt-2">
+              <Label htmlFor="track-link" className="mb-2 block">Share Track Link</Label>
+              <div className="relative">
                 <Input
                   id="track-link"
                   placeholder="Paste your Google Drive, Dropbox, or SoundCloud link here..."
@@ -121,16 +121,7 @@ export const TrackSubmission = () => {
                 Please ensure sharing is set to "Anyone with the link can view/listen".
               </p>
             </div>
-            {/* Mentor's Comment Section */}
-            {showMentorComment && (
-              <div className="mt-6 bg-gray-50 border border-gray-100 rounded-lg px-4 py-3 flex items-start gap-3">
-                <MessageCircle className="w-6 h-6 text-purple-500 mt-0.5" />
-                <div>
-                  <span className="font-semibold text-gray-800">Mentor's Comment:</span>
-                  <p className="mt-1 text-sm text-gray-700">{mentorComment}</p>
-                </div>
-              </div>
-            )}
+
             <Button
               type="submit"
               className="w-full mt-4 py-2 rounded-2xl text-lg font-semibold bg-gradient-to-r from-red-500 to-purple-500 hover:from-red-600 hover:to-purple-600"
@@ -140,6 +131,17 @@ export const TrackSubmission = () => {
               Submit for Feedback
             </Button>
           </form>
+
+          {/* Mentor's Comment Section */}
+          <div className="mt-8 bg-gradient-to-r from-purple-50 to-pink-50 border border-purple-200 rounded-2xl p-6">
+            <div className="flex items-start gap-3">
+              <MessageCircle className="w-6 h-6 text-purple-600 mt-0.5 flex-shrink-0" />
+              <div className="flex-1">
+                <h3 className="font-semibold text-gray-800 mb-2 text-lg">Mentor's Comment</h3>
+                <p className="text-gray-700 leading-relaxed">{mentorComment}</p>
+              </div>
+            </div>
+          </div>
         </CardContent>
       </Card>
 
