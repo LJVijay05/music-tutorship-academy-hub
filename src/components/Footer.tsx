@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Music } from 'lucide-react';
@@ -19,6 +20,7 @@ const Footer = () => {
         <div className="mt-4 md:mt-0 flex gap-2">
           <Link to="/terms" className="text-gray-600 hover:text-red-600 text-sm">Terms of Service</Link>
           <Link to="/privacy" className="text-gray-600 hover:text-red-600 text-sm">Privacy Policy</Link>
+          <Link to="/mentor-login" className="text-gray-600 hover:text-red-600 text-sm">Mentor Access</Link>
         </div>
       </div>
       <div className="bg-gray-100 py-3 text-center text-gray-500 text-xs">
