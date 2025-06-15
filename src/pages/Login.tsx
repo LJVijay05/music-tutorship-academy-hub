@@ -78,7 +78,7 @@ const Login = () => {
         {/* Logo */}
         <div className="text-center mb-8">
           <Link to="/" className="inline-flex items-center gap-2 font-bold text-2xl group">
-            <div className="w-10 h-10 bg-gradient-to-r from-red-600 to-pink-600 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-red-200 transition-all duration-300">
+            <div className="w-10 h-10 bg-gradient-to-r from-red-600 to-pink-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-red-200 transition-all duration-300">
               <Music className="w-5 h-5 text-white" />
             </div>
             <span className="text-gray-900">
@@ -87,7 +87,7 @@ const Login = () => {
           </Link>
         </div>
 
-        <Card className="shadow-xl border-0 bg-white/80 backdrop-blur-sm">
+        <Card className="shadow-2xl border-0 bg-white/90 backdrop-blur-xl rounded-3xl overflow-hidden">
           <CardHeader className="text-center pb-6">
             <CardTitle className="text-2xl font-bold text-gray-900">Welcome Back</CardTitle>
             <p className="text-gray-600 mt-2">Sign in to your account to continue</p>
@@ -95,7 +95,7 @@ const Login = () => {
           
           <CardContent className="space-y-6">
             {errors.general && (
-              <div className="bg-red-50 border border-red-200 rounded-lg p-4 flex items-center gap-2 text-red-800">
+              <div className="bg-red-50 border border-red-200 rounded-2xl p-4 flex items-center gap-2 text-red-800">
                 <AlertCircle className="w-4 h-4" />
                 <span className="text-sm">{errors.general}</span>
               </div>
@@ -112,7 +112,7 @@ const Login = () => {
                     placeholder="Enter your email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className={`pl-10 h-12 border-gray-200 focus:border-red-500 focus:ring-red-500 ${
+                    className={`pl-10 h-12 border-gray-200 focus:border-red-500 focus:ring-red-500 rounded-2xl transition-all duration-300 ${
                       errors.email ? 'border-red-500' : ''
                     }`}
                     disabled={isLoading}
@@ -136,7 +136,7 @@ const Login = () => {
                     placeholder="Enter your password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className={`pl-10 pr-10 h-12 border-gray-200 focus:border-red-500 focus:ring-red-500 ${
+                    className={`pl-10 pr-10 h-12 border-gray-200 focus:border-red-500 focus:ring-red-500 rounded-2xl transition-all duration-300 ${
                       errors.password ? 'border-red-500' : ''
                     }`}
                     disabled={isLoading}
@@ -144,7 +144,7 @@ const Login = () => {
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-3 text-gray-400 hover:text-gray-600"
+                    className="absolute right-3 top-3 text-gray-400 hover:text-gray-600 transition-colors duration-200"
                     disabled={isLoading}
                   >
                     {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
@@ -163,13 +163,13 @@ const Login = () => {
                   <input
                     id="remember"
                     type="checkbox"
-                    className="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 rounded"
+                    className="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 rounded-lg"
                   />
                   <Label htmlFor="remember" className="ml-2 text-sm text-gray-600">
                     Remember me
                   </Label>
                 </div>
-                <Link to="/forgot-password" className="text-sm text-red-600 hover:text-red-700 font-medium">
+                <Link to="/forgot-password" className="text-sm text-red-600 hover:text-red-700 font-medium transition-colors duration-200">
                   Forgot password?
                 </Link>
               </div>
@@ -177,7 +177,7 @@ const Login = () => {
               <Button
                 type="submit"
                 disabled={isLoading}
-                className="w-full h-12 bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full h-12 bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700 text-white font-semibold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-[1.02] active:scale-[0.98]"
               >
                 {isLoading ? 'Signing in...' : 'Sign In'}
               </Button>
@@ -186,7 +186,7 @@ const Login = () => {
             <div className="text-center">
               <p className="text-sm text-gray-600">
                 Don't have an account?{' '}
-                <Link to="/register" className="text-red-600 hover:text-red-700 font-semibold">
+                <Link to="/register" className="text-red-600 hover:text-red-700 font-semibold transition-colors duration-200">
                   Create one here
                 </Link>
               </p>
