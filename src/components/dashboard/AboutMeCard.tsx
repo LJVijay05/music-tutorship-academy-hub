@@ -17,11 +17,16 @@ const AboutMeCard = () => {
       <div className="flex flex-col items-center justify-center text-center mt-3 mb-8">
         {/* Mentor Photo */}
         <div className="relative mb-4">
-          <div className="w-24 h-24 rounded-full overflow-hidden shadow-lg border-4 border-white">
+          <div className="w-24 h-24 rounded-full overflow-hidden shadow-lg border-4 border-white bg-gray-200">
             <img
               src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&h=400&fit=crop&crop=face"
               alt="Music Mentor"
               className="w-full h-full object-cover"
+              onLoad={() => console.log('Mentor image loaded successfully')}
+              onError={(e) => {
+                console.error('Failed to load mentor image:', e);
+                e.currentTarget.style.display = 'none';
+              }}
             />
           </div>
           {/* Music Icon Overlay */}
