@@ -1,3 +1,4 @@
+
 import { Music, Mail, Phone, Instagram, Youtube, Facebook, MessageCircle, Shield } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -123,15 +124,13 @@ const Footer = () => {
           <p className="text-gray-400">
             © 2024 Music Tutorship. All rights reserved. | 
             <a href="/privacy" className="text-red-600 hover:underline ml-1 font-medium">Privacy Policy</a> | 
-            <a
-              href="/terms"
-              target="_blank"
-              rel="noopener"
+            <Link
+              to="/terms"
               onClick={handleTermsClick}
               className="text-red-600 hover:underline ml-1 font-medium"
             >
               Terms of Service
-            </a>
+            </Link>
           </p>
         </div>
       </div>
