@@ -60,8 +60,8 @@ const Navigation = () => {
     navigate('/login');
   };
 
-  const handleRegisterClick = () => {
-    navigate('/register');
+  const handleEnquireNowClick = () => {
+    navigate('/contact');
   };
 
   return (
@@ -133,24 +133,24 @@ const Navigation = () => {
 
             {/* Enhanced Auth Buttons - Desktop */}
             <div className="hidden md:flex items-center gap-2">
-              {/* Login Button */}
+              {/* Student Login Button */}
               <Button 
                 onClick={handleLoginClick}
                 variant="ghost"
                 className="relative group text-gray-700 hover:text-red-600 hover:bg-red-50 px-6 py-2.5 text-sm font-semibold transition-all duration-300 rounded-xl border border-gray-200 hover:border-red-300 flex items-center gap-2 hover:shadow-sm"
               >
                 <LogIn className="w-4 h-4 transition-colors" />
-                <span>Login</span>
+                <span>Student Login</span>
               </Button>
 
-              {/* Register Button */}
+              {/* Enquire Now Button */}
               <Button 
-                onClick={handleRegisterClick}
+                onClick={handleEnquireNowClick}
                 className="relative group bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700 text-white px-6 py-2.5 text-sm font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 rounded-xl overflow-hidden flex items-center gap-2 border-0"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-pink-600 to-red-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <UserPlus className="w-4 h-4 relative z-10" />
-                <span className="relative z-10">Register</span>
+                <span className="relative z-10">Enquire Now</span>
                 <div className="absolute -top-1 -right-1 w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
               </Button>
             </div>
@@ -227,18 +227,18 @@ const Navigation = () => {
                   className="w-full text-gray-700 hover:text-red-600 hover:bg-red-50 py-3 rounded-xl border border-gray-200 hover:border-red-300 flex items-center justify-center gap-2 transition-all duration-300"
                 >
                   <LogIn className="w-4 h-4" />
-                  <span className="font-semibold">Login</span>
+                  <span className="font-semibold">Student Login</span>
                 </Button>
                 
                 <Button 
                   onClick={() => {
-                    handleRegisterClick();
+                    handleEnquireNowClick();
                     setIsMenuOpen(false);
                   }}
                   className="w-full bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700 text-white py-3 rounded-xl shadow-lg flex items-center justify-center gap-2 border-0 transition-all duration-300"
                 >
                   <UserPlus className="w-4 h-4" />
-                  <span className="font-semibold">Register</span>
+                  <span className="font-semibold">Enquire Now</span>
                   <div className="absolute -top-1 -right-1 w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
                 </Button>
               </div>
