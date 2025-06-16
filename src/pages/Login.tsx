@@ -182,15 +182,6 @@ const Login = () => {
                 {isLoading ? 'Signing in...' : 'Sign In'}
               </Button>
             </form>
-
-            <div className="text-center">
-              <p className="text-sm text-gray-600">
-                Don't have an account?{' '}
-                <Link to="/register" className="text-red-600 hover:text-red-700 font-semibold transition-colors duration-200">
-                  Create one here
-                </Link>
-              </p>
-            </div>
           </CardContent>
         </Card>
       </div>
