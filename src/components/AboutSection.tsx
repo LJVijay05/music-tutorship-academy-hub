@@ -43,14 +43,18 @@ const AboutSection = () => {
               </div>
             </div>
 
-            {/* Right Content - Professional Card */}
+            {/* Right Content - Professional Card with Real Photo */}
             <div className="relative">
               <div className="bg-gradient-to-br from-red-50 to-pink-50 rounded-3xl p-8 shadow-xl border border-red-100">
                 <div className="text-center">
-                  <div className="w-24 h-24 bg-gradient-to-r from-red-600 to-pink-600 rounded-full flex items-center justify-center mx-auto mb-6 shadow-xl">
-                    <Music className="w-12 h-12 text-white" />
+                  <div className="w-32 h-32 rounded-full overflow-hidden mx-auto mb-6 shadow-xl border-4 border-white">
+                    <img
+                      src="/lovable-uploads/8e4988dc-184a-4830-b569-64e9a67c6d19.png"
+                      alt="Vijay - Music Producer & Educator"
+                      className="w-full h-full object-cover"
+                    />
                   </div>
-                  <h3 className="text-2xl font-bold text-gray-800 mb-3">Professional Mentor</h3>
+                  <h3 className="text-2xl font-bold text-gray-800 mb-3">Vijay</h3>
                   <p className="text-lg text-gray-600 mb-8">Music Producer & Educator</p>
                   
                   {/* Achievement Badges */}

@@ -51,17 +51,17 @@ const MentorIntroSection = () => {
               </div>
             </div>
 
-            {/* Right Content - Image Space */}
+            {/* Right Content - Real Photo */}
             <div className="relative animate-fade-in" style={{ animationDelay: '0.4s' }}>
               <div className="bg-gradient-to-br from-red-100 via-pink-100 to-purple-100 rounded-3xl p-16 shadow-2xl hover:shadow-red-200 transition-all duration-500 group">
-                <div className="aspect-square bg-gradient-to-br from-red-200 to-pink-200 rounded-3xl flex items-center justify-center relative overflow-hidden hover:scale-105 transition-transform duration-500">
-                  <div className="absolute inset-0 bg-gradient-to-br from-red-500/20 to-pink-500/20 group-hover:from-red-500/30 group-hover:to-pink-500/30 transition-all duration-500"></div>
-                  <div className="relative z-10 text-center">
-                    <div className="w-32 h-32 bg-white rounded-full flex items-center justify-center mx-auto mb-8 shadow-2xl group-hover:scale-110 transition-transform duration-500">
-                      <Music className="w-16 h-16 text-red-600" />
-                    </div>
-                    <h3 className="text-3xl font-bold text-gray-800 mb-4">Professional Mentor</h3>
-                    <p className="text-xl text-gray-600">Industry Expert & Producer</p>
+                <div className="aspect-square rounded-3xl flex items-center justify-center relative overflow-hidden hover:scale-105 transition-transform duration-500">
+                  <div className="absolute inset-0 bg-gradient-to-br from-red-500/20 to-pink-500/20 group-hover:from-red-500/30 group-hover:to-pink-500/30 transition-all duration-500 rounded-3xl"></div>
+                  <div className="relative z-10 w-full h-full rounded-3xl overflow-hidden shadow-2xl">
+                    <img
+                      src="/lovable-uploads/8e4988dc-184a-4830-b569-64e9a67c6d19.png"
+                      alt="Vijay - Professional Music Mentor"
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                 </div>
               </div>
