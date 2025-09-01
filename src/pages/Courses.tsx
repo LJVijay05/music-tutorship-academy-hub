@@ -55,6 +55,35 @@ const Courses = memo(() => {
       offerSubtext: "Enroll for 1 Year & Get 15% Off!"
     },
     {
+      courseId: "crash-course",
+      title: "3-Month Music Production Crash Course",
+      description: "Intensive Learning",
+      level: "Beginner to Intermediate Level",
+      icon: Users,
+      imageUrl: "/lovable-uploads/8e4988dc-184a-4830-b569-64e9a67c6d19.png",
+      features: [
+        "8 students per batch",
+        "3 months intensive program",
+        "Twice weekly sessions",
+        "Hands-on project work",
+        "Essential software training",
+        "Certificate upon completion"
+      ],
+      isPopular: false,
+      isPremium: false,
+      gradientFrom: "from-purple-900",
+      gradientTo: "to-purple-700",
+      borderColor: "border-purple-100",
+      textColor: "text-purple-700",
+      bgColor: "bg-purple-50",
+      buttonGradientFrom: "from-purple-600",
+      buttonGradientTo: "to-purple-700",
+      buttonHoverFrom: "from-purple-700",
+      buttonHoverTo: "to-purple-800",
+      offerText: "Quick Start Program",
+      offerSubtext: "Complete Course for ₹49,800 Only!"
+    },
+    {
       courseId: "mentorship-90",
       title: "One-on-One Music Production Mentorship",
       description: "1-on-1 Mentorship",
