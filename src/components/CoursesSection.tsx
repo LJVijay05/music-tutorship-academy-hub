@@ -34,7 +34,7 @@ const CoursesSection = memo(() => {
         "Industry-standard software training",
         "Certificate upon completion"
       ],
-      isPopular: true,
+      isPopular: false,
       isPremium: false,
       gradientFrom: "from-gray-900",
       gradientTo: "to-gray-700",
@@ -61,7 +61,7 @@ const CoursesSection = memo(() => {
         "Essential software training",
         "Certificate upon completion"
       ],
-      isPopular: false,
+      isPopular: true,
       isPremium: false,
       gradientFrom: "from-purple-900",
       gradientTo: "to-purple-700",
@@ -70,7 +70,7 @@ const CoursesSection = memo(() => {
       bgColor: "bg-purple-50",
       buttonGradientFrom: "from-purple-600",
       buttonGradientTo: "to-purple-700",
-      offerText: "Quick Start Program",
+      offerText: "🚀 MOST POPULAR",
       offerSubtext: "Complete Course for ₹49,800 Only!"
     },
     {
@@ -132,10 +132,10 @@ const CoursesSection = memo(() => {
           </div>
           
           {/* Optimized Grid Layout for better screen fit */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 lg:gap-6 max-w-7xl mx-auto">
             {courses.map((course, index) => (
               <article key={course.id} className="group animate-fade-in-up h-full" style={{ animationDelay: `${index * 0.3}s` }}>
-                <Card className={`overflow-hidden border-0 shadow-xl hover:shadow-2xl transition-all duration-500 ease-out rounded-2xl h-full bg-white hover:-translate-y-2 relative group-hover:scale-[1.02] ${course.isPremium ? 'ring-2 ring-amber-200/60' : ''}`}>
+                <Card className={`overflow-hidden border-0 shadow-xl hover:shadow-2xl transition-all duration-500 ease-out rounded-2xl h-full bg-white hover:-translate-y-2 relative group-hover:scale-[1.02] ${course.isPremium ? 'ring-2 ring-amber-200/60' : ''} ${course.isPopular ? 'ring-2 ring-green-400/60 shadow-green-200/30' : ''}`}>
                   {/* Course Type Icon - moved to top-left as floating badge */}
                   <div className="absolute top-4 left-4 z-30">
                     <div className="w-8 h-8 bg-white/90 backdrop-blur-sm rounded-lg flex items-center justify-center border border-white/40 shadow-md">
@@ -162,7 +162,7 @@ const CoursesSection = memo(() => {
                     </div>
                   )}
 
-                  <header className={`h-48 md:h-52 bg-gradient-to-br ${course.gradientFrom} ${course.gradientTo} relative overflow-hidden`}>
+                  <header className={`h-40 md:h-44 bg-gradient-to-br ${course.gradientFrom} ${course.gradientTo} relative overflow-hidden`}>
                     <div className="absolute inset-0">
                       {course.imageUrl ? (
                         <img 
@@ -177,16 +177,16 @@ const CoursesSection = memo(() => {
                     </div>
                   </header>
 
-                  <CardContent className="p-6 md:p-7 flex flex-col h-auto">
+                  <CardContent className="p-4 md:p-5 flex flex-col h-auto">
                     {/* Title and Level */}
-                    <div className="mb-6">
-                      <h3 className="text-lg md:text-xl font-bold mb-3 text-gray-900 leading-tight">{course.title}</h3>
-                      <p className="text-sm md:text-base text-gray-600 mb-3 font-medium">{course.level}</p>
+                    <div className="mb-4">
+                      <h3 className="text-base md:text-lg font-bold mb-2 text-gray-900 leading-tight">{course.title}</h3>
+                      <p className="text-xs md:text-sm text-gray-600 mb-2 font-medium">{course.level}</p>
                     </div>
                     
                     {/* Features */}
-                    <div className="flex-grow mb-6">
-                      <ul className="space-y-2.5 mb-5 text-sm md:text-base">
+                    <div className="flex-grow mb-4">
+                      <ul className="space-y-2 mb-4 text-xs md:text-sm">
                         {course.features.map((feature, featureIndex) => (
                           <li key={featureIndex} className="flex items-center gap-3">
                             <CheckCircle className="w-4 h-4 md:w-5 md:h-5 text-green-600 flex-shrink-0" />
@@ -196,19 +196,19 @@ const CoursesSection = memo(() => {
                       </ul>
                       
                       {/* Offer Banner */}
-                      <div className={`flex items-center gap-3 p-4 ${course.bgColor} rounded-xl border-2 ${course.borderColor} text-sm md:text-base shadow-lg`}>
+                      <div className={`flex items-center gap-2 p-3 ${course.bgColor} rounded-lg border-2 ${course.borderColor} text-xs md:text-sm shadow-lg`}>
                         <div>
-                          <p className={`font-bold ${course.textColor} text-sm md:text-base mb-1`}>{course.offerText}</p>
-                          <p className={`text-xs md:text-sm ${course.textColor.replace('text-', 'text-').replace('-700', '-600')}`}>{course.offerSubtext}</p>
+                          <p className={`font-bold ${course.textColor} text-xs md:text-sm mb-1`}>{course.offerText}</p>
+                          <p className={`text-xs ${course.textColor.replace('text-', 'text-').replace('-700', '-600')}`}>{course.offerSubtext}</p>
                         </div>
                       </div>
                     </div>
                     
                     {/* Action Buttons */}
-                    <div className="flex gap-3 mt-auto">
+                    <div className="flex gap-2 mt-auto">
                       <Button 
                         variant="outline" 
-                        className="border-2 border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400 transition-all duration-300 h-11 md:h-12 rounded-xl font-bold text-sm md:text-base flex-1 hover:scale-105 shadow-md hover:shadow-lg"
+                        className="border-2 border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400 transition-all duration-300 h-9 md:h-10 rounded-lg font-bold text-xs md:text-sm flex-1 hover:scale-105 shadow-md hover:shadow-lg"
                         asChild
                       >
                         <Link to={`/courses/${course.id}`}>
@@ -218,7 +218,7 @@ const CoursesSection = memo(() => {
                       </Button>
                       <Button 
                         onClick={handleEnquireClick}
-                        className={`bg-gradient-to-r ${course.buttonGradientFrom} ${course.buttonGradientTo} hover:from-red-600 hover:to-pink-600 text-white h-11 md:h-12 rounded-xl font-bold text-sm md:text-base flex-1 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 border-2 border-white/20`}
+                        className={`bg-gradient-to-r ${course.buttonGradientFrom} ${course.buttonGradientTo} hover:from-red-600 hover:to-pink-600 text-white h-9 md:h-10 rounded-lg font-bold text-xs md:text-sm flex-1 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 border-2 border-white/20`}
                       >
                         Enquire Now
                       </Button>
