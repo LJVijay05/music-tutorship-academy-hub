@@ -40,7 +40,7 @@ const Courses = memo(() => {
       icon: Users,
       imageUrl: "/lovable-uploads/fd4cf1bf-e786-42ff-8762-0f6086327f43.png",
       features: courseData.batchFeatures,
-      isPopular: true,
+      isPopular: false,
       isPremium: false,
       gradientFrom: "from-gray-900",
       gradientTo: "to-gray-700",
@@ -69,7 +69,7 @@ const Courses = memo(() => {
         "Essential software training",
         "Certificate upon completion"
       ],
-      isPopular: false,
+      isPopular: true,
       isPremium: false,
       gradientFrom: "from-purple-900",
       gradientTo: "to-purple-700",
@@ -80,7 +80,7 @@ const Courses = memo(() => {
       buttonGradientTo: "to-purple-700",
       buttonHoverFrom: "from-purple-700",
       buttonHoverTo: "to-purple-800",
-      offerText: "Quick Start Program",
+      offerText: "🚀 MOST POPULAR",
       offerSubtext: "Complete Course for ₹49,800 Only!"
     },
     {
@@ -125,7 +125,7 @@ const Courses = memo(() => {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8 max-w-7xl mx-auto">
               {courses.map((course) => (
                 <CourseCard
                   key={course.courseId}

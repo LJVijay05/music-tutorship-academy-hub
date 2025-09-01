@@ -115,10 +115,11 @@ const CoursesSection = memo(() => {
   return (
     <>
       <section id="courses" className="py-16 lg:py-20 bg-gradient-to-br from-slate-50 via-white to-red-50 relative overflow-hidden">
-        {/* Optimized Background Effects */}
+        {/* Enhanced Background Effects with Animation */}
         <div className="absolute inset-0 opacity-10 pointer-events-none">
-          <div className="absolute top-20 left-20 w-40 h-40 bg-gradient-to-r from-red-400 to-pink-500 rounded-full blur-3xl animate-float"></div>
-          <div className="absolute bottom-20 right-20 w-48 h-48 bg-gradient-to-r from-yellow-400 to-red-500 rounded-full blur-3xl animate-float-delayed"></div>
+          <div className="absolute top-20 left-20 w-40 h-40 bg-gradient-to-r from-red-400 to-pink-500 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-20 right-20 w-48 h-48 bg-gradient-to-r from-yellow-400 to-red-500 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-gradient-to-r from-purple-400 to-blue-500 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
         </div>
         
         <div className="container mx-auto px-4 md:px-6 lg:px-8 xl:px-12 relative z-10">
@@ -134,8 +135,8 @@ const CoursesSection = memo(() => {
           {/* Optimized Grid Layout for better screen fit */}
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 lg:gap-6 max-w-7xl mx-auto">
             {courses.map((course, index) => (
-              <article key={course.id} className="group animate-fade-in-up h-full" style={{ animationDelay: `${index * 0.3}s` }}>
-                <Card className={`overflow-hidden border-0 shadow-xl hover:shadow-2xl transition-all duration-500 ease-out rounded-2xl h-full bg-white hover:-translate-y-2 relative group-hover:scale-[1.02] ${course.isPremium ? 'ring-2 ring-amber-200/60' : ''} ${course.isPopular ? 'ring-2 ring-green-400/60 shadow-green-200/30' : ''}`}>
+              <article key={course.id} className="group animate-fade-in hover-scale" style={{ animationDelay: `${index * 0.2}s` }}>
+                <Card className={`overflow-hidden border-0 shadow-xl hover:shadow-2xl transition-all duration-500 ease-out rounded-2xl h-full bg-white hover:-translate-y-2 relative group-hover:scale-[1.02] ${course.isPremium ? 'ring-2 ring-amber-200/60' : ''} ${course.isPopular ? 'ring-2 ring-green-400/60 shadow-green-200/30 animate-pulse' : ''}`}>
                   {/* Course Type Icon - moved to top-left as floating badge */}
                   <div className="absolute top-4 left-4 z-30">
                     <div className="w-8 h-8 bg-white/90 backdrop-blur-sm rounded-lg flex items-center justify-center border border-white/40 shadow-md">
@@ -143,11 +144,11 @@ const CoursesSection = memo(() => {
                     </div>
                   </div>
 
-                  {/* Popular Badge */}
+                  {/* Popular Badge with Enhanced Animation */}
                   {course.isPopular && (
                     <div className="absolute top-4 right-4 z-30">
-                      <div className="bg-gradient-to-r from-green-500 to-emerald-600 text-white px-3 py-1.5 rounded-full text-xs font-bold flex items-center gap-1.5 shadow-lg backdrop-blur-sm border border-white/20">
-                        <Star className="w-3 h-3 fill-current" />
+                      <div className="bg-gradient-to-r from-green-500 to-emerald-600 text-white px-3 py-1.5 rounded-full text-xs font-bold flex items-center gap-1.5 shadow-lg backdrop-blur-sm border border-white/20 animate-scale-in">
+                        <Star className="w-3 h-3 fill-current animate-pulse" />
                         POPULAR
                       </div>
                     </div>
