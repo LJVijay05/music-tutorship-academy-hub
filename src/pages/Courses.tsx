@@ -56,7 +56,7 @@ const Courses = memo(() => {
     },
     {
       courseId: "crash-course",
-      title: "3-Month Music Production Crash Course",
+      title: "Essential Producer Bootcamp: Launch Your Music Career in 3 Months",
       description: "Intensive Learning",
       level: "Beginner to Intermediate Level",
       icon: Users,

@@ -47,6 +47,33 @@ const CoursesSection = memo(() => {
       offerSubtext: "Enroll for 1 Year & Get 15% Off!"
     },
     {
+      id: "crash-course",
+      title: "Essential Producer Bootcamp: Launch Your Music Career in 3 Months",
+      description: "Intensive Learning",
+      level: "Beginner to Intermediate Level",
+      icon: Users,
+      imageUrl: "/lovable-uploads/8e4988dc-184a-4830-b569-64e9a67c6d19.png",
+      features: [
+        "8 students per batch",
+        "3 months intensive program",
+        "Twice weekly sessions",
+        "Hands-on project work",
+        "Essential software training",
+        "Certificate upon completion"
+      ],
+      isPopular: false,
+      isPremium: false,
+      gradientFrom: "from-purple-900",
+      gradientTo: "to-purple-700",
+      borderColor: "border-purple-100",
+      textColor: "text-purple-700",
+      bgColor: "bg-purple-50",
+      buttonGradientFrom: "from-purple-600",
+      buttonGradientTo: "to-purple-700",
+      offerText: "Quick Start Program",
+      offerSubtext: "Complete Course for ₹49,800 Only!"
+    },
+    {
       id: "mentorship-90",
       title: "One-on-One Music Production Mentorship",
       description: "1-on-1 Mentorship",
@@ -105,7 +132,7 @@ const CoursesSection = memo(() => {
           </div>
           
           {/* Optimized Grid Layout for better screen fit */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 max-w-7xl mx-auto">
             {courses.map((course, index) => (
               <article key={course.id} className="group animate-fade-in-up h-full" style={{ animationDelay: `${index * 0.3}s` }}>
                 <Card className={`overflow-hidden border-0 shadow-xl hover:shadow-2xl transition-all duration-500 ease-out rounded-2xl h-full bg-white hover:-translate-y-2 relative group-hover:scale-[1.02] ${course.isPremium ? 'ring-2 ring-amber-200/60' : ''}`}>
