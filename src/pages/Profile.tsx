@@ -32,11 +32,14 @@ const Profile = () => {
 
     (async () => {
       try {
-        const { data, error } = await supabase
-          .from("students")
-          .select("*")
-          .eq("email", user.email)
-          .maybeSingle();
+        // Temporarily disabled until tables are created
+        const data = null;
+        const error = null;
+        // const { data, error } = await supabase
+        //   .from("students")
+        //   .select("*")
+        //   .eq("email", user.email)
+        //   .maybeSingle();
 
         if (error || !data) {
           toast({
@@ -48,8 +51,8 @@ const Profile = () => {
         if (data) {
           setProfile(data);
           setForm({
-            first_name: data.first_name,
-            last_name: data.last_name,
+            first_name: data.first_name || "",
+            last_name: data.last_name || "",
             phone: data.phone || "",
           });
         }
@@ -80,15 +83,16 @@ const Profile = () => {
     e.preventDefault();
     if (!profile) return;
     setSaving(true);
-    // Update student profile in Supabase
-    const { error } = await supabase
-      .from("students")
-      .update({
-        first_name: form.first_name,
-        last_name: form.last_name,
-        phone: form.phone,
-      })
-      .eq("id", profile.id);
+    // Temporarily disabled until tables are created
+    const error = null;
+    // const { error } = await supabase
+    //   .from("students")
+    //   .update({
+    //     first_name: form.first_name,
+    //     last_name: form.last_name,
+    //     phone: form.phone,
+    //   })
+    //   .eq("id", profile.id);
 
     setSaving(false);
 

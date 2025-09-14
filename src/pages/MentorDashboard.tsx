@@ -59,43 +59,46 @@ const MentorDashboard = () => {
     try {
       setLoading(true);
       
-      // Fetch students
-      const { data: studentsData, error: studentsError } = await supabase
-        .from('students')
-        .select('*')
-        .order('created_at', { ascending: false });
+      // Fetch students - temporarily disabled until tables are created
+      const studentsData = [];
+      // const { data: studentsData, error: studentsError } = await supabase
+      //   .from('students')
+      //   .select('*')
+      //   .order('created_at', { ascending: false });
 
-      if (studentsError) throw studentsError;
+      // if (studentsError) throw studentsError;
 
-      // Fetch fees with student data
-      const { data: feesData, error: feesError } = await supabase
-        .from('fees')
-        .select(`
-          *,
-          students (
-            first_name,
-            last_name,
-            email
-          )
-        `)
-        .order('paid_on', { ascending: false });
+      // Fetch fees with student data - temporarily disabled
+      const feesData = [];
+      // const { data: feesData, error: feesError } = await supabase
+      //   .from('fees')
+      //   .select(`
+      //     *,
+      //     students (
+      //       first_name,
+      //       last_name,
+      //       email
+      //     )
+      //   `)
+      //   .order('paid_on', { ascending: false });
 
-      if (feesError) throw feesError;
+      // if (feesError) throw feesError;
 
-      // Fetch schedules with student data
-      const { data: schedulesData, error: schedulesError } = await supabase
-        .from('class_schedules')
-        .select(`
-          *,
-          students (
-            first_name,
-            last_name,
-            email
-          )
-        `)
-        .order('class_date', { ascending: true });
+      // Fetch schedules with student data - temporarily disabled
+      const schedulesData = [];
+      // const { data: schedulesData, error: schedulesError } = await supabase
+      //   .from('class_schedules')
+      //   .select(`
+      //     *,
+      //     students (
+      //       first_name,
+      //       last_name,
+      //       email
+      //     )
+      //   `)
+      //   .order('class_date', { ascending: true });
 
-      if (schedulesError) throw schedulesError;
+      // if (schedulesError) throw schedulesError;
 
       setStudents(studentsData || []);
       setFees(feesData || []);
