@@ -74,13 +74,12 @@ const Navigation = () => {
         <div className="container mx-auto px-3 sm:px-4 lg:px-6">
           <div className="flex items-center justify-between h-14 sm:h-16">
             {/* Logo */}
-            <Link to="/" className="flex items-center gap-1.5 sm:gap-2 font-bold text-base sm:text-lg group transition-all duration-300 hover:scale-105">
-              <div className="w-7 h-7 sm:w-8 sm:h-8 bg-gradient-to-r from-red-600 to-pink-600 rounded-lg flex items-center justify-center shadow-md group-hover:shadow-red-200 transition-all duration-300 group-hover:rotate-3">
-                <Music className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white" />
-              </div>
-              <span className="text-gray-900 tracking-tight text-sm sm:text-base font-semibold">
-                Music <span className="text-transparent bg-gradient-to-r from-red-600 to-pink-600 bg-clip-text">Tutorship</span>
-              </span>
+            <Link to="/" className="flex items-center gap-2 group transition-all duration-300 hover:scale-105">
+              <img 
+                src="/music-tutorship-logo.png" 
+                alt="Music Tutorship Logo" 
+                className="h-8 sm:h-10 w-auto object-contain"
+              />
             </Link>
 
             {/* Desktop Navigation */}
