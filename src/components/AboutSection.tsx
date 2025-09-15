@@ -38,7 +38,7 @@ const AboutSection = () => {
             <div className="relative order-2 lg:order-1">
               <div className="relative group">
                 {/* Subtle Glow Effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-accent/20 rounded-2xl blur-xl opacity-20 group-hover:opacity-30 transition-opacity duration-500"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-red-500/20 to-pink-500/20 rounded-2xl blur-xl opacity-20 group-hover:opacity-30 transition-opacity duration-500"></div>
                 
                 {/* Clean Card Container */}
                 <div className="relative bg-card rounded-2xl p-6 border border-border shadow-lg hover:shadow-xl transition-all duration-300">
@@ -51,39 +51,14 @@ const AboutSection = () => {
                   </div>
                   
                   {/* Clean Music Badge */}
-                  <div className="absolute -top-3 -right-3 w-12 h-12 bg-primary rounded-full flex items-center justify-center shadow-lg border-2 border-background">
-                    <Music className="w-5 h-5 text-primary-foreground" />
+                  <div className="absolute -top-3 -right-3 w-12 h-12 bg-gradient-to-r from-red-600 to-pink-600 rounded-full flex items-center justify-center shadow-lg border-2 border-background">
+                    <Music className="w-5 h-5 text-white" />
                   </div>
                   
                   {/* Top Rated Badge */}
-                  <div className="absolute -top-2 left-6 bg-accent text-accent-foreground px-4 py-2 rounded-lg font-semibold shadow-md flex items-center gap-2 text-sm">
+                  <div className="absolute -top-2 left-6 bg-gradient-to-r from-red-600 to-pink-600 text-white px-4 py-2 rounded-lg font-semibold shadow-md flex items-center gap-2 text-sm">
                     <Star className="w-4 h-4 fill-current" />
                     Top Rated
-                  </div>
-                </div>
-
-                {/* Clean Floating Stats */}
-                <div className="absolute -bottom-4 -left-4 bg-card rounded-xl p-4 shadow-lg border border-border">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
-                      <Users className="w-5 h-5 text-primary-foreground" />
-                    </div>
-                    <div>
-                      <div className="text-2xl font-bold text-foreground">320+</div>
-                      <div className="text-muted-foreground text-xs">Students</div>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="absolute -bottom-4 -right-4 bg-card rounded-xl p-4 shadow-lg border border-border">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-accent flex items-center justify-center">
-                      <Calendar className="w-5 h-5 text-accent-foreground" />
-                    </div>
-                    <div>
-                      <div className="text-2xl font-bold text-foreground">10+</div>
-                      <div className="text-muted-foreground text-xs">Years</div>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -95,7 +70,7 @@ const AboutSection = () => {
                 <h3 className="text-3xl lg:text-4xl font-bold leading-tight">
                   <span className="text-foreground">Transforming</span>
                   <br />
-                  <span className="text-transparent bg-gradient-to-r from-primary to-accent bg-clip-text">
+                  <span className="text-transparent bg-gradient-to-r from-red-600 to-pink-600 bg-clip-text">
                     Musical Dreams
                   </span>
                   <br />
@@ -116,37 +91,10 @@ const AboutSection = () => {
                   </p>
                 </div>
               </div>
-
-              {/* Clean Achievement Cards */}
-              <div className="grid grid-cols-2 gap-4">
-                <div className="bg-card rounded-xl p-4 border border-border hover:border-primary/20 transition-colors group">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
-                      <Award className="w-5 h-5 text-primary-foreground" />
-                    </div>
-                    <div>
-                      <div className="text-lg font-bold text-foreground">Industry</div>
-                      <div className="text-muted-foreground text-sm">Recognition</div>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="bg-card rounded-xl p-4 border border-border hover:border-accent/20 transition-colors group">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-accent flex items-center justify-center">
-                      <Sparkles className="w-5 h-5 text-accent-foreground" />
-                    </div>
-                    <div>
-                      <div className="text-lg font-bold text-foreground">Passionate</div>
-                      <div className="text-muted-foreground text-sm">Teaching</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
               
               {/* Clean CTA Button */}
               <div className="pt-4">
-                <Button asChild size="lg" className="bg-gradient-to-r from-primary to-accent hover:opacity-90 text-primary-foreground">
+                <Button asChild size="lg" className="bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700 text-white px-8 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
                   <Link to="/about" className="flex items-center gap-2">
                     Discover My Journey
                     <Sparkles className="w-4 h-4" />
