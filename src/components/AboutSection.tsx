@@ -1,100 +1,88 @@
 
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { Music, Users, Calendar, Award, Star, ArrowRight, Sparkles } from "lucide-react";
+import { Music, Users, Calendar, Award, Star, Sparkles } from "lucide-react";
 
 const AboutSection = () => {
   return (
-    <section className="py-16 lg:py-20 bg-gradient-to-br from-background via-background/95 to-red-50/30 relative overflow-hidden">
-      {/* Modern Background Elements */}
-      <div className="absolute inset-0 opacity-40">
-        <div className="absolute top-20 left-20 w-32 h-32 bg-gradient-to-r from-primary/20 to-accent/20 rounded-full blur-2xl animate-pulse"></div>
-        <div className="absolute bottom-20 right-20 w-40 h-40 bg-gradient-to-r from-accent/20 to-secondary/20 rounded-full blur-2xl animate-pulse delay-1000"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-24 bg-gradient-to-r from-secondary/10 to-primary/10 rounded-full blur-xl animate-bounce"></div>
-      </div>
-
-      {/* Grid Pattern Overlay */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="grid grid-cols-12 h-full">
-          {Array.from({ length: 12 }).map((_, i) => (
-            <div key={i} className="border-r border-muted-foreground/20"></div>
-          ))}
-        </div>
+    <section className="py-16 lg:py-20 bg-gradient-to-br from-background to-muted/20 relative overflow-hidden">
+      {/* Elegant Background Elements */}
+      <div className="absolute inset-0 opacity-30">
+        <div className="absolute top-20 left-20 w-32 h-32 bg-gradient-to-r from-primary/10 to-accent/10 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 right-20 w-40 h-40 bg-gradient-to-r from-accent/10 to-primary/10 rounded-full blur-3xl"></div>
       </div>
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-6xl mx-auto">
           {/* Header Section */}
-          <div className="text-center mb-16 animate-fade-in">
-            <div className="inline-flex items-center gap-2 bg-card/80 backdrop-blur-sm text-primary px-6 py-3 rounded-full text-sm font-semibold mb-6 border border-border/50 shadow-sm">
+          <div className="text-center mb-12 animate-fade-in">
+            <div className="inline-flex items-center gap-2 bg-card border border-border text-primary px-4 py-2 rounded-full text-sm font-medium mb-4">
               <Music className="w-4 h-4" />
               Meet Your Mentor
             </div>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-              <span className="text-transparent bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 leading-tight">
+              <span className="text-transparent bg-gradient-to-r from-primary to-accent bg-clip-text">
                 Expert Guidance
               </span>
               <br />
               <span className="text-foreground">for Your Musical Journey</span>
             </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Learn from a seasoned professional with 10+ years of experience in music production and education
             </p>
           </div>
 
           {/* Main Content Grid */}
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             {/* Left Content - Image Section */}
-            <div className="relative order-2 lg:order-1 animate-slide-left">
+            <div className="relative order-2 lg:order-1">
               <div className="relative group">
-                {/* Enhanced Glow Effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-primary/30 via-accent/30 to-secondary/30 rounded-3xl blur-2xl opacity-30 group-hover:opacity-50 transition-opacity duration-700 scale-110"></div>
+                {/* Subtle Glow Effect */}
+                <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-accent/20 rounded-2xl blur-xl opacity-20 group-hover:opacity-30 transition-opacity duration-500"></div>
                 
-                {/* Glass Card Container */}
-                <div className="relative bg-card/60 backdrop-blur-xl rounded-3xl p-8 shadow-2xl border border-border/30 hover:border-border/50 transition-all duration-500">
-                  <div className="aspect-square rounded-2xl overflow-hidden relative">
+                {/* Clean Card Container */}
+                <div className="relative bg-card rounded-2xl p-6 border border-border shadow-lg hover:shadow-xl transition-all duration-300">
+                  <div className="aspect-square rounded-xl overflow-hidden relative">
                     <img
                       src="/lovable-uploads/8e4988dc-184a-4830-b569-64e9a67c6d19.png"
                       alt="Vijay - Music Producer & Educator"
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                      className="w-full h-full object-cover"
                     />
-                    {/* Subtle Gradient Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-background/20 via-transparent to-transparent"></div>
                   </div>
                   
-                  {/* Floating Music Badge */}
-                  <div className="absolute -top-4 -right-4 w-16 h-16 bg-gradient-to-r from-primary to-accent rounded-full flex items-center justify-center shadow-2xl animate-bounce border-4 border-card">
-                    <Music className="w-6 h-6 text-primary-foreground" />
+                  {/* Clean Music Badge */}
+                  <div className="absolute -top-3 -right-3 w-12 h-12 bg-primary rounded-full flex items-center justify-center shadow-lg border-2 border-background">
+                    <Music className="w-5 h-5 text-primary-foreground" />
                   </div>
                   
                   {/* Top Rated Badge */}
-                  <div className="absolute -top-3 left-8 bg-gradient-to-r from-yellow-500 to-orange-500 text-white px-6 py-3 rounded-2xl font-bold shadow-xl flex items-center gap-2">
-                    <Star className="w-5 h-5 fill-current" />
+                  <div className="absolute -top-2 left-6 bg-accent text-accent-foreground px-4 py-2 rounded-lg font-semibold shadow-md flex items-center gap-2 text-sm">
+                    <Star className="w-4 h-4 fill-current" />
                     Top Rated
                   </div>
                 </div>
 
-                {/* Modern Floating Stats */}
-                <div className="absolute -bottom-6 -left-6 bg-card/80 backdrop-blur-lg rounded-2xl p-6 shadow-xl border border-border/30 animate-pulse">
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-r from-primary to-accent flex items-center justify-center">
-                      <Users className="w-6 h-6 text-primary-foreground" />
+                {/* Clean Floating Stats */}
+                <div className="absolute -bottom-4 -left-4 bg-card rounded-xl p-4 shadow-lg border border-border">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
+                      <Users className="w-5 h-5 text-primary-foreground" />
                     </div>
                     <div>
-                      <div className="text-3xl font-bold text-foreground">320+</div>
-                      <div className="text-muted-foreground text-sm font-medium">Students</div>
+                      <div className="text-2xl font-bold text-foreground">320+</div>
+                      <div className="text-muted-foreground text-xs">Students</div>
                     </div>
                   </div>
                 </div>
                 
-                <div className="absolute -bottom-6 -right-6 bg-card/80 backdrop-blur-lg rounded-2xl p-6 shadow-xl border border-border/30 animate-bounce">
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-r from-secondary to-accent flex items-center justify-center">
-                      <Calendar className="w-6 h-6 text-secondary-foreground" />
+                <div className="absolute -bottom-4 -right-4 bg-card rounded-xl p-4 shadow-lg border border-border">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-accent flex items-center justify-center">
+                      <Calendar className="w-5 h-5 text-accent-foreground" />
                     </div>
                     <div>
-                      <div className="text-3xl font-bold text-foreground">10+</div>
-                      <div className="text-muted-foreground text-sm font-medium">Years</div>
+                      <div className="text-2xl font-bold text-foreground">10+</div>
+                      <div className="text-muted-foreground text-xs">Years</div>
                     </div>
                   </div>
                 </div>
@@ -102,9 +90,9 @@ const AboutSection = () => {
             </div>
 
             {/* Right Content - Text Section */}
-            <div className="space-y-8 order-1 lg:order-2 animate-slide-right">
-              <div className="space-y-6">
-                <h3 className="text-4xl lg:text-5xl font-bold leading-tight">
+            <div className="space-y-6 order-1 lg:order-2">
+              <div className="space-y-4">
+                <h3 className="text-3xl lg:text-4xl font-bold leading-tight">
                   <span className="text-foreground">Transforming</span>
                   <br />
                   <span className="text-transparent bg-gradient-to-r from-primary to-accent bg-clip-text">
@@ -114,7 +102,7 @@ const AboutSection = () => {
                   <span className="text-foreground">into Reality</span>
                 </h3>
                 
-                <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
+                <div className="space-y-3 text-muted-foreground">
                   <p>
                     With over a decade of experience in music production, mixing, sound design, and music theory, I've dedicated my career to helping aspiring musicians unlock their creative potential and achieve professional success.
                   </p>
@@ -129,42 +117,39 @@ const AboutSection = () => {
                 </div>
               </div>
 
-              {/* Modern Achievement Cards */}
-              <div className="grid grid-cols-2 gap-6">
-                <div className="bg-card/60 backdrop-blur-lg rounded-2xl p-6 border border-border/30 hover:bg-card/80 transition-all duration-300 group">
-                  <div className="flex items-center gap-4">
-                    <div className="w-14 h-14 rounded-full bg-gradient-to-r from-primary to-accent flex items-center justify-center group-hover:scale-110 transition-transform">
-                      <Award className="w-7 h-7 text-primary-foreground" />
+              {/* Clean Achievement Cards */}
+              <div className="grid grid-cols-2 gap-4">
+                <div className="bg-card rounded-xl p-4 border border-border hover:border-primary/20 transition-colors group">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
+                      <Award className="w-5 h-5 text-primary-foreground" />
                     </div>
                     <div>
-                      <div className="text-2xl font-bold text-foreground">Industry</div>
-                      <div className="text-muted-foreground font-medium">Recognition</div>
+                      <div className="text-lg font-bold text-foreground">Industry</div>
+                      <div className="text-muted-foreground text-sm">Recognition</div>
                     </div>
                   </div>
                 </div>
                 
-                <div className="bg-card/60 backdrop-blur-lg rounded-2xl p-6 border border-border/30 hover:bg-card/80 transition-all duration-300 group">
-                  <div className="flex items-center gap-4">
-                    <div className="w-14 h-14 rounded-full bg-gradient-to-r from-secondary to-accent flex items-center justify-center group-hover:scale-110 transition-transform">
-                      <Sparkles className="w-7 h-7 text-secondary-foreground" />
+                <div className="bg-card rounded-xl p-4 border border-border hover:border-accent/20 transition-colors group">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-accent flex items-center justify-center">
+                      <Sparkles className="w-5 h-5 text-accent-foreground" />
                     </div>
                     <div>
-                      <div className="text-2xl font-bold text-foreground">Passionate</div>
-                      <div className="text-muted-foreground font-medium">Teaching</div>
+                      <div className="text-lg font-bold text-foreground">Passionate</div>
+                      <div className="text-muted-foreground text-sm">Teaching</div>
                     </div>
                   </div>
                 </div>
               </div>
               
-              {/* Modern CTA Button */}
-              <div className="pt-8">
-                <Button asChild size="lg" className="bg-gradient-to-r from-primary via-accent to-secondary hover:opacity-90 text-primary-foreground text-xl px-16 py-8 rounded-2xl shadow-2xl hover:shadow-primary/25 transition-all duration-500 hover:scale-105 group relative overflow-hidden border-0">
-                  <Link to="/about">
-                    <span className="absolute inset-0 bg-gradient-to-r from-primary/50 via-accent/50 to-secondary/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-                    <span className="relative flex items-center gap-4">
-                      Discover My Journey
-                      <Sparkles className="w-6 h-6 group-hover:rotate-12 transition-transform duration-300" />
-                    </span>
+              {/* Clean CTA Button */}
+              <div className="pt-4">
+                <Button asChild size="lg" className="bg-gradient-to-r from-primary to-accent hover:opacity-90 text-primary-foreground">
+                  <Link to="/about" className="flex items-center gap-2">
+                    Discover My Journey
+                    <Sparkles className="w-4 h-4" />
                   </Link>
                 </Button>
               </div>
