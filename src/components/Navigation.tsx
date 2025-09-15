@@ -78,7 +78,7 @@ const Navigation = () => {
               <img 
                 src="/music-tutorship-logo.png" 
                 alt="Music Tutorship Logo" 
-                className="h-8 sm:h-10 w-auto object-contain"
+                className="h-10 sm:h-12 w-auto object-contain"
               />
             </Link>
 
