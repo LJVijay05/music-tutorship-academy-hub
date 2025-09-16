@@ -136,7 +136,7 @@ const CoursesSection = memo(() => {
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 lg:gap-6 max-w-7xl mx-auto">
             {courses.map((course, index) => (
               <article key={course.id} className="group animate-fade-in hover-scale" style={{ animationDelay: `${index * 0.2}s` }}>
-                <Card className={`overflow-hidden border-0 shadow-xl hover:shadow-2xl transition-all duration-500 ease-out rounded-2xl h-full bg-white hover:-translate-y-2 relative group-hover:scale-[1.02] ${course.isPremium ? 'ring-2 ring-amber-200/60' : ''} ${course.isPopular ? 'ring-2 ring-green-400/60 shadow-green-200/30 animate-pulse' : ''}`}>
+                <Card className={`overflow-hidden border-0 shadow-xl hover:shadow-2xl transition-all duration-300 ease-out rounded-2xl h-full bg-white hover:-translate-y-1 relative group-hover:scale-[1.01] ${course.isPremium ? 'ring-2 ring-amber-200/60' : ''} ${course.isPopular ? 'ring-2 ring-green-400/60 shadow-green-200/30' : ''}`}>
                   {/* Course Type Icon - moved to top-left as floating badge */}
                   <div className="absolute top-4 left-4 z-30">
                     <div className="w-8 h-8 bg-white/90 backdrop-blur-sm rounded-lg flex items-center justify-center border border-white/40 shadow-md">
