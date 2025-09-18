@@ -60,7 +60,7 @@ const Index = () => {
       <main role="main">
         <Hero />
         <AboutSection />
-        <CoursesSection />
+        <CoursesSection showOnlyFeatured={true} />
         <WhyChooseSection />
         <FAQSection />
       </main>

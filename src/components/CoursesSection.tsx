@@ -8,7 +8,7 @@ import SuccessPopup from "./SuccessPopup";
 import { useStudentForm } from "@/hooks/useStudentForm";
 import { memo, useCallback } from "react";
 
-const CoursesSection = memo(() => {
+const CoursesSection = memo(({ showOnlyFeatured = false }: { showOnlyFeatured?: boolean }) => {
   const { 
     showStudentForm, 
     showSuccessPopup, 
@@ -18,7 +18,7 @@ const CoursesSection = memo(() => {
     closeSuccess 
   } = useStudentForm();
 
-  const courses = [
+  const allCourses = [
     {
       id: "production-course",
       title: "Complete Music Production Mastery Course",
@@ -102,6 +102,11 @@ const CoursesSection = memo(() => {
     }
   ];
 
+  // Filter courses based on the showOnlyFeatured prop
+  const courses = showOnlyFeatured 
+    ? allCourses.filter(course => course.id === "crash-course") 
+    : allCourses;
+
   const handleEnquireClick = useCallback(() => {
     console.log('CoursesSection: Enquire Now clicked');
     openForm();
@@ -133,7 +138,7 @@ const CoursesSection = memo(() => {
           </div>
           
           {/* Optimized Grid Layout for better screen fit */}
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 lg:gap-6 max-w-7xl mx-auto">
+          <div className={`grid gap-4 lg:gap-6 max-w-7xl mx-auto ${showOnlyFeatured ? 'grid-cols-1 max-w-md' : 'grid-cols-1 md:grid-cols-2 xl:grid-cols-3'}`}>
             {courses.map((course, index) => (
               <article key={course.id} className="group animate-fade-in hover-scale" style={{ animationDelay: `${index * 0.2}s` }}>
                 <Card className={`overflow-hidden border-0 shadow-xl hover:shadow-2xl transition-all duration-300 ease-out rounded-2xl h-full bg-white hover:-translate-y-1 relative group-hover:scale-[1.01] ${course.isPremium ? 'ring-2 ring-amber-200/60' : ''} ${course.isPopular ? 'ring-2 ring-green-400/60 shadow-green-200/30' : ''}`}>
@@ -230,14 +235,16 @@ const CoursesSection = memo(() => {
             ))}
           </div>
 
-          <div className="text-center mt-12 lg:mt-16">
-            <Button 
-              asChild
-              className="bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700 text-white px-8 py-5 text-lg font-bold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
-            >
-              <Link to="/courses">View All Courses</Link>
-            </Button>
-          </div>
+          {showOnlyFeatured && (
+            <div className="text-center mt-12 lg:mt-16">
+              <Button 
+                asChild
+                className="bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700 text-white px-8 py-5 text-lg font-bold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
+              >
+                <Link to="/courses">View All Courses</Link>
+              </Button>
+            </div>
+          )}
         </div>
       </section>
 
