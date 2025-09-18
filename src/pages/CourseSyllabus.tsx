@@ -183,6 +183,92 @@ const CourseSyllabus = () => {
         "Portfolio development assistance",
         "Career guidance and placement support"
       ]
+    },
+    "crash-course": {
+      title: "Essential Producer Bootcamp: Launch Your Music Career in 3 Months",
+      subtitle: "Intensive Learning Path from Beginner to Intermediate Level",
+      duration: "3 Months",
+      batchSize: "8 Students",
+      sessions: "Twice Weekly Sessions",
+      overview: "Fast-track your music production journey with our intensive 3-month bootcamp. Perfect for aspiring producers who want to quickly build essential skills and launch their music career with confidence.",
+      modules: [
+        {
+          week: "Week 1-2",
+          title: "Production Fundamentals & DAW Setup",
+          icon: Monitor,
+          topics: [
+            "Introduction to Music Production",
+            "DAW Installation & Basic Navigation",
+            "Audio Fundamentals & File Management",
+            "Creating Your First Beat"
+          ]
+        },
+        {
+          week: "Week 3-4",
+          title: "Beat Making & Rhythm Mastery",
+          icon: Music,
+          topics: [
+            "Drum Programming Essentials",
+            "Creating Grooves & Patterns",
+            "Sample Selection & Manipulation",
+            "Building Dynamic Rhythms"
+          ]
+        },
+        {
+          week: "Week 5-6",
+          title: "Melody & Chord Progressions",
+          icon: Music,
+          topics: [
+            "Basic Music Theory for Producers",
+            "Creating Catchy Melodies",
+            "Chord Progression Fundamentals",
+            "Bass Line Construction"
+          ]
+        },
+        {
+          week: "Week 7-8",
+          title: "Sound Design & Creative Processing",
+          icon: Headphones,
+          topics: [
+            "Basic Synthesis Techniques",
+            "Audio Effects & Processing",
+            "Creating Unique Sounds",
+            "Layering & Arrangement"
+          ]
+        },
+        {
+          week: "Week 9-10",
+          title: "Mixing Fundamentals",
+          icon: Headphones,
+          topics: [
+            "EQ & Compression Basics",
+            "Creating Space with Reverb",
+            "Balancing Mix Elements",
+            "Professional Mixing Tips"
+          ]
+        },
+        {
+          week: "Week 11-12",
+          title: "Track Completion & Career Launch",
+          icon: Sparkles,
+          topics: [
+            "Finalizing Your Productions",
+            "Basic Mastering Concepts",
+            "Sharing Your Music Online",
+            "Building Your Producer Identity"
+          ]
+        }
+      ],
+      features: [
+        "8 students per batch for focused attention",
+        "3 months of intensive twice-weekly sessions",
+        "Hands-on project work every session",
+        "Essential software training (DAW of choice)",
+        "Complete track production by course end",
+        "Certificate upon completion",
+        "Access to exclusive producer community",
+        "Career guidance and next steps planning"
+      ]
     }
   };
 
