@@ -188,7 +188,7 @@ const CourseSyllabus = () => {
       title: "Essential Producer Bootcamp: Launch Your Music Career in 3 Months",
       subtitle: "Intensive Learning Path from Beginner to Intermediate Level",
       duration: "3 Months",
-      batchSize: "8 Students",
+      batchSize: "15 Students",
       sessions: "Twice Weekly Sessions",
       overview: "Fast-track your music production journey with our intensive 3-month bootcamp. Perfect for aspiring producers who want to quickly build essential skills and launch their music career with confidence.",
       modules: [
@@ -260,7 +260,7 @@ const CourseSyllabus = () => {
         }
       ],
       features: [
-        "8 students per batch for focused attention",
+        "15 students per batch for focused attention",
         "3 months of intensive twice-weekly sessions",
         "Hands-on project work every session",
         "Essential software training (DAW of choice)",
