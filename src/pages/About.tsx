@@ -54,43 +54,8 @@ const About = () => {
                       {/* Gradient Overlay */}
                       <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>
                     </div>
-                    
-                    {/* Floating Badge */}
-                    <div className="absolute -top-6 -right-6 w-20 h-20 bg-gradient-to-r from-red-500 to-pink-500 rounded-full flex items-center justify-center shadow-2xl animate-bounce border-4 border-white">
-                      <Music className="w-8 h-8 text-white" />
-                    </div>
-                    
-                    {/* Top Rated Badge */}
-                    <div className="absolute -top-4 left-8 bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-6 py-3 rounded-2xl font-bold shadow-xl flex items-center gap-2">
-                      <Star className="w-5 h-5 fill-current" />
-                      Top Rated
-                    </div>
                   </div>
 
-                  {/* Floating Stats */}
-                  <div className="absolute -right-12 top-1/4 bg-white/90 backdrop-blur-lg rounded-2xl p-6 shadow-2xl border border-red-100 animate-float">
-                    <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center">
-                        <Users className="w-6 h-6 text-red-600" />
-                      </div>
-                      <div>
-                        <div className="text-3xl font-bold text-red-600">320+</div>
-                        <div className="text-red-500 text-sm font-medium">Students</div>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div className="absolute -left-12 bottom-1/4 bg-white/90 backdrop-blur-lg rounded-2xl p-6 shadow-2xl border border-purple-100 animate-float-delayed">
-                    <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center">
-                        <Calendar className="w-6 h-6 text-purple-600" />
-                      </div>
-                      <div>
-                        <div className="text-3xl font-bold text-purple-600">10+</div>
-                        <div className="text-purple-500 text-sm font-medium">Years</div>
-                      </div>
-                    </div>
-                  </div>
                 </div>
               </div>
 
