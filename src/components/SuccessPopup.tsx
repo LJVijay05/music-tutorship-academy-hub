@@ -3,6 +3,9 @@ import React from 'react';
 import {
   Dialog,
   DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { CheckCircle } from "lucide-react";
@@ -38,6 +41,11 @@ const SuccessPopup = ({
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[420px] bg-white border border-gray-100 shadow-xl rounded-2xl p-0 gap-0">
+        <DialogHeader className="sr-only">
+          <DialogTitle>{title}</DialogTitle>
+          <DialogDescription>{message}</DialogDescription>
+        </DialogHeader>
+        
         {/* Header with animated checkmark */}
         <div className="text-center pt-8 pb-6 px-6">
           <div className="mx-auto w-16 h-16 mb-6 relative">

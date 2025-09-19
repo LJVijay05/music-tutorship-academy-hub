@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import StudentDataForm from "./StudentDataForm";
 import SuccessPopup from "./SuccessPopup";
 import { useStudentForm } from "@/hooks/useStudentForm";
-import { memo, useCallback } from "react";
+import { memo, useCallback, useState } from "react";
 
 const CoursesSection = memo(({ showOnlyFeatured = false }: { showOnlyFeatured?: boolean }) => {
   const { 
@@ -17,6 +17,9 @@ const CoursesSection = memo(({ showOnlyFeatured = false }: { showOnlyFeatured?: 
     showSuccess, 
     closeSuccess 
   } = useStudentForm();
+
+  // Track which course was clicked for proper redirection
+  const [selectedCourseId, setSelectedCourseId] = useState<string | null>(null);
 
   const allCourses = [
     {
@@ -107,8 +110,9 @@ const CoursesSection = memo(({ showOnlyFeatured = false }: { showOnlyFeatured?: 
     ? allCourses.filter(course => course.id === "crash-course") 
     : allCourses;
 
-  const handleEnquireClick = useCallback(() => {
-    console.log('CoursesSection: Enquire Now clicked');
+  const handleEnquireClick = useCallback((courseId: string) => {
+    console.log('CoursesSection: Enquire Now clicked for course:', courseId);
+    setSelectedCourseId(courseId);
     openForm();
   }, [openForm]);
 
@@ -223,7 +227,7 @@ const CoursesSection = memo(({ showOnlyFeatured = false }: { showOnlyFeatured?: 
                         </Link>
                       </Button>
                       <Button 
-                        onClick={handleEnquireClick}
+                        onClick={() => handleEnquireClick(course.id)}
                         className={`bg-gradient-to-r ${course.buttonGradientFrom} ${course.buttonGradientTo} hover:from-red-600 hover:to-pink-600 text-white h-9 md:h-10 rounded-lg font-bold text-xs md:text-sm flex-1 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 border-2 border-white/20`}
                       >
                         Enquire Now
@@ -258,9 +262,12 @@ const CoursesSection = memo(({ showOnlyFeatured = false }: { showOnlyFeatured?: 
         open={showSuccessPopup}
         onOpenChange={closeSuccess}
         title="Successful Registration"
-        message="Thank you! You have successfully registered your interest. You can now proceed to explore our enrollment options."
-        buttonText="Continue"
-        redirectTo="/enrollment"
+        message={selectedCourseId === "crash-course" 
+          ? "Thank you! You're all set to enroll in the Essential Producer Bootcamp. Let's get you started on your 3-month music journey!"
+          : "Thank you! You have successfully registered your interest. You can now proceed to explore our enrollment options."
+        }
+        buttonText={selectedCourseId === "crash-course" ? "Go to Bootcamp Enrollment" : "Continue"}
+        redirectTo={selectedCourseId === "crash-course" ? "/essential-bootcamp-enrollment" : "/enrollment"}
       />
     </>
   );
