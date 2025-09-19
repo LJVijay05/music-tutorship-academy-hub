@@ -49,17 +49,6 @@ const AboutSection = () => {
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  
-                  {/* Clean Music Badge */}
-                  <div className="absolute -top-3 -right-3 w-12 h-12 bg-gradient-to-r from-red-600 to-pink-600 rounded-full flex items-center justify-center shadow-lg border-2 border-background">
-                    <Music className="w-5 h-5 text-white" />
-                  </div>
-                  
-                  {/* Top Rated Badge */}
-                  <div className="absolute -top-2 left-6 bg-gradient-to-r from-red-600 to-pink-600 text-white px-4 py-2 rounded-lg font-semibold shadow-md flex items-center gap-2 text-sm">
-                    <Star className="w-4 h-4 fill-current" />
-                    Top Rated
-                  </div>
                 </div>
               </div>
             </div>
