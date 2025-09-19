@@ -51,7 +51,7 @@ const Courses = memo(() => {
       buttonGradientTo: "to-red-700",
       buttonHoverFrom: "from-red-700",
       buttonHoverTo: "to-red-800",
-      offerText: "Limited Time Offer",
+      offerText: "Regular Batch",
       offerSubtext: "Enroll for 1 Year & Get 15% Off!"
     },
     {
@@ -62,7 +62,7 @@ const Courses = memo(() => {
       icon: Users,
       imageUrl: "/lovable-uploads/8e4988dc-184a-4830-b569-64e9a67c6d19.png",
       features: [
-        "8 students per batch",
+        "15 students per batch",
         "3 months intensive program",
         "Twice weekly sessions",
         "Hands-on project work",
