@@ -5,6 +5,7 @@ import CourseDetailsContent from "@/components/CourseDetailsContent";
 
 const ProductionCourse = () => {
   const courseData = {
+    courseId: "production-course",
     courseTitle: "Complete Music Production Mastery Course",
     courseDescription: "Master the art of music production from beginner to advanced level with our comprehensive group learning program.",
     level: "Beginner to Advanced",

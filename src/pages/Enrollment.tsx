@@ -22,7 +22,7 @@ import { Badge } from "@/components/ui/badge";
 
 const Enrollment = () => {
   const [selectedPlan, setSelectedPlan] = useState("annually");
-  const [selectedCourse, setSelectedCourse] = useState("bootcamp");
+  const [selectedCourse, setSelectedCourse] = useState("mastery");
   const [studentData, setStudentData] = useState<any>(null);
   const { 
     showStudentForm, 
@@ -106,25 +106,6 @@ const Enrollment = () => {
       cardGradient: "from-purple-50 to-indigo-50",
       borderColor: "border-purple-200",
       textColor: "text-purple-700"
-    },
-    bootcamp: {
-      title: "Essential Producer Bootcamp",
-      subtitle: "Beginner to Intermediate Level",
-      duration: "3 Months Intensive Program",
-      batchSize: "15 Students Per Batch",
-      price: 49800,
-      features: [
-        "Twice-weekly sessions",
-        "Hands-on project work",
-        "Small group learning",
-        "Individual project guidance",
-        "Career mentoring included"
-      ],
-      badge: "Most Popular",
-      badgeColor: "bg-coral-500",
-      cardGradient: "from-coral-50 to-pink-50",
-      borderColor: "border-coral-200",
-      textColor: "text-coral-700"
     }
   };
 
@@ -145,7 +126,7 @@ const Enrollment = () => {
         ? { price: courses.mentorship.annualPrice, period: "annually", monthly: Math.round(courses.mentorship.annualPrice / 12) }
         : { price: courses.mentorship.monthlyPrice, period: "monthly", monthly: null };
     }
-    return { price: courses.bootcamp.price, period: "one-time", monthly: null };
+    return { price: 0, period: "one-time", monthly: null };
   };
 
   return (
@@ -236,95 +217,21 @@ const Enrollment = () => {
               </div>
 
               {/* Course Cards Grid - Clean Aligned Layout */}
-              <div className="grid md:grid-cols-3 gap-6 max-w-7xl mx-auto">
+              <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
                 
-                {/* Essential Producer Bootcamp - Left Card */}
-                <Card 
-                  className={`cursor-pointer border-2 transition-all duration-300 hover:shadow-xl relative ${
-                    selectedCourse === "bootcamp" 
-                      ? "border-orange-500 bg-gradient-to-br from-orange-50 to-orange-100 shadow-lg" 
-                      : "border-gray-200 hover:border-orange-300 bg-white"
-                  }`}
-                  onClick={() => setSelectedCourse("bootcamp")}
-                >
-                  {/* Badge */}
-                  <div className="absolute top-4 right-4 z-10">
-                    <Badge className="bg-orange-500 text-white text-xs font-bold px-3 py-1.5 rounded-full">
-                      <TrendingUp className="w-3 h-3 mr-1" />
-                      Most Popular
-                    </Badge>
+                {/* Essential Producer Bootcamp - Special Section */}
+                <div className="col-span-full mb-8">
+                  <div className="bg-gradient-to-r from-orange-100 to-red-100 rounded-lg p-6 text-center border border-orange-200">
+                    <h3 className="text-xl font-bold text-gray-900 mb-2">Looking for our Essential Producer Bootcamp?</h3>
+                    <p className="text-gray-700 mb-4">Launch Your Music Career in 3 Months - Our most popular short program</p>
+                    <Button 
+                      className="bg-orange-600 hover:bg-orange-700 text-white px-6 py-2 rounded-lg"
+                      onClick={() => window.location.href = '/essential-bootcamp-enrollment'}
+                    >
+                      View Essential Bootcamp →
+                    </Button>
                   </div>
-                  
-                  <CardContent className="p-6">
-                    {/* Header - Course Selection */}
-                    <div className="flex items-start gap-3 mb-6">
-                      <div className={`w-6 h-6 rounded-full border-2 mt-1 flex-shrink-0 transition-all ${
-                        selectedCourse === "bootcamp" 
-                          ? "bg-orange-500 border-orange-500" 
-                          : "border-gray-300"
-                      }`}>
-                        {selectedCourse === "bootcamp" && <CheckCircle className="w-6 h-6 text-white -m-0.5" />}
-                      </div>
-                      <div className="flex-1">
-                        <h3 className="text-xl font-bold text-gray-900 mb-3 leading-tight">
-                          Essential Producer Bootcamp
-                        </h3>
-                      </div>
-                    </div>
-                    
-                    {/* Course Details */}
-                    <div className="mb-6">
-                      <p className="text-gray-600 font-medium text-base mb-3">{courses.bootcamp.subtitle}</p>
-                      
-                      <div className="space-y-2 text-sm text-gray-600">
-                        <div className="flex items-center gap-2">
-                          <Clock className="w-4 h-4" />
-                          <span>{courses.bootcamp.duration}</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <Users className="w-4 h-4" />
-                          <span>{courses.bootcamp.batchSize}</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Features */}
-                    <div className="mb-8">
-                      <h4 className="font-semibold text-gray-900 flex items-center gap-2 mb-3 text-base">
-                        <Star className="w-4 h-4 text-orange-500" />
-                        Features:
-                      </h4>
-                      <ul className="space-y-2.5">
-                        {courses.bootcamp.features.map((feature, index) => (
-                          <li key={index} className="flex items-start gap-2 text-sm text-gray-700">
-                            <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0 mt-0.5" />
-                            <span className="leading-relaxed">{feature}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    {/* Pricing */}
-                    <div className="bg-gradient-to-br from-orange-50 to-red-50 rounded-lg border border-orange-200 p-5 text-center">
-                      <div className="text-sm text-orange-700 font-semibold mb-2 flex items-center justify-center gap-1">
-                        <TrendingUp className="w-3 h-3" />
-                        Popular Choice
-                      </div>
-                      <div className="text-2xl font-bold text-orange-600 mb-2">
-                        8,200 INR per month Easy EMI offer.
-                      </div>
-                      <div className="text-xl font-bold text-orange-600 mb-2">
-                        ₹{courses.bootcamp.price.toLocaleString()} <span className="text-base font-normal text-gray-600">total</span>
-                      </div>
-                      <div className="text-sm text-gray-600 mb-3">
-                        one-time investment
-                      </div>
-                      <div className="text-sm text-green-600 font-medium">
-                        ✨ Most affordable way to start your music journey
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
+                </div>
 
                 {/* Complete Music Production Mastery Course - Center Card */}
                 <Card 

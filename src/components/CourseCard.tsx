@@ -191,7 +191,7 @@ const CourseCard = memo(({
         title="Successful Registration"
         message="Thank you! You have successfully registered your interest. You can now proceed to explore our enrollment options."
         buttonText="Continue"
-        redirectTo="/enrollment"
+        redirectTo={courseId === "crash-course" ? "/essential-bootcamp-enrollment" : "/enrollment"}
       />
     </>
   );

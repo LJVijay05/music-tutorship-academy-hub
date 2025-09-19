@@ -5,6 +5,7 @@ import CourseDetailsContent from "@/components/CourseDetailsContent";
 
 const MentorshipCourse = () => {
   const courseData = {
+    courseId: "mentorship-90",
     courseTitle: "One-on-One Music Production Mentorship",
     courseDescription: "Get personalized guidance and accelerate your music production journey with our exclusive 1-on-1 mentorship program.",
     level: "All Levels",

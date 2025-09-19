@@ -145,7 +145,7 @@ const CourseDetailsModal = ({ isOpen, onClose, courseId, courseTitle }: CourseDe
               }`}
               asChild
             >
-              <Link to="/enrollment">
+              <Link to={courseId === "crash-course" ? "/essential-bootcamp-enrollment" : "/enrollment"}>
                 Enroll Now
               </Link>
             </Button>

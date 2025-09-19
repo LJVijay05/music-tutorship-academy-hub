@@ -17,6 +17,7 @@ import StudentDataForm from "@/components/StudentDataForm";
 import SuccessPopup from "@/components/SuccessPopup";
 
 interface CourseDetailsContentProps {
+  courseId?: string;
   courseTitle: string;
   courseDescription: string;
   level: string;
@@ -35,6 +36,7 @@ interface CourseDetailsContentProps {
 }
 
 const CourseDetailsContent = ({
+  courseId,
   courseTitle,
   courseDescription,
   level,
@@ -80,7 +82,7 @@ const CourseDetailsContent = ({
         title="Application Submitted!"
         message="Thank you for your interest! We'll contact you within 24 hours to discuss your learning journey."
         buttonText="Go to Enrollment"
-        redirectTo="/enrollment"
+        redirectTo={courseId === "crash-course" ? "/essential-bootcamp-enrollment" : "/enrollment"}
       />
 
       {/* Hero Section */}
