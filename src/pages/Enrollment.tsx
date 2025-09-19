@@ -235,108 +235,117 @@ const Enrollment = () => {
                 </div>
               </div>
 
-              {/* Course Cards Grid - Reordered as per requirement */}
-              <div className="grid md:grid-cols-3 gap-8 items-stretch">
+              {/* Course Cards Grid - Clean Aligned Layout */}
+              <div className="grid md:grid-cols-3 gap-6 max-w-7xl mx-auto">
                 
-                {/* Essential Producer Bootcamp - First Card */}
+                {/* Essential Producer Bootcamp - Left Card */}
                 <Card 
-                  className={`cursor-pointer border-2 transition-all duration-300 hover:shadow-xl relative overflow-hidden flex flex-col h-full ${
+                  className={`cursor-pointer border-2 transition-all duration-300 hover:shadow-xl relative ${
                     selectedCourse === "bootcamp" 
-                      ? "border-coral-500 bg-gradient-to-br from-coral-50 to-pink-50 shadow-lg ring-2 ring-coral-200" 
-                      : "border-gray-200 hover:border-coral-300 bg-white"
+                      ? "border-orange-500 bg-gradient-to-br from-orange-50 to-orange-100 shadow-lg" 
+                      : "border-gray-200 hover:border-orange-300 bg-white"
                   }`}
                   onClick={() => setSelectedCourse("bootcamp")}
                 >
-                  <div className="absolute top-4 right-4">
-                    <Badge className="bg-coral-500 text-white font-semibold">
+                  {/* Badge */}
+                  <div className="absolute top-4 right-4 z-10">
+                    <Badge className="bg-orange-500 text-white text-xs font-bold px-3 py-1.5 rounded-full">
                       <TrendingUp className="w-3 h-3 mr-1" />
                       Most Popular
                     </Badge>
                   </div>
                   
-                  <CardContent className="p-8 flex flex-col h-full">
-                    <div className="flex items-start gap-4 mb-6">
+                  <CardContent className="p-6">
+                    {/* Header - Course Selection */}
+                    <div className="flex items-start gap-3 mb-6">
                       <div className={`w-6 h-6 rounded-full border-2 mt-1 flex-shrink-0 transition-all ${
                         selectedCourse === "bootcamp" 
-                          ? "bg-coral-500 border-coral-500" 
+                          ? "bg-orange-500 border-orange-500" 
                           : "border-gray-300"
                       }`}>
                         {selectedCourse === "bootcamp" && <CheckCircle className="w-6 h-6 text-white -m-0.5" />}
                       </div>
                       <div className="flex-1">
-                        <h3 className="text-xl font-bold text-gray-900 mb-2 leading-tight">
+                        <h3 className="text-xl font-bold text-gray-900 mb-3 leading-tight">
                           Essential Producer Bootcamp
                         </h3>
-                        <p className="text-gray-600 mb-1">{courses.bootcamp.subtitle}</p>
-                        <div className="flex items-center gap-4 text-sm text-gray-600 mb-4">
-                          <span className="flex items-center gap-1">
-                            <Clock className="w-4 h-4" />
-                            {courses.bootcamp.duration}
-                          </span>
-                          <span className="flex items-center gap-1">
-                            <Users className="w-4 h-4" />
-                            {courses.bootcamp.batchSize}
-                          </span>
+                      </div>
+                    </div>
+                    
+                    {/* Course Details */}
+                    <div className="mb-6">
+                      <p className="text-gray-600 font-medium text-base mb-3">{courses.bootcamp.subtitle}</p>
+                      
+                      <div className="space-y-2 text-sm text-gray-600">
+                        <div className="flex items-center gap-2">
+                          <Clock className="w-4 h-4" />
+                          <span>{courses.bootcamp.duration}</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <Users className="w-4 h-4" />
+                          <span>{courses.bootcamp.batchSize}</span>
                         </div>
                       </div>
                     </div>
 
-                    <div className="space-y-3 mb-6 flex-grow">
-                      <h4 className="font-semibold text-gray-900 flex items-center gap-2">
-                        <Star className="w-4 h-4 text-coral-500" />
+                    {/* Features */}
+                    <div className="mb-8">
+                      <h4 className="font-semibold text-gray-900 flex items-center gap-2 mb-3 text-base">
+                        <Star className="w-4 h-4 text-orange-500" />
                         Features:
                       </h4>
-                      <ul className="space-y-2">
+                      <ul className="space-y-2.5">
                         {courses.bootcamp.features.map((feature, index) => (
-                          <li key={index} className="flex items-center gap-2 text-sm text-gray-700">
-                            <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0" />
-                            {feature}
+                          <li key={index} className="flex items-start gap-2 text-sm text-gray-700">
+                            <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0 mt-0.5" />
+                            <span className="leading-relaxed">{feature}</span>
                           </li>
                         ))}
                       </ul>
                     </div>
 
-                    <div className="mt-auto">
-                      <div className="text-center p-4 bg-gradient-to-br from-coral-50 to-pink-50 rounded-lg border border-coral-200">
-                        <div className="text-sm text-coral-700 font-semibold mb-1 flex items-center justify-center gap-1">
-                          <TrendingUp className="w-3 h-3" />
-                          Popular Choice
-                        </div>
-                        <div className="text-lg font-bold text-coral-600 mb-1">
-                          8,200 INR per month Easy EMI offer.
-                        </div>
-                        <div className="text-2xl font-bold text-coral-600 mb-1">
-                          ₹{courses.bootcamp.price.toLocaleString()} <span className="text-sm font-normal text-gray-600">total</span>
-                        </div>
-                        <div className="text-sm text-gray-600 mb-2">
-                          one-time investment
-                        </div>
-                        <div className="text-xs text-green-600 font-medium">
-                          ✨ Most affordable way to start your music journey
-                        </div>
+                    {/* Pricing */}
+                    <div className="bg-gradient-to-br from-orange-50 to-red-50 rounded-lg border border-orange-200 p-5 text-center">
+                      <div className="text-sm text-orange-700 font-semibold mb-2 flex items-center justify-center gap-1">
+                        <TrendingUp className="w-3 h-3" />
+                        Popular Choice
+                      </div>
+                      <div className="text-lg font-bold text-orange-600 mb-2">
+                        8,200 INR per month Easy EMI offer.
+                      </div>
+                      <div className="text-3xl font-bold text-orange-600 mb-2">
+                        ₹{courses.bootcamp.price.toLocaleString()} <span className="text-base font-normal text-gray-600">total</span>
+                      </div>
+                      <div className="text-sm text-gray-600 mb-3">
+                        one-time investment
+                      </div>
+                      <div className="text-sm text-green-600 font-medium">
+                        ✨ Most affordable way to start your music journey
                       </div>
                     </div>
                   </CardContent>
                 </Card>
 
-                {/* Complete Music Production Mastery Course */}
+                {/* Complete Music Production Mastery Course - Center Card */}
                 <Card 
-                  className={`cursor-pointer border-2 transition-all duration-300 hover:shadow-xl relative overflow-hidden flex flex-col h-full ${
+                  className={`cursor-pointer border-2 transition-all duration-300 hover:shadow-xl relative ${
                     selectedCourse === "mastery" 
-                      ? "border-red-500 bg-gradient-to-br from-red-50 to-red-100 shadow-lg ring-2 ring-red-200" 
+                      ? "border-red-500 bg-gradient-to-br from-red-50 to-red-100 shadow-lg" 
                       : "border-gray-200 hover:border-red-300 bg-white"
                   }`}
                   onClick={() => setSelectedCourse("mastery")}
                 >
-                  <div className="absolute top-4 right-4">
-                    <Badge className="bg-red-600 text-white font-semibold">
+                  {/* Badge */}
+                  <div className="absolute top-4 right-4 z-10">
+                    <Badge className="bg-red-600 text-white text-xs font-bold px-3 py-1.5 rounded-full">
                       <Award className="w-3 h-3 mr-1" />
                       Best Value
                     </Badge>
                   </div>
                   
-                  <CardContent className="p-8 flex flex-col h-full">
-                    <div className="flex items-start gap-4 mb-6">
+                  <CardContent className="p-6">
+                    {/* Header - Course Selection */}
+                    <div className="flex items-start gap-3 mb-6">
                       <div className={`w-6 h-6 rounded-full border-2 mt-1 flex-shrink-0 transition-all ${
                         selectedCourse === "mastery" 
                           ? "bg-red-500 border-red-500" 
@@ -345,96 +354,103 @@ const Enrollment = () => {
                         {selectedCourse === "mastery" && <CheckCircle className="w-6 h-6 text-white -m-0.5" />}
                       </div>
                       <div className="flex-1">
-                        <h3 className="text-xl font-bold text-gray-900 mb-2 leading-tight">
+                        <h3 className="text-xl font-bold text-gray-900 mb-3 leading-tight">
                           Complete Music Production Mastery Course
                         </h3>
-                        <p className="text-gray-600 mb-1">{courses.mastery.subtitle}</p>
-                        <div className="flex items-center gap-4 text-sm text-gray-600 mb-4">
-                          <span className="flex items-center gap-1">
-                            <Clock className="w-4 h-4" />
-                            {courses.mastery.duration}
-                          </span>
-                          <span className="flex items-center gap-1">
-                            <Users className="w-4 h-4" />
-                            {courses.mastery.batchSize}
-                          </span>
+                      </div>
+                    </div>
+                    
+                    {/* Course Details */}
+                    <div className="mb-6">
+                      <p className="text-gray-600 font-medium text-base mb-3">{courses.mastery.subtitle}</p>
+                      
+                      <div className="space-y-2 text-sm text-gray-600">
+                        <div className="flex items-center gap-2">
+                          <Clock className="w-4 h-4" />
+                          <span>{courses.mastery.duration}</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <Users className="w-4 h-4" />
+                          <span>{courses.mastery.batchSize}</span>
                         </div>
                       </div>
                     </div>
 
-                    <div className="space-y-3 mb-6 flex-grow">
-                      <h4 className="font-semibold text-gray-900 flex items-center gap-2">
+                    {/* Features */}
+                    <div className="mb-8">
+                      <h4 className="font-semibold text-gray-900 flex items-center gap-2 mb-3 text-base">
                         <Star className="w-4 h-4 text-red-500" />
                         Key Features:
                       </h4>
-                      <ul className="space-y-2">
+                      <ul className="space-y-2.5">
                         {courses.mastery.features.map((feature, index) => (
-                          <li key={index} className="flex items-center gap-2 text-sm text-gray-700">
-                            <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0" />
-                            {feature}
+                          <li key={index} className="flex items-start gap-2 text-sm text-gray-700">
+                            <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0 mt-0.5" />
+                            <span className="leading-relaxed">{feature}</span>
                           </li>
                         ))}
                       </ul>
                     </div>
 
-                    <div className="mt-auto">
-                      <div className="text-center p-4 bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg border border-green-200">
-                        {selectedPlan === "annually" ? (
-                          <>
-                            <div className="text-sm text-green-700 font-semibold mb-1 flex items-center justify-center gap-1">
-                              <Crown className="w-3 h-3" />
-                              Best Value Plan
-                            </div>
-                            <div className="text-3xl font-bold text-red-600 mb-1">
-                              ₹{Math.round(courses.mastery.annualPrice / 12).toLocaleString()}
-                              <span className="text-lg font-normal text-gray-600">/month</span>
-                            </div>
-                            <div className="text-sm text-gray-600 mb-2">
-                              billed annually
-                            </div>
-                            <div className="inline-flex items-center gap-1 bg-green-100 text-green-700 text-xs font-semibold px-3 py-1 rounded-full">
-                              <span>💰 Save ₹{courses.mastery.savings.toLocaleString()}</span>
-                            </div>
-                            <div className="text-xs text-gray-500 mt-2">
-                              That's just ₹328/day for professional music education
-                            </div>
-                          </>
-                        ) : (
-                          <>
-                            <div className="text-sm text-gray-500 mb-1">Monthly Investment</div>
-                            <div className="text-3xl font-bold text-red-600 mb-1">
-                              ₹{courses.mastery.monthlyPrice.toLocaleString()}
-                              <span className="text-lg font-normal text-gray-600">/month</span>
-                            </div>
-                            <div className="text-sm text-gray-600">flexible monthly billing</div>
-                            <div className="text-xs text-gray-500 mt-2">
-                              Just ₹387/day - less than a coffee shop visit!
-                            </div>
-                          </>
-                        )}
-                      </div>
+                    {/* Pricing */}
+                    <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg border border-green-200 p-5 text-center">
+                      {selectedPlan === "annually" ? (
+                        <>
+                          <div className="text-sm text-green-700 font-semibold mb-2 flex items-center justify-center gap-1">
+                            <Crown className="w-3 h-3" />
+                            Best Value Plan
+                          </div>
+                          <div className="text-3xl font-bold text-red-600 mb-2">
+                            ₹{Math.round(courses.mastery.annualPrice / 12).toLocaleString()}
+                            <span className="text-base font-normal text-gray-600">/month</span>
+                          </div>
+                          <div className="text-sm text-gray-600 mb-2">
+                            billed annually
+                          </div>
+                          <div className="inline-flex items-center gap-1 bg-green-100 text-green-700 text-xs font-semibold px-3 py-1 rounded-full mb-2">
+                            <span>💰 Save ₹{courses.mastery.savings.toLocaleString()}</span>
+                          </div>
+                          <div className="text-sm text-gray-500">
+                            That's just ₹328/day for professional music education
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                          <div className="text-sm text-gray-500 mb-2">Monthly Investment</div>
+                          <div className="text-3xl font-bold text-red-600 mb-2">
+                            ₹{courses.mastery.monthlyPrice.toLocaleString()}
+                            <span className="text-base font-normal text-gray-600">/month</span>
+                          </div>
+                          <div className="text-sm text-gray-600 mb-2">flexible monthly billing</div>
+                          <div className="text-sm text-gray-500">
+                            Just ₹387/day - less than a coffee shop visit!
+                          </div>
+                        </>
+                      )}
                     </div>
                   </CardContent>
                 </Card>
 
-                {/* One-on-One Music Production Mentorship */}
+                {/* One-on-One Music Production Mentorship - Right Card */}
                 <Card 
-                  className={`cursor-pointer border-2 transition-all duration-300 hover:shadow-xl relative overflow-hidden flex flex-col h-full ${
+                  className={`cursor-pointer border-2 transition-all duration-300 hover:shadow-xl relative ${
                     selectedCourse === "mentorship" 
-                      ? "border-purple-500 bg-gradient-to-br from-purple-50 to-indigo-50 shadow-lg ring-2 ring-purple-200" 
+                      ? "border-purple-500 bg-gradient-to-br from-purple-50 to-indigo-50 shadow-lg" 
                       : "border-gray-200 hover:border-purple-300 bg-white"
                   }`}
                   onClick={() => setSelectedCourse("mentorship")}
                 >
-                  <div className="absolute top-4 right-4">
-                    <Badge className="bg-purple-600 text-white font-semibold">
+                  {/* Badge */}
+                  <div className="absolute top-4 right-4 z-10">
+                    <Badge className="bg-purple-600 text-white text-xs font-bold px-3 py-1.5 rounded-full">
                       <Crown className="w-3 h-3 mr-1" />
                       Premium
                     </Badge>
                   </div>
                   
-                  <CardContent className="p-8 flex flex-col h-full">
-                    <div className="flex items-start gap-4 mb-6">
+                  <CardContent className="p-6">
+                    {/* Header - Course Selection */}
+                    <div className="flex items-start gap-3 mb-6">
                       <div className={`w-6 h-6 rounded-full border-2 mt-1 flex-shrink-0 transition-all ${
                         selectedCourse === "mentorship" 
                           ? "bg-purple-500 border-purple-500" 
@@ -443,74 +459,79 @@ const Enrollment = () => {
                         {selectedCourse === "mentorship" && <CheckCircle className="w-6 h-6 text-white -m-0.5" />}
                       </div>
                       <div className="flex-1">
-                        <h3 className="text-xl font-bold text-gray-900 mb-2 leading-tight">
+                        <h3 className="text-xl font-bold text-gray-900 mb-3 leading-tight">
                           One-on-One Music Production Mentorship
                         </h3>
-                        <p className="text-gray-600 mb-1">{courses.mentorship.subtitle}</p>
-                        <div className="flex items-center gap-4 text-sm text-gray-600 mb-4">
-                          <span className="flex items-center gap-1">
-                            <Clock className="w-4 h-4" />
-                            {courses.mentorship.duration}
-                          </span>
-                          <span className="flex items-center gap-1">
-                            <Users className="w-4 h-4" />
-                            {courses.mentorship.batchSize}
-                          </span>
+                      </div>
+                    </div>
+                    
+                    {/* Course Details */}
+                    <div className="mb-6">
+                      <p className="text-gray-600 font-medium text-base mb-3">{courses.mentorship.subtitle}</p>
+                      
+                      <div className="space-y-2 text-sm text-gray-600">
+                        <div className="flex items-center gap-2">
+                          <Clock className="w-4 h-4" />
+                          <span>{courses.mentorship.duration}</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <Users className="w-4 h-4" />
+                          <span>{courses.mentorship.batchSize}</span>
                         </div>
                       </div>
                     </div>
 
-                    <div className="space-y-3 mb-6 flex-grow">
-                      <h4 className="font-semibold text-gray-900 flex items-center gap-2">
+                    {/* Features */}
+                    <div className="mb-8">
+                      <h4 className="font-semibold text-gray-900 flex items-center gap-2 mb-3 text-base">
                         <Star className="w-4 h-4 text-purple-500" />
                         Premium Features:
                       </h4>
-                      <ul className="space-y-2">
+                      <ul className="space-y-2.5">
                         {courses.mentorship.features.map((feature, index) => (
-                          <li key={index} className="flex items-center gap-2 text-sm text-gray-700">
-                            <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0" />
-                            {feature}
+                          <li key={index} className="flex items-start gap-2 text-sm text-gray-700">
+                            <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0 mt-0.5" />
+                            <span className="leading-relaxed">{feature}</span>
                           </li>
                         ))}
                       </ul>
                     </div>
 
-                    <div className="mt-auto">
-                      <div className="text-center p-4 bg-gradient-to-br from-purple-50 to-indigo-50 rounded-lg border border-purple-200">
-                        {selectedPlan === "annually" ? (
-                          <>
-                            <div className="text-sm text-purple-700 font-semibold mb-1 flex items-center justify-center gap-1">
-                              <Crown className="w-3 h-3" />
-                              Premium Experience
-                            </div>
-                            <div className="text-3xl font-bold text-purple-600 mb-1">
-                              ₹{Math.round(courses.mentorship.annualPrice / 12).toLocaleString()}
-                              <span className="text-lg font-normal text-gray-600">/month</span>
-                            </div>
-                            <div className="text-sm text-gray-600 mb-2">
-                              billed annually
-                            </div>
-                            <div className="inline-flex items-center gap-1 bg-green-100 text-green-700 text-xs font-semibold px-3 py-1 rounded-full">
-                              <span>💰 Save ₹{courses.mentorship.savings.toLocaleString()}</span>
-                            </div>
-                            <div className="text-xs text-gray-500 mt-2">
-                              Premium 1-on-1 guidance for just ₹453/day
-                            </div>
-                          </>
-                        ) : (
-                          <>
-                            <div className="text-sm text-gray-500 mb-1">Monthly Investment</div>
-                            <div className="text-3xl font-bold text-purple-600 mb-1">
-                              ₹{courses.mentorship.monthlyPrice.toLocaleString()}
-                              <span className="text-lg font-normal text-gray-600">/month</span>
-                            </div>
-                            <div className="text-sm text-gray-600">flexible monthly billing</div>
-                            <div className="text-xs text-gray-500 mt-2">
-                              Premium personalized training for ₹533/day
-                            </div>
-                          </>
-                        )}
-                      </div>
+                    {/* Pricing */}
+                    <div className="bg-gradient-to-br from-purple-50 to-indigo-50 rounded-lg border border-purple-200 p-5 text-center">
+                      {selectedPlan === "annually" ? (
+                        <>
+                          <div className="text-sm text-purple-700 font-semibold mb-2 flex items-center justify-center gap-1">
+                            <Crown className="w-3 h-3" />
+                            Premium Experience
+                          </div>
+                          <div className="text-3xl font-bold text-purple-600 mb-2">
+                            ₹{Math.round(courses.mentorship.annualPrice / 12).toLocaleString()}
+                            <span className="text-base font-normal text-gray-600">/month</span>
+                          </div>
+                          <div className="text-sm text-gray-600 mb-2">
+                            billed annually
+                          </div>
+                          <div className="inline-flex items-center gap-1 bg-green-100 text-green-700 text-xs font-semibold px-3 py-1 rounded-full mb-2">
+                            <span>💰 Save ₹{courses.mentorship.savings.toLocaleString()}</span>
+                          </div>
+                          <div className="text-sm text-gray-500">
+                            Premium 1-on-1 guidance for just ₹453/day
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                          <div className="text-sm text-gray-500 mb-2">Monthly Investment</div>
+                          <div className="text-3xl font-bold text-purple-600 mb-2">
+                            ₹{courses.mentorship.monthlyPrice.toLocaleString()}
+                            <span className="text-base font-normal text-gray-600">/month</span>
+                          </div>
+                          <div className="text-sm text-gray-600 mb-2">flexible monthly billing</div>
+                          <div className="text-sm text-gray-500">
+                            Premium personalized training for ₹533/day
+                          </div>
+                        </>
+                      )}
                     </div>
                   </CardContent>
                 </Card>
