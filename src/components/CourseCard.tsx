@@ -189,8 +189,11 @@ const CourseCard = memo(({
         open={showSuccessPopup}
         onOpenChange={closeSuccess}
         title="Successful Registration"
-        message="Thank you! You have successfully registered your interest. You can now proceed to explore our enrollment options."
-        buttonText="Continue"
+        message={courseId === "crash-course" 
+          ? "Thank you! You're all set to enroll in the Essential Producer Bootcamp. Let's get you started on your 3-month music journey!"
+          : "Thank you! You have successfully registered your interest. You can now proceed to explore our enrollment options."
+        }
+        buttonText={courseId === "crash-course" ? "Go to Bootcamp Enrollment" : "Continue"}
         redirectTo={courseId === "crash-course" ? "/essential-bootcamp-enrollment" : "/enrollment"}
       />
     </>
