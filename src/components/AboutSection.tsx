@@ -21,11 +21,11 @@ const AboutSection = () => {
               Meet Your Mentor
             </div>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 leading-tight">
-              <span className="text-transparent bg-gradient-to-r from-primary to-accent bg-clip-text">
+              <span className="text-transparent bg-gradient-to-r from-red-600 to-pink-600 bg-clip-text">
                 Expert Guidance
               </span>
               <br />
-              <span className="text-foreground">for Your Musical Journey</span>
+              <span className="text-transparent bg-gradient-to-r from-red-600 to-pink-600 bg-clip-text">for Your Musical Journey</span>
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Learn from a seasoned professional with 10+ years of experience in music production and education
