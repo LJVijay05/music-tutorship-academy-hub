@@ -81,7 +81,7 @@ const Courses = memo(() => {
       buttonHoverFrom: "from-purple-700",
       buttonHoverTo: "to-purple-800",
       offerText: "🚀 MOST POPULAR",
-      offerSubtext: "Complete Course for ₹49,800 Only!"
+      offerSubtext: "Start Your Music Production Journey!"
     },
     {
       courseId: "mentorship-90",

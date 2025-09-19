@@ -42,7 +42,7 @@ const FAQ_DATA = [
 // Contact actions for better reusability
 const CONTACT_ACTIONS = [
   {
-    href: "https://wa.me/919514499932",
+    href: "https://wa.me/916374428173",
     label: "Chat with Us",
     variant: "primary" as const
   },
