@@ -116,7 +116,9 @@ const Enrollment = () => {
       features: [
         "Twice-weekly sessions",
         "Hands-on project work",
-        "Small group learning"
+        "Small group learning",
+        "Individual project guidance",
+        "Career mentoring included"
       ],
       badge: "Most Popular",
       badgeColor: "bg-coral-500",
