@@ -49,7 +49,7 @@ const Footer = () => {
                 <Facebook className="w-5 h-5" />
               </a>
               <a 
-                href="https://wa.me/919514499932" 
+                href="https://wa.me/916374428173" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center text-gray-400 hover:text-red-600 hover:bg-gray-700 transition-all duration-300"
@@ -75,6 +75,7 @@ const Footer = () => {
           <div className="space-y-6">
             <h3 className="font-bold text-xl mb-6 text-white">Our Courses</h3>
             <ul className="space-y-4">
+              <li><Link to="/courses" className="text-gray-400 hover:text-white transition-colors duration-300 font-medium">Essential Producer Bootcamp: Launch Your Music Career in 3 Months</Link></li>
               <li><Link to="/courses" className="text-gray-400 hover:text-white transition-colors duration-300 font-medium">Complete Music Production Mastery Course</Link></li>
               <li><Link to="/courses" className="text-gray-400 hover:text-white transition-colors duration-300 font-medium">One-on-One Music Production Mentorship</Link></li>
             </ul>
@@ -94,13 +95,13 @@ const Footer = () => {
                 <span className="font-medium">contact@musictutorship.com</span>
               </a>
               <a 
-                href="tel:+919514499932" 
+                href="tel:+916374428173" 
                 className="flex items-center gap-3 text-gray-400 hover:text-white transition-colors duration-300"
               >
                 <div className="w-8 h-8 bg-red-600 rounded-lg flex items-center justify-center">
                   <Phone className="w-4 h-4 text-white" />
                 </div>
-                <span className="font-medium">+91 9514499932</span>
+                <span className="font-medium">+91 6374428173</span>
               </a>
               
               {/* Mentor Login Button */}
