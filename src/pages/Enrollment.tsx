@@ -310,10 +310,10 @@ const Enrollment = () => {
                         <TrendingUp className="w-3 h-3" />
                         Popular Choice
                       </div>
-                      <div className="text-lg font-bold text-orange-600 mb-2">
+                      <div className="text-2xl font-bold text-orange-600 mb-2">
                         8,200 INR per month Easy EMI offer.
                       </div>
-                      <div className="text-3xl font-bold text-orange-600 mb-2">
+                      <div className="text-xl font-bold text-orange-600 mb-2">
                         ₹{courses.bootcamp.price.toLocaleString()} <span className="text-base font-normal text-gray-600">total</span>
                       </div>
                       <div className="text-sm text-gray-600 mb-3">
@@ -409,9 +409,6 @@ const Enrollment = () => {
                           </div>
                           <div className="inline-flex items-center gap-1 bg-green-100 text-green-700 text-xs font-semibold px-3 py-1 rounded-full mb-2">
                             <span>💰 Save ₹{courses.mastery.savings.toLocaleString()}</span>
-                          </div>
-                          <div className="text-sm text-gray-500">
-                            That's just ₹328/day for professional music education
                           </div>
                         </>
                       ) : (
@@ -514,9 +511,6 @@ const Enrollment = () => {
                           </div>
                           <div className="inline-flex items-center gap-1 bg-green-100 text-green-700 text-xs font-semibold px-3 py-1 rounded-full mb-2">
                             <span>💰 Save ₹{courses.mentorship.savings.toLocaleString()}</span>
-                          </div>
-                          <div className="text-sm text-gray-500">
-                            Premium 1-on-1 guidance for just ₹453/day
                           </div>
                         </>
                       ) : (
