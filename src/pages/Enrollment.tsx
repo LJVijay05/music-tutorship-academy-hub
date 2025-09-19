@@ -295,27 +295,38 @@ const Enrollment = () => {
                     </div>
 
                     <div className="space-y-4">
-                      <div className="text-center p-4 bg-white/80 rounded-lg border">
+                      <div className="text-center p-4 bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg border border-green-200">
                         {selectedPlan === "annually" ? (
                           <>
-                            <div className="text-sm text-gray-500 mb-1">Annual Payment</div>
-                            <div className="text-3xl font-bold text-red-600 mb-1">
-                              ₹{Math.round(courses.mastery.annualPrice / 12).toLocaleString()}/month
+                            <div className="text-sm text-green-700 font-semibold mb-1 flex items-center justify-center gap-1">
+                              <Crown className="w-3 h-3" />
+                              Best Value Plan
                             </div>
-                            <div className="text-sm text-gray-600">
-                              paid annually
+                            <div className="text-4xl font-bold text-red-600 mb-1">
+                              ₹{Math.round(courses.mastery.annualPrice / 12).toLocaleString()}
+                              <span className="text-lg font-normal text-gray-600">/month</span>
                             </div>
-                            <div className="text-xs text-green-600 font-medium mt-2">
-                              Save ₹{courses.mastery.savings.toLocaleString()} (15% off)
+                            <div className="text-sm text-gray-600 mb-2">
+                              billed annually
+                            </div>
+                            <div className="inline-flex items-center gap-1 bg-green-100 text-green-700 text-xs font-semibold px-3 py-1 rounded-full">
+                              <span>💰 Save ₹{courses.mastery.savings.toLocaleString()}</span>
+                            </div>
+                            <div className="text-xs text-gray-500 mt-2">
+                              That's just ₹328/day for professional music education
                             </div>
                           </>
                         ) : (
                           <>
-                            <div className="text-sm text-gray-500 mb-1">Monthly Payment</div>
-                            <div className="text-3xl font-bold text-red-600">
+                            <div className="text-sm text-gray-500 mb-1">Monthly Investment</div>
+                            <div className="text-4xl font-bold text-red-600 mb-1">
                               ₹{courses.mastery.monthlyPrice.toLocaleString()}
+                              <span className="text-lg font-normal text-gray-600">/month</span>
                             </div>
-                            <div className="text-sm text-gray-600">per month</div>
+                            <div className="text-sm text-gray-600">flexible monthly billing</div>
+                            <div className="text-xs text-gray-500 mt-2">
+                              Just ₹387/day - less than a coffee shop visit!
+                            </div>
                           </>
                         )}
                       </div>
@@ -382,27 +393,38 @@ const Enrollment = () => {
                     </div>
 
                     <div className="space-y-4">
-                      <div className="text-center p-4 bg-white/80 rounded-lg border">
+                      <div className="text-center p-4 bg-gradient-to-br from-purple-50 to-indigo-50 rounded-lg border border-purple-200">
                         {selectedPlan === "annually" ? (
                           <>
-                            <div className="text-sm text-gray-500 mb-1">Annual Payment</div>
-                            <div className="text-3xl font-bold text-purple-600 mb-1">
-                              ₹{Math.round(courses.mentorship.annualPrice / 12).toLocaleString()}/month
+                            <div className="text-sm text-purple-700 font-semibold mb-1 flex items-center justify-center gap-1">
+                              <Crown className="w-3 h-3" />
+                              Premium Experience
                             </div>
-                            <div className="text-sm text-gray-600">
-                              paid annually
+                            <div className="text-4xl font-bold text-purple-600 mb-1">
+                              ₹{Math.round(courses.mentorship.annualPrice / 12).toLocaleString()}
+                              <span className="text-lg font-normal text-gray-600">/month</span>
                             </div>
-                            <div className="text-xs text-green-600 font-medium mt-2">
-                              Save ₹{courses.mentorship.savings.toLocaleString()} (15% off)
+                            <div className="text-sm text-gray-600 mb-2">
+                              billed annually
+                            </div>
+                            <div className="inline-flex items-center gap-1 bg-green-100 text-green-700 text-xs font-semibold px-3 py-1 rounded-full">
+                              <span>💰 Save ₹{courses.mentorship.savings.toLocaleString()}</span>
+                            </div>
+                            <div className="text-xs text-gray-500 mt-2">
+                              Personal mentorship for just ₹453/day
                             </div>
                           </>
                         ) : (
                           <>
-                            <div className="text-sm text-gray-500 mb-1">Monthly Payment</div>
-                            <div className="text-3xl font-bold text-purple-600">
+                            <div className="text-sm text-gray-500 mb-1">Monthly Investment</div>
+                            <div className="text-4xl font-bold text-purple-600 mb-1">
                               ₹{courses.mentorship.monthlyPrice.toLocaleString()}
+                              <span className="text-lg font-normal text-gray-600">/month</span>
                             </div>
-                            <div className="text-sm text-gray-600">per month</div>
+                            <div className="text-sm text-gray-600">1-on-1 dedicated mentorship</div>
+                            <div className="text-xs text-gray-500 mt-2">
+                              Premium personal guidance for ₹533/day
+                            </div>
                           </>
                         )}
                       </div>
@@ -469,29 +491,69 @@ const Enrollment = () => {
                     </div>
 
                     <div className="space-y-4">
-                      <div className="text-center p-4 bg-white/80 rounded-lg border">
-                        <div className="text-sm text-gray-500 mb-1">One-time Payment</div>
-                        <div className="text-3xl font-bold text-coral-600">
-                          ₹{courses.bootcamp.price.toLocaleString()}
+                      <div className="text-center p-4 bg-gradient-to-br from-coral-50 to-orange-50 rounded-lg border border-coral-200">
+                        <div className="text-sm text-coral-700 font-semibold mb-1 flex items-center justify-center gap-1">
+                          <TrendingUp className="w-3 h-3" />
+                          Popular Choice
                         </div>
-                        <div className="text-sm text-gray-600">Complete Course</div>
+                        <div className="text-4xl font-bold text-coral-600 mb-1">
+                          ₹{courses.bootcamp.price.toLocaleString()}
+                          <span className="text-lg font-normal text-gray-600"> total</span>
+                        </div>
+                        <div className="text-sm text-gray-600 mb-2">one-time investment</div>
+                        <div className="text-xs text-gray-500">
+                          Complete 3-month program for just ₹553/day
+                        </div>
+                        <div className="text-xs text-green-600 font-medium mt-2">
+                          💡 Most affordable way to start your music journey
+                        </div>
                       </div>
                     </div>
                   </CardContent>
                 </Card>
               </div>
               
+              {/* Trust Indicators */}
+              <div className="text-center mb-8">
+                <div className="flex flex-wrap justify-center items-center gap-8 mb-6">
+                  <div className="flex items-center gap-2 text-sm text-gray-600">
+                    <div className="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center">
+                      <CheckCircle className="w-3 h-3 text-green-600" />
+                    </div>
+                    <span>7-day money-back guarantee</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-sm text-gray-600">
+                    <div className="w-5 h-5 bg-blue-100 rounded-full flex items-center justify-center">
+                      <Award className="w-3 h-3 text-blue-600" />
+                    </div>
+                    <span>Industry certification included</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-sm text-gray-600">
+                    <div className="w-5 h-5 bg-purple-100 rounded-full flex items-center justify-center">
+                      <Users className="w-3 h-3 text-purple-600" />
+                    </div>
+                    <span>500+ successful students</span>
+                  </div>
+                </div>
+                <p className="text-xs text-gray-500 max-w-2xl mx-auto">
+                  Your investment is protected with our hassle-free refund policy. Start risk-free and see results within the first week.
+                </p>
+              </div>
+              
               {/* Enroll Now Button */}
-              <div className="text-center mt-12">
+              <div className="text-center">
                 <Button 
                   className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-bold text-lg px-12 py-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
                   onClick={() => setShowStudentForm(true)}
                 >
                   <Crown className="w-5 h-5 mr-2" />
-                  Enroll Now - Start Your Journey
+                  Start Your Musical Journey Today
                 </Button>
                 <p className="text-sm text-gray-600 mt-3">
-                  🔒 Secure enrollment • 💰 Money-back guarantee • 🎓 Industry certification
+                  🔒 Secure payment • 💰 7-day money-back guarantee • 🎯 Instant access
+                </p>
+                <p className="text-xs text-gray-500 mt-2">
+                  Join thousands of students who've transformed their musical skills with our proven system
                 </p>
               </div>
             </div>
