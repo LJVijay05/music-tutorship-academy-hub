@@ -44,6 +44,16 @@ export default {
 					DEFAULT: 'hsl(var(--accent))',
 					foreground: 'hsl(var(--accent-foreground))'
 				},
+				coral: {
+					50: 'hsl(var(--coral-50))',
+					100: 'hsl(var(--coral-100))',
+					200: 'hsl(var(--coral-200))',
+					300: 'hsl(var(--coral-300))',
+					400: 'hsl(var(--coral-400))',
+					500: 'hsl(var(--coral-500))',
+					600: 'hsl(var(--coral-600))',
+					700: 'hsl(var(--coral-700))'
+				},
 				popover: {
 					DEFAULT: 'hsl(var(--popover))',
 					foreground: 'hsl(var(--popover-foreground))'
