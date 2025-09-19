@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { 
   CheckCircle, 
   Star, 
@@ -226,9 +227,11 @@ const Enrollment = () => {
                     <p className="text-gray-700 mb-4">Launch Your Music Career in 3 Months - Our most popular short program</p>
                     <Button 
                       className="bg-orange-600 hover:bg-orange-700 text-white px-6 py-2 rounded-lg"
-                      onClick={() => window.location.href = '/essential-bootcamp-enrollment'}
+                      asChild
                     >
-                      View Essential Bootcamp →
+                      <Link to="/essential-bootcamp-enrollment">
+                        View Essential Bootcamp →
+                      </Link>
                     </Button>
                   </div>
                 </div>

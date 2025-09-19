@@ -7,6 +7,7 @@ import StudentDataForm from "./StudentDataForm";
 import SuccessPopup from "./SuccessPopup";
 import { useStudentForm } from "@/hooks/useStudentForm";
 import { memo, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface CourseCardProps {
   courseId: string;
@@ -55,6 +56,7 @@ const CourseCard = memo(({
   onDetailsClick,
   imageUrl
 }: CourseCardProps) => {
+  const navigate = useNavigate();
   const { 
     showStudentForm, 
     showSuccessPopup, 
@@ -66,8 +68,15 @@ const CourseCard = memo(({
 
   const handleEnquireClick = useCallback(() => {
     console.log(`CourseCard: Enquire clicked for course ${courseId}`);
+    
+    // For Essential Producer Bootcamp, redirect directly to enrollment page
+    if (courseId === "crash-course") {
+      navigate("/essential-bootcamp-enrollment");
+      return;
+    }
+    
     openForm();
-  }, [courseId, openForm]);
+  }, [courseId, openForm, navigate]);
 
   const handleFormSuccess = useCallback(() => {
     console.log(`CourseCard: Student form submitted successfully for course ${courseId}`);

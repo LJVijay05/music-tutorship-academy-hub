@@ -7,8 +7,10 @@ import StudentDataForm from "./StudentDataForm";
 import SuccessPopup from "./SuccessPopup";
 import { useStudentForm } from "@/hooks/useStudentForm";
 import { memo, useCallback, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const CoursesSection = memo(({ showOnlyFeatured = false }: { showOnlyFeatured?: boolean }) => {
+  const navigate = useNavigate();
   const { 
     showStudentForm, 
     showSuccessPopup, 
@@ -113,8 +115,15 @@ const CoursesSection = memo(({ showOnlyFeatured = false }: { showOnlyFeatured?: 
   const handleEnquireClick = useCallback((courseId: string) => {
     console.log('CoursesSection: Enquire Now clicked for course:', courseId);
     setSelectedCourseId(courseId);
+    
+    // For Essential Producer Bootcamp, redirect directly to enrollment page
+    if (courseId === "crash-course") {
+      navigate("/essential-bootcamp-enrollment");
+      return;
+    }
+    
     openForm();
-  }, [openForm]);
+  }, [openForm, navigate]);
 
   const handleFormSuccess = useCallback(() => {
     console.log('CoursesSection: Student form submitted successfully');

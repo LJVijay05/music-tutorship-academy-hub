@@ -13,7 +13,6 @@ interface CourseDetailsModalProps {
 }
 
 const CourseDetailsModal = ({ isOpen, onClose, courseId, courseTitle }: CourseDetailsModalProps) => {
-  console.log('CourseDetailsModal rendered with:', { isOpen, courseId, courseTitle });
 
   const isPremium = courseId === "mentorship-90";
   

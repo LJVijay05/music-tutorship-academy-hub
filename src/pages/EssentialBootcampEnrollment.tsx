@@ -92,8 +92,8 @@ const EssentialBootcampEnrollment = () => {
         open={showSuccessPopup}
         onOpenChange={closeSuccess}
         title="Registration Complete!"
-        message="Your information has been successfully saved. You can now proceed with the enrollment and payment process."
-        buttonText="Continue"
+        message="Your information has been successfully saved. You can now proceed with the enrollment and payment process for the Essential Producer Bootcamp."
+        buttonText="Continue with Enrollment"
         redirectTo="/essential-bootcamp-enrollment"
       />
       
