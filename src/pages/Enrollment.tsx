@@ -101,6 +101,28 @@ const Enrollment = () => {
       cardGradient: "from-coral-50 to-pink-50",
       borderColor: "border-coral-200",
       textColor: "text-coral-700"
+    },
+    mentorship: {
+      title: "One-on-One Music Production Mentorship",
+      subtitle: "Personalized Learning Experience",
+      duration: "Flexible Schedule",
+      batchSize: "1-on-1 Sessions",
+      monthlyPrice: 15999,
+      annualPrice: 163188,
+      totalPrice: 191988,
+      savings: 28800,
+      features: [
+        "Personalized curriculum design",
+        "Direct mentor access",
+        "Flexible scheduling",
+        "Individual project guidance",
+        "Career mentoring included"
+      ],
+      badge: "Premium",
+      badgeColor: "bg-purple-600",
+      cardGradient: "from-purple-50 to-indigo-50",
+      borderColor: "border-purple-200",
+      textColor: "text-purple-700"
     }
   };
 
@@ -115,6 +137,11 @@ const Enrollment = () => {
       return selectedPlan === "annually" 
         ? { price: courses.mastery.annualPrice, period: "annually", monthly: 9859 }
         : { price: courses.mastery.monthlyPrice, period: "monthly", monthly: null };
+    }
+    if (selectedCourse === "mentorship") {
+      return selectedPlan === "annually" 
+        ? { price: courses.mentorship.annualPrice, period: "annually", monthly: Math.round(courses.mentorship.annualPrice / 12) }
+        : { price: courses.mentorship.monthlyPrice, period: "monthly", monthly: null };
     }
     return { price: courses.bootcamp.price, period: "one-time", monthly: null };
   };
@@ -207,7 +234,7 @@ const Enrollment = () => {
               </div>
 
               {/* Course Cards Grid */}
-              <div className="grid md:grid-cols-2 gap-8">
+              <div className="grid md:grid-cols-3 gap-6">
                 
                 {/* Complete Music Production Mastery Course */}
                 <Card 
@@ -273,10 +300,10 @@ const Enrollment = () => {
                           <>
                             <div className="text-sm text-gray-500 mb-1">Annual Payment</div>
                             <div className="text-3xl font-bold text-red-600 mb-1">
-                              ₹{courses.mastery.annualPrice.toLocaleString()}
+                              ₹{Math.round(courses.mastery.annualPrice / 12).toLocaleString()}/month
                             </div>
                             <div className="text-sm text-gray-600">
-                              Only ₹{Math.round(courses.mastery.annualPrice / 12).toLocaleString()}/month paid annually
+                              paid annually
                             </div>
                             <div className="text-xs text-green-600 font-medium mt-2">
                               Save ₹{courses.mastery.savings.toLocaleString()} (15% off)
@@ -287,6 +314,93 @@ const Enrollment = () => {
                             <div className="text-sm text-gray-500 mb-1">Monthly Payment</div>
                             <div className="text-3xl font-bold text-red-600">
                               ₹{courses.mastery.monthlyPrice.toLocaleString()}
+                            </div>
+                            <div className="text-sm text-gray-600">per month</div>
+                          </>
+                        )}
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* One-on-One Music Production Mentorship */}
+                <Card 
+                  className={`cursor-pointer border-2 transition-all duration-300 hover:shadow-xl relative overflow-hidden ${
+                    selectedCourse === "mentorship" 
+                      ? "border-purple-500 bg-gradient-to-br from-purple-50 to-indigo-50 shadow-lg ring-2 ring-purple-200" 
+                      : "border-gray-200 hover:border-purple-300 bg-white"
+                  }`}
+                  onClick={() => setSelectedCourse("mentorship")}
+                >
+                  <div className="absolute top-4 right-4">
+                    <Badge className="bg-purple-600 text-white font-semibold">
+                      <Crown className="w-3 h-3 mr-1" />
+                      Premium
+                    </Badge>
+                  </div>
+                  
+                  <CardContent className="p-8">
+                    <div className="flex items-start gap-4 mb-6">
+                      <div className={`w-6 h-6 rounded-full border-2 mt-1 flex-shrink-0 transition-all ${
+                        selectedCourse === "mentorship" 
+                          ? "bg-purple-500 border-purple-500" 
+                          : "border-gray-300"
+                      }`}>
+                        {selectedCourse === "mentorship" && <CheckCircle className="w-6 h-6 text-white -m-0.5" />}
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                          One-on-One Music Production Mentorship
+                        </h3>
+                        <p className="text-gray-600 mb-1">{courses.mentorship.subtitle}</p>
+                        <div className="flex items-center gap-4 text-sm text-gray-600 mb-4">
+                          <span className="flex items-center gap-1">
+                            <Clock className="w-4 h-4" />
+                            {courses.mentorship.duration}
+                          </span>
+                          <span className="flex items-center gap-1">
+                            <Users className="w-4 h-4" />
+                            {courses.mentorship.batchSize}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="space-y-3 mb-6">
+                      <h4 className="font-semibold text-gray-900 flex items-center gap-2">
+                        <Star className="w-4 h-4 text-purple-500" />
+                        Premium Features:
+                      </h4>
+                      <ul className="space-y-2">
+                        {courses.mentorship.features.map((feature, index) => (
+                          <li key={index} className="flex items-center gap-2 text-sm text-gray-700">
+                            <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0" />
+                            {feature}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <div className="space-y-4">
+                      <div className="text-center p-4 bg-white/80 rounded-lg border">
+                        {selectedPlan === "annually" ? (
+                          <>
+                            <div className="text-sm text-gray-500 mb-1">Annual Payment</div>
+                            <div className="text-3xl font-bold text-purple-600 mb-1">
+                              ₹{Math.round(courses.mentorship.annualPrice / 12).toLocaleString()}/month
+                            </div>
+                            <div className="text-sm text-gray-600">
+                              paid annually
+                            </div>
+                            <div className="text-xs text-green-600 font-medium mt-2">
+                              Save ₹{courses.mentorship.savings.toLocaleString()} (15% off)
+                            </div>
+                          </>
+                        ) : (
+                          <>
+                            <div className="text-sm text-gray-500 mb-1">Monthly Payment</div>
+                            <div className="text-3xl font-bold text-purple-600">
+                              ₹{courses.mentorship.monthlyPrice.toLocaleString()}
                             </div>
                             <div className="text-sm text-gray-600">per month</div>
                           </>
