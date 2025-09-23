@@ -7,6 +7,9 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import StudentDataForm from "@/components/StudentDataForm";
 import { useStudentForm } from "@/hooks/useStudentForm";
+import CourseCTAButton from "@/components/course/CourseCTAButton";
+import CourseStatsCard from "@/components/course/CourseStatsCard";
+import CourseModuleCard from "@/components/course/CourseModuleCard";
 
 const CourseSyllabus = () => {
   const { courseId } = useParams();
@@ -332,40 +335,30 @@ const CourseSyllabus = () => {
               
               {/* Quick Stats */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
-                <div className={`flex items-center justify-center gap-3 ${isPremium ? 'bg-amber-50' : 'bg-red-50'} backdrop-blur-sm rounded-xl p-4 border ${isPremium ? 'border-amber-100' : 'border-red-100'} shadow-sm hover:shadow-md transition-all duration-300`}>
-                  <Clock className={`w-5 h-5 ${isPremium ? 'text-amber-600' : 'text-red-600'}`} />
-                  <div className="text-left">
-                    <p className="font-semibold text-gray-900">{course.duration}</p>
-                    <p className="text-sm text-gray-600">Duration</p>
-                  </div>
-                </div>
-                <div className={`flex items-center justify-center gap-3 ${isPremium ? 'bg-amber-50' : 'bg-red-50'} backdrop-blur-sm rounded-xl p-4 border ${isPremium ? 'border-amber-100' : 'border-red-100'} shadow-sm hover:shadow-md transition-all duration-300`}>
-                  <Users className={`w-5 h-5 ${isPremium ? 'text-amber-600' : 'text-red-600'}`} />
-                  <div className="text-left">
-                    <p className="font-semibold text-gray-900">{course.batchSize}</p>
-                    <p className="text-sm text-gray-600">Batch Size</p>
-                  </div>
-                </div>
-                <div className={`flex items-center justify-center gap-3 ${isPremium ? 'bg-amber-50' : 'bg-red-50'} backdrop-blur-sm rounded-xl p-4 border ${isPremium ? 'border-amber-100' : 'border-red-100'} shadow-sm hover:shadow-md transition-all duration-300`}>
-                  <Video className={`w-5 h-5 ${isPremium ? 'text-amber-600' : 'text-red-600'}`} />
-                  <div className="text-left">
-                    <p className="font-semibold text-gray-900">{course.sessions}</p>
-                    <p className="text-sm text-gray-600">Format</p>
-                  </div>
-                </div>
+                <CourseStatsCard 
+                  icon={Clock} 
+                  value={course.duration} 
+                  label="Duration" 
+                  isPremium={isPremium} 
+                />
+                <CourseStatsCard 
+                  icon={Users} 
+                  value={course.batchSize} 
+                  label="Batch Size" 
+                  isPremium={isPremium} 
+                />
+                <CourseStatsCard 
+                  icon={Video} 
+                  value={course.sessions} 
+                  label="Format" 
+                  isPremium={isPremium} 
+                />
               </div>
               
               {/* CTA Button */}
-              <Button 
-                onClick={openForm}
-                className={`px-8 py-6 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 ${
-                  isPremium 
-                    ? 'bg-gradient-to-r from-amber-500 to-yellow-600 hover:from-amber-600 hover:to-yellow-700 text-amber-900' 
-                    : 'bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white'
-                }`}
-              >
+              <CourseCTAButton courseId={courseId || ""} isPremium={isPremium}>
                 Apply For This Course
-              </Button>
+              </CourseCTAButton>
             </div>
           </div>
         </section>
@@ -401,30 +394,12 @@ const CourseSyllabus = () => {
               
               <div className="space-y-4">
                 {course.modules.map((module, index) => (
-                  <Card key={index} className="border-0 shadow-md bg-white hover:shadow-lg transition-all duration-300">
-                    <CardHeader className={`${isPremium ? 'bg-gradient-to-r from-amber-50 to-yellow-50' : 'bg-gradient-to-r from-red-50 to-pink-50'} rounded-t-lg border-b ${isPremium ? 'border-amber-100' : 'border-red-100'}`}>
-                      <CardTitle className="flex items-center gap-3 text-xl">
-                        <div className={`w-8 h-8 ${isPremium ? 'bg-amber-600' : 'bg-red-600'} text-white rounded-full flex items-center justify-center font-bold text-sm`}>
-                          {index + 1}
-                        </div>
-                        <div className="flex items-center gap-3 flex-1">
-                          <span className={`${isPremium ? 'text-amber-600' : 'text-red-600'} text-sm font-medium`}>{module.week}</span>
-                          <h3 className="text-gray-900">{module.title}</h3>
-                        </div>
-                        {module.icon && <module.icon className={`w-5 h-5 ${isPremium ? 'text-amber-600' : 'text-red-600'}`} />}
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent className="pt-4">
-                      <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                        {module.topics.map((topic, topicIndex) => (
-                          <li key={topicIndex} className="flex items-start gap-3 p-2 hover:bg-gray-50 rounded-lg transition-colors duration-200">
-                            <CheckCircle className={`w-4 h-4 ${isPremium ? 'text-amber-600' : 'text-green-600'} flex-shrink-0 mt-0.5`} />
-                            <span className="text-gray-700 text-sm">{topic}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </CardContent>
-                  </Card>
+                  <CourseModuleCard 
+                    key={index}
+                    module={module}
+                    index={index}
+                    isPremium={isPremium}
+                  />
                 ))}
               </div>
             </div>
@@ -468,17 +443,9 @@ const CourseSyllabus = () => {
                 Join thousands of students who have transformed their passion into professional skills.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button 
-                  onClick={openForm}
-                  size="lg" 
-                  className={`px-8 py-4 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 ${
-                    isPremium 
-                      ? 'bg-gradient-to-r from-amber-500 to-yellow-600 hover:from-amber-600 hover:to-yellow-700 text-amber-900' 
-                      : 'bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white'
-                  }`}
-                >
+                <CourseCTAButton courseId={courseId || ""} isPremium={isPremium}>
                   Apply Now
-                </Button>
+                </CourseCTAButton>
                 <Button 
                   asChild 
                   variant="outline" 
