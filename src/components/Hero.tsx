@@ -75,7 +75,7 @@ const Hero = () => {
           
           <div className="mb-8 lg:mb-12 opacity-0 animate-[fade-in_0.8s_ease-out_1.1s_forwards]">
             <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed font-medium px-4">
-              Master the art of music production with expert guidance. From beginner basics to advanced techniques, unlock your creative potential and produce professional-quality tracks.
+              Complete music production mastery course. Professional guidance from basics to advanced techniques. Create studio-quality tracks today!
             </p>
           </div>
           
