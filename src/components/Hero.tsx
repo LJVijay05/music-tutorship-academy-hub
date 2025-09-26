@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Play, Star, Users, Music } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import DemoPopup from "./DemoPopup";
+import EnhancedDemoBookingForm from "./EnhancedDemoBookingForm";
 
 // Counter Animation Component
 const AnimatedCounter = ({ target, suffix = "", duration = 2000 }: { target: number; suffix?: string; duration?: number }) => {
@@ -130,7 +130,7 @@ const Hero = () => {
         </div>
       </div>
       
-      <DemoPopup isOpen={isDemoPopupOpen} onClose={() => setIsDemoPopupOpen(false)} />
+      <EnhancedDemoBookingForm open={isDemoPopupOpen} onOpenChange={setIsDemoPopupOpen} />
     </section>
   );
 };
