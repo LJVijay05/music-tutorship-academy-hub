@@ -126,7 +126,7 @@ const CourseCard = memo(({
             </div>
           </header>
 
-          <CardContent className="p-6 md:p-7 flex flex-col h-auto">
+          <CardContent className="p-6 md:p-7 flex flex-col min-h-[400px]">
             {/* Title and Level Section */}
             <div className="mb-6">
               <h3 className="text-lg md:text-xl font-bold mb-3 text-gray-900 leading-tight line-clamp-2">{title}</h3>
@@ -136,7 +136,7 @@ const CourseCard = memo(({
               </div>
             </div>
             
-            {/* Features Section */}
+            {/* Features Section - flex-grow to push buttons to bottom */}
             <div className="flex-grow mb-6">
               <ul className="space-y-2.5 mb-5 text-sm md:text-base" role="list">
                 {features.slice(0, 4).map((feature, index) => (
@@ -151,18 +151,18 @@ const CourseCard = memo(({
                   </li>
                 )}
               </ul>
-              
-              {/* Offer Banner */}
-              <div className={`flex items-start gap-3 p-4 ${bgColor} rounded-xl border-2 ${borderColor} text-sm md:text-base shadow-lg`}>
-                <Clock className={`w-5 h-5 ${textColor.replace('text-', 'text-').replace('-700', '-600')} flex-shrink-0 mt-0.5`} />
-                <div>
-                  <p className={`font-bold ${textColor} text-sm md:text-base mb-1`}>{offerText}</p>
-                  <p className={`text-xs md:text-sm ${textColor.replace('text-', 'text-').replace('-700', '-600')}`}>{offerSubtext}</p>
-                </div>
+            </div>
+            
+            {/* Offer Banner - positioned above buttons */}
+            <div className={`flex items-start gap-3 p-4 ${bgColor} rounded-xl border-2 ${borderColor} text-sm md:text-base shadow-lg mb-6`}>
+              <Clock className={`w-5 h-5 ${textColor.replace('text-', 'text-').replace('-700', '-600')} flex-shrink-0 mt-0.5`} />
+              <div>
+                <p className={`font-bold ${textColor} text-sm md:text-base mb-1`}>{offerText}</p>
+                <p className={`text-xs md:text-sm ${textColor.replace('text-', 'text-').replace('-700', '-600')}`}>{offerSubtext}</p>
               </div>
             </div>
             
-            {/* Action Buttons */}
+            {/* Action Buttons - Always at bottom */}
             <div className="flex gap-3 mt-auto">
               <Button 
                 variant="outline" 

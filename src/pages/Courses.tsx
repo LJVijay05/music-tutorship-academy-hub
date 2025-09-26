@@ -8,10 +8,10 @@ import TrustIndicators from "@/components/TrustIndicators";
 import { memo, useCallback, useMemo } from "react";
 
 const Courses = memo(() => {
-  const courseData = {
+  const courseData = useMemo(() => ({
     batchFeatures: [
       "15 students per batch",
-      "12 months intensive program",
+      "12 months intensive program", 
       "Live weekly sessions",
       "Group collaboration projects",
       "Industry-standard software training",
@@ -19,13 +19,13 @@ const Courses = memo(() => {
     ],
     oneOnOneFeatures: [
       "Personalized curriculum",
-      "Flexible scheduling",
+      "Flexible scheduling", 
       "Direct mentor feedback",
       "Custom project development",
       "Industry networking opportunities",
       "Lifetime support access"
     ]
-  };
+  }), []);
 
   const handleDetailsClick = useCallback((courseId: string) => {
     console.log('Details click handled via routing for course:', courseId);
@@ -114,7 +114,7 @@ const Courses = memo(() => {
       <main className="pt-16">
         <CoursesHero />
 
-        <section className="py-20 relative" aria-labelledby="courses-heading">
+        <section className="py-16 lg:py-20 relative" aria-labelledby="courses-heading">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-16 2xl:px-20">
             <div className="text-center mb-12 lg:mb-16">
               <h2 id="courses-heading" className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
@@ -135,7 +135,7 @@ const Courses = memo(() => {
               ))}
             </div>
 
-            <div className="mt-16">
+            <div className="mt-12 lg:mt-16">
               <TrustIndicators />
             </div>
           </div>
