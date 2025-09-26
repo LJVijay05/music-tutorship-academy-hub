@@ -54,14 +54,12 @@ const AboutSection = () => {
             {/* Right Content - Text Section */}
             <div className="space-y-6 order-1 lg:order-2">
               <div className="space-y-4">
-                <h3 className="text-3xl lg:text-4xl font-bold leading-tight">
-                  <span className="text-foreground">Transforming</span>
-                  <br />
+                <h3 className="text-2xl lg:text-3xl font-bold leading-tight">
+                  <span className="text-foreground">Transforming </span>
                   <span className="text-transparent bg-gradient-to-r from-red-600 to-pink-600 bg-clip-text">
                     Musical Dreams
                   </span>
-                  <br />
-                  <span className="text-foreground">into Reality</span>
+                  <span className="text-foreground"> into Reality</span>
                 </h3>
                 
                 <div className="space-y-3 text-muted-foreground">
