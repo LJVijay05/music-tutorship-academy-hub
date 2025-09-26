@@ -10,10 +10,7 @@ export default defineConfig(({ mode }) => ({
     port: 8080,
   },
   plugins: [
-    react({
-      // Enable React Fast Refresh optimizations
-      jsxImportSource: '@emotion/react',
-    }),
+    react(),
     mode === 'development' &&
     componentTagger(),
   ].filter(Boolean),
