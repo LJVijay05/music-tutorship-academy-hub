@@ -184,17 +184,6 @@ const About = () => {
               </div>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {[1, 2, 3, 4, 5, 6].map((item) => (
-                <div key={item} className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 group border border-gray-100">
-                  <div className="aspect-video bg-gradient-to-br from-red-100 to-pink-100 rounded-xl mb-4 flex items-center justify-center group-hover:scale-105 transition-transform">
-                    <Play className="w-12 h-12 text-red-500" />
-                  </div>
-                  <h4 className="text-xl font-semibold text-gray-800 mb-2">Project {item}</h4>
-                  <p className="text-gray-600 text-sm">Music production showcase highlighting various techniques and styles</p>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
       </section>
