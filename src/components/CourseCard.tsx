@@ -120,9 +120,12 @@ const CourseCard = memo(({
               {imageUrl ? (
                 <img 
                   src={imageUrl} 
-                  alt={title}
+                  alt={`${title} course preview`}
                   className="w-full h-full object-cover"
                   loading="lazy"
+                  decoding="async"
+                  width="400"
+                  height="200"
                 />
               ) : (
                 <div className="w-full h-full bg-gradient-to-br from-black/20 to-black/40" />
@@ -142,10 +145,10 @@ const CourseCard = memo(({
             
             {/* Features Section */}
             <div className="flex-grow mb-6">
-              <ul className="space-y-2.5 mb-5 text-sm md:text-base">
+              <ul className="space-y-2.5 mb-5 text-sm md:text-base" role="list">
                 {features.slice(0, 4).map((feature, index) => (
-                  <li key={index} className="flex items-start gap-3">
-                    <CheckCircle className="w-4 h-4 md:w-5 md:h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                  <li key={`${courseId}-feature-${index}`} className="flex items-start gap-3">
+                    <CheckCircle className="w-4 h-4 md:w-5 md:h-5 text-green-600 flex-shrink-0 mt-0.5" aria-hidden="true" />
                     <span className="text-gray-700 leading-relaxed font-medium">{feature}</span>
                   </li>
                 ))}

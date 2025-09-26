@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import CoursesHero from "@/components/CoursesHero";
 import CourseCard from "@/components/CourseCard";
 import TrustIndicators from "@/components/TrustIndicators";
-import { memo, useCallback } from "react";
+import { memo, useCallback, useMemo } from "react";
 
 const Courses = memo(() => {
   const courseData = {
@@ -31,7 +31,7 @@ const Courses = memo(() => {
     console.log('Details click handled via routing for course:', courseId);
   }, []);
 
-  const courses = [
+  const courses = useMemo(() => [
     {
       courseId: "production-course",
       title: "Complete Music Production Mastery Course",
@@ -60,7 +60,7 @@ const Courses = memo(() => {
       description: "Intensive Learning",
       level: "Beginner to Intermediate Level",
       icon: Users,
-      imageUrl: "/lovable-uploads/8e4988dc-184a-4830-b569-64e9a67c6d19.png",
+      imageUrl: "/assets/music-production-studio.jpg",
       features: [
         "15 students per batch",
         "3 months intensive program",
@@ -105,7 +105,7 @@ const Courses = memo(() => {
       offerText: "Exclusive Offer",
       offerSubtext: "Enroll for 1 Year & Get 20% Off!"
     }
-  ];
+  ], [courseData.batchFeatures, courseData.oneOnOneFeatures]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-red-50">

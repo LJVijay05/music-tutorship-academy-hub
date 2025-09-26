@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import StudentDataForm from "./StudentDataForm";
 import SuccessPopup from "./SuccessPopup";
 import { useStudentForm } from "@/hooks/useStudentForm";
-import { memo, useCallback, useState } from "react";
+import { memo, useCallback, useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 
 const CoursesSection = memo(({ showOnlyFeatured = false }: { showOnlyFeatured?: boolean }) => {
@@ -23,7 +23,7 @@ const CoursesSection = memo(({ showOnlyFeatured = false }: { showOnlyFeatured?: 
   // Track which course was clicked for proper redirection
   const [selectedCourseId, setSelectedCourseId] = useState<string | null>(null);
 
-  const allCourses = [
+  const allCourses = useMemo(() => [
     {
       id: "production-course",
       title: "Complete Music Production Mastery Course",
@@ -57,7 +57,7 @@ const CoursesSection = memo(({ showOnlyFeatured = false }: { showOnlyFeatured?: 
       description: "Intensive Learning",
       level: "Beginner to Intermediate Level",
       icon: Users,
-      imageUrl: "/lovable-uploads/8e4988dc-184a-4830-b569-64e9a67c6d19.png",
+      imageUrl: "/assets/music-production-studio.jpg",
       features: [
         "15 students per batch",
         "3 months intensive program",
@@ -105,7 +105,7 @@ const CoursesSection = memo(({ showOnlyFeatured = false }: { showOnlyFeatured?: 
       offerText: "Exclusive Offer",
       offerSubtext: "Enroll for 1 Year & Get 20% Off!"
     }
-  ];
+  ], []);
 
   // Filter courses based on the showOnlyFeatured prop
   const courses = showOnlyFeatured 
