@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import CoursesHero from "@/components/CoursesHero";
 import CourseCard from "@/components/CourseCard";
 import TrustIndicators from "@/components/TrustIndicators";
+import MentorIntroduction from "@/components/MentorIntroduction";
 import { memo, useCallback, useMemo } from "react";
 
 const Courses = memo(() => {
@@ -113,6 +114,7 @@ const Courses = memo(() => {
       
       <main className="pt-16">
         <CoursesHero />
+        <MentorIntroduction />
 
         <section className="py-16 lg:py-20 relative" aria-labelledby="courses-heading">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-16 2xl:px-20">
