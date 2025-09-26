@@ -20,12 +20,10 @@ const AboutSection = () => {
               <Music className="w-4 h-4" />
               Meet Your Mentor
             </div>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 leading-tight">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 leading-tight text-center">
               <span className="text-transparent bg-gradient-to-r from-red-600 to-pink-600 bg-clip-text">
-                Expert Guidance
+                Expert Guidance for Your Musical Journey
               </span>
-              <br />
-              <span className="text-transparent bg-gradient-to-r from-red-600 to-pink-600 bg-clip-text">for Your Musical Journey</span>
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Learn from a seasoned professional with 10+ years of experience in music production and education
