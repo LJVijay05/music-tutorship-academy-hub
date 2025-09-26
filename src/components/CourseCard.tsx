@@ -79,7 +79,7 @@ const CourseCard = memo(({
 
   return (
     <>
-      <article className="group w-full max-w-md h-full">
+      <article className="group w-full max-w-lg h-full mx-auto">
         <Card className={`overflow-hidden border-0 shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300 rounded-2xl h-full bg-white relative ${isPremium ? 'ring-2 ring-amber-200/60' : ''} w-full`}>
           {/* Course Type Icon - moved to top-left as floating badge */}
           <div className="absolute top-4 left-4 z-30">
