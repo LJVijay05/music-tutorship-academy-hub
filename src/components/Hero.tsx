@@ -70,12 +70,30 @@ const Hero = () => {
               <span className="inline-block opacity-0 animate-[fade-in_0.8s_ease-out_0.8s_forwards] bg-gradient-to-r from-red-600 via-pink-600 to-purple-600 bg-clip-text text-transparent ml-2 sm:ml-4 lg:ml-6 drop-shadow-2xl">
                 Production
               </span>
+              <span className="inline-block opacity-0 animate-[fade-in_0.8s_ease-out_1.1s_forwards] text-gray-900 ml-2 sm:ml-4 lg:ml-6 drop-shadow-lg">
+                Online
+              </span>
+              <span className="inline-block opacity-0 animate-[fade-in_0.8s_ease-out_1.4s_forwards] text-gray-900 ml-2 sm:ml-4 lg:ml-6 drop-shadow-lg">
+                with
+              </span>
+              <span className="inline-block opacity-0 animate-[fade-in_0.8s_ease-out_1.7s_forwards] bg-gradient-to-r from-red-600 via-pink-600 to-purple-600 bg-clip-text text-transparent ml-2 sm:ml-4 lg:ml-6 drop-shadow-2xl">
+                Expert
+              </span>
+              <span className="inline-block opacity-0 animate-[fade-in_0.8s_ease-out_2.0s_forwards] bg-gradient-to-r from-red-600 via-pink-600 to-purple-600 bg-clip-text text-transparent ml-2 sm:ml-4 lg:ml-6 drop-shadow-2xl">
+                Coaching
+              </span>
+              <span className="inline-block opacity-0 animate-[fade-in_0.8s_ease-out_2.3s_forwards] text-gray-900 ml-2 sm:ml-4 lg:ml-6 drop-shadow-lg">
+                &
+              </span>
+              <span className="inline-block opacity-0 animate-[fade-in_0.8s_ease-out_2.6s_forwards] bg-gradient-to-r from-red-600 via-pink-600 to-purple-600 bg-clip-text text-transparent ml-2 sm:ml-4 lg:ml-6 drop-shadow-2xl">
+                Mentorship
+              </span>
             </h1>
           </div>
           
           <div className="mb-8 lg:mb-12 opacity-0 animate-[fade-in_0.8s_ease-out_1.1s_forwards]">
             <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed font-medium px-4">
-              Complete music production mastery course. Professional guidance from basics to advanced techniques. Create studio-quality tracks today!
+              At Music Tutorship Academy, we help aspiring producers turn their musical ideas into professional-quality tracks. Through personalized online music production coaching and mentorship, you'll gain real-world skills in beatmaking, mixing, mastering, and DAW training. Whether you're a complete beginner or an advanced producer refining your craft, our expert mentors will guide you step by step.
             </p>
           </div>
           
