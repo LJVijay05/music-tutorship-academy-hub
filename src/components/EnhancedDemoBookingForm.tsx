@@ -180,7 +180,11 @@ const EnhancedDemoBookingForm = ({ open, onOpenChange, onSuccess }: EnhancedDemo
 
   // Disable past dates
   const disabledDays = (date: Date) => {
-    return date < new Date();
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const d = new Date(date);
+    d.setHours(0, 0, 0, 0);
+    return d < today;
   };
 
   const renderStepIndicator = () => (
@@ -331,7 +335,7 @@ const EnhancedDemoBookingForm = ({ open, onOpenChange, onSuccess }: EnhancedDemo
                                   selected={field.value}
                                   onSelect={field.onChange}
                                   disabled={disabledDays}
-                                  className="p-0 w-full"
+                                  className="p-3 pointer-events-auto w-full"
                                 />
                               </div>
                             </FormControl>
