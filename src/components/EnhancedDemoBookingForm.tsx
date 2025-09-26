@@ -229,7 +229,7 @@ const EnhancedDemoBookingForm = ({ open, onOpenChange, onSuccess }: EnhancedDemo
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="w-[95vw] max-w-5xl max-h-[90vh] mx-auto bg-background rounded-2xl p-0 border shadow-2xl overflow-hidden">
+      <DialogContent className="w-[95vw] max-w-5xl h-[90vh] mx-auto bg-background rounded-2xl p-0 border shadow-2xl overflow-hidden">
         <DialogTitle className="sr-only">Book Your Free Music Production Demo Session</DialogTitle>
         <DialogDescription className="sr-only">Complete demo booking with mobile verification</DialogDescription>
         
@@ -512,7 +512,7 @@ const EnhancedDemoBookingForm = ({ open, onOpenChange, onSuccess }: EnhancedDemo
                     </p>
                   </div>
 
-                  <div className="flex justify-between">
+                  <div className="sticky bottom-0 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80 border-t mt-6 pt-4 flex justify-between">
                     <Button type="button" variant="outline" onClick={goBack} className="flex items-center gap-2">
                       <ArrowLeft className="w-4 h-4" />
                       Back
