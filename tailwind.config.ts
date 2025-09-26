@@ -210,14 +210,7 @@ export default {
 						transform: 'translateY(-20px) scale(1.05)',
 						opacity: '0.8'
 					}
-						opacity: '1'
-					}
 				},
-				'float': {
-					'0%, 100%': { 
-						transform: 'translateY(0px) rotate(0deg)' 
-					},
-					'50%': { 
 						transform: 'translateY(-20px) rotate(10deg)' 
 					}
 				},
