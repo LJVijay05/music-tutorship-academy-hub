@@ -115,8 +115,8 @@ const Courses = memo(() => {
         <CoursesHero />
 
         <section className="py-20 relative" aria-labelledby="courses-heading">
-          <div className="container mx-auto px-6 lg:px-8 xl:px-12">
-            <div className="text-center mb-16">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16">
+            <div className="text-center mb-12 lg:mb-16">
               <h2 id="courses-heading" className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
                 Choose Your Learning Path
               </h2>
@@ -125,7 +125,7 @@ const Courses = memo(() => {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8 max-w-7xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-6 lg:gap-8 xl:gap-10 justify-items-center max-w-none">
               {courses.map((course) => (
                 <CourseCard
                   key={course.courseId}
