@@ -169,18 +169,35 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico" />
     <link rel="manifest" href="/site.webmanifest" />
     
-    <!-- Preconnect to external domains for performance -->
-    <link rel="preconnect" href="https://images.unsplash.com" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="dns-prefetch" href="//fonts.googleapis.com" />
-    <link rel="dns-prefetch" href="//fonts.gstatic.com" />
+    <!-- Performance optimizations -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://images.unsplash.com">
     
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Critical resource hints -->
+    <link rel="preload" href="/music-tutorship-logo.png" as="image" type="image/png">
+    <link rel="preload" href="/lovable-uploads/b3ac942f-a004-4e7e-a005-13fa36ac41a7.png" as="image" type="image/png">
     
-    <!-- Performance and Loading Optimization -->
-    <link rel="preload" href="/src/main.tsx" as="script" />
+    <!-- Load Google Fonts with font-display: swap for performance -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Critical CSS for above-the-fold content -->
+    <style>
+      .critical-above-fold {
+        contain: layout style paint;
+      }
+      .lazy-placeholder {
+        background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+        background-size: 200% 100%;
+        animation: loading 1.5s infinite;
+      }
+      @keyframes loading {
+        0% { background-position: 200% 0; }
+        100% { background-position: -200% 0; }
+      }
+    </style>
+    
     <meta name="generator" content="Music Tutorship Academy Hub - Lovable" />
   </head>
 
