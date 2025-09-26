@@ -80,8 +80,9 @@ const CourseCard = memo(({
 
   const handleFormSuccess = useCallback(() => {
     console.log(`CourseCard: Student form submitted successfully for course ${courseId}`);
-    showSuccess();
-  }, [courseId, showSuccess]);
+    // Redirect directly to payments/enrollment page instead of showing success popup
+    navigate('/enrollment');
+  }, [courseId, navigate]);
 
   return (
     <>
