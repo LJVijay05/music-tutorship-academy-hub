@@ -6,69 +6,110 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
 import { MentorAuthProvider } from "./contexts/MentorAuthContext";
 import ScrollToTop from "./components/ScrollToTop";
-import Index from "./pages/Index";
-import About from "./pages/About";
-import Courses from "./pages/Courses";
-import CourseSyllabus from "./pages/CourseSyllabus";
-import ProductionCourse from "./pages/ProductionCourse";
-import MentorshipCourse from "./pages/MentorshipCourse";
-import RecordedCourses from "./pages/RecordedCourses";
-import Contact from "./pages/Contact";
-import Blog from "./pages/Blog";
-import Enrollment from "./pages/Enrollment";
-import EssentialBootcampEnrollment from "./pages/EssentialBootcampEnrollment";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import Dashboard from "./pages/Dashboard";
-import MentorLogin from "./pages/MentorLogin";
-import MentorDashboard from "./pages/MentorDashboard";
-import NotFound from "./pages/NotFound";
-import Terms from "./pages/Terms";
-import Profile from "./pages/Profile";
-import Privacy from "./pages/Privacy";
+import { Suspense, lazy, memo } from "react";
+import { ErrorBoundary } from "./components/ErrorBoundary";
+import { AppSkeleton } from "./components/AppSkeleton";
 
-const queryClient = new QueryClient();
+// Lazy load pages for better performance
+const Index = lazy(() => import("./pages/Index"));
+const About = lazy(() => import("./pages/About"));
+const Courses = lazy(() => import("./pages/Courses"));
+const CourseSyllabus = lazy(() => import("./pages/CourseSyllabus"));
+const ProductionCourse = lazy(() => import("./pages/ProductionCourse"));
+const MentorshipCourse = lazy(() => import("./pages/MentorshipCourse"));
+const RecordedCourses = lazy(() => import("./pages/RecordedCourses"));
+const Contact = lazy(() => import("./pages/Contact"));
+const Blog = lazy(() => import("./pages/Blog"));
+const Enrollment = lazy(() => import("./pages/Enrollment"));
+const EssentialBootcampEnrollment = lazy(() => import("./pages/EssentialBootcampEnrollment"));
+const Login = lazy(() => import("./pages/Login"));
+const Register = lazy(() => import("./pages/Register"));
+const Dashboard = lazy(() => import("./pages/Dashboard"));
+const MentorLogin = lazy(() => import("./pages/MentorLogin"));
+const MentorDashboard = lazy(() => import("./pages/MentorDashboard"));
+const NotFound = lazy(() => import("./pages/NotFound"));
+const Terms = lazy(() => import("./pages/Terms"));
+const Profile = lazy(() => import("./pages/Profile"));
+const Privacy = lazy(() => import("./pages/Privacy"));
 
-const App = () => (
+// Optimized query client configuration
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 5 * 60 * 1000, // 5 minutes
+      gcTime: 10 * 60 * 1000, // 10 minutes (renamed from cacheTime)
+      retry: (failureCount, error: any) => {
+        // Don't retry on 4xx errors except 429 (rate limit)
+        if (error?.status >= 400 && error?.status < 500 && error?.status !== 429) {
+          return false;
+        }
+        return failureCount < 3;
+      },
+      refetchOnWindowFocus: false,
+      refetchOnMount: false,
+      refetchOnReconnect: 'always',
+    },
+    mutations: {
+      retry: 1,
+    },
+  },
+});
+
+// Memoized route wrapper for better performance
+const RouteWrapper = memo(({ children }: { children: React.ReactNode }) => (
+  <ErrorBoundary>
+    <Suspense fallback={<AppSkeleton />}>
+      {children}
+    </Suspense>
+  </ErrorBoundary>
+));
+
+RouteWrapper.displayName = 'RouteWrapper';
+
+const App = memo(() => (
   <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
+    <TooltipProvider delayDuration={300}>
       <AuthProvider>
         <MentorAuthProvider>
           <Toaster />
-          <Sonner />
+          <Sonner 
+            position="top-right"
+            closeButton
+            richColors
+            expand={false}
+            visibleToasts={3}
+          />
           <BrowserRouter>
             <ScrollToTop />
             <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/courses" element={<Courses />} />
-              <Route path="/courses/:courseId" element={<CourseSyllabus />} />
-              <Route path="/courses/production-course" element={<ProductionCourse />} />
-              <Route path="/courses/mentorship-90" element={<MentorshipCourse />} />
-              <Route path="/recorded-courses" element={<RecordedCourses />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/blog" element={<Blog />} />
-              <Route path="/enrollment" element={<Enrollment />} />
-              <Route path="/essential-bootcamp-enrollment" element={<EssentialBootcampEnrollment />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/mentor-login" element={<MentorLogin />} />
-              <Route path="/mentor-dashboard" element={<MentorDashboard />} />
-              <Route path="/profile" element={<Profile />} />
-
-              {/* Legal: Privacy Policy and Terms of Service */}
-              <Route path="/privacy" element={<Privacy />} />
-              <Route path="/terms" element={<Terms />} />
-
-              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-              <Route path="*" element={<NotFound />} />
+              <Route path="/" element={<RouteWrapper><Index /></RouteWrapper>} />
+              <Route path="/about" element={<RouteWrapper><About /></RouteWrapper>} />
+              <Route path="/courses" element={<RouteWrapper><Courses /></RouteWrapper>} />
+              <Route path="/courses/:courseId" element={<RouteWrapper><CourseSyllabus /></RouteWrapper>} />
+              <Route path="/courses/production-course" element={<RouteWrapper><ProductionCourse /></RouteWrapper>} />
+              <Route path="/courses/mentorship-90" element={<RouteWrapper><MentorshipCourse /></RouteWrapper>} />
+              <Route path="/recorded-courses" element={<RouteWrapper><RecordedCourses /></RouteWrapper>} />
+              <Route path="/contact" element={<RouteWrapper><Contact /></RouteWrapper>} />
+              <Route path="/blog" element={<RouteWrapper><Blog /></RouteWrapper>} />
+              <Route path="/enrollment" element={<RouteWrapper><Enrollment /></RouteWrapper>} />
+              <Route path="/essential-bootcamp-enrollment" element={<RouteWrapper><EssentialBootcampEnrollment /></RouteWrapper>} />
+              <Route path="/login" element={<RouteWrapper><Login /></RouteWrapper>} />
+              <Route path="/register" element={<RouteWrapper><Register /></RouteWrapper>} />
+              <Route path="/dashboard" element={<RouteWrapper><Dashboard /></RouteWrapper>} />
+              <Route path="/mentor-login" element={<RouteWrapper><MentorLogin /></RouteWrapper>} />
+              <Route path="/mentor-dashboard" element={<RouteWrapper><MentorDashboard /></RouteWrapper>} />
+              <Route path="/profile" element={<RouteWrapper><Profile /></RouteWrapper>} />
+              <Route path="/privacy" element={<RouteWrapper><Privacy /></RouteWrapper>} />
+              <Route path="/terms" element={<RouteWrapper><Terms /></RouteWrapper>} />
+              <Route path="*" element={<RouteWrapper><NotFound /></RouteWrapper>} />
             </Routes>
           </BrowserRouter>
         </MentorAuthProvider>
       </AuthProvider>
     </TooltipProvider>
   </QueryClientProvider>
-);
+));
+
+App.displayName = 'App';
 
 export default App;

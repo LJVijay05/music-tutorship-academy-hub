@@ -1,11 +1,12 @@
 
+import { memo, useCallback, useState, useEffect, useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import { Music, Menu, X, ChevronDown, LogIn, UserPlus } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
 import StudentDataForm from "./StudentDataForm";
 import SuccessPopup from "./SuccessPopup";
 import { useStudentForm } from "@/hooks/useStudentForm";
+import { OptimizedImage } from "./OptimizedImage";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,56 +14,65 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-const Navigation = () => {
+const Navigation = memo(() => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
   const { showStudentForm, showSuccessPopup, openForm, closeForm, showSuccess, closeSuccess } = useStudentForm();
 
+  // Memoize scroll handler for better performance
+  const handleScroll = useCallback(() => {
+    setIsScrolled(window.scrollY > 20);
+  }, []);
+
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [handleScroll]);
 
   // Close mobile menu when location changes
   useEffect(() => {
     setIsMenuOpen(false);
   }, [location.pathname]);
 
-  const isActive = (path: string) => location.pathname === path;
+  // Memoize isActive function
+  const isActive = useCallback((path: string) => location.pathname === path, [location.pathname]);
 
-  const navItems = [
+  // Memoize navigation items
+  const navItems = useMemo(() => [
     { path: "/", label: "Home" },
     { path: "/about", label: "About Me" },
     { path: "/courses", label: "Courses", hasDropdown: true },
     { path: "/blog", label: "Blog" },
     { path: "/contact", label: "Contact Us" }
-  ];
+  ], []);
 
-  const handleFormSuccess = () => {
+  // Memoize event handlers
+  const handleFormSuccess = useCallback(() => {
     console.log('Navigation: Student form submitted successfully');
     showSuccess();
-  };
+  }, [showSuccess]);
 
-  const handleRecordedCoursesClick = () => {
+  const handleRecordedCoursesClick = useCallback(() => {
     navigate('/recorded-courses');
-  };
+  }, [navigate]);
 
-  const handleLiveMentorshipClick = () => {
+  const handleLiveMentorshipClick = useCallback(() => {
     navigate('/courses');
-  };
+  }, [navigate]);
 
-  const handleLoginClick = () => {
+  const handleLoginClick = useCallback(() => {
     navigate('/login');
-  };
+  }, [navigate]);
 
-  const handleEnquireNowClick = () => {
+  const handleEnquireNowClick = useCallback(() => {
     navigate('/contact');
-  };
+  }, [navigate]);
+
+  const toggleMenu = useCallback(() => {
+    setIsMenuOpen(prev => !prev);
+  }, []);
 
   return (
     <>
@@ -75,10 +85,13 @@ const Navigation = () => {
           <div className="flex items-center justify-between h-14 sm:h-16">
             {/* Logo */}
             <Link to="/" className="flex items-center gap-2 group transition-all duration-300 hover:scale-105">
-              <img 
+              <OptimizedImage 
                 src="/music-tutorship-logo.png" 
                 alt="Music Tutorship Logo" 
-                className="h-10 sm:h-12 w-auto object-contain"
+                className="h-10 sm:h-12 w-auto"
+                width={48}
+                height={48}
+                priority
               />
             </Link>
 
@@ -157,8 +170,9 @@ const Navigation = () => {
             {/* Mobile Menu Button */}
             <button
               className="md:hidden p-2 rounded-lg bg-gray-50 hover:bg-gray-100 transition-all duration-300"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              onClick={toggleMenu}
               aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={isMenuOpen}
             >
               <div className="relative w-5 h-5">
                 <Menu className={`w-5 h-5 transition-all duration-300 ${isMenuOpen ? 'opacity-0 rotate-180' : 'opacity-100'}`} />
@@ -262,6 +276,8 @@ const Navigation = () => {
       />
     </>
   );
-};
+});
+
+Navigation.displayName = 'Navigation';
 
 export default Navigation;

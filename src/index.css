@@ -87,22 +87,29 @@
     scroll-behavior: smooth;
   }
 
-  /* Performance optimizations */
-  img {
+  /* Critical performance optimizations */
+  img, video {
     content-visibility: auto;
-    will-change: transform;
-    image-rendering: optimizeQuality;
+    contain-intrinsic-size: 1px 1000px;
   }
 
-  /* Responsive typography */
-  html {
-    font-size: clamp(14px, 2.5vw, 18px);
-    -webkit-text-size-adjust: 100%;
+  /* Optimize for better rendering performance */
+  .gpu-layer {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
   }
 
-  /* Critical CSS for above-the-fold content */
-  .critical-above-fold {
-    contain: layout style paint;
+  /* Improve text rendering */
+  p, h1, h2, h3, h4, h5, h6 {
+    text-rendering: optimizeSpeed;
+  }
+
+  /* Reduce repaints on hover */
+  @media (hover: hover) {
+    .hover-optimize {
+      will-change: transform;
+    }
   }
 
   /* Optimize for touch devices */
@@ -121,7 +128,7 @@
 }
 
 @layer utilities {
-  /* Simplified animations for better performance */
+  /* High-performance animations */
   @keyframes fade-in-up {
     0% {
       opacity: 0;
@@ -133,8 +140,15 @@
     }
   }
 
-  /* Enhanced responsive utilities */
+  @keyframes skeleton-loading {
+    0% { background-color: hsl(210, 40%, 96%); }
+    50% { background-color: hsl(210, 40%, 93%); }
+    100% { background-color: hsl(210, 40%, 96%); }
+  }
+
+  /* Container queries support */
   .container-responsive {
+    container-type: inline-size;
     @apply w-full max-w-8xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16;
   }
 
@@ -146,27 +160,40 @@
     @apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl;
   }
 
-  /* Optimized card utilities */
+  /* Performance-optimized card utilities */
   .card-premium {
     @apply shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-2xl;
     will-change: box-shadow;
+    contain: layout style paint;
   }
 
-  /* Simplified animation classes */
+  /* Animation controls with accessibility */
   @media (prefers-reduced-motion: no-preference) {
     .animate-fade-in-up {
-      animation: fade-in-up 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+      animation: fade-in-up 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    }
+    
+    .animate-skeleton {
+      animation: skeleton-loading 1.5s ease-in-out infinite;
     }
   }
 
   /* Reduced motion fallbacks */
   @media (prefers-reduced-motion: reduce) {
-    .animate-fade-in-up {
+    .animate-fade-in-up,
+    .animate-skeleton {
       animation: none;
     }
 
-    .card-premium:hover {
+    .card-premium:hover,
+    .hover-optimize:hover {
       transform: none;
+    }
+    
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
     }
   }
 
@@ -197,26 +224,54 @@
     overflow: hidden;
   }
 
-  /* Performance optimizations */
+  /* Performance utilities */
   .gpu-accelerated {
     transform: translateZ(0);
     backface-visibility: hidden;
     perspective: 1000px;
+    contain: layout style paint;
+  }
+  
+  .contain-layout {
+    contain: layout;
+  }
+  
+  .contain-paint {
+    contain: paint;
+  }
+  
+  .loading-skeleton {
+    @apply animate-skeleton bg-gray-200 rounded;
   }
 }
 
-/* Mobile optimizations */
+/* Critical loading optimizations */
 @media (max-width: 640px) {
   .mobile-optimized {
     touch-action: manipulation;
     -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+  
+  /* Reduce animations on mobile for battery life */
+  .reduce-motion-mobile {
+    animation: none !important;
+    transition: none !important;
   }
 }
 
-/* Performance critical loading states */
+/* Network-aware optimizations */
 @media (prefers-reduced-data: reduce) {
-  .animate-fade-in-up {
+  .animate-fade-in-up,
+  .animate-skeleton {
     animation: none;
+  }
+  
+  /* Hide non-essential decorative elements */
+  .decorative-only {
+    display: none;
   }
 }
 

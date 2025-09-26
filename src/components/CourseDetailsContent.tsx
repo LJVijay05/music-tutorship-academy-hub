@@ -1,4 +1,5 @@
 
+import { memo, useCallback, useMemo } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -7,7 +8,6 @@ import {
   Clock, 
   Users, 
   Star, 
-  Play, 
   Award,
   Target,
   Zap
@@ -35,7 +35,7 @@ interface CourseDetailsContentProps {
   showPricing?: boolean;
 }
 
-const CourseDetailsContent = ({
+const CourseDetailsContent = memo(({
   courseId,
   courseTitle,
   courseDescription,
@@ -58,13 +58,58 @@ const CourseDetailsContent = ({
     closeSuccess 
   } = useStudentForm();
 
-  const handleApplyNow = () => {
+  const handleApplyNow = useCallback(() => {
     setShowStudentForm(true);
-  };
+  }, [setShowStudentForm]);
 
-  const handleFormSuccess = () => {
+  const handleFormSuccess = useCallback(() => {
     showSuccess();
-  };
+  }, [showSuccess]);
+
+  // Memoize course stats for better performance
+  const courseStats = useMemo(() => [
+    {
+      icon: Target,
+      value: level,
+      label: "Skill Level",
+      bgColor: "bg-red-100",
+      iconColor: "text-red-600"
+    },
+    {
+      icon: Clock,
+      value: duration,
+      label: "Duration",
+      bgColor: "bg-blue-100",
+      iconColor: "text-blue-600"
+    },
+    {
+      icon: Users,
+      value: batchSize,
+      label: "Class Size",
+      bgColor: "bg-green-100",
+      iconColor: "text-green-600"
+    }
+  ], [level, duration, batchSize]);
+
+  // Memoize pricing card styles
+  const pricingCardStyles = useMemo(() => ({
+    card: courseType === "individual" 
+      ? "bg-gradient-to-br from-amber-50 via-yellow-50 to-white ring-2 ring-amber-200" 
+      : "bg-gradient-to-br from-white via-red-50 to-white ring-1 ring-red-100",
+    header: courseType === "individual" 
+      ? "bg-gradient-to-r from-amber-500 to-yellow-500" 
+      : "bg-gradient-to-r from-red-600 to-red-500",
+    button: courseType === "individual" 
+      ? "bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-black" 
+      : "bg-gradient-to-r from-red-600 to-red-500 hover:from-red-700 hover:to-red-600"
+  }), [courseType]);
+
+  // Memoize button styles
+  const buttonStyles = useMemo(() => 
+    courseType === "individual"
+      ? "bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-black"
+      : "bg-gradient-to-r from-red-600 to-red-500 hover:from-red-700 hover:to-red-600 text-white"
+  , [courseType]);
 
   return (
     <div className="pt-16 md:pt-20">
@@ -120,46 +165,24 @@ const CourseDetailsContent = ({
 
                 {/* Course Stats */}
                 <div className={`grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 ${!showPricing ? 'max-w-2xl mx-auto' : ''}`}>
-                  <div className="flex items-center gap-2 sm:gap-3 p-3 sm:p-4 bg-white rounded-lg border border-gray-200 shadow-sm">
-                    <div className="w-8 h-8 sm:w-10 sm:h-10 bg-red-100 rounded-lg flex items-center justify-center">
-                      <Target className="w-4 h-4 sm:w-5 sm:h-5 text-red-600" />
+                  {courseStats.map((stat, index) => (
+                    <div key={index} className="flex items-center gap-2 sm:gap-3 p-3 sm:p-4 bg-white rounded-lg border border-gray-200 shadow-sm">
+                      <div className={`w-8 h-8 sm:w-10 sm:h-10 ${stat.bgColor} rounded-lg flex items-center justify-center`}>
+                        <stat.icon className={`w-4 h-4 sm:w-5 sm:h-5 ${stat.iconColor}`} />
+                      </div>
+                      <div>
+                        <p className="text-xs sm:text-sm font-semibold text-gray-900">{stat.value}</p>
+                        <p className="text-xs text-gray-600">{stat.label}</p>
+                      </div>
                     </div>
-                    <div>
-                      <p className="text-xs sm:text-sm font-semibold text-gray-900">{level}</p>
-                      <p className="text-xs text-gray-600">Skill Level</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-center gap-2 sm:gap-3 p-3 sm:p-4 bg-white rounded-lg border border-gray-200 shadow-sm">
-                    <div className="w-8 h-8 sm:w-10 sm:h-10 bg-blue-100 rounded-lg flex items-center justify-center">
-                      <Clock className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
-                    </div>
-                    <div>
-                      <p className="text-xs sm:text-sm font-semibold text-gray-900">{duration}</p>
-                      <p className="text-xs text-gray-600">Duration</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-center gap-2 sm:gap-3 p-3 sm:p-4 bg-white rounded-lg border border-gray-200 shadow-sm">
-                    <div className="w-8 h-8 sm:w-10 sm:h-10 bg-green-100 rounded-lg flex items-center justify-center">
-                      <Users className="w-4 h-4 sm:w-5 sm:h-5 text-green-600" />
-                    </div>
-                    <div>
-                      <p className="text-xs sm:text-sm font-semibold text-gray-900">{batchSize}</p>
-                      <p className="text-xs text-gray-600">Class Size</p>
-                    </div>
-                  </div>
+                  ))}
                 </div>
 
                 {/* CTA Buttons */}
                 <div className={`flex ${!showPricing ? 'max-w-lg mx-auto' : ''}`}>
                   <Button 
                     onClick={handleApplyNow}
-                    className={`w-full h-11 sm:h-12 text-sm sm:text-base font-semibold shadow-lg transition-all duration-300 hover:scale-105 ${
-                      courseType === "individual"
-                        ? "bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-black"
-                        : "bg-gradient-to-r from-red-600 to-red-500 hover:from-red-700 hover:to-red-600 text-white"
-                    }`}
+                    className={`w-full h-11 sm:h-12 text-sm sm:text-base font-semibold shadow-lg transition-all duration-300 hover:scale-105 ${buttonStyles}`}
                   >
                     <Zap className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
                     Apply Now
@@ -170,17 +193,9 @@ const CourseDetailsContent = ({
               {/* Right Column - Pricing Card (only show if showPricing is true) */}
               {showPricing && price && originalPrice && discount && (
                 <div className="lg:sticky lg:top-24">
-                  <Card className={`shadow-2xl border-0 overflow-hidden ${
-                    courseType === "individual" 
-                      ? "bg-gradient-to-br from-amber-50 via-yellow-50 to-white ring-2 ring-amber-200" 
-                      : "bg-gradient-to-br from-white via-red-50 to-white ring-1 ring-red-100"
-                  }`}>
+                  <Card className={`shadow-2xl border-0 overflow-hidden ${pricingCardStyles.card}`}>
                     <CardContent className="p-0">
-                      <div className={`p-4 sm:p-6 ${
-                        courseType === "individual" 
-                          ? "bg-gradient-to-r from-amber-500 to-yellow-500" 
-                          : "bg-gradient-to-r from-red-600 to-red-500"
-                      } text-white`}>
+                      <div className={`p-4 sm:p-6 ${pricingCardStyles.header} text-white`}>
                         <div className="text-center">
                           <p className="text-sm sm:text-base opacity-90 mb-1">Course Investment</p>
                           <div className="flex items-center justify-center gap-2 sm:gap-3">
@@ -209,11 +224,7 @@ const CourseDetailsContent = ({
                         
                         <Button 
                           onClick={handleApplyNow}
-                          className={`w-full h-11 sm:h-12 text-sm sm:text-base font-bold shadow-lg transition-all duration-300 hover:scale-105 ${
-                            courseType === "individual" 
-                              ? "bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-black" 
-                              : "bg-gradient-to-r from-red-600 to-red-500 hover:from-red-700 hover:to-red-600"
-                          }`}
+                          className={`w-full h-11 sm:h-12 text-sm sm:text-base font-bold shadow-lg transition-all duration-300 hover:scale-105 ${pricingCardStyles.button}`}
                         >
                           <Award className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
                           Secure Your Spot
@@ -283,6 +294,8 @@ const CourseDetailsContent = ({
       </section>
     </div>
   );
-};
+});
+
+CourseDetailsContent.displayName = 'CourseDetailsContent';
 
 export default CourseDetailsContent;
