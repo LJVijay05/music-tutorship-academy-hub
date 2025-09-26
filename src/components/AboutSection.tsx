@@ -22,11 +22,13 @@ const AboutSection = () => {
             </div>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 leading-tight">
               <span className="text-transparent bg-gradient-to-r from-red-600 to-pink-600 bg-clip-text">
-                One-on-One Music Production Coaching
+                Expert Guidance
               </span>
+              <br />
+              <span className="text-transparent bg-gradient-to-r from-red-600 to-pink-600 bg-clip-text">for Your Musical Journey</span>
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Our tailored coaching sessions focus on your individual goals. Learn how to produce music that stands out, from building your first beat to finalizing a polished track.
+              Learn from a seasoned professional with 10+ years of experience in music production and education
             </p>
           </div>
 
@@ -55,26 +57,26 @@ const AboutSection = () => {
             <div className="space-y-6 order-1 lg:order-2">
               <div className="space-y-4">
                 <h3 className="text-3xl lg:text-4xl font-bold leading-tight">
-                  <span className="text-foreground">Mixing &</span>
+                  <span className="text-foreground">Transforming</span>
                   <br />
                   <span className="text-transparent bg-gradient-to-r from-red-600 to-pink-600 bg-clip-text">
-                    Mastering
+                    Musical Dreams
                   </span>
                   <br />
-                  <span className="text-foreground">Mentorship</span>
+                  <span className="text-foreground">into Reality</span>
                 </h3>
                 
                 <div className="space-y-3 text-muted-foreground">
                   <p>
-                    Take your sound to the next level with mentorship in mixing and mastering. Get personalized feedback on your tracks, industry-level tips, and techniques used by professional producers.
+                    With over a decade of experience in music production, mixing, sound design, and music theory, I've dedicated my career to helping aspiring musicians unlock their creative potential and achieve professional success.
                   </p>
                   
                   <p>
-                    Learn Any DAW: FL Studio, Ableton, Logic & More. No matter your preferred DAW, we'll help you master it. From FL Studio and Ableton Live to Logic Pro and Pro Tools, our sessions are designed to fit your workflow.
+                    My journey spans working with renowned artists across various genres, producing tracks that have reached millions of listeners, and mentoring hundreds of students who have gone on to build successful music careers.
                   </p>
                   
                   <p>
-                    Why Choose Music Tutorship Academy? Personalized, one-on-one mentorship. Learn at your own pace, from anywhere in the world. Feedback on your own projects. Access to professional production techniques.
+                    Through personalized mentorship and innovative teaching methods, I guide students on a transformative journey that goes beyond just learning software to truly understanding the art, science, and business of music creation.
                   </p>
                 </div>
               </div>
@@ -83,7 +85,7 @@ const AboutSection = () => {
               <div className="pt-4">
                 <Button asChild size="lg" className="bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700 text-white px-8 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
                   <Link to="/about" className="flex items-center gap-2">
-                    Start Your Music Production Mentorship Today
+                    Discover My Journey
                     <Sparkles className="w-4 h-4" />
                   </Link>
                 </Button>

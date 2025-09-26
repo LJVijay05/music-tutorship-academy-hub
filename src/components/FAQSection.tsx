@@ -10,24 +10,32 @@ import { Plus } from "lucide-react";
 // Extract FAQ data to a constant for better maintainability
 const FAQ_DATA = [
   {
-    question: "What is online music production coaching?",
-    answer: "Online music production coaching is personalized, one-on-one mentorship delivered through video calls. You'll get direct feedback on your tracks, learn industry techniques, and receive guidance tailored to your specific goals and skill level."
+    question: "What is the eligible age to join your music production courses?",
+    answer: "Our music production training is open to all age groups. Whether you're 8 years old, a teenager, or an adult exploring music later in life, you're welcome to join. If you have a passion for music production, age is never a limitation."
   },
   {
-    question: "Which DAWs do you teach?",
-    answer: "We teach all major Digital Audio Workstations including FL Studio, Ableton Live, Logic Pro, Pro Tools, and more. Our sessions are customized to your preferred DAW, ensuring you master the tools you want to use."
+    question: "What types of music production courses are available?",
+    answer: "We offer complete music production courses designed for beginners, intermediate learners, and advanced producers. This includes full music production programs, electronic music production, and personalized one-on-one mentorship that covers songwriting, sound design, mixing, and mastering."
   },
   {
-    question: "Do I need prior music knowledge to start?",
-    answer: "No prior music knowledge is required! Our coaching adapts to your skill level, whether you're a complete beginner or an experienced producer looking to refine specific techniques."
+    question: "How are the music production classes conducted?",
+    answer: "Our classes follow a structured format that blends music theory with practical training. Each session includes individual attention, group collaboration, and hands-on experience with professional music software. Students will actively create, produce, and refine music throughout the course."
   },
   {
-    question: "How does mentorship differ from tutorials?",
-    answer: "Unlike generic tutorials, our mentorship provides personalized feedback on your actual projects, addresses your specific challenges, and adapts to your learning pace. You get real-time guidance and industry insights you can't find in standard tutorials."
+    question: "What is the class size for each batch?",
+    answer: "We maintain a small class size of 15 students per batch to ensure focused learning and individual support. For those looking for deeper, customized learning, we offer personal one-on-one mentorship programs tailored to your specific music production goals."
   },
   {
-    question: "Can I get feedback on my own music?",
-    answer: "Absolutely! Getting feedback on your own tracks is a core part of our mentorship. We'll analyze your productions, suggest improvements, and guide you through professional mixing and mastering techniques."
+    question: "How long is each music production class?",
+    answer: "Weekly group sessions last between 60 to 90 minutes. We also offer extended 120-minute sessions for students seeking an intensive learning experience. One-on-one mentorship classes typically run for 90 minutes and are scheduled with flexible timing."
+  },
+  {
+    question: "What software do students learn during the course?",
+    answer: "Students are trained on industry-standard digital audio workstations (DAWs) such as Logic Pro X, Ableton Live, and other professional music production tools. We also provide access to high-quality sample libraries, VST plugins, and virtual instruments used in modern music production."
+  },
+  {
+    question: "Is there ongoing support after completing the music production course?",
+    answer: "Yes, students enrolled in our premium courses receive lifetime access to mentorship support. You'll also be part of an exclusive alumni network with career guidance, music industry opportunities, and long-term support to help you succeed as a professional music producer."
   }
 ] as const;
 
@@ -52,7 +60,7 @@ const FAQSection = () => {
         <div className="max-w-4xl mx-auto">
           <header className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold mb-4 text-gray-900">
-              Frequently Asked Questions <span className="text-red-600">(FAQs)</span>
+              Common Inquiries About <span className="text-red-600">My Mentorship</span>
             </h2>
             <p className="text-gray-600 max-w-2xl mx-auto leading-relaxed">
               Explore answers to the most common questions about our music mentorship program, designed to help you excel in your musical journey.
