@@ -152,10 +152,10 @@ const CourseDetailsContent = ({
                 </div>
 
                 {/* CTA Buttons */}
-                <div className={`flex flex-col sm:flex-row gap-3 sm:gap-4 ${!showPricing ? 'max-w-lg mx-auto' : ''}`}>
+                <div className={`flex ${!showPricing ? 'max-w-lg mx-auto' : ''}`}>
                   <Button 
                     onClick={handleApplyNow}
-                    className={`flex-1 h-11 sm:h-12 text-sm sm:text-base font-semibold shadow-lg transition-all duration-300 hover:scale-105 ${
+                    className={`w-full h-11 sm:h-12 text-sm sm:text-base font-semibold shadow-lg transition-all duration-300 hover:scale-105 ${
                       courseType === "individual"
                         ? "bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-black"
                         : "bg-gradient-to-r from-red-600 to-red-500 hover:from-red-700 hover:to-red-600 text-white"
@@ -163,13 +163,6 @@ const CourseDetailsContent = ({
                   >
                     <Zap className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
                     Apply Now
-                  </Button>
-                  <Button 
-                    variant="outline" 
-                    className="flex-1 sm:flex-none h-11 sm:h-12 text-sm sm:text-base border-2 hover:bg-gray-50"
-                  >
-                    <Play className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
-                    Watch Demo
                   </Button>
                 </div>
               </div>
