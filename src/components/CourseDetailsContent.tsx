@@ -13,7 +13,7 @@ import {
   Zap
 } from "lucide-react";
 import { useStudentForm } from "@/hooks/useStudentForm";
-import StudentDataForm from "@/components/StudentDataForm";
+import EnhancedStudentForm from "@/components/EnhancedStudentForm";
 import SuccessPopup from "@/components/SuccessPopup";
 
 interface CourseDetailsContentProps {
@@ -68,8 +68,8 @@ const CourseDetailsContent = ({
 
   return (
     <div className="pt-16 md:pt-20">
-      {/* Student Data Form */}
-      <StudentDataForm 
+      {/* Enhanced Student Form with OTP */}
+      <EnhancedStudentForm 
         open={showStudentForm} 
         onOpenChange={setShowStudentForm}
         onSuccess={handleFormSuccess}
