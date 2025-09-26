@@ -89,11 +89,6 @@
     line-height: 1.6;
   }
 
-  /* Critical performance optimizations */
-  img, video {
-    content-visibility: auto;
-    contain-intrinsic-size: 1px 1000px;
-  }
 
   /* Performance optimizations */
   .gpu-layer {
@@ -101,10 +96,6 @@
     transform: translateZ(0);
   }
 
-  /* Critical above-the-fold optimization */
-  .critical-above-fold {
-    contain: layout style paint;
-  }
 
   /* Lazy loading placeholders */
   .lazy-placeholder {
@@ -122,7 +113,6 @@
   img, video, iframe {
     max-width: 100%;
     height: auto;
-    aspect-ratio: attr(width) / attr(height);
   }
 
   /* Font display optimization */
@@ -150,151 +140,8 @@
     }
   }
 
-  /* Optimize for touch devices */
-  @media (hover: none) and (pointer: coarse) {
-    .hover\:scale-105:hover,
-    .hover\:scale-\[1\.02\]:hover,
-    .hover\:scale-\[1\.03\]:hover {
-      transform: none;
-    }
-    
-    .hover\:-translate-y-2:hover,
-    .hover\:-translate-y-3:hover {
-      transform: none;
-    }
-  }
 }
 
-@layer utilities {
-  /* High-performance animations */
-  @keyframes fade-in-up {
-    0% {
-      opacity: 0;
-      transform: translate3d(0, 20px, 0);
-    }
-    100% {
-      opacity: 1;
-      transform: translate3d(0, 0, 0);
-    }
-  }
-
-  @keyframes skeleton-loading {
-    0% { background-color: hsl(210, 40%, 96%); }
-    50% { background-color: hsl(210, 40%, 93%); }
-    100% { background-color: hsl(210, 40%, 96%); }
-  }
-
-  /* Container queries support */
-  .container-responsive {
-    container-type: inline-size;
-    @apply w-full max-w-8xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16;
-  }
-
-  .text-responsive {
-    @apply text-lg sm:text-xl md:text-2xl;
-  }
-
-  .heading-responsive {
-    @apply text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-display;
-  }
-  
-  .subheading-responsive {
-    @apply text-xl sm:text-2xl md:text-3xl lg:text-4xl font-display;
-  }
-
-  /* Enhanced typography utilities */
-  .text-display {
-    @apply font-display;
-  }
-  
-  .text-enhanced {
-    @apply text-lg leading-relaxed;
-  }
-
-  /* Performance-optimized card utilities */
-  .card-premium {
-    @apply shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-2xl;
-    will-change: box-shadow;
-    contain: layout style paint;
-  }
-
-  /* Animation controls with accessibility */
-  @media (prefers-reduced-motion: no-preference) {
-    .animate-fade-in-up {
-      animation: fade-in-up 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-    }
-    
-    .animate-skeleton {
-      animation: skeleton-loading 1.5s ease-in-out infinite;
-    }
-  }
-
-  /* Reduced motion fallbacks */
-  @media (prefers-reduced-motion: reduce) {
-    .animate-fade-in-up,
-    .animate-skeleton {
-      animation: none;
-    }
-
-    .card-premium:hover,
-    .hover-optimize:hover {
-      transform: none;
-    }
-    
-    * {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-    }
-  }
-
-  /* Enhanced focus styles for accessibility */
-  .focus-visible-ring {
-    @apply focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-red-500 focus-visible:ring-offset-4;
-  }
-
-  /* Text utilities */
-  .line-clamp-1 {
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-
-  .line-clamp-2 {
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-
-  .line-clamp-3 {
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-
-  /* Performance utilities */
-  .gpu-accelerated {
-    transform: translateZ(0);
-    backface-visibility: hidden;
-    perspective: 1000px;
-    contain: layout style paint;
-  }
-  
-  .contain-layout {
-    contain: layout;
-  }
-  
-  .contain-paint {
-    contain: paint;
-  }
-  
-  .loading-skeleton {
-    @apply animate-skeleton bg-gray-200 rounded;
-  }
-}
 
 /* Critical loading optimizations */
 @media (max-width: 640px) {
