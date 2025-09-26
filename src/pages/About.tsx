@@ -30,8 +30,7 @@ const About = () => {
                 <span className="text-transparent bg-gradient-to-r from-red-600 via-pink-600 to-purple-600 bg-clip-text">
                   Your Journey
                 </span>
-                <br />
-                <span className="text-gray-800">Starts Here</span>
+                <span className="text-gray-800"> Starts Here</span>
               </h1>
             </div>
 
