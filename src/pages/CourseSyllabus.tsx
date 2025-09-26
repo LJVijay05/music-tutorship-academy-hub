@@ -326,7 +326,7 @@ const CourseSyllabus = () => {
                 </div>
               )}
               
-              <h1 className={`text-4xl md:text-5xl font-bold mb-4 ${isPremium ? 'text-amber-900' : 'text-gray-900'}`}>
+              <h1 className={`text-4xl md:text-5xl font-bold mb-4 animate-fade-in ${isPremium ? 'text-amber-900' : 'text-gray-900'}`}>
                 {course.title}
               </h1>
               <p className="text-xl text-gray-600 mb-8">
