@@ -221,6 +221,11 @@ const EnhancedDemoBookingForm = ({ open, onOpenChange, onSuccess }: EnhancedDemo
     "Demo Booking Details", 
     "Mobile Verification"
   ];
+  const canContinueStep2 = Boolean(
+    demoBookingForm?.watch?.("selectedDate") &&
+    demoBookingForm?.watch?.("selectedTime") &&
+    ((demoBookingForm?.watch?.("interests")?.length ?? 0) > 0)
+  );
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -343,31 +348,34 @@ const EnhancedDemoBookingForm = ({ open, onOpenChange, onSuccess }: EnhancedDemo
                     />
                   </div>
 
-                  {/* Time Slots - Only show when date is selected */}
-                  {demoBookingForm.watch("selectedDate") && (
-                    <div className="bg-muted/30 rounded-xl p-4 mb-6">
-                      <FormField
-                        control={demoBookingForm.control}
-                        name="selectedTime"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel className="text-lg font-semibold flex items-center gap-2 mb-4">
-                              <Clock className="w-5 h-5 text-primary" />
-                              Available Time Slots *
-                            </FormLabel>
-                            <p className="text-sm text-muted-foreground mb-4">All times are in IST</p>
-                            <FormControl>
-                              <div className="bg-background rounded-lg p-4 shadow-sm">
-                                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
-                                  {timeSlots.map(({ time, isBooked }) => (
+                  {/* Time Slots */}
+                  <div className="bg-muted/30 rounded-xl p-4 mb-6">
+                    <FormField
+                      control={demoBookingForm.control}
+                      name="selectedTime"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-lg font-semibold flex items-center gap-2 mb-1">
+                            <Clock className="w-5 h-5 text-primary" />
+                            Available Time Slots *
+                          </FormLabel>
+                          <p className="text-sm text-muted-foreground mb-4">
+                            {demoBookingForm.watch("selectedDate") ? "All times are in IST" : "Select a date to enable time slots"}
+                          </p>
+                          <FormControl>
+                            <div className="bg-background rounded-lg p-4 shadow-sm">
+                              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+                                {timeSlots.map(({ time, isBooked }) => {
+                                  const isDisabled = isBooked || !demoBookingForm.watch("selectedDate");
+                                  return (
                                     <button
                                       key={time}
                                       type="button"
-                                      onClick={() => !isBooked && field.onChange(time)}
-                                      disabled={isBooked}
+                                      onClick={() => !isDisabled && field.onChange(time)}
+                                      disabled={isDisabled}
                                       className={cn(
                                         "p-3 rounded-lg text-sm font-medium transition-all border min-h-[50px]",
-                                        isBooked 
+                                        isDisabled
                                           ? "bg-muted text-muted-foreground border-muted cursor-not-allowed opacity-50"
                                           : field.value === time
                                             ? "bg-primary text-primary-foreground border-primary shadow-md"
@@ -377,16 +385,16 @@ const EnhancedDemoBookingForm = ({ open, onOpenChange, onSuccess }: EnhancedDemo
                                       {time}
                                       {isBooked && <span className="block text-xs mt-1 opacity-75">Booked</span>}
                                     </button>
-                                  ))}
-                                </div>
+                                  );
+                                })}
                               </div>
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    </div>
-                  )}
+                            </div>
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
 
                   {/* Course Interests */}
                   <FormField
@@ -433,12 +441,12 @@ const EnhancedDemoBookingForm = ({ open, onOpenChange, onSuccess }: EnhancedDemo
                     )}
                   />
 
-                  <div className="flex justify-between">
+                  <div className="sticky bottom-0 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80 border-t mt-6 pt-4 flex justify-between">
                     <Button type="button" variant="outline" onClick={goBack} className="flex items-center gap-2">
                       <ArrowLeft className="w-4 h-4" />
                       Back
                     </Button>
-                    <Button type="submit" className="px-8">
+                    <Button type="submit" className="px-8" disabled={!canContinueStep2}>
                       Continue
                     </Button>
                   </div>
