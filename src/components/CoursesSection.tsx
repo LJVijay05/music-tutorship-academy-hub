@@ -3,7 +3,7 @@ import { Users, User, Star, CheckCircle, Info } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "react-router-dom";
-import StudentDataForm from "./StudentDataForm";
+import EnhancedStudentForm from "./EnhancedStudentForm";
 import SuccessPopup from "./SuccessPopup";
 import { useStudentForm } from "@/hooks/useStudentForm";
 import { memo, useCallback, useState, useMemo } from "react";
@@ -261,7 +261,7 @@ const CoursesSection = memo(({ showOnlyFeatured = false }: { showOnlyFeatured?: 
         </div>
       </section>
 
-      <StudentDataForm 
+      <EnhancedStudentForm 
         open={showStudentForm} 
         onOpenChange={closeForm}
         onSuccess={handleFormSuccess}
