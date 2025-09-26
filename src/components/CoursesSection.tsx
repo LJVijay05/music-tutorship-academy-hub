@@ -115,20 +115,19 @@ const CoursesSection = memo(({ showOnlyFeatured = false }: { showOnlyFeatured?: 
   const handleEnquireClick = useCallback((courseId: string) => {
     console.log('CoursesSection: Enquire Now clicked for course:', courseId);
     setSelectedCourseId(courseId);
-    
-    // For Essential Producer Bootcamp, redirect directly to enrollment page
-    if (courseId === "crash-course") {
-      navigate("/essential-bootcamp-enrollment");
-      return;
-    }
-    
+    // Always open the form first; redirect happens after successful submission
     openForm();
-  }, [openForm, navigate]);
+  }, [openForm]);
 
   const handleFormSuccess = useCallback(() => {
     console.log('CoursesSection: Student form submitted successfully');
-    showSuccess();
-  }, [showSuccess]);
+    // After OTP verification and form completion, redirect to payment/enrollment
+    if (selectedCourseId === 'crash-course') {
+      navigate('/essential-bootcamp-enrollment');
+    } else {
+      navigate('/enrollment');
+    }
+  }, [navigate, selectedCourseId]);
 
   return (
     <>
