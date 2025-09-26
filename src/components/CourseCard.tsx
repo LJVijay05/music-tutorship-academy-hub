@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { CheckCircle, Clock, Star, Info } from "lucide-react";
 import { Link } from "react-router-dom";
-import StudentDataForm from "./StudentDataForm";
+import EnhancedStudentForm from "./EnhancedStudentForm";
 import SuccessPopup from "./SuccessPopup";
 import { useStudentForm } from "@/hooks/useStudentForm";
 import { memo, useCallback } from "react";
@@ -185,7 +185,7 @@ const CourseCard = memo(({
         </Card>
       </article>
 
-      <StudentDataForm 
+      <EnhancedStudentForm 
         open={showStudentForm} 
         onOpenChange={closeForm}
         onSuccess={handleFormSuccess}
