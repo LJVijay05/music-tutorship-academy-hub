@@ -7,9 +7,10 @@ const AboutSection = () => {
   return (
     <section className="py-16 lg:py-20 bg-gradient-to-br from-background to-muted/20 relative overflow-hidden">
       {/* Elegant Background Elements */}
-      <div className="absolute inset-0 opacity-30">
-        <div className="absolute top-20 left-20 w-32 h-32 bg-gradient-to-r from-primary/10 to-accent/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-20 right-20 w-40 h-40 bg-gradient-to-r from-accent/10 to-primary/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+      <div className="absolute inset-0 opacity-30 animate-fade-in">
+        <div className="absolute top-20 left-20 w-32 h-32 bg-gradient-to-r from-primary/10 to-accent/10 rounded-full blur-3xl animate-[float_6s_ease-in-out_infinite]"></div>
+        <div className="absolute bottom-20 right-20 w-40 h-40 bg-gradient-to-r from-accent/10 to-primary/10 rounded-full blur-3xl animate-[float_8s_ease-in-out_infinite_reverse] opacity-80"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-24 bg-gradient-to-r from-red-400/5 to-pink-400/5 rounded-full blur-2xl animate-[pulse_4s_ease-in-out_infinite]"></div>
       </div>
 
       <div className="container mx-auto px-6 relative z-10">
