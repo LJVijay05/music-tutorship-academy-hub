@@ -474,20 +474,24 @@ const EnhancedDemoBookingForm = ({ open, onOpenChange, onSuccess }: EnhancedDemo
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel className="sr-only">Enter OTP</FormLabel>
-                        <FormControl>
-                          <div className="flex justify-center">
-                            <InputOTP maxLength={6} {...field}>
-                              <InputOTPGroup>
-                                <InputOTPSlot index={0} />
-                                <InputOTPSlot index={1} />
-                                <InputOTPSlot index={2} />
-                                <InputOTPSlot index={3} />
-                                <InputOTPSlot index={4} />
-                                <InputOTPSlot index={5} />
-                              </InputOTPGroup>
-                            </InputOTP>
-                          </div>
-                        </FormControl>
+                         <FormControl>
+                           <div className="flex justify-center">
+                             <InputOTP 
+                               maxLength={6} 
+                               value={field.value || ""}
+                               onChange={field.onChange}
+                             >
+                               <InputOTPGroup>
+                                 <InputOTPSlot index={0} />
+                                 <InputOTPSlot index={1} />
+                                 <InputOTPSlot index={2} />
+                                 <InputOTPSlot index={3} />
+                                 <InputOTPSlot index={4} />
+                                 <InputOTPSlot index={5} />
+                               </InputOTPGroup>
+                             </InputOTP>
+                           </div>
+                         </FormControl>
                         <FormMessage />
                       </FormItem>
                     )}
