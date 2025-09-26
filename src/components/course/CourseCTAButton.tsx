@@ -14,11 +14,7 @@ const CourseCTAButton = ({ courseId, isPremium = false, className = "", children
   const { openForm } = useStudentForm();
 
   const handleClick = () => {
-    if (courseId === "crash-course") {
-      navigate("/essential-bootcamp-enrollment");
-    } else {
-      openForm();
-    }
+    openForm();
   };
 
   const buttonStyles = isPremium 
