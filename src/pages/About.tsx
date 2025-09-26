@@ -157,17 +157,17 @@ const About = () => {
             </div>
 
             {/* Spotify Playlist Section */}
-            <div className="mb-16">
-              <div className="max-w-4xl mx-auto">
-                <div className="text-center mb-8">
-                  <h4 className="text-2xl font-bold text-gray-800 mb-3">
+            <div className="mb-20 mt-12">
+              <div className="max-w-5xl mx-auto">
+                <div className="text-center mb-10">
+                  <h4 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
                     Listen to My <span className="text-transparent bg-gradient-to-r from-red-600 to-pink-600 bg-clip-text">Latest Work</span>
                   </h4>
-                  <p className="text-lg text-gray-600">
-                    Explore my music production portfolio on Spotify
+                  <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Explore my music production portfolio on Spotify - hear the tracks that showcase my expertise
                   </p>
                 </div>
-                <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-200">
+                <div className="bg-white rounded-3xl p-8 md:p-10 shadow-xl border border-gray-200 hover:shadow-2xl transition-all duration-300">
                   <iframe 
                     data-testid="embed-iframe" 
                     style={{borderRadius:'12px'}} 
