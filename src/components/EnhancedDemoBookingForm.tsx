@@ -224,7 +224,7 @@ const EnhancedDemoBookingForm = ({ open, onOpenChange, onSuccess }: EnhancedDemo
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="w-[95vw] max-w-4xl max-h-[95vh] mx-auto bg-background rounded-2xl p-0 border shadow-2xl overflow-hidden">
+      <DialogContent className="w-[95vw] max-w-5xl max-h-[90vh] mx-auto bg-background rounded-2xl p-0 border shadow-2xl overflow-hidden">
         <DialogTitle className="sr-only">Book Your Free Music Production Demo Session</DialogTitle>
         <DialogDescription className="sr-only">Complete demo booking with mobile verification</DialogDescription>
         
@@ -315,80 +315,70 @@ const EnhancedDemoBookingForm = ({ open, onOpenChange, onSuccess }: EnhancedDemo
               <Form {...demoBookingForm}>
                 <form onSubmit={demoBookingForm.handleSubmit(handleDemoBookingSubmit)} className="space-y-6">
                   
-                  {/* Date and Time Selection */}
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    {/* Calendar */}
-                    <div className="bg-muted/30 rounded-xl p-4">
-                      <FormField
-                        control={demoBookingForm.control}
-                        name="selectedDate"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel className="text-lg font-semibold flex items-center gap-2">
-                              <CalendarIcon className="w-5 h-5 text-primary" />
-                              Select Date *
-                            </FormLabel>
-                            <FormControl>
-                              <div className="bg-background rounded-lg p-3 shadow-sm">
-                                <Calendar
-                                  mode="single"
-                                  selected={field.value}
-                                  onSelect={field.onChange}
-                                  disabled={disabledDays}
-                                  className="p-3 pointer-events-auto w-full"
-                                />
-                              </div>
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    </div>
+                  {/* Date Selection */}
+                  <div className="bg-muted/30 rounded-xl p-4 mb-6">
+                    <FormField
+                      control={demoBookingForm.control}
+                      name="selectedDate"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-lg font-semibold flex items-center gap-2 mb-4">
+                            <CalendarIcon className="w-5 h-5 text-primary" />
+                            Select Date *
+                          </FormLabel>
+                          <FormControl>
+                            <div className="bg-background rounded-lg p-3 shadow-sm max-w-fit mx-auto">
+                              <Calendar
+                                mode="single"
+                                selected={field.value}
+                                onSelect={field.onChange}
+                                disabled={disabledDays}
+                                className="p-3 pointer-events-auto"
+                              />
+                            </div>
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
 
-                    {/* Time Slots */}
-                    <div className="bg-muted/30 rounded-xl p-4">
+                  {/* Time Slots - Only show when date is selected */}
+                  {demoBookingForm.watch("selectedDate") && (
+                    <div className="bg-muted/30 rounded-xl p-4 mb-6">
                       <FormField
                         control={demoBookingForm.control}
                         name="selectedTime"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="text-lg font-semibold flex items-center gap-2">
+                            <FormLabel className="text-lg font-semibold flex items-center gap-2 mb-4">
                               <Clock className="w-5 h-5 text-primary" />
                               Available Time Slots *
                             </FormLabel>
                             <p className="text-sm text-muted-foreground mb-4">All times are in IST</p>
                             <FormControl>
-                              <div className="bg-background rounded-lg p-3 shadow-sm h-64 overflow-y-auto">
-                                {demoBookingForm.watch("selectedDate") ? (
-                                  <div className="grid grid-cols-2 gap-2">
-                                    {timeSlots.map(({ time, isBooked }) => (
-                                      <button
-                                        key={time}
-                                        type="button"
-                                        onClick={() => !isBooked && field.onChange(time)}
-                                        disabled={isBooked}
-                                        className={cn(
-                                          "p-3 rounded-lg text-sm font-medium transition-all border",
-                                          isBooked 
-                                            ? "bg-muted text-muted-foreground border-muted cursor-not-allowed"
-                                            : field.value === time
-                                              ? "bg-primary text-primary-foreground border-primary"
-                                              : "bg-secondary text-secondary-foreground border-border hover:bg-secondary/80"
-                                        )}
-                                      >
-                                        {time}
-                                        {isBooked && <span className="block text-xs mt-1">Booked</span>}
-                                      </button>
-                                    ))}
-                                  </div>
-                                ) : (
-                                  <div className="flex items-center justify-center h-full text-muted-foreground text-center">
-                                    <div>
-                                      <CalendarIcon className="w-12 h-12 mx-auto mb-2 opacity-50" />
-                                      <p className="text-sm">Please select a date first</p>
-                                    </div>
-                                  </div>
-                                )}
+                              <div className="bg-background rounded-lg p-4 shadow-sm">
+                                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+                                  {timeSlots.map(({ time, isBooked }) => (
+                                    <button
+                                      key={time}
+                                      type="button"
+                                      onClick={() => !isBooked && field.onChange(time)}
+                                      disabled={isBooked}
+                                      className={cn(
+                                        "p-3 rounded-lg text-sm font-medium transition-all border min-h-[50px]",
+                                        isBooked 
+                                          ? "bg-muted text-muted-foreground border-muted cursor-not-allowed opacity-50"
+                                          : field.value === time
+                                            ? "bg-primary text-primary-foreground border-primary shadow-md"
+                                            : "bg-background text-foreground border-border hover:bg-secondary hover:border-primary/50"
+                                      )}
+                                    >
+                                      {time}
+                                      {isBooked && <span className="block text-xs mt-1 opacity-75">Booked</span>}
+                                    </button>
+                                  ))}
+                                </div>
                               </div>
                             </FormControl>
                             <FormMessage />
@@ -396,7 +386,7 @@ const EnhancedDemoBookingForm = ({ open, onOpenChange, onSuccess }: EnhancedDemo
                         )}
                       />
                     </div>
-                  </div>
+                  )}
 
                   {/* Course Interests */}
                   <FormField
