@@ -80,7 +80,7 @@ const CourseCard = memo(({
   return (
     <>
       <article className="group w-full max-w-lg h-full mx-auto">
-        <Card className={`overflow-hidden border-0 shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300 rounded-2xl h-full bg-white relative ${isPremium ? 'ring-2 ring-amber-200/60' : ''} w-full`}>
+        <Card className={`overflow-hidden border-0 shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300 rounded-2xl h-full bg-white relative ${isPremium ? 'ring-2 ring-amber-200/60' : ''} w-full flex flex-col`}>
           {/* Course Type Icon - moved to top-left as floating badge */}
           <div className="absolute top-4 left-4 z-30">
             <div className="w-8 h-8 bg-white/90 backdrop-blur-sm rounded-lg flex items-center justify-center border border-white/40 shadow-md">
@@ -126,7 +126,7 @@ const CourseCard = memo(({
             </div>
           </header>
 
-          <CardContent className="p-6 md:p-7 flex flex-col min-h-[400px]">
+          <CardContent className="p-6 md:p-7 flex flex-col flex-grow">
             {/* Title and Level Section */}
             <div className="mb-6">
               <h3 className="text-lg md:text-xl font-bold mb-3 text-gray-900 leading-tight line-clamp-2">{title}</h3>
@@ -136,7 +136,7 @@ const CourseCard = memo(({
               </div>
             </div>
             
-            {/* Features Section - flex-grow to push buttons to bottom */}
+            {/* Features Section - takes available space */}
             <div className="flex-grow mb-6">
               <ul className="space-y-2.5 mb-5 text-sm md:text-base" role="list">
                 {features.slice(0, 4).map((feature, index) => (
@@ -153,7 +153,7 @@ const CourseCard = memo(({
               </ul>
             </div>
             
-            {/* Offer Banner - positioned above buttons */}
+            {/* Offer Banner - consistent position */}
             <div className={`flex items-start gap-3 p-4 ${bgColor} rounded-xl border-2 ${borderColor} text-sm md:text-base shadow-lg mb-6`}>
               <Clock className={`w-5 h-5 ${textColor.replace('text-', 'text-').replace('-700', '-600')} flex-shrink-0 mt-0.5`} />
               <div>
@@ -162,8 +162,8 @@ const CourseCard = memo(({
               </div>
             </div>
             
-            {/* Action Buttons - Always at bottom */}
-            <div className="flex gap-3 mt-auto">
+            {/* Action Buttons - Always aligned at bottom */}
+            <div className="flex gap-3">
               <Button 
                 variant="outline" 
                 className="border-2 border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400 transition-colors duration-200 h-11 md:h-12 rounded-xl font-bold text-sm md:text-base flex-1 shadow-md"
