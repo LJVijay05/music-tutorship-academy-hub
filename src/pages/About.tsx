@@ -156,6 +156,34 @@ const About = () => {
               </p>
             </div>
 
+            {/* Spotify Playlist Section */}
+            <div className="mb-16">
+              <div className="max-w-4xl mx-auto">
+                <div className="text-center mb-8">
+                  <h4 className="text-2xl font-bold text-gray-800 mb-3">
+                    Listen to My <span className="text-transparent bg-gradient-to-r from-red-600 to-pink-600 bg-clip-text">Latest Work</span>
+                  </h4>
+                  <p className="text-lg text-gray-600">
+                    Explore my music production portfolio on Spotify
+                  </p>
+                </div>
+                <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-200">
+                  <iframe 
+                    data-testid="embed-iframe" 
+                    style={{borderRadius:'12px'}} 
+                    src="https://open.spotify.com/embed/playlist/1Baqr6iqDkXbHUCXXK8ThG?utm_source=generator" 
+                    width="100%" 
+                    height="352" 
+                    frameBorder="0" 
+                    allowFullScreen 
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                    loading="lazy"
+                    title="Vijay's Music Production Portfolio"
+                  />
+                </div>
+              </div>
+            </div>
+
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[1, 2, 3, 4, 5, 6].map((item) => (
                 <div key={item} className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 group border border-gray-100">
