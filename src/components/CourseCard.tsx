@@ -68,15 +68,8 @@ const CourseCard = memo(({
 
   const handleEnquireClick = useCallback(() => {
     console.log(`CourseCard: Enquire clicked for course ${courseId}`);
-    
-    // For Essential Producer Bootcamp, redirect directly to enrollment page
-    if (courseId === "crash-course") {
-      navigate("/essential-bootcamp-enrollment");
-      return;
-    }
-    
     openForm();
-  }, [courseId, openForm, navigate]);
+  }, [courseId, openForm]);
 
   const handleFormSuccess = useCallback(() => {
     console.log(`CourseCard: Student form submitted successfully for course ${courseId}`);
