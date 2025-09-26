@@ -68,22 +68,22 @@ const About = () => {
                   </h2>
                   
                   <div className="space-y-6 text-lg text-gray-700 leading-relaxed">
-                    <p className="animate-fade-in" style={{ animationDelay: '0.2s' }}>
+                    <p className="animate-fade-in">
                       With over a decade of experience in music production, mixing, sound design, and music theory, I've dedicated my career to helping aspiring musicians unlock their creative potential and achieve professional success.
                     </p>
                     
-                    <p className="animate-fade-in" style={{ animationDelay: '0.4s' }}>
+                    <p className="animate-fade-in">
                       My journey spans working with renowned artists across various genres, producing tracks that have reached millions of listeners, and mentoring hundreds of students who have gone on to build successful music careers.
                     </p>
                     
-                    <p className="animate-fade-in" style={{ animationDelay: '0.6s' }}>
+                    <p className="animate-fade-in">
                       I believe that music production is not just about technology—it's about storytelling, emotion, and connecting with your audience. Through personalized mentorship, I guide students on a transformative journey that goes beyond software to truly understanding the art and business of music creation.
                     </p>
                   </div>
                 </div>
                 
                 {/* CTA Button */}
-                <div className="pt-8 animate-fade-in" style={{ animationDelay: '0.8s' }}>
+                <div className="pt-8 animate-fade-in">
                   <Button asChild size="lg" className="bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700 text-white text-xl px-16 py-8 rounded-2xl shadow-2xl hover:shadow-red-200 transition-all duration-500 hover:scale-105 group relative overflow-hidden border-0">
                     <Link to="/courses">
                       <span className="absolute inset-0 bg-gradient-to-r from-red-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
