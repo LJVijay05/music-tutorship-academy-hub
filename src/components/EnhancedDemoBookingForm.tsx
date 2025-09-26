@@ -234,14 +234,6 @@ const EnhancedDemoBookingForm = ({ open, onOpenChange, onSuccess }: EnhancedDemo
         <DialogDescription className="sr-only">Complete demo booking with mobile verification</DialogDescription>
         
         <div className="relative h-full overflow-y-auto">
-          {/* Close Button */}
-          <button
-            onClick={() => onOpenChange(false)}
-            className="absolute top-4 right-4 z-20 text-muted-foreground hover:text-foreground transition-colors bg-muted/50 rounded-full p-2 hover:bg-muted"
-            aria-label="Close demo booking dialog"
-          >
-            <X className="w-5 h-5" />
-          </button>
           
           {/* Header */}
           <div className="text-center px-6 pt-6 pb-4">
