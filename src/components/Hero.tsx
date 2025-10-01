@@ -5,11 +5,20 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import EnhancedDemoBookingForm from "./EnhancedDemoBookingForm";
 
-// Counter Animation Component
+// Optimized Counter - Deferred animation
 const AnimatedCounter = ({ target, suffix = "", duration = 2000 }: { target: number; suffix?: string; duration?: number }) => {
   const [count, setCount] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
+    // Defer counter animation to improve initial load
+    const visibilityTimer = setTimeout(() => setIsVisible(true), 300);
+    return () => clearTimeout(visibilityTimer);
+  }, []);
+
+  useEffect(() => {
+    if (!isVisible) return;
+
     const startTime = Date.now();
     const endTime = startTime + duration;
 
@@ -17,7 +26,6 @@ const AnimatedCounter = ({ target, suffix = "", duration = 2000 }: { target: num
       const now = Date.now();
       const progress = Math.min((now - startTime) / duration, 1);
       
-      // Easing function for smooth animation
       const easeOutQuad = 1 - (1 - progress) * (1 - progress);
       const currentCount = Math.floor(easeOutQuad * target);
       
@@ -30,12 +38,8 @@ const AnimatedCounter = ({ target, suffix = "", duration = 2000 }: { target: num
       }
     };
 
-    const timer = setTimeout(() => {
-      updateCount();
-    }, 500);
-
-    return () => clearTimeout(timer);
-  }, [target, duration]);
+    updateCount();
+  }, [target, duration, isVisible]);
 
   return (
     <span className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 group-hover:text-red-600 transition-colors duration-300">
@@ -49,11 +53,10 @@ const Hero = () => {
 
   return (
     <section className="relative min-h-screen bg-gradient-to-br from-gray-50 via-white to-red-50 overflow-hidden">
-      {/* Dynamic Background Elements - Optimized for performance */}
-      <div className="absolute inset-0 opacity-20 will-change-transform">
-        <div className="absolute top-10 sm:top-20 left-10 sm:left-20 w-32 sm:w-48 lg:w-64 h-32 sm:h-48 lg:h-64 bg-gradient-to-r from-red-500 to-pink-500 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-10 sm:bottom-20 right-10 sm:right-20 w-48 sm:w-64 lg:w-96 h-48 sm:h-64 lg:h-96 bg-gradient-to-r from-purple-500 to-red-500 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute top-1/2 left-1/2 w-24 sm:w-32 lg:w-48 h-24 sm:h-32 lg:h-48 bg-gradient-to-r from-pink-500 to-red-500 rounded-full blur-3xl animate-pulse"></div>
+      {/* Optimized Background - Reduced blur complexity */}
+      <div className="absolute inset-0 opacity-15 pointer-events-none" aria-hidden="true">
+        <div className="absolute top-10 sm:top-20 left-10 sm:left-20 w-32 sm:w-48 lg:w-64 h-32 sm:h-48 lg:h-64 bg-gradient-to-r from-red-400 to-pink-400 rounded-full blur-2xl opacity-60"></div>
+        <div className="absolute bottom-10 sm:bottom-20 right-10 sm:right-20 w-48 sm:w-64 lg:w-96 h-48 sm:h-64 lg:h-96 bg-gradient-to-r from-purple-400 to-red-400 rounded-full blur-2xl opacity-60"></div>
       </div>
       
       <div className="relative z-10 container mx-auto px-4 lg:px-6 pt-20 sm:pt-28 lg:pt-32 pb-12 lg:pb-20">

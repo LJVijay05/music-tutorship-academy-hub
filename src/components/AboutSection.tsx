@@ -46,6 +46,8 @@ const AboutSection = () => {
                       src="/lovable-uploads/DSC04596.jpg"
                       alt="Vijay - Music Producer & Educator"
                       className="w-full h-full object-cover object-[58%_center]"
+                      loading="lazy"
+                      decoding="async"
                     />
                   </div>
                 </div>

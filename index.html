@@ -170,17 +170,18 @@
     <link rel="manifest" href="/site.webmanifest" />
     
     <!-- Performance optimizations -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="dns-prefetch" href="https://fonts.googleapis.com">
-    <link rel="dns-prefetch" href="https://images.unsplash.com">
     
-    <!-- Critical resource hints -->
-    <link rel="preload" href="/music-tutorship-logo.png" as="image" type="image/png">
-    <link rel="preload" href="/lovable-uploads/b3ac942f-a004-4e7e-a005-13fa36ac41a7.png" as="image" type="image/png">
+    <!-- Critical resource preloading with high priority -->
+    <link rel="preload" href="/music-tutorship-logo.png" as="image" type="image/png" fetchpriority="high">
+    <link rel="preload" href="/lovable-uploads/b3ac942f-a004-4e7e-a005-13fa36ac41a7.png" as="image" type="image/png" fetchpriority="high">
+    <link rel="preload" href="/lovable-uploads/DSC04596.jpg" as="image" type="image/jpeg">
     
-    <!-- Load Google Fonts with font-display: swap for performance -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Optimized Google Fonts loading with display=swap and preload -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap"></noscript>
     
     <!-- Moved critical CSS to src/index.css to avoid inline CSS parsing issues -->
     <meta name="generator" content="Music Tutorship Academy Hub - Lovable" />
