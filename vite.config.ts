@@ -20,58 +20,27 @@ export default defineConfig(({ mode }) => ({
     },
   },
   build: {
-    // Optimize chunk splitting for better caching and performance
+    // Optimize chunk splitting for better caching
     rollupOptions: {
       output: {
-        manualChunks: (id) => {
-          if (id.includes('node_modules')) {
-            if (id.includes('react') || id.includes('react-dom')) {
-              return 'vendor-react';
-            }
-            if (id.includes('@radix-ui')) {
-              return 'vendor-ui';
-            }
-            if (id.includes('react-router-dom')) {
-              return 'vendor-router';
-            }
-            if (id.includes('@tanstack/react-query')) {
-              return 'vendor-query';
-            }
-            if (id.includes('@supabase')) {
-              return 'vendor-supabase';
-            }
-            if (id.includes('lucide-react')) {
-              return 'vendor-icons';
-            }
-            return 'vendor-other';
-          }
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+          ui: ['@radix-ui/react-dialog', '@radix-ui/react-dropdown-menu'],
+          router: ['react-router-dom'],
+          query: ['@tanstack/react-query'],
+          supabase: ['@supabase/supabase-js'],
         },
-        chunkFileNames: 'assets/[name]-[hash].js',
-        entryFileNames: 'assets/[name]-[hash].js',
-        assetFileNames: 'assets/[name]-[hash].[ext]',
       },
     },
-    // Aggressive optimization settings
+    // Optimize build performance
     target: 'esnext',
     minify: 'esbuild',
     cssMinify: true,
     sourcemap: false,
-    cssCodeSplit: true,
-    reportCompressedSize: false,
-    chunkSizeWarningLimit: 1000,
   },
   optimizeDeps: {
-    include: [
-      'react', 
-      'react-dom', 
-      'react-router-dom', 
-      '@tanstack/react-query',
-      'lucide-react'
-    ],
+    include: ['react', 'react-dom', 'react-router-dom', '@tanstack/react-query'],
     exclude: ['@vite/client', '@vite/env'],
-    esbuildOptions: {
-      target: 'esnext'
-    }
   },
   esbuild: {
     // Remove console.log in production

@@ -30,8 +30,11 @@ const AboutMeCard = () => {
                 src="/lovable-uploads/31fe46dc-2cc5-4253-8b13-f7a401f8edc2.png"
                 alt="Vijay - Music Mentor"
                 className="w-full h-full object-cover"
-                loading="lazy"
-                decoding="async"
+                onLoad={() => console.log('Mentor image loaded successfully')}
+                onError={(e) => {
+                  console.error('Failed to load mentor image:', e);
+                  e.currentTarget.style.display = 'none';
+                }}
               />
               {/* Gradient Overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>

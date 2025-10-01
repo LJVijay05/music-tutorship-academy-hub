@@ -110,8 +110,6 @@ const MentorIntroSection = () => {
                       src="/lovable-uploads/8e4988dc-184a-4830-b569-64e9a67c6d19.png"
                       alt="Vijay - Music Producer & Educator"
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                      loading="lazy"
-                      decoding="async"
                     />
                     {/* Gradient Overlay */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>

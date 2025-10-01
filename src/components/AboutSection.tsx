@@ -43,11 +43,9 @@ const AboutSection = () => {
                 <div className="relative bg-card rounded-2xl p-6 border border-border shadow-lg hover:shadow-xl transition-all duration-300">
                   <div className="aspect-square rounded-xl overflow-hidden relative">
                     <img
-                      src="/lovable-uploads/DSC04596.jpg"
+                      src="/lovable-uploads/8e4988dc-184a-4830-b569-64e9a67c6d19.png"
                       alt="Vijay - Music Producer & Educator"
-                      className="w-full h-full object-cover object-[58%_center]"
-                      loading="lazy"
-                      decoding="async"
+                      className="w-full h-full object-cover"
                     />
                   </div>
                 </div>
