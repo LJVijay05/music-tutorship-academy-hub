@@ -45,7 +45,7 @@ const AboutSection = () => {
                     <img
                       src="/lovable-uploads/DSC04596.jpg"
                       alt="Vijay - Music Producer & Educator"
-                      className="w-full h-full object-cover object-[65%_center]"
+                      className="w-full h-full object-cover object-[58%_center]"
                     />
                   </div>
                 </div>
