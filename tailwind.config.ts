@@ -74,9 +74,9 @@ const config = {
 				},
 			},
 			fontFamily: {
-				sans: ["Inter", "system-ui", "-apple-system", "sans-serif"],
-				display: ["Playfair Display", "serif"],
-				body: ["Inter", "system-ui", "-apple-system", "sans-serif"],
+				sans: ["Inter", "sans-serif"],
+				display: ["Inter", "sans-serif"],
+				body: ["Inter", "sans-serif"],
 			},
 			fontSize: {
 				"2xs": ["0.625rem", { lineHeight: "0.75rem" }],
