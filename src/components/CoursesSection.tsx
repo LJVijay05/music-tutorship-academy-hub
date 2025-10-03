@@ -1,4 +1,3 @@
-
 import { Users, User, Star, CheckCircle, Info } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -8,6 +7,7 @@ import SuccessPopup from "./SuccessPopup";
 import { useStudentForm } from "@/hooks/useStudentForm";
 import { memo, useCallback, useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
+import { OptimizedImage } from "./OptimizedImage";
 
 const CoursesSection = memo(({ showOnlyFeatured = false }: { showOnlyFeatured?: boolean }) => {
   const navigate = useNavigate();
@@ -182,16 +182,15 @@ const CoursesSection = memo(({ showOnlyFeatured = false }: { showOnlyFeatured?: 
 
                   <header className={`h-40 md:h-44 bg-gradient-to-br ${course.gradientFrom} ${course.gradientTo} relative overflow-hidden`}>
                     <div className="absolute inset-0">
-                      {course.imageUrl ? (
-                        <img 
-                          src={course.imageUrl} 
-                          alt={course.title}
-                          className="w-full h-full object-cover"
-                          loading="lazy"
-                        />
-                      ) : (
-                        <div className="w-full h-full bg-gradient-to-br from-black/20 to-black/40" />
-                      )}
+                    {course.imageUrl ? (
+                      <OptimizedImage 
+                        src={course.imageUrl}
+                        alt={course.title}
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-gradient-to-br from-black/20 to-black/40" />
+                    )}
                     </div>
                   </header>
 

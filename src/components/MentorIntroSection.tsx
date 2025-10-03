@@ -8,8 +8,8 @@ const MentorIntroSection = () => {
     <section className="py-20 bg-gradient-to-br from-slate-50 via-white to-red-50 relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-20 right-20 w-96 h-96 bg-gradient-to-r from-red-500 to-pink-500 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-20 left-20 w-80 h-80 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full blur-3xl animate-bounce"></div>
+        <div className="absolute top-20 right-20 w-96 h-96 bg-gradient-to-r from-red-500 to-pink-500 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 left-20 w-80 h-80 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full blur-3xl"></div>
       </div>
       
       <div className="container mx-auto px-6 relative z-10">
@@ -98,7 +98,7 @@ const MentorIntroSection = () => {
             </div>
 
             {/* Right Content - Image Section */}
-            <div className="relative animate-slide-left">
+            <div className="relative">
               <div className="relative group">
                 {/* Glow Effect */}
                 <div className="absolute inset-0 bg-gradient-to-r from-red-500 via-pink-500 to-purple-500 rounded-3xl blur-2xl opacity-20 group-hover:opacity-30 transition-opacity duration-500 scale-110"></div>
@@ -109,14 +109,14 @@ const MentorIntroSection = () => {
                     <img
                       src="/lovable-uploads/8e4988dc-184a-4830-b569-64e9a67c6d19.png"
                       alt="Vijay - Music Producer & Educator"
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                      className="w-full h-full object-cover"
                     />
                     {/* Gradient Overlay */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>
                   </div>
                   
                   {/* Floating Music Badge */}
-                  <div className="absolute -top-6 -right-6 w-20 h-20 bg-gradient-to-r from-red-500 to-pink-500 rounded-full flex items-center justify-center shadow-2xl animate-bounce border-4 border-white">
+                  <div className="absolute -top-6 -right-6 w-20 h-20 bg-gradient-to-r from-red-500 to-pink-500 rounded-full flex items-center justify-center shadow-2xl border-4 border-white">
                     <Music className="w-8 h-8 text-white" />
                   </div>
                   

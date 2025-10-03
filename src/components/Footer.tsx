@@ -124,7 +124,7 @@ const Footer = () => {
         <div className="border-t border-gray-800 mt-12 pt-8 text-center">
           <p className="text-gray-400">
             © 2024 Music Tutorship. All rights reserved. | 
-            <a href="/privacy" className="text-red-600 hover:underline ml-1 font-medium">Privacy Policy</a> | 
+            <Link to="/privacy" className="text-red-600 hover:underline ml-1 font-medium">Privacy Policy</Link> | 
             <Link
               to="/terms"
               onClick={handleTermsClick}
