@@ -35,7 +35,7 @@ const AnimatedCounter = ({ target, suffix = "", duration = 2000 }: AnimatedCount
   }, [target, duration]);
 
   return (
-    <span className="text-5xl font-bold text-gray-900 mb-4 text-transparent bg-gradient-to-r from-red-600 to-pink-600 bg-clip-text">
+    <span className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900">
       {count}{suffix}
     </span>
   );

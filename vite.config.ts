@@ -20,30 +20,40 @@ export default defineConfig(({ mode }) => ({
     },
   },
   build: {
-    // Optimize chunk splitting for better caching
     rollupOptions: {
       output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom'],
-          ui: ['@radix-ui/react-dialog', '@radix-ui/react-dropdown-menu'],
-          router: ['react-router-dom'],
-          query: ['@tanstack/react-query'],
-          supabase: ['@supabase/supabase-js'],
+        manualChunks: (id) => {
+          if (id.includes('node_modules')) {
+            if (id.includes('react') || id.includes('react-dom')) {
+              return 'react-vendor';
+            }
+            if (id.includes('@radix-ui')) {
+              return 'radix-ui';
+            }
+            if (id.includes('react-router')) {
+              return 'router';
+            }
+            if (id.includes('@tanstack')) {
+              return 'query';
+            }
+            if (id.includes('supabase')) {
+              return 'supabase';
+            }
+            return 'vendor';
+          }
         },
       },
     },
-    // Optimize build performance
-    target: 'esnext',
+    target: 'es2015',
     minify: 'esbuild',
     cssMinify: true,
     sourcemap: false,
+    chunkSizeWarningLimit: 1000,
   },
   optimizeDeps: {
-    include: ['react', 'react-dom', 'react-router-dom', '@tanstack/react-query'],
-    exclude: ['@vite/client', '@vite/env'],
+    include: ['react', 'react-dom', 'react-router-dom'],
   },
   esbuild: {
-    // Remove console.log in production
-    drop: mode === 'production' ? ['console', 'debugger'] : [],
+    logOverride: { 'this-is-undefined-in-esm': 'silent' },
   },
 }));

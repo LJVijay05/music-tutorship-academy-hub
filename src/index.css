@@ -115,10 +115,6 @@
 }
 
 @layer utilities {
-  .critical-above-fold {
-    contain: layout style paint;
-  }
-
   .lazy-placeholder {
     background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
     background-size: 200% 100%;
@@ -132,21 +128,5 @@
     100% { 
       background-position: -200% 0; 
     }
-  }
-
-  .gpu-layer {
-    will-change: transform;
-    transform: translateZ(0);
-    backface-visibility: hidden;
-  }
-
-  .text-responsive {
-    font-size: clamp(0.875rem, 2.5vw, 1.125rem);
-    line-height: 1.6;
-  }
-
-  .heading-responsive {
-    font-size: clamp(1.5rem, 5vw, 3rem);
-    line-height: 1.2;
   }
 }
