@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Music, Users, Calendar, Award, Star, Sparkles } from "lucide-react";
-import { OptimizedImage } from "./OptimizedImage";
+import OptimizedImage from "./OptimizedImage";
 
 const AboutSection = () => {
   return (

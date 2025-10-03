@@ -13,7 +13,7 @@ interface OptimizedImageProps {
   onError?: () => void;
 }
 
-export const OptimizedImage = memo(({
+const OptimizedImage = memo(({
   src,
   alt,
   className = '',
@@ -82,3 +82,6 @@ export const OptimizedImage = memo(({
 });
 
 OptimizedImage.displayName = 'OptimizedImage';
+
+export { OptimizedImage };
+export default OptimizedImage;

@@ -7,7 +7,7 @@ import SuccessPopup from "./SuccessPopup";
 import { useStudentForm } from "@/hooks/useStudentForm";
 import { memo, useCallback, useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-import { OptimizedImage } from "./OptimizedImage";
+import OptimizedImage from "./OptimizedImage";
 
 const CoursesSection = memo(({ showOnlyFeatured = false }: { showOnlyFeatured?: boolean }) => {
   const navigate = useNavigate();
