@@ -106,20 +106,17 @@ const EnhancedDemoBookingForm = ({ open, onOpenChange, onSuccess }: EnhancedDemo
 
   // Step handlers
   const handlePersonalInfoSubmit = (data: PersonalInfoData) => {
-    console.log('Personal info submitted:', data);
     setFormData(prev => ({ ...prev, ...data }));
     setCurrentStep(2);
   };
 
   const handleDemoBookingSubmit = async (data: DemoBookingData) => {
-    console.log('Demo booking info submitted:', data);
     setFormData(prev => ({ ...prev, ...data }));
     await sendOTP();
     setCurrentStep(3);
   };
 
   const sendOTP = async () => {
-    console.log('Sending OTP...');
     setIsOTPSent(true);
     toast({
       title: "OTP Sent!",
@@ -128,7 +125,6 @@ const EnhancedDemoBookingForm = ({ open, onOpenChange, onSuccess }: EnhancedDemo
   };
 
   const handleOTPSubmit = async (data: OTPData) => {
-    console.log('OTP submitted:', data);
     setIsVerifyingOTP(true);
     
     try {
@@ -136,7 +132,6 @@ const EnhancedDemoBookingForm = ({ open, onOpenChange, onSuccess }: EnhancedDemo
       await new Promise(resolve => setTimeout(resolve, 2000));
       
       const completeData = { ...formData, ...data };
-      console.log('Demo booking complete:', completeData);
       
       // Save to localStorage
       localStorage.setItem('demoBookingData', JSON.stringify(completeData));

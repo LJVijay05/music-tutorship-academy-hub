@@ -29,7 +29,6 @@ const Courses = memo(() => {
   }), []);
 
   const handleDetailsClick = useCallback((courseId: string) => {
-    console.log('Details click handled via routing for course:', courseId);
   }, []);
 
   const courses = useMemo(() => [

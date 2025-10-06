@@ -6,7 +6,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import StudentDataForm from "./StudentDataForm";
 import SuccessPopup from "./SuccessPopup";
 import { useStudentForm } from "@/hooks/useStudentForm";
-import { OptimizedImage } from "./OptimizedImage";
+import OptimizedImage from "./OptimizedImage";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -50,7 +50,6 @@ const Navigation = memo(() => {
 
   // Memoize event handlers
   const handleFormSuccess = useCallback(() => {
-    console.log('Navigation: Student form submitted successfully');
     showSuccess();
   }, [showSuccess]);
 

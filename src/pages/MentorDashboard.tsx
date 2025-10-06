@@ -104,7 +104,6 @@ const MentorDashboard = () => {
       setFees(feesData || []);
       setSchedules(schedulesData || []);
     } catch (error) {
-      console.error('Error fetching data:', error);
       toast({
         title: "Error",
         description: "Failed to fetch dashboard data",

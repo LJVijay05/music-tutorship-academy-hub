@@ -50,7 +50,7 @@ export const MentorAuthProvider: React.FC<{ children: React.ReactNode }> = ({ ch
     try {
       // Check for hardcoded mentor credentials first
       if (email === 'producingwithvijay@gmail.com' && password === 'Vijay@0104') {
-        console.log('Using hardcoded mentor credentials');
+        
         
         // Create a mock user session for the mentor
         const mockUser = {
@@ -86,7 +86,6 @@ export const MentorAuthProvider: React.FC<{ children: React.ReactNode }> = ({ ch
 
       return true;
     } catch (error) {
-      console.error('Mentor login error:', error);
       setIsLoading(false);
       throw error;
     }

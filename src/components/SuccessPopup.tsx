@@ -31,7 +31,6 @@ const SuccessPopup = ({
   const navigate = useNavigate();
 
   const handleContinue = () => {
-    console.log(`SuccessPopup: Redirecting to ${redirectTo}`);
     onOpenChange(false);
     setTimeout(() => {
       navigate(redirectTo);

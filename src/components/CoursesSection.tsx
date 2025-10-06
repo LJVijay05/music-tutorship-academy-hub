@@ -113,14 +113,12 @@ const CoursesSection = memo(({ showOnlyFeatured = false }: { showOnlyFeatured?: 
     : allCourses;
 
   const handleEnquireClick = useCallback((courseId: string) => {
-    console.log('CoursesSection: Enquire Now clicked for course:', courseId);
     setSelectedCourseId(courseId);
     // Always open the form first; redirect happens after successful submission
     openForm();
   }, [openForm]);
 
   const handleFormSuccess = useCallback(() => {
-    console.log('CoursesSection: Student form submitted successfully');
     // After OTP verification and form completion, redirect to payment/enrollment
     if (selectedCourseId === 'crash-course') {
       navigate('/essential-bootcamp-enrollment');

@@ -8,8 +8,6 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 
 export const ChatWithMentor = () => {
-  console.log('ChatWithMentor component rendered');
-  
   const [message, setMessage] = useState('');
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([

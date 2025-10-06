@@ -112,7 +112,6 @@ const Register = () => {
   };
 
   const handleSocialLogin = (provider: string) => {
-    console.log(`Login with ${provider}`);
     toast({
       title: "Social Login",
       description: `${provider} login will be implemented soon`,

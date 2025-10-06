@@ -63,12 +63,9 @@ const StudentDataForm = ({ open, onOpenChange, onSuccess }: StudentDataFormProps
   });
 
   const onSubmit = (data: FormData) => {
-    console.log('StudentDataForm: Form submitted with data:', data);
-    
     try {
       // Store data in localStorage for potential use in enrollment page
       localStorage.setItem('studentData', JSON.stringify(data));
-      console.log('StudentDataForm: Data stored in localStorage');
       
       toast({
         title: "Information Submitted Successfully!",
@@ -81,13 +78,11 @@ const StudentDataForm = ({ open, onOpenChange, onSuccess }: StudentDataFormProps
       // Small delay to ensure smooth transition
       setTimeout(() => {
         if (onSuccess) {
-          console.log('StudentDataForm: Triggering success callback');
           onSuccess();
         }
       }, 300);
       
     } catch (error) {
-      console.error('StudentDataForm: Error submitting form:', error);
       toast({
         title: "Error",
         description: "There was an error submitting your information. Please try again.",

@@ -67,15 +67,13 @@ const CourseCard = memo(({
   } = useStudentForm();
 
   const handleEnquireClick = useCallback(() => {
-    console.log(`CourseCard: Enquire clicked for course ${courseId}`);
     openForm();
-  }, [courseId, openForm]);
+  }, [openForm]);
 
   const handleFormSuccess = useCallback(() => {
-    console.log(`CourseCard: Student form submitted successfully for course ${courseId}`);
     // Redirect directly to payments/enrollment page instead of showing success popup
     navigate('/enrollment');
-  }, [courseId, navigate]);
+  }, [navigate]);
 
   return (
     <>

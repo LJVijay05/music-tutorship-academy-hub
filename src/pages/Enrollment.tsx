@@ -42,7 +42,6 @@ const Enrollment = () => {
         const parsedData = JSON.parse(storedStudentData);
         setStudentData(parsedData);
       } catch (error) {
-        console.error("Error parsing student data:", error);
         localStorage.removeItem('studentData');
         setShowStudentForm(true);
       }
@@ -58,7 +57,6 @@ const Enrollment = () => {
         const parsedData = JSON.parse(storedStudentData);
         setStudentData(parsedData);
       } catch (error) {
-        console.error("Error parsing updated student data:", error);
       }
     }
     showSuccess();

@@ -8,8 +8,6 @@ import { TrackSubmission } from '@/components/dashboard/TrackSubmission';
 import AboutMeCard from '@/components/dashboard/AboutMeCard';
 
 const Dashboard = () => {
-  console.log('Dashboard component rendered');
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-red-50 via-purple-50 to-pink-50">
       <DashboardHeader />
