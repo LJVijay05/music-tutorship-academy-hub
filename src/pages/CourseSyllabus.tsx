@@ -263,7 +263,7 @@ const CourseSyllabus = () => {
         }
       ],
       features: [
-        "15 students per batch for focused attention",
+        "20 students per batch for focused attention",
         "3 months of intensive twice-weekly sessions",
         "Hands-on project work every session",
         "Essential software training (DAW of choice)",

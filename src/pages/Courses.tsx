@@ -63,7 +63,7 @@ const Courses = memo(() => {
       icon: Users,
       imageUrl: "/assets/music-production-studio.jpg",
       features: [
-        "15 students per batch",
+        "20 students per batch",
         "3 months intensive program",
         "Twice weekly sessions",
         "Hands-on project work",

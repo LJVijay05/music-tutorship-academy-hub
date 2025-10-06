@@ -23,7 +23,7 @@ const FAQ_DATA = [
   },
   {
     question: "What is the class size for each batch?",
-    answer: "We maintain a small class size of 15 students per batch to ensure focused learning and individual support. For those looking for deeper, customized learning, we offer personal one-on-one mentorship programs tailored to your specific music production goals."
+    answer: "We maintain a small class size of 20 students per batch for the Essential Producer Bootcamp and 15 students per batch for the Advanced Production Course to ensure focused learning and individual support. For those looking for deeper, customized learning, we offer personal one-on-one mentorship programs tailored to your specific music production goals."
   },
   {
     question: "How long is each music production class?",

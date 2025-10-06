@@ -61,7 +61,7 @@ const EssentialBootcampEnrollment = () => {
     title: "Essential Producer Bootcamp",
     subtitle: "Launch Your Music Career in 3 Months",
     duration: "3 Months Intensive Program",
-    batchSize: "15 Students Per Batch",
+    batchSize: "20 Students Per Batch",
     price: 49800,
     features: [
       "Twice-weekly sessions",
@@ -244,7 +244,7 @@ const EssentialBootcampEnrollment = () => {
                       <Users className="w-6 h-6 text-orange-600" />
                     </div>
                     <h4 className="font-semibold text-gray-900 mb-2">Small Batches</h4>
-                    <p className="text-gray-600 text-sm">Only 15 students per batch for personalized attention</p>
+                    <p className="text-gray-600 text-sm">Only 20 students per batch for personalized attention</p>
                   </div>
                   <div className="text-center">
                     <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
