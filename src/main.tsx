@@ -21,6 +21,37 @@ const preloadCriticalResources = () => {
 
 preloadCriticalResources();
 
+// Ensure external links work in sandboxed preview: try new tab, fallback to same tab
+const enableIframeSafeExternalLinks = () => {
+  const inIframe = window.self !== window.top;
+  if (!inIframe) return;
+
+  document.addEventListener(
+    'click',
+    (evt) => {
+      const mouseEvt = evt as MouseEvent;
+      const target = evt.target as HTMLElement | null;
+      const anchor = (target && target.closest) ? (target.closest('a') as HTMLAnchorElement | null) : null;
+      if (!anchor) return;
+
+      // Only handle explicit new-tab links
+      if (anchor.target === '_blank') {
+        // Let modifier keys behave normally
+        if (mouseEvt.ctrlKey || mouseEvt.metaKey || mouseEvt.shiftKey) return;
+        evt.preventDefault();
+        const opened = window.open(anchor.href, '_blank', 'noopener,noreferrer');
+        if (!opened) {
+          // Fallback: open in same tab
+          window.location.href = anchor.href;
+        }
+      }
+    },
+    { capture: true }
+  );
+};
+
+enableIframeSafeExternalLinks();
+
 const rootElement = document.getElementById("root");
 if (!rootElement) throw new Error('Root element not found');
 

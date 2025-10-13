@@ -111,7 +111,7 @@ const Enrollment = () => {
   const openWhatsApp = () => {
     const phoneNumber = "+916374428173";
     const message = encodeURIComponent("Hi! I'm interested in your music production courses. Can you help me with more information?");
-    window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+    import('@/utils/openExternal').then(({ openExternal }) => openExternal(`https://wa.me/${phoneNumber}?text=${message}`));
   };
 
   const getDisplayPrice = () => {

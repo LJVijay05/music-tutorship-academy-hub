@@ -73,7 +73,7 @@ const EssentialBootcampEnrollment = () => {
   const openWhatsApp = () => {
     const phoneNumber = "+916374428173";
     const message = encodeURIComponent("Hi! I'm interested in the Essential Producer Bootcamp course. Can you help me with more information?");
-    window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+    import('@/utils/openExternal').then(({ openExternal }) => openExternal(`https://wa.me/${phoneNumber}?text=${message}`));
   };
 
   return (
@@ -211,7 +211,7 @@ const EssentialBootcampEnrollment = () => {
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                 <Button 
                   className="bg-orange-600 hover:bg-orange-700 text-white px-8 py-3 text-lg font-semibold rounded-lg shadow-lg transition-all duration-300 hover:scale-105"
-                  onClick={() => window.open('https://wa.me/916374428173?text=I%20want%20to%20enroll%20in%20the%20Essential%20Producer%20Bootcamp', '_blank')}
+                  onClick={() => import('@/utils/openExternal').then(({ openExternal }) => openExternal('https://wa.me/916374428173?text=I%20want%20to%20enroll%20in%20the%20Essential%20Producer%20Bootcamp'))}
                 >
                   Enroll Now - Pay ₹49,800
                 </Button>

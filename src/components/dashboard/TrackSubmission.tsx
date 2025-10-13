@@ -64,7 +64,7 @@ export const TrackSubmission = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (trackLink) {
-      window.open(trackLink, "_blank");
+      import('@/utils/openExternal').then(({ openExternal }) => openExternal(trackLink));
     }
   };
 
