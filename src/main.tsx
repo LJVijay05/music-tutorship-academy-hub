@@ -35,9 +35,27 @@ const addPerformanceHints = () => {
     document.head.appendChild(link);
   });
 };
+const normalizeHash = () => {
+  const { hash } = window.location;
+  if (!hash) return;
+  let next = hash;
+  // Normalize leading double slashes and duplicate slashes
+  next = next.replace(/^#\/{2,}/, '#/');
+  next = next.replace(/\/{2,}/g, '/');
+  // Normalize '#/.' to '#/'
+  next = next.replace(/^#\/\.$/, '#/');
+  if (next !== hash) {
+    // Avoid adding extra entries to history
+    window.location.replace(next);
+  }
+};
 
 preloadCriticalResources();
 addPerformanceHints();
+
+// Normalize malformed hash routes on load and on change
+normalizeHash();
+window.addEventListener('hashchange', normalizeHash);
 
 // Ensure external links work in sandboxed preview: try new tab, fallback to same tab
 const enableIframeSafeExternalLinks = () => {
