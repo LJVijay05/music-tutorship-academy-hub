@@ -31,6 +31,7 @@ const NotFound = lazy(() => import("./pages/NotFound"));
 const Terms = lazy(() => import("./pages/Terms"));
 const Profile = lazy(() => import("./pages/Profile"));
 const Privacy = lazy(() => import("./pages/Privacy"));
+const HealthCheck = lazy(() => import("./pages/HealthCheck"));
 
 // Optimized query client configuration
 const queryClient = new QueryClient({
@@ -101,6 +102,7 @@ const App = memo(() => (
               <Route path="/profile" element={<RouteWrapper><Profile /></RouteWrapper>} />
               <Route path="/privacy" element={<RouteWrapper><Privacy /></RouteWrapper>} />
               <Route path="/terms" element={<RouteWrapper><Terms /></RouteWrapper>} />
+              <Route path="/health" element={<RouteWrapper><HealthCheck /></RouteWrapper>} />
               <Route path="*" element={<RouteWrapper><NotFound /></RouteWrapper>} />
             </Routes>
           </HashRouter>
