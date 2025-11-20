@@ -75,12 +75,13 @@ const config = {
     		},
     		fontFamily: {
     			sans: [
-    				'Roboto',
+    				'DM Sans',
     				'ui-sans-serif',
     				'system-ui',
     				'-apple-system',
     				'BlinkMacSystemFont',
     				'Segoe UI',
+    				'Roboto',
     				'Helvetica Neue',
     				'Arial',
     				'Noto Sans',
@@ -95,7 +96,7 @@ const config = {
     				'sans-serif'
     			],
     			serif: [
-    				'Libre Caslon Text',
+    				'Crimson Pro',
     				'ui-serif',
     				'Georgia',
     				'Cambria',
@@ -104,7 +105,7 @@ const config = {
     				'serif'
     			],
     			mono: [
-    				'Roboto Mono',
+    				'SF Mono',
     				'ui-monospace',
     				'SFMono-Regular',
     				'Menlo',
@@ -273,7 +274,7 @@ const config = {
     					opacity: '1'
     				}
     			},
-    			'float': {
+    			float: {
     				'0%, 100%': {
     					transform: 'translateY(0) scale(1)',
     					opacity: '0.6'
@@ -295,7 +296,7 @@ const config = {
     			'slide-left': 'slide-left 0.4s ease-out',
     			'slide-right': 'slide-right 0.4s ease-out',
     			'bounce-in': 'bounce-in 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
-    			'float': 'float 6s ease-in-out infinite'
+    			float: 'float 6s ease-in-out infinite'
     		}
     	}
     },
