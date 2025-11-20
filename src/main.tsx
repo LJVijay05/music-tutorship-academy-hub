@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import App from './App.tsx';
 import './index.css';
 import { openExternal } from '@/utils/openExternal';
+import { initializeSentry } from '@/utils/sentry';
 
 // Preload critical resources
 const preloadCriticalResources = () => {
@@ -49,6 +50,9 @@ const normalizeHash = () => {
     window.location.replace(next);
   }
 };
+
+// Initialize error tracking FIRST
+initializeSentry();
 
 preloadCriticalResources();
 addPerformanceHints();
