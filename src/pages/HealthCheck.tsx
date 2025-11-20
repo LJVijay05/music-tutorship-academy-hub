@@ -2,17 +2,25 @@ import { useEffect, useState } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { CheckCircle2, XCircle, Clock } from 'lucide-react';
+import { CheckCircle2, XCircle, Clock, AlertCircle } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import * as Sentry from '@sentry/react';
 
 export default function HealthCheck() {
   const [status, setStatus] = useState({
     envVars: false,
     supabaseConnection: false,
     authSession: null as any,
+    sentryConfigured: false,
     timestamp: new Date().toISOString(),
     loadTime: 0,
   });
   const [loading, setLoading] = useState(true);
+
+  const testSentryError = () => {
+    Sentry.captureException(new Error('Test error from Health Check page'));
+    alert('Test error sent to Sentry! Check your Sentry dashboard.');
+  };
 
   useEffect(() => {
     const startTime = performance.now();
@@ -20,6 +28,7 @@ export default function HealthCheck() {
     const checkHealth = async () => {
       // Check environment variables
       const envVars = !!(import.meta.env.VITE_SUPABASE_URL && import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY);
+      const sentryConfigured = !!import.meta.env.VITE_SENTRY_DSN;
       
       // Check Supabase connection by attempting to get session
       let supabaseConnection = false;
@@ -39,6 +48,7 @@ export default function HealthCheck() {
         envVars,
         supabaseConnection,
         authSession: session,
+        sentryConfigured,
         timestamp: new Date().toISOString(),
         loadTime: Math.round(endTime - startTime),
       });
@@ -111,6 +121,43 @@ export default function HealthCheck() {
               <span className="text-muted-foreground">Database Ping</span>
               <StatusBadge success={status.supabaseConnection} />
             </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center justify-between">
+              <span>Error Tracking (Sentry)</span>
+              {status.sentryConfigured && (
+                <Button onClick={testSentryError} size="sm" variant="outline">
+                  Test Error
+                </Button>
+              )}
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-3">
+            <div className="flex justify-between items-center">
+              <span className="text-muted-foreground">Sentry DSN Configured</span>
+              <StatusBadge success={status.sentryConfigured} />
+            </div>
+            {!status.sentryConfigured && (
+              <div className="flex items-start gap-2 p-3 bg-muted rounded text-sm">
+                <AlertCircle className="w-4 h-4 text-yellow-600 mt-0.5 flex-shrink-0" />
+                <div>
+                  <p className="font-semibold">Sentry not configured</p>
+                  <p className="text-muted-foreground text-xs mt-1">
+                    Add VITE_SENTRY_DSN to enable automatic error tracking
+                  </p>
+                </div>
+              </div>
+            )}
+            {status.sentryConfigured && (
+              <div className="space-y-2 mt-3 p-3 bg-green-50 dark:bg-green-950/20 rounded text-sm">
+                <p className="text-green-700 dark:text-green-400">✓ Console errors are tracked</p>
+                <p className="text-green-700 dark:text-green-400">✓ Unhandled rejections are tracked</p>
+                <p className="text-green-700 dark:text-green-400">✓ React errors are tracked</p>
+              </div>
+            )}
           </CardContent>
         </Card>
 
