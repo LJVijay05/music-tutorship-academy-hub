@@ -75,7 +75,7 @@ const config = {
     		},
     		fontFamily: {
     			sans: [
-    				'DM Sans',
+    				'Source Sans Pro',
     				'ui-sans-serif',
     				'system-ui',
     				'-apple-system',
@@ -96,7 +96,7 @@ const config = {
     				'sans-serif'
     			],
     			serif: [
-    				'Crimson Pro',
+    				'Source Serif Pro',
     				'ui-serif',
     				'Georgia',
     				'Cambria',
@@ -105,7 +105,7 @@ const config = {
     				'serif'
     			],
     			mono: [
-    				'SF Mono',
+    				'Source Code Pro',
     				'ui-monospace',
     				'SFMono-Regular',
     				'Menlo',
