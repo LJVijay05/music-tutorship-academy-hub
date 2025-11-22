@@ -43,9 +43,13 @@ const cleanupLovableToken = () => {
   if (url.searchParams.has('__lovable_token')) {
     const hash = url.hash;
     url.search = ''; // Remove all query params
-    const cleanUrl = url.origin + url.pathname + hash;
-    window.location.replace(cleanUrl);
-    return true; // Indicate cleanup happened
+    const cleanUrl = url.pathname + hash;
+    
+    // Use history.replaceState instead of window.location.replace to avoid page reload
+    window.history.replaceState(null, '', cleanUrl);
+    
+    console.info('[New Tab] Cleaned Lovable token from URL');
+    return true;
   }
   return false;
 };
@@ -66,9 +70,7 @@ const normalizeHash = () => {
 };
 
 // Clean up Lovable token FIRST (must run before everything else)
-if (cleanupLovableToken()) {
-  console.info('[New Tab] Cleaned Lovable token from URL');
-}
+cleanupLovableToken();
 
 // Initialize error tracking
 initializeSentry();
