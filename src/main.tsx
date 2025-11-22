@@ -36,6 +36,20 @@ const addPerformanceHints = () => {
     document.head.appendChild(link);
   });
 };
+
+// Clean up Lovable preview token that can interfere with HashRouter
+const cleanupLovableToken = () => {
+  const url = new URL(window.location.href);
+  if (url.searchParams.has('__lovable_token')) {
+    const hash = url.hash;
+    url.search = ''; // Remove all query params
+    const cleanUrl = url.origin + url.pathname + hash;
+    window.location.replace(cleanUrl);
+    return true; // Indicate cleanup happened
+  }
+  return false;
+};
+
 const normalizeHash = () => {
   const { hash } = window.location;
   if (!hash) return;
@@ -51,7 +65,12 @@ const normalizeHash = () => {
   }
 };
 
-// Initialize error tracking FIRST
+// Clean up Lovable token FIRST (must run before everything else)
+if (cleanupLovableToken()) {
+  console.info('[New Tab] Cleaned Lovable token from URL');
+}
+
+// Initialize error tracking
 initializeSentry();
 
 preloadCriticalResources();
@@ -127,6 +146,15 @@ root.render(
     <App />
   </StrictMode>
 );
+
+// Hide loading screen once React mounts
+setTimeout(() => {
+  const loader = document.getElementById('app-loader');
+  if (loader) {
+    loader.classList.add('loaded');
+    setTimeout(() => loader.remove(), 300);
+  }
+}, 100);
 
 // Lazy load web vitals monitoring (non-blocking)
 if (import.meta.env.PROD) {

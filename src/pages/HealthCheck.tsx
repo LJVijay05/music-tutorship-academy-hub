@@ -14,6 +14,9 @@ export default function HealthCheck() {
     sentryConfigured: false,
     timestamp: new Date().toISOString(),
     loadTime: 0,
+    isNewTab: window.self === window.top,
+    hasLovableToken: window.location.search.includes('__lovable_token'),
+    currentUrl: window.location.href,
   });
   const [loading, setLoading] = useState(true);
 
@@ -51,6 +54,9 @@ export default function HealthCheck() {
         sentryConfigured,
         timestamp: new Date().toISOString(),
         loadTime: Math.round(endTime - startTime),
+        isNewTab: window.self === window.top,
+        hasLovableToken: window.location.search.includes('__lovable_token'),
+        currentUrl: window.location.href,
       });
       setLoading(false);
     };
@@ -186,6 +192,58 @@ export default function HealthCheck() {
                 </div>
               </div>
             )}
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle>New Tab Diagnostics</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-3">
+            <div className="flex justify-between items-center">
+              <span className="text-muted-foreground">Running in New Tab</span>
+              <StatusBadge success={status.isNewTab} />
+            </div>
+            <div className="flex justify-between items-center">
+              <span className="text-muted-foreground">Lovable Token Present</span>
+              {status.hasLovableToken ? (
+                <Badge variant="destructive">
+                  <XCircle className="w-4 h-4 mr-1" />
+                  Yes (Should be cleaned)
+                </Badge>
+              ) : (
+                <Badge variant="default" className="bg-green-600 hover:bg-green-700">
+                  <CheckCircle2 className="w-4 h-4 mr-1" />
+                  Clean
+                </Badge>
+              )}
+            </div>
+            <div className="mt-3 p-3 bg-muted rounded">
+              <div className="text-sm mb-2">
+                <span className="font-semibold">Current URL:</span>
+              </div>
+              <div className="font-mono text-xs break-all text-muted-foreground">
+                {status.currentUrl}
+              </div>
+            </div>
+            {status.hasLovableToken && (
+              <div className="flex items-start gap-2 p-3 bg-yellow-50 dark:bg-yellow-950/20 rounded text-sm">
+                <AlertCircle className="w-4 h-4 text-yellow-600 mt-0.5 flex-shrink-0" />
+                <div>
+                  <p className="font-semibold">Token cleanup needed</p>
+                  <p className="text-muted-foreground text-xs mt-1">
+                    The __lovable_token should have been removed. Try refreshing the page.
+                  </p>
+                </div>
+              </div>
+            )}
+            <Button 
+              onClick={() => window.open(window.location.hash || '/#/', '_blank')}
+              variant="outline"
+              className="w-full"
+            >
+              Test: Open Current Route in New Tab
+            </Button>
           </CardContent>
         </Card>
 
