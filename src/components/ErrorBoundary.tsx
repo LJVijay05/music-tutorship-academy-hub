@@ -43,19 +43,33 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
   }
 }
 
-const ErrorFallback = memo(() => (
-  <div className="min-h-screen flex items-center justify-center bg-gray-50">
-    <div className="text-center p-8">
-      <h2 className="text-2xl font-bold text-gray-900 mb-4">Something went wrong</h2>
-      <p className="text-gray-600 mb-6">Please refresh the page or try again later.</p>
-      <button
-        onClick={() => window.location.reload()}
-        className="px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
-      >
-        Refresh Page
-      </button>
+const ErrorFallback = memo(() => {
+  const isNewTab = window.self === window.top;
+  const hasToken = window.location.search.includes('__lovable_token');
+  
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="text-center p-8 max-w-md">
+        <h2 className="text-2xl font-bold text-gray-900 mb-4">Something went wrong</h2>
+        <p className="text-gray-600 mb-6">
+          {isNewTab && hasToken 
+            ? "There was an issue opening the preview. Please try refreshing the page."
+            : "Please refresh the page or try again later."}
+        </p>
+        <button
+          onClick={() => {
+            // Clean URL before reload
+            const url = new URL(window.location.href);
+            url.search = '';
+            window.location.replace(url.href);
+          }}
+          className="px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+        >
+          Refresh Page
+        </button>
+      </div>
     </div>
-  </div>
-));
+  );
+});
 
 ErrorFallback.displayName = 'ErrorFallback';
