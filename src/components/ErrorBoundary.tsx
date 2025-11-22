@@ -58,10 +58,11 @@ const ErrorFallback = memo(() => {
         </p>
         <button
           onClick={() => {
-            // Clean URL before reload
+            // Clean URL before reload using history API to avoid reload loop
             const url = new URL(window.location.href);
             url.search = '';
-            window.location.replace(url.href);
+            window.history.replaceState(null, '', url.pathname + url.hash);
+            window.location.reload();
           }}
           className="px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
         >
