@@ -40,29 +40,42 @@ const addPerformanceHints = () => {
 // Clean up Lovable preview token that can interfere with HashRouter
 const cleanupLovableToken = () => {
   const url = new URL(window.location.href);
-  if (url.searchParams.has('__lovable_token')) {
-    // Check if we've already attempted cleanup to prevent infinite loops
-    const cleanupAttempted = sessionStorage.getItem('lovable_token_cleanup');
-    
+  const hasToken = url.searchParams.has('__lovable_token');
+  const cleanupAttempted = sessionStorage.getItem('lovable_token_cleanup');
+  
+  if (hasToken) {
     if (!cleanupAttempted) {
+      // First time seeing token - clean it up
       sessionStorage.setItem('lovable_token_cleanup', 'true');
       const hash = url.hash;
-      url.search = ''; // Remove all query params
+      url.search = ''; 
       const cleanUrl = url.pathname + hash;
       
       console.info('[New Tab] Cleaning Lovable token and reloading...');
       window.location.replace(cleanUrl);
-      return true; // Will reload, so code below won't execute
+      return true; // Will reload
     } else {
-      // Cleanup was already attempted, just remove the flag and continue
+      // Token still present after cleanup attempt - this shouldn't happen
+      // Force continue to prevent infinite loop
+      console.error('[New Tab] Token still present after cleanup, forcing continue');
       sessionStorage.removeItem('lovable_token_cleanup');
-      console.warn('[New Tab] Token cleanup already attempted, continuing anyway');
     }
+  } else if (cleanupAttempted) {
+    // Token successfully cleaned - remove flag
+    sessionStorage.removeItem('lovable_token_cleanup');
+    console.info('[New Tab] Token cleanup successful');
   }
+  
   return false;
 };
 
 const normalizeHash = () => {
+  // Don't normalize during token cleanup to avoid double reload
+  if (sessionStorage.getItem('lovable_token_cleanup')) {
+    console.info('[New Tab] Skipping hash normalization during token cleanup');
+    return;
+  }
+  
   const { hash } = window.location;
   if (!hash) return;
   let next = hash;
@@ -72,99 +85,135 @@ const normalizeHash = () => {
   // Normalize '#/.' to '#/'
   next = next.replace(/^#\/\.$/, '#/');
   if (next !== hash) {
-    // Avoid adding extra entries to history
+    console.info('[New Tab] Normalizing hash from', hash, 'to', next);
     window.location.replace(next);
   }
 };
 
-// Clean up Lovable token FIRST (must run before everything else)
-cleanupLovableToken();
+// Wrap everything in error handling
+try {
+  // Clean up Lovable token FIRST (must run before everything else)
+  const needsReload = cleanupLovableToken();
+  if (needsReload) {
+    console.info('[New Tab] Reloading after token cleanup...');
+    // Don't run anything else, page will reload
+  } else {
+    console.info('[New Tab] Initializing app...');
+    
+    // Initialize error tracking
+    initializeSentry();
 
-// Initialize error tracking
-initializeSentry();
+    preloadCriticalResources();
+    addPerformanceHints();
 
-preloadCriticalResources();
-addPerformanceHints();
+    // Normalize malformed hash routes on load and on change
+    normalizeHash();
+    window.addEventListener('hashchange', normalizeHash);
 
-// Normalize malformed hash routes on load and on change
-normalizeHash();
-window.addEventListener('hashchange', normalizeHash);
+    // Ensure external links work everywhere: add security attributes and handle sandboxed contexts
+    const enableIframeSafeExternalLinks = () => {
+      const inIframe = window.self !== window.top;
 
-// Ensure external links work in sandboxed preview: try new tab, fallback to same tab
-const enableIframeSafeExternalLinks = () => {
-  const inIframe = window.self !== window.top;
-  if (!inIframe) return;
+      // Ensure all target=_blank links have proper rel for security
+      const secureRel = (a: HTMLAnchorElement) => {
+        if (a.target === '_blank') {
+          const rel = (a.getAttribute('rel') || '').toLowerCase();
+          const needed = ['noopener', 'noreferrer'];
+          const parts = new Set(rel.split(/\s+/).filter(Boolean));
+          needed.forEach((t) => parts.add(t));
+          a.setAttribute('rel', Array.from(parts).join(' '));
+        }
+      };
 
-  // Ensure all target=_blank links have proper rel for security
-  const secureRel = (a: HTMLAnchorElement) => {
-    if (a.target === '_blank') {
-      const rel = (a.getAttribute('rel') || '').toLowerCase();
-      const needed = ['noopener', 'noreferrer'];
-      const parts = new Set(rel.split(/\s+/).filter(Boolean));
-      needed.forEach((t) => parts.add(t));
-      a.setAttribute('rel', Array.from(parts).join(' '));
-    }
-  };
+      // Initial pass - ALWAYS run this
+      document.querySelectorAll('a[target="_blank"]').forEach((el) => secureRel(el as HTMLAnchorElement));
 
-  // Initial pass
-  document.querySelectorAll('a[target="_blank"]').forEach((el) => secureRel(el as HTMLAnchorElement));
-
-  // Observe future anchors
-  const mo = new MutationObserver((mutations) => {
-    for (const m of mutations) {
-      m.addedNodes.forEach((node) => {
-        if (node instanceof HTMLAnchorElement) secureRel(node);
-        if (node instanceof HTMLElement) node.querySelectorAll('a[target="_blank"]').forEach((a) => secureRel(a as HTMLAnchorElement));
+      // Observe future anchors - ALWAYS run this
+      const mo = new MutationObserver((mutations) => {
+        for (const m of mutations) {
+          m.addedNodes.forEach((node) => {
+            if (node instanceof HTMLAnchorElement) secureRel(node);
+            if (node instanceof HTMLElement) node.querySelectorAll('a[target="_blank"]').forEach((a) => secureRel(a as HTMLAnchorElement));
+          });
+        }
       });
-    }
-  });
-  mo.observe(document.documentElement, { childList: true, subtree: true });
+      mo.observe(document.documentElement, { childList: true, subtree: true });
 
-  // Handle clicks in sandboxed preview
-  document.addEventListener(
-    'click',
-    (evt) => {
-      const mouseEvt = evt as MouseEvent;
-      const target = evt.target as HTMLElement | null;
-      const anchor = (target && (target.closest?.('a') as HTMLAnchorElement | null)) || null;
-      if (!anchor) return;
+      // Handle clicks - ONLY in iframe context with special fallback
+      if (inIframe) {
+        document.addEventListener(
+          'click',
+          (evt) => {
+            const mouseEvt = evt as MouseEvent;
+            const target = evt.target as HTMLElement | null;
+            const anchor = (target && (target.closest?.('a') as HTMLAnchorElement | null)) || null;
+            if (!anchor) return;
 
-      // Only handle explicit new-tab links
-      if (anchor.target === '_blank') {
-        // Let modifier keys behave normally
-        if (mouseEvt.ctrlKey || mouseEvt.metaKey || mouseEvt.shiftKey || mouseEvt.altKey) return;
-        if (anchor.hasAttribute('download')) return;
-        evt.preventDefault();
-        secureRel(anchor);
-        // Use robust helper to cope with blocked popups inside iframe
-        openExternal(anchor.href, '_blank');
+            if (anchor.target === '_blank') {
+              if (mouseEvt.ctrlKey || mouseEvt.metaKey || mouseEvt.shiftKey || mouseEvt.altKey) return;
+              if (anchor.hasAttribute('download')) return;
+              evt.preventDefault();
+              secureRel(anchor);
+              openExternal(anchor.href, '_blank');
+            }
+          },
+          { capture: true }
+        );
       }
-    },
-    { capture: true }
-  );
-};
+    };
 
-enableIframeSafeExternalLinks();
+    enableIframeSafeExternalLinks();
 
-const rootElement = document.getElementById("root");
-if (!rootElement) throw new Error('Root element not found');
+    const rootElement = document.getElementById("root");
+    if (!rootElement) throw new Error('Root element not found');
 
-const root = createRoot(rootElement);
+    const root = createRoot(rootElement);
 
-root.render(
-  <StrictMode>
-    <App />
-  </StrictMode>
-);
+    root.render(
+      <StrictMode>
+        <App />
+      </StrictMode>
+    );
+    
+    console.info('[New Tab] React mounted successfully');
 
-// Hide loading screen once React mounts
-setTimeout(() => {
-  const loader = document.getElementById('app-loader');
-  if (loader) {
-    loader.classList.add('loaded');
-    setTimeout(() => loader.remove(), 300);
+    // Hide loading screen once React mounts
+    const hideLoader = () => {
+      const loader = document.getElementById('app-loader');
+      if (loader) {
+        loader.classList.add('loaded');
+        setTimeout(() => loader.remove(), 300);
+      }
+    };
+
+    // Check if React has mounted by looking for React root
+    const checkReactMounted = () => {
+      const root = document.getElementById('root');
+      if (root && root.children.length > 0) {
+        hideLoader();
+      } else {
+        // Retry after a short delay
+        setTimeout(checkReactMounted, 50);
+      }
+    };
+
+    // Start checking after a minimum delay
+    setTimeout(checkReactMounted, 100);
   }
-}, 100);
+} catch (error) {
+  console.error('[New Tab] Fatal initialization error:', error);
+  // Show error to user
+  document.body.innerHTML = `
+    <div style="display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; font-family: system-ui;">
+      <div style="text-align: center; max-width: 500px;">
+        <h1 style="color: #dc2626; font-size: 24px; margin-bottom: 16px;">Failed to Load</h1>
+        <p style="color: #6b7280; margin-bottom: 24px;">There was an error initializing the application.</p>
+        <button onclick="sessionStorage.clear(); location.href=location.pathname" style="padding: 12px 24px; background: #dc2626; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 16px;">Reload Page</button>
+        <pre style="margin-top: 24px; padding: 16px; background: #f3f4f6; border-radius: 8px; text-align: left; overflow: auto; font-size: 12px;">${error}</pre>
+      </div>
+    </div>
+  `;
+}
 
 // Lazy load web vitals monitoring (non-blocking)
 if (import.meta.env.PROD) {

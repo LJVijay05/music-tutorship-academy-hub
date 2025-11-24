@@ -220,6 +220,18 @@
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
     
+    <!-- Failsafe: hide loader after 10 seconds if React hasn't mounted -->
+    <script>
+      setTimeout(() => {
+        const loader = document.getElementById('app-loader');
+        if (loader && !loader.classList.contains('loaded')) {
+          console.warn('[New Tab] Loader timeout - forcing hide');
+          loader.classList.add('loaded');
+          setTimeout(() => loader.remove(), 300);
+        }
+      }, 10000);
+    </script>
+    
     <!-- Structured Data for WebSite -->
     <script type="application/ld+json">
     {
