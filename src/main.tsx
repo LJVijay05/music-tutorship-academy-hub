@@ -41,15 +41,23 @@ const addPerformanceHints = () => {
 const cleanupLovableToken = () => {
   const url = new URL(window.location.href);
   if (url.searchParams.has('__lovable_token')) {
-    const hash = url.hash;
-    url.search = ''; // Remove all query params
-    const cleanUrl = url.pathname + hash;
+    // Check if we've already attempted cleanup to prevent infinite loops
+    const cleanupAttempted = sessionStorage.getItem('lovable_token_cleanup');
     
-    // Use history.replaceState instead of window.location.replace to avoid page reload
-    window.history.replaceState(null, '', cleanUrl);
-    
-    console.info('[New Tab] Cleaned Lovable token from URL');
-    return true;
+    if (!cleanupAttempted) {
+      sessionStorage.setItem('lovable_token_cleanup', 'true');
+      const hash = url.hash;
+      url.search = ''; // Remove all query params
+      const cleanUrl = url.pathname + hash;
+      
+      console.info('[New Tab] Cleaning Lovable token and reloading...');
+      window.location.replace(cleanUrl);
+      return true; // Will reload, so code below won't execute
+    } else {
+      // Cleanup was already attempted, just remove the flag and continue
+      sessionStorage.removeItem('lovable_token_cleanup');
+      console.warn('[New Tab] Token cleanup already attempted, continuing anyway');
+    }
   }
   return false;
 };
