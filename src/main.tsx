@@ -40,50 +40,30 @@ const addPerformanceHints = () => {
 // Clean up Lovable preview token that can interfere with HashRouter
 const cleanupLovableToken = () => {
   const url = new URL(window.location.href);
-  const hasToken = url.searchParams.has('__lovable_token');
-  const cleanupAttempted = sessionStorage.getItem('lovable_token_cleanup');
   
-  if (hasToken) {
-    if (!cleanupAttempted) {
-      // First time seeing token - clean it up
-      sessionStorage.setItem('lovable_token_cleanup', 'true');
-      const hash = url.hash;
-      url.search = ''; 
-      const cleanUrl = url.pathname + hash;
-      
-      console.info('[New Tab] Cleaning Lovable token and reloading...');
-      window.location.replace(cleanUrl);
-      return true; // Will reload
-    } else {
-      // Token still present after cleanup attempt - this shouldn't happen
-      // Force continue to prevent infinite loop
-      console.error('[New Tab] Token still present after cleanup, forcing continue');
-      sessionStorage.removeItem('lovable_token_cleanup');
-    }
-  } else if (cleanupAttempted) {
-    // Token successfully cleaned - remove flag
-    sessionStorage.removeItem('lovable_token_cleanup');
-    console.info('[New Tab] Token cleanup successful');
+  if (url.searchParams.has('__lovable_token')) {
+    // Clean the URL and reload immediately - no session storage needed
+    const hash = url.hash || '#/';
+    const cleanUrl = url.pathname + hash;
+    console.info('[New Tab] Removing Lovable token from URL');
+    window.location.replace(cleanUrl);
+    return true; // Will reload, so don't execute rest
   }
   
   return false;
 };
 
 const normalizeHash = () => {
-  // Don't normalize during token cleanup to avoid double reload
-  if (sessionStorage.getItem('lovable_token_cleanup')) {
-    console.info('[New Tab] Skipping hash normalization during token cleanup');
-    return;
-  }
-  
   const { hash } = window.location;
   if (!hash) return;
+  
   let next = hash;
   // Normalize leading double slashes and duplicate slashes
   next = next.replace(/^#\/{2,}/, '#/');
   next = next.replace(/\/{2,}/g, '/');
   // Normalize '#/.' to '#/'
   next = next.replace(/^#\/\.$/, '#/');
+  
   if (next !== hash) {
     console.info('[New Tab] Normalizing hash from', hash, 'to', next);
     window.location.replace(next);
@@ -93,11 +73,7 @@ const normalizeHash = () => {
 // Wrap everything in error handling
 try {
   // Clean up Lovable token FIRST (must run before everything else)
-  const needsReload = cleanupLovableToken();
-  if (needsReload) {
-    console.info('[New Tab] Reloading after token cleanup...');
-    // Don't run anything else, page will reload
-  } else {
+  if (!cleanupLovableToken()) {
     console.info('[New Tab] Initializing app...');
     
     // Initialize error tracking
@@ -202,17 +178,26 @@ try {
   }
 } catch (error) {
   console.error('[New Tab] Fatal initialization error:', error);
+  
+  // Ensure loader is hidden
+  const loader = document.getElementById('app-loader');
+  if (loader) {
+    loader.classList.add('loaded');
+    setTimeout(() => loader.remove(), 300);
+  }
+  
   // Show error to user
-  document.body.innerHTML = `
-    <div style="display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; font-family: system-ui;">
-      <div style="text-align: center; max-width: 500px;">
-        <h1 style="color: #dc2626; font-size: 24px; margin-bottom: 16px;">Failed to Load</h1>
-        <p style="color: #6b7280; margin-bottom: 24px;">There was an error initializing the application.</p>
-        <button onclick="sessionStorage.clear(); location.href=location.pathname" style="padding: 12px 24px; background: #dc2626; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 16px;">Reload Page</button>
-        <pre style="margin-top: 24px; padding: 16px; background: #f3f4f6; border-radius: 8px; text-align: left; overflow: auto; font-size: 12px;">${error}</pre>
-      </div>
+  const errorContainer = document.createElement('div');
+  errorContainer.style.cssText = 'display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; font-family: system-ui;';
+  errorContainer.innerHTML = `
+    <div style="text-align: center; max-width: 500px;">
+      <h1 style="color: #dc2626; font-size: 24px; margin-bottom: 16px;">Failed to Load</h1>
+      <p style="color: #6b7280; margin-bottom: 24px;">There was an error initializing the application.</p>
+      <button onclick="location.href=location.pathname" style="padding: 12px 24px; background: #dc2626; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 16px;">Reload Page</button>
+      <pre style="margin-top: 24px; padding: 16px; background: #f3f4f6; border-radius: 8px; text-align: left; overflow: auto; font-size: 12px;">${error}</pre>
     </div>
   `;
+  document.getElementById('root')?.appendChild(errorContainer);
 }
 
 // Lazy load web vitals monitoring (non-blocking)
