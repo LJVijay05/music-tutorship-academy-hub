@@ -42,15 +42,13 @@ const cleanupLovableToken = () => {
   const url = new URL(window.location.href);
   
   if (url.searchParams.has('__lovable_token')) {
-    // Clean the URL and reload immediately - no session storage needed
+    // Use history API to clean URL without reload (works in sandboxed iframes)
     const hash = url.hash || '#/';
     const cleanUrl = url.pathname + hash;
     console.info('[New Tab] Removing Lovable token from URL');
-    window.location.replace(cleanUrl);
-    return true; // Will reload, so don't execute rest
+    window.history.replaceState(null, '', cleanUrl);
+    // Don't return true - continue with app initialization
   }
-  
-  return false;
 };
 
 const normalizeHash = () => {
@@ -73,109 +71,108 @@ const normalizeHash = () => {
 // Wrap everything in error handling
 try {
   // Clean up Lovable token FIRST (must run before everything else)
-  if (!cleanupLovableToken()) {
-    console.info('[New Tab] Initializing app...');
-    
-    // Initialize error tracking
-    initializeSentry();
+  cleanupLovableToken();
+  console.info('[New Tab] Initializing app...');
+  
+  // Initialize error tracking
+  initializeSentry();
 
-    preloadCriticalResources();
-    addPerformanceHints();
+  preloadCriticalResources();
+  addPerformanceHints();
 
-    // Normalize malformed hash routes on load and on change
-    normalizeHash();
-    window.addEventListener('hashchange', normalizeHash);
+  // Normalize malformed hash routes on load and on change
+  normalizeHash();
+  window.addEventListener('hashchange', normalizeHash);
 
-    // Ensure external links work everywhere: add security attributes and handle sandboxed contexts
-    const enableIframeSafeExternalLinks = () => {
-      const inIframe = window.self !== window.top;
+  // Ensure external links work everywhere: add security attributes and handle sandboxed contexts
+  const enableIframeSafeExternalLinks = () => {
+    const inIframe = window.self !== window.top;
 
-      // Ensure all target=_blank links have proper rel for security
-      const secureRel = (a: HTMLAnchorElement) => {
-        if (a.target === '_blank') {
-          const rel = (a.getAttribute('rel') || '').toLowerCase();
-          const needed = ['noopener', 'noreferrer'];
-          const parts = new Set(rel.split(/\s+/).filter(Boolean));
-          needed.forEach((t) => parts.add(t));
-          a.setAttribute('rel', Array.from(parts).join(' '));
-        }
-      };
-
-      // Initial pass - ALWAYS run this
-      document.querySelectorAll('a[target="_blank"]').forEach((el) => secureRel(el as HTMLAnchorElement));
-
-      // Observe future anchors - ALWAYS run this
-      const mo = new MutationObserver((mutations) => {
-        for (const m of mutations) {
-          m.addedNodes.forEach((node) => {
-            if (node instanceof HTMLAnchorElement) secureRel(node);
-            if (node instanceof HTMLElement) node.querySelectorAll('a[target="_blank"]').forEach((a) => secureRel(a as HTMLAnchorElement));
-          });
-        }
-      });
-      mo.observe(document.documentElement, { childList: true, subtree: true });
-
-      // Handle clicks - ONLY in iframe context with special fallback
-      if (inIframe) {
-        document.addEventListener(
-          'click',
-          (evt) => {
-            const mouseEvt = evt as MouseEvent;
-            const target = evt.target as HTMLElement | null;
-            const anchor = (target && (target.closest?.('a') as HTMLAnchorElement | null)) || null;
-            if (!anchor) return;
-
-            if (anchor.target === '_blank') {
-              if (mouseEvt.ctrlKey || mouseEvt.metaKey || mouseEvt.shiftKey || mouseEvt.altKey) return;
-              if (anchor.hasAttribute('download')) return;
-              evt.preventDefault();
-              secureRel(anchor);
-              openExternal(anchor.href, '_blank');
-            }
-          },
-          { capture: true }
-        );
+    // Ensure all target=_blank links have proper rel for security
+    const secureRel = (a: HTMLAnchorElement) => {
+      if (a.target === '_blank') {
+        const rel = (a.getAttribute('rel') || '').toLowerCase();
+        const needed = ['noopener', 'noreferrer'];
+        const parts = new Set(rel.split(/\s+/).filter(Boolean));
+        needed.forEach((t) => parts.add(t));
+        a.setAttribute('rel', Array.from(parts).join(' '));
       }
     };
 
-    enableIframeSafeExternalLinks();
+    // Initial pass - ALWAYS run this
+    document.querySelectorAll('a[target="_blank"]').forEach((el) => secureRel(el as HTMLAnchorElement));
 
-    const rootElement = document.getElementById("root");
-    if (!rootElement) throw new Error('Root element not found');
-
-    const root = createRoot(rootElement);
-
-    root.render(
-      <StrictMode>
-        <App />
-      </StrictMode>
-    );
-    
-    console.info('[New Tab] React mounted successfully');
-
-    // Hide loading screen once React mounts
-    const hideLoader = () => {
-      const loader = document.getElementById('app-loader');
-      if (loader) {
-        loader.classList.add('loaded');
-        setTimeout(() => loader.remove(), 300);
+    // Observe future anchors - ALWAYS run this
+    const mo = new MutationObserver((mutations) => {
+      for (const m of mutations) {
+        m.addedNodes.forEach((node) => {
+          if (node instanceof HTMLAnchorElement) secureRel(node);
+          if (node instanceof HTMLElement) node.querySelectorAll('a[target="_blank"]').forEach((a) => secureRel(a as HTMLAnchorElement));
+        });
       }
-    };
+    });
+    mo.observe(document.documentElement, { childList: true, subtree: true });
 
-    // Check if React has mounted by looking for React root
-    const checkReactMounted = () => {
-      const root = document.getElementById('root');
-      if (root && root.children.length > 0) {
-        hideLoader();
-      } else {
-        // Retry after a short delay
-        setTimeout(checkReactMounted, 50);
-      }
-    };
+    // Handle clicks - ONLY in iframe context with special fallback
+    if (inIframe) {
+      document.addEventListener(
+        'click',
+        (evt) => {
+          const mouseEvt = evt as MouseEvent;
+          const target = evt.target as HTMLElement | null;
+          const anchor = (target && (target.closest?.('a') as HTMLAnchorElement | null)) || null;
+          if (!anchor) return;
 
-    // Start checking after a minimum delay
-    setTimeout(checkReactMounted, 100);
-  }
+          if (anchor.target === '_blank') {
+            if (mouseEvt.ctrlKey || mouseEvt.metaKey || mouseEvt.shiftKey || mouseEvt.altKey) return;
+            if (anchor.hasAttribute('download')) return;
+            evt.preventDefault();
+            secureRel(anchor);
+            openExternal(anchor.href, '_blank');
+          }
+        },
+        { capture: true }
+      );
+    }
+  };
+
+  enableIframeSafeExternalLinks();
+
+  const rootElement = document.getElementById("root");
+  if (!rootElement) throw new Error('Root element not found');
+
+  const root = createRoot(rootElement);
+
+  root.render(
+    <StrictMode>
+      <App />
+    </StrictMode>
+  );
+  
+  console.info('[New Tab] React mounted successfully');
+
+  // Hide loading screen once React mounts
+  const hideLoader = () => {
+    const loader = document.getElementById('app-loader');
+    if (loader) {
+      loader.classList.add('loaded');
+      setTimeout(() => loader.remove(), 300);
+    }
+  };
+
+  // Check if React has mounted by looking for React root
+  const checkReactMounted = () => {
+    const root = document.getElementById('root');
+    if (root && root.children.length > 0) {
+      hideLoader();
+    } else {
+      // Retry after a short delay
+      setTimeout(checkReactMounted, 50);
+    }
+  };
+
+  // Start checking after a minimum delay
+  setTimeout(checkReactMounted, 100);
 } catch (error) {
   console.error('[New Tab] Fatal initialization error:', error);
   
